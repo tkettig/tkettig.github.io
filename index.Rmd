@@ -1,5 +1,39 @@
 ---
-title: "Personal Website"
+title: "Hello! I'm Thomas Kettig."
 ---
+### About me
 
-Hello, World!
+Welcome to my humble internet abode!
+
+#### Research interests
+I study how the sounds of language vary and change through space and time. Some of my research aims to understand why the vowel sounds of English change from one generation of speakers to the next. I have also undertaken the first large-scale, multi-speaker investigation of the vowels of Hawaiian. This means that my work touches on issues in endangered language description, sociolinguistics, quantitative experimental methods, theoretical phonology, historical linguistics, and articulatory and acoustic phonetics.
+
+#### Current & past work
+I'm currently an Assistant Professor in the Department of Languages, Literatures, and Linguistics at York University in Toronto. I was previously an Associate Lecturer in the Department of Language and Linguistic Science at the University of York and a postdoctoral researcher on the AHRC-funded project Humans and Machines: Novel Methods for Assessing Speaker Recognition Performance.
+
+#### My background!
+I'm from Jackson Heights, a neighborhood in New York City's borough of Queens and the most linguistically diverse community in the world. I speak English, Hawaiian, French, Finnish, and German, understand Hawaiʻi Creole English (Pidgin), and have a reading knowledge of Yiddish and Latin.
+
+<br>
+
+### Education
+
+__University of Hawai'i at Mānoa (2016-2021)__  
+Honolulu, HI  
+PhD student, Department of Linguistics  
+Dissertation: Ha'ina 'ia mai ana ka puana: The vowels of ʻōlelo Hawaiʻi  
+Advised by Rory Turnbull
+
+<br>
+
+__University of Cambridge - St Edmund's College (2014-2015)__  
+Cambridge, England  
+MPhil (Distinction), Theoretical and Applied Linguistics  
+Thesis: The BAD-LAd Split: A Phonetic Investigation  
+
+<br>
+
+__McGill University (2009-2013)__   
+Montreal, Québec, Canada   
+BA (Honours), Department of Linguistics  
+Thesis: The Canadian Shift in a Montreal Community: Change and Variation in Perception and Production of the Non-Hight Short Vowels  

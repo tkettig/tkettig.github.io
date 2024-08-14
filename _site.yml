@@ -1,9 +1,20 @@
-name: "personal-website"
+name: "thomas-kettig"
 output_dir: "."
 navbar:
-  title: "Personal Website"
+  title: "Thomas Kettig"
+  type: inverse
   left:
-    - text: "Home"
-      href: index.html
-    - text: "About Me"
-      href: about.html
+  - text: "About"
+    icon: fa-user
+    href: index.html
+  - text: "Research"
+    href: about.html
+  - text: "CV"
+  right:
+  - text: "Contact"
+    icon: fa-envelope-o
+    
+output:
+  html_document:
+    theme: readable
+    highlight: textmate
