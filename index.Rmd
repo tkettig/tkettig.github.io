@@ -1,9 +1,12 @@
 ---
-title: "Hello! I'm Thomas Kettig."
+title: "Hello!"
 ---
-### About me
+<br>
 
-Welcome to my humble internet abode!
+![](./images/me_round.png)
+&nbsp; &nbsp; &nbsp; Welcome to my humble internet abode, I'm Thomas!
+
+<br>
 
 #### Research interests
 I study how the sounds of language vary and change through space and time. Some of my research aims to understand why the vowel sounds of English change from one generation of speakers to the next. I have also undertaken the first large-scale, multi-speaker investigation of the vowels of Hawaiian. This means that my work touches on issues in endangered language description, sociolinguistics, quantitative experimental methods, theoretical phonology, historical linguistics, and articulatory and acoustic phonetics.
@@ -20,20 +23,20 @@ I'm from Jackson Heights, a neighborhood in New York City's borough of Queens an
 
 __University of Hawai'i at Mānoa (2016-2021)__  
 Honolulu, HI  
-PhD student, Department of Linguistics  
-Dissertation: Ha'ina 'ia mai ana ka puana: The vowels of ʻōlelo Hawaiʻi  
-Advised by Rory Turnbull
+PhD student, [Department of Linguistics](https://manoa.hawaii.edu/linguistics/)  
+Dissertation: [Ha'ina 'ia mai ana ka puana: The vowels of ʻōlelo Hawaiʻi](https://scholarspace.manoa.hawaii.edu/items/a7a4013a-8942-4764-9820-335583e74c03)    
+Advised by [Rory Turnbull](https://roryturnbull.github.io/)
 
 <br>
 
 __University of Cambridge - St Edmund's College (2014-2015)__  
 Cambridge, England  
-MPhil (Distinction), Theoretical and Applied Linguistics  
-Thesis: The BAD-LAd Split: A Phonetic Investigation  
+MPhil (Distinction), [Theoretical and Applied Linguistics](https://www.mmll.cam.ac.uk/dtal)    
+Thesis: [The BAD-LAd Split: A Phonetic Investigation](https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_05e3218b7ea948909115c933c02cecae.pdf)    
 
 <br>
 
 __McGill University (2009-2013)__   
 Montreal, Québec, Canada   
-BA (Honours), Department of Linguistics  
-Thesis: The Canadian Shift in a Montreal Community: Change and Variation in Perception and Production of the Non-Hight Short Vowels  
+BA (Honours), [Department of Linguistics](https://www.mcgill.ca/linguistics/)  
+Thesis: [The Canadian Shift in a Montreal Community: Change and Variation in Perception and Production of the Non-Hight Short Vowels](https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_349a6e092ae9421084af8f2b5c7be087.pdf)    

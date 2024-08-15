@@ -5,16 +5,24 @@ navbar:
   type: inverse
   left:
   - text: "About"
-    icon: fa-user
     href: index.html
   - text: "Research"
     href: about.html
+  - text: "Teaching"
+    href: teaching.html
   - text: "CV"
+    href: CV.pdf
   right:
   - text: "Contact"
     icon: fa-envelope-o
+    menu:
+    - text: "E-mail"
+      href: mailto:tkettig@yorku.ca
+    - text: "Twitter (X)"
+      href: https://x.com/tkettig?lang=en
     
 output:
   html_document:
+    css: style.css
     theme: readable
     highlight: textmate
