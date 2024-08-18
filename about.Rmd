@@ -1,112 +1,42 @@
 ---
-title: "Research Papers & Presentations"
+title: "Hello!"
 ---
+<br>
+
+![](./images/me_round.png)
+&nbsp; &nbsp; &nbsp; Welcome to my humble internet abode, I'm Thomas!
 
 <br>
 
-#### 2024
+#### Research interests
+I study how the sounds of language vary and change through space and time. Some of my research aims to understand why the vowel sounds of English change from one generation of speakers to the next. I have also undertaken the first large-scale, multi-speaker investigation of the vowels of Hawaiian. This means that my work touches on issues in endangered language description, sociolinguistics, quantitative experimental methods, theoretical phonology, historical linguistics, and articulatory and acoustic phonetics.
 
-[[abstract](https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_d00d95b5d9f045fbb41915f02253f470.pdf)] Kettig, Thomas, and Lisa Davidson. Acoustic correlates of stress in contrastive short and long vowels in ʻōlelo Hawaiʻi. _LabPhon19_. Seoul, Korea, 27–29 June. 
+#### Current & past work
+I'm currently an Assistant Professor in the Department of Languages, Literatures, and Linguistics at York University in Toronto. I was previously an Associate Lecturer in the Department of Language and Linguistic Science at the University of York and a postdoctoral researcher on the AHRC-funded project Humans and Machines: Novel Methods for Assessing Speaker Recognition Performance.
 
-[[slides](https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_d11c22981b7c402bb89151bbfc752149.pdf)] Kettig, Thomas, and Lisa Davidson. 2024. Acoustic correlates distinguish multiple levels of stress in ʻōlelo Hawaiʻi. _100th Annual Meeting of the Linguistic Society of America_. New York, NY, 5 January.  
-
-
-<br>
-
-#### 2023
-
-[[link](https://osf.io/preprints/psyarxiv/q8t2k)]  Coretta, Stefano, Joseph Casillas, … Thomas Kettig, … Timo Roettger. 2023. Multidimensional signals and analytic flexibility: Estimating degrees of freedom in human speech analyses. _Advances in Methods and Practices in Psychological Science_.  
-
-[[slides](https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_1d0a03b120ea475288a93228f0ee4dac.pdf)] Kettig, Thomas. 2023. Inter- and intra-speaker /ai~ei/ variation in ʻōlelo Hawaiʻi. Acoustic and historical-comparative evidence. _NWAV 51_, New York, NY, 14 October.  
-
-[[link](https://guarant.cz/icphs2023/798.pdf)] [[slides](https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_764be71cfbb040c7b4d40c61e3d37424.pdf)] Kettig, Thomas. 2023. Word class and frequency effects in Hawaiian stressed vowel clusters. _International Congress of Phonetic Sciences 2023_. Prague, Czechia, 9 August.
+#### My background!
+I'm from Jackson Heights, a neighborhood in New York City's borough of Queens and the most linguistically diverse community in the world. I speak English, Hawaiian, French, Finnish, and German, understand Hawaiʻi Creole English (Pidgin), and have a reading knowledge of Yiddish and Latin.
 
 <br>
 
-#### 2022
-[[slides](https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_ce7fad48e2ac473ab4bb1143c3f844a3.pdf)] Kettig, Thomas. 2022. Word class and diphthong reduction in ʻōlelo Hawaiʻi. _NWAV 50_, San Jose, CA, USA, 14 October.  
+### Education
 
-[[link](https://vincent-hughes.com/wp-content/uploads/2022/06/490_paper.pdf)] Hughes, Vincent, Carmen Llamas, and Thomas Kettig. 2022. Eliciting and evaluating likelihood ratios for speaker recognition by human listeners under forensically realistic channel-mismatched conditions. _Proceedings of Interspeech_. Incheon, Korea.  
-
-[[link](https://drive.google.com/file/d/1X7FrSzja2EBUlUlivOv93dNwlRyUwErm/view)] Hughes, Vincent, Carmen Llamas, and Thomas Kettig. 2022. A game-based approach to eliciting and evaluating likelihood ratios for speaker recognition. _30th Annual Conference of the International Association for Forensic Phonetics and Acoustics_. Prague, Czechia, 10-13 July.  
-
-<br>
-
-#### 2021
-
-[[link](https://utexas.zoom.us/rec/play/ZsqXfG_GDpxgxMCTXr9cyO-62M41Z4fz7xRwOa3HfTHYcq6dGKkHNevuOi5eIWciVFeiNtbzqybYUlVs.V7N3dsmWhHF0Up86?continueMode=true&_x_zm_rtaid=WJBdogFURBiShzLW9w06vg.1666069809234.99ea19040622ee596cfbe07477fe39d8&_x_zm_rhtaid=416)] Barreda, Santiago, Thomas Kettig, and Chaya Nove. 2021. Workshop: Improving vowel formant analysis in sociophonetic research using Fast Track. _NWAV 49_. Online, 19 October.  
-
-[[link](https://youtu.be/PdPxQGXSX64?si=L9T25u1TVCq-kIXl)] Kettig, Thomas. 2021. Nānā i ke kumu: Acoustic phonetic research on archival recordings of ʻōlelo Hawaiʻi. _International Conference on Language Documentation and Conservation 7_. Online.  
-
-[[link](https://scholarspace.manoa.hawaii.edu/server/api/core/bitstreams/49cdaa29-f832-43d3-bb57-1c2b7d5694f3/content)] Kettig, Thomas. 2021. Haʻina ʻia mai ana ka puana: The vowels of ʻōlelo Hawaiʻi. PhD Dissertation, University of Hawaiʻi at Mānoa.  
-
-[[link](https://www.cambridge.org/core/books/cambridge-handbook-of-phonetics/4C35C9BE4CE7D93EB21C06E90BEE68A9)] Drager, Katie and Thomas Kettig. 2021. Trends in Sociophonetics. In R.-A. Knight and J. Setter (eds), _Cambridge Handbook of Phonetics. Cambridge: Cambridge University Press_, pp. 551-577.  
+__University of Hawai'i at Mānoa (2016-2021)__  
+Honolulu, HI  
+PhD student, [Department of Linguistics](https://manoa.hawaii.edu/linguistics/)  
+Dissertation: [Ha'ina 'ia mai ana ka puana: The vowels of ʻōlelo Hawaiʻi](https://scholarspace.manoa.hawaii.edu/items/a7a4013a-8942-4764-9820-335583e74c03)    
+Advised by [Rory Turnbull](https://roryturnbull.github.io/)
 
 <br>
 
-#### 2019
-
-[[link](https://assta.org/proceedings/ICPhS2019/papers/ICPhS_3607.pdf)] [[poster](https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_13219430bd0f449baa1df7e869fc8263.pdf)] Kettig, Thomas. 2019. Spectral coarticulation in Hawaiian /aV/ and /aCV/ sequences. _International Congress of Phonetic Sciences 2019_. Melbourne, Australia, 8 August. (Poster)
-
-<br>
-
-#### 2018
-
-[[link](https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_cad36e09e9bd471c9cf17e5a4338e541.pptx?dn=SS%20Presentation.pptx)] Kettig, Thomas and Katie Drager. 2018. The social evaluation of TRAP-backing in Montreal. _Sociolinguistics Symposium 22_. Auckland, New Zealand, 30 June.  
+__University of Cambridge - St Edmund's College (2014-2015)__  
+Cambridge, England  
+MPhil (Distinction), [Theoretical and Applied Linguistics](https://www.mmll.cam.ac.uk/dtal)    
+Thesis: [The BAD-LAd Split: A Phonetic Investigation](https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_05e3218b7ea948909115c933c02cecae.pdf)    
 
 <br>
 
-#### 2017
-
-[[link](https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_e2ec84fd0c574d49946ff45a7d17d76b.pdf)] Kettig, Thomas. 2017. “Now say ‘Ah’: Internal factors of shifting and the English low vowel space.” E. Louviot & C. Delesse (eds), _Studies in Language Variation and Change 2 Shifting, Switching and Alternating Patterns in the History of English_. Newcastle upon Tyne: Cambridge Scholars Publishing.  
-
-[[link](https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_5650c0e127184be893dd2ba1a9d6de47.pdf)] Kettig, Thomas. 2017. “Diachronically stable, lexically specific variation: The phonological representation of secondary /æ/-lengthening”. _Phonetics and Phonology in Europe_. Cologne, Germany, 12-14 June. (Poster)  
-
-[[link](https://www.cambridge.org/core/journals/language-variation-and-change/article/abs/producing-and-perceiving-the-canadian-vowel-shift-evidence-from-a-montreal-community/A45A2F348CBC7AA652035F17177AFE30)]  Kettig, Thomas and Bodo Winter. 2017. “Producing and Perceiving the Canadian Vowel Shift: Evidence from a Montreal Community.” _Language Variation and Change_ 29(1): 79–100. DOI:[https://doi.org/10.1017/S0954394517000023](https://doi.org/10.1017/S0954394517000023.) https://doi.org/10.1017/S0954394517000023.  
-
-[[link](https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_6f0425d4802a4560b44fa62d4df74638.pdf)] Kettig, Thomas. 2017. “One hundred years of stability: The case of the BAD-LAD split”. _91st Annual Meeting of the Linguistic Society of America. Austin, TX, 6 January_. (Poster)  
-
-<br>
-
-#### 2016
-
-[[link](https://www.tandfonline.com/doi/full/10.1080/00472336.2015.1028964)] Kettig, Thomas, Sarah Turner, Đinh Thị Diệu and Phạm Văn Cự. 2016. “State Livelihood Planning and Legibility in Vietnam’s Northern Borderlands: The ‘Rightful Criticisms’ of Local Officials.” _Journal of Contemporary Asia_ 46(1): 42–70. DOI: [http://dx.doi.org/10.1080/00472336.2015.1028964](http://dx.doi.org/10.1080/00472336.2015.1028964)
-
-[[link](https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_18240bd9a85443b28cbae2cd58915fce.pdf)] Kettig, Thomas. 2016. “Preaspiration following /æ/ in Southern Standard British English.” _Sociolinguistics Symposium_ 21. Murcia, Spain, 15–18 June.  
-
-[[link](https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_babb6eead8f34cd1a572b4c6b14d8b43.pdf)] [[extended abstract](https://journals.linguisticsociety.org/proceedings/index.php/PLSA/article/view/3732)] Kettig, Thomas. 2016. “The BAD-LAD split: Secondary /æ/-lengthening in Southern Standard British English” (Poster). _90th Annual Meeting of the Linguistic Society of America_. Washington, DC, 8 January. DOI: [http://dx.doi.org/10.3765/plsa.v1i0.3732.](http://dx.doi.org/10.3765/plsa.v1i0.3732)  
-
-[[link](https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_1de8b2f0db0e4fb0a5643731ab51b9c1.pdf)] Kettig, Thomas. The BAD-LAD Split: A Phonetic Investigation. Masters Thesis, University of Cambridge.  
-
-<br>
-
-#### 2015
-
-[[link](https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_71645c800aa945fba95eb411ae9690a7.pdf)] Kettig, Thomas and Bodo Winter. 2015. “The Canadian Vowel Shift in Production and Perception: New Evidence from Montreal.” _NWAV44: Intersections_. Toronto, ON, 22-25 October 2015.
-
-[[link](https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_71645c800aa945fba95eb411ae9690a7.pdf)] Kettig, Thomas. 2015. “Now say ‘Ah’: Internal factors of shifting and the English low vowel space.” _4th Biennial Conference on the Diachrony of English_. Troyes, France, 6 July.
-
-[[link](https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_20bb1c447c114ec999a8d7426681d45f.pdf)] [[extended abstract](http://conferences.phil.uoa.gr/exling/2015/Exling_2015.pdf#page=36)] Kettig, Thomas and Bodo Winter. 2015. “Production and Perception Asymmetries in the Canadian Vowel Shift.” _6th International Conference on Experimental Linguistics_. Athens, Greece, 26 June.
-
-[[link](https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_a26bb392ba97414d988faacc9751116e.pdf)] Kettig, Thomas. 2015. “Changing Accents, Changing Vowels.” _St Edmund’s Interdisciplinary Conference_. St Edmund’s College, Cambridge, UK, 19 February.
-
-<br>
-
-#### 2014
-
-[[link](https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_b34cfce30e1b4933ad42d67d3b27195d.pdf)] Kettig, Thomas. 2014. “Gussing Rondomly: How Canadians are advancing, spreading, and perceiving an active vowel shift.” _Sociolinguistics Symposium 20. Jyväskylä_, Finland, 18 June.
-
-[[link](https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_e126b303138449fda9752613f6d12432.pdf)] Kettig, Thomas. 2014. The Canadian Short Vowels in Motion: Real-time Change and Regional Diffusion. _2014 Annual Meeting of the American Dialect Society_. Minneapolis, MN, 2 January.
-
-[[link](https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_03c0b36a684e4b21b19d4861c06d9460.pdf)] [[extended abstract](https://journals.linguisticsociety.org/proceedings/index.php/ExtendedAbs/article/viewFile/2386/2166)] Kettig, Thomas. 2014. “The Canadian Shift: Its Acoustic Trajectory and Consequences for Vowel Categorization.” _88th Annual Meeting of the Linguistic Society of America_. Minneapolis, MN, 4 January. DOI:[http://dx.doi.org/10.3765/exabs.v0i0.2386.](http://dx.doi.org/10.3765/exabs.v0i0.2386)
-
-<br>
-
-#### 2013
-
-[[link](https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_2306e7a0a3d74ac8a420af2da60df043.pdf)] Kettig, Thomas. 2013. “Production and Perception of Short Vowels in Montréal.” _McGill Canadian Conference for Linguistics Undergraduates_. Montréal, QC, 18 March.
-
-
-
-
-
+__McGill University (2009-2013)__   
+Montreal, Québec, Canada   
+BA (Honours), [Department of Linguistics](https://www.mcgill.ca/linguistics/)  
+Thesis: [The Canadian Shift in a Montreal Community: Change and Variation in Perception and Production of the Non-Hight Short Vowels](https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_349a6e092ae9421084af8f2b5c7be087.pdf)    

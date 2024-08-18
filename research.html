@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Research Papers &amp; Presentations</title>
+
+<script src="site_libs/header-attrs-2.27/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Thomas Kettig</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="research.html">Research</a>
+</li>
+<li>
+  <a href="teaching.html">Teaching</a>
+</li>
+<li>
+  <a href="CV.pdf">CV</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-envelope-o"></span>
+     
+    Contact
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="mailto:tkettig@yorku.ca">E-mail</a>
+    </li>
+    <li>
+      <a href="https://x.com/tkettig?lang=en">Twitter (X)</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Research Papers &amp; Presentations</h1>
+
+</div>
+
+
+<p><br></p>
+<div id="section" class="section level4">
+<h4>2024</h4>
+<p>[<a
+href="https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_d00d95b5d9f045fbb41915f02253f470.pdf">abstract</a>]
+Kettig, Thomas, and Lisa Davidson. Acoustic correlates of stress in
+contrastive short and long vowels in ʻōlelo Hawaiʻi. <em>LabPhon19</em>.
+Seoul, Korea, 27–29 June.</p>
+<p>[<a
+href="https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_d11c22981b7c402bb89151bbfc752149.pdf">slides</a>]
+Kettig, Thomas, and Lisa Davidson. 2024. Acoustic correlates distinguish
+multiple levels of stress in ʻōlelo Hawaiʻi. <em>100th Annual Meeting of
+the Linguistic Society of America</em>. New York, NY, 5 January.</p>
+<p><br></p>
+</div>
+<div id="section-1" class="section level4">
+<h4>2023</h4>
+<p>[<a href="https://osf.io/preprints/psyarxiv/q8t2k">link</a>] Coretta,
+Stefano, Joseph Casillas, … Thomas Kettig, … Timo Roettger. 2023.
+Multidimensional signals and analytic flexibility: Estimating degrees of
+freedom in human speech analyses. <em>Advances in Methods and Practices
+in Psychological Science</em>.</p>
+<p>[<a
+href="https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_1d0a03b120ea475288a93228f0ee4dac.pdf">slides</a>]
+Kettig, Thomas. 2023. Inter- and intra-speaker /ai~ei/ variation in
+ʻōlelo Hawaiʻi. Acoustic and historical-comparative evidence. <em>NWAV
+51</em>, New York, NY, 14 October.</p>
+<p>[<a href="https://guarant.cz/icphs2023/798.pdf">link</a>] [<a
+href="https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_764be71cfbb040c7b4d40c61e3d37424.pdf">slides</a>]
+Kettig, Thomas. 2023. Word class and frequency effects in Hawaiian
+stressed vowel clusters. <em>International Congress of Phonetic Sciences
+2023</em>. Prague, Czechia, 9 August.</p>
+<p><br></p>
+</div>
+<div id="section-2" class="section level4">
+<h4>2022</h4>
+<p>[<a
+href="https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_ce7fad48e2ac473ab4bb1143c3f844a3.pdf">slides</a>]
+Kettig, Thomas. 2022. Word class and diphthong reduction in ʻōlelo
+Hawaiʻi. <em>NWAV 50</em>, San Jose, CA, USA, 14 October.</p>
+<p>[<a
+href="https://vincent-hughes.com/wp-content/uploads/2022/06/490_paper.pdf">link</a>]
+Hughes, Vincent, Carmen Llamas, and Thomas Kettig. 2022. Eliciting and
+evaluating likelihood ratios for speaker recognition by human listeners
+under forensically realistic channel-mismatched conditions.
+<em>Proceedings of Interspeech</em>. Incheon, Korea.</p>
+<p>[<a
+href="https://drive.google.com/file/d/1X7FrSzja2EBUlUlivOv93dNwlRyUwErm/view">link</a>]
+Hughes, Vincent, Carmen Llamas, and Thomas Kettig. 2022. A game-based
+approach to eliciting and evaluating likelihood ratios for speaker
+recognition. <em>30th Annual Conference of the International Association
+for Forensic Phonetics and Acoustics</em>. Prague, Czechia, 10-13
+July.</p>
+<p><br></p>
+</div>
+<div id="section-3" class="section level4">
+<h4>2021</h4>
+<p>[<a
+href="https://utexas.zoom.us/rec/play/ZsqXfG_GDpxgxMCTXr9cyO-62M41Z4fz7xRwOa3HfTHYcq6dGKkHNevuOi5eIWciVFeiNtbzqybYUlVs.V7N3dsmWhHF0Up86?continueMode=true&amp;_x_zm_rtaid=WJBdogFURBiShzLW9w06vg.1666069809234.99ea19040622ee596cfbe07477fe39d8&amp;_x_zm_rhtaid=416">link</a>]
+Barreda, Santiago, Thomas Kettig, and Chaya Nove. 2021. Workshop:
+Improving vowel formant analysis in sociophonetic research using Fast
+Track. <em>NWAV 49</em>. Online, 19 October.</p>
+<p>[<a href="https://youtu.be/PdPxQGXSX64?si=L9T25u1TVCq-kIXl">link</a>]
+Kettig, Thomas. 2021. Nānā i ke kumu: Acoustic phonetic research on
+archival recordings of ʻōlelo Hawaiʻi. <em>International Conference on
+Language Documentation and Conservation 7</em>. Online.</p>
+<p>[<a
+href="https://scholarspace.manoa.hawaii.edu/server/api/core/bitstreams/49cdaa29-f832-43d3-bb57-1c2b7d5694f3/content">link</a>]
+Kettig, Thomas. 2021. Haʻina ʻia mai ana ka puana: The vowels of ʻōlelo
+Hawaiʻi. PhD Dissertation, University of Hawaiʻi at Mānoa.</p>
+<p>[<a
+href="https://www.cambridge.org/core/books/cambridge-handbook-of-phonetics/4C35C9BE4CE7D93EB21C06E90BEE68A9">link</a>]
+Drager, Katie and Thomas Kettig. 2021. Trends in Sociophonetics. In
+R.-A. Knight and J. Setter (eds), <em>Cambridge Handbook of Phonetics.
+Cambridge: Cambridge University Press</em>, pp. 551-577.</p>
+<p><br></p>
+</div>
+<div id="section-4" class="section level4">
+<h4>2019</h4>
+<p>[<a
+href="https://assta.org/proceedings/ICPhS2019/papers/ICPhS_3607.pdf">link</a>]
+[<a
+href="https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_13219430bd0f449baa1df7e869fc8263.pdf">poster</a>]
+Kettig, Thomas. 2019. Spectral coarticulation in Hawaiian /aV/ and /aCV/
+sequences. <em>International Congress of Phonetic Sciences 2019</em>.
+Melbourne, Australia, 8 August. (Poster)</p>
+<p><br></p>
+</div>
+<div id="section-5" class="section level4">
+<h4>2018</h4>
+<p>[<a
+href="https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_cad36e09e9bd471c9cf17e5a4338e541.pptx?dn=SS%20Presentation.pptx">link</a>]
+Kettig, Thomas and Katie Drager. 2018. The social evaluation of
+TRAP-backing in Montreal. <em>Sociolinguistics Symposium 22</em>.
+Auckland, New Zealand, 30 June.</p>
+<p><br></p>
+</div>
+<div id="section-6" class="section level4">
+<h4>2017</h4>
+<p>[<a
+href="https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_e2ec84fd0c574d49946ff45a7d17d76b.pdf">link</a>]
+Kettig, Thomas. 2017. “Now say ‘Ah’: Internal factors of shifting and
+the English low vowel space.” E. Louviot &amp; C. Delesse (eds),
+<em>Studies in Language Variation and Change 2 Shifting, Switching and
+Alternating Patterns in the History of English</em>. Newcastle upon
+Tyne: Cambridge Scholars Publishing.</p>
+<p>[<a
+href="https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_5650c0e127184be893dd2ba1a9d6de47.pdf">link</a>]
+Kettig, Thomas. 2017. “Diachronically stable, lexically specific
+variation: The phonological representation of secondary
+/æ/-lengthening”. <em>Phonetics and Phonology in Europe</em>. Cologne,
+Germany, 12-14 June. (Poster)</p>
+<p>[<a
+href="https://www.cambridge.org/core/journals/language-variation-and-change/article/abs/producing-and-perceiving-the-canadian-vowel-shift-evidence-from-a-montreal-community/A45A2F348CBC7AA652035F17177AFE30">link</a>]
+Kettig, Thomas and Bodo Winter. 2017. “Producing and Perceiving the
+Canadian Vowel Shift: Evidence from a Montreal Community.” <em>Language
+Variation and Change</em> 29(1): 79–100. <a
+href="DOI:%5Bhttps://doi.org/10.1017/S0954394517000023"
+class="uri">DOI:[https://doi.org/10.1017/S0954394517000023</a>](<a
+href="https://doi.org/10.1017/S0954394517000023"
+class="uri">https://doi.org/10.1017/S0954394517000023</a>.) <a
+href="https://doi.org/10.1017/S0954394517000023"
+class="uri">https://doi.org/10.1017/S0954394517000023</a>.</p>
+<p>[<a
+href="https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_6f0425d4802a4560b44fa62d4df74638.pdf">link</a>]
+Kettig, Thomas. 2017. “One hundred years of stability: The case of the
+BAD-LAD split”. <em>91st Annual Meeting of the Linguistic Society of
+America. Austin, TX, 6 January</em>. (Poster)</p>
+<p><br></p>
+</div>
+<div id="section-7" class="section level4">
+<h4>2016</h4>
+<p>[<a
+href="https://www.tandfonline.com/doi/full/10.1080/00472336.2015.1028964">link</a>]
+Kettig, Thomas, Sarah Turner, Đinh Thị Diệu and Phạm Văn Cự. 2016.
+“State Livelihood Planning and Legibility in Vietnam’s Northern
+Borderlands: The ‘Rightful Criticisms’ of Local Officials.” <em>Journal
+of Contemporary Asia</em> 46(1): 42–70. DOI: <a
+href="http://dx.doi.org/10.1080/00472336.2015.1028964">http://dx.doi.org/10.1080/00472336.2015.1028964</a></p>
+<p>[<a
+href="https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_18240bd9a85443b28cbae2cd58915fce.pdf">link</a>]
+Kettig, Thomas. 2016. “Preaspiration following /æ/ in Southern Standard
+British English.” <em>Sociolinguistics Symposium</em> 21. Murcia, Spain,
+15–18 June.</p>
+<p>[<a
+href="https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_babb6eead8f34cd1a572b4c6b14d8b43.pdf">link</a>]
+[<a
+href="https://journals.linguisticsociety.org/proceedings/index.php/PLSA/article/view/3732">extended
+abstract</a>] Kettig, Thomas. 2016. “The BAD-LAD split: Secondary
+/æ/-lengthening in Southern Standard British English” (Poster). <em>90th
+Annual Meeting of the Linguistic Society of America</em>. Washington,
+DC, 8 January. DOI: <a
+href="http://dx.doi.org/10.3765/plsa.v1i0.3732">http://dx.doi.org/10.3765/plsa.v1i0.3732.</a></p>
+<p>[<a
+href="https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_1de8b2f0db0e4fb0a5643731ab51b9c1.pdf">link</a>]
+Kettig, Thomas. The BAD-LAD Split: A Phonetic Investigation. Masters
+Thesis, University of Cambridge.</p>
+<p><br></p>
+</div>
+<div id="section-8" class="section level4">
+<h4>2015</h4>
+<p>[<a
+href="https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_71645c800aa945fba95eb411ae9690a7.pdf">link</a>]
+Kettig, Thomas and Bodo Winter. 2015. “The Canadian Vowel Shift in
+Production and Perception: New Evidence from Montreal.” <em>NWAV44:
+Intersections</em>. Toronto, ON, 22-25 October 2015.</p>
+<p>[<a
+href="https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_71645c800aa945fba95eb411ae9690a7.pdf">link</a>]
+Kettig, Thomas. 2015. “Now say ‘Ah’: Internal factors of shifting and
+the English low vowel space.” <em>4th Biennial Conference on the
+Diachrony of English</em>. Troyes, France, 6 July.</p>
+<p>[<a
+href="https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_20bb1c447c114ec999a8d7426681d45f.pdf">link</a>]
+[<a
+href="http://conferences.phil.uoa.gr/exling/2015/Exling_2015.pdf#page=36">extended
+abstract</a>] Kettig, Thomas and Bodo Winter. 2015. “Production and
+Perception Asymmetries in the Canadian Vowel Shift.” <em>6th
+International Conference on Experimental Linguistics</em>. Athens,
+Greece, 26 June.</p>
+<p>[<a
+href="https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_a26bb392ba97414d988faacc9751116e.pdf">link</a>]
+Kettig, Thomas. 2015. “Changing Accents, Changing Vowels.” <em>St
+Edmund’s Interdisciplinary Conference</em>. St Edmund’s College,
+Cambridge, UK, 19 February.</p>
+<p><br></p>
+</div>
+<div id="section-9" class="section level4">
+<h4>2014</h4>
+<p>[<a
+href="https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_b34cfce30e1b4933ad42d67d3b27195d.pdf">link</a>]
+Kettig, Thomas. 2014. “Gussing Rondomly: How Canadians are advancing,
+spreading, and perceiving an active vowel shift.” <em>Sociolinguistics
+Symposium 20. Jyväskylä</em>, Finland, 18 June.</p>
+<p>[<a
+href="https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_e126b303138449fda9752613f6d12432.pdf">link</a>]
+Kettig, Thomas. 2014. The Canadian Short Vowels in Motion: Real-time
+Change and Regional Diffusion. <em>2014 Annual Meeting of the American
+Dialect Society</em>. Minneapolis, MN, 2 January.</p>
+<p>[<a
+href="https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_03c0b36a684e4b21b19d4861c06d9460.pdf">link</a>]
+[<a
+href="https://journals.linguisticsociety.org/proceedings/index.php/ExtendedAbs/article/viewFile/2386/2166">extended
+abstract</a>] Kettig, Thomas. 2014. “The Canadian Shift: Its Acoustic
+Trajectory and Consequences for Vowel Categorization.” <em>88th Annual
+Meeting of the Linguistic Society of America</em>. Minneapolis, MN, 4
+January. <a href="DOI:%5Bhttp://dx.doi.org/10.3765/exabs.v0i0.2386"
+class="uri">DOI:[http://dx.doi.org/10.3765/exabs.v0i0.2386</a>.](<a
+href="http://dx.doi.org/10.3765/exabs.v0i0.2386"
+class="uri">http://dx.doi.org/10.3765/exabs.v0i0.2386</a>)</p>
+<p><br></p>
+</div>
+<div id="section-10" class="section level4">
+<h4>2013</h4>
+<p>[<a
+href="https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_2306e7a0a3d74ac8a420af2da60df043.pdf">link</a>]
+Kettig, Thomas. 2013. “Production and Perception of Short Vowels in
+Montréal.” <em>McGill Canadian Conference for Linguistics
+Undergraduates</em>. Montréal, QC, 18 March.</p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
