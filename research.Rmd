@@ -6,16 +6,17 @@ title: "Research Papers & Presentations"
 
 #### 2024
 
-[[abstract](https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_d00d95b5d9f045fbb41915f02253f470.pdf)] Kettig, Thomas, and Lisa Davidson. Acoustic correlates of stress in contrastive short and long vowels in ʻōlelo Hawaiʻi. _LabPhon19_. Seoul, Korea, 27–29 June. 
+[[abstract](https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_d00d95b5d9f045fbb41915f02253f470.pdf)] Kettig, Thomas, and Lisa Davidson. 2024. Acoustic correlates of stress in contrastive short and long vowels in ʻōlelo Hawaiʻi. _LabPhon19_. Seoul, Korea, 27–29 June. 
 
-[[slides](https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_d11c22981b7c402bb89151bbfc752149.pdf)] Kettig, Thomas, and Lisa Davidson. 2024. Acoustic correlates distinguish multiple levels of stress in ʻōlelo Hawaiʻi. _100th Annual Meeting of the Linguistic Society of America_. New York, NY, 5 January.  
+[[slides](papers_etc/KettigDavidson2024LSA_slides.pdf)] Kettig, Thomas, and Lisa Davidson. 2024. Acoustic correlates distinguish multiple levels of stress in ʻōlelo Hawaiʻi. _100th Annual Meeting of the Linguistic Society of America_. New York, NY, 5 January.  
 
+[[slides]()Kettig, Thomas, and Lisa Davidson. 2024. Stress and contrastive length are distinctively cued in ʻōlelo Hawaiʻi vowels. AFLA31, Amherst, MA, 12–14 June.
 
 <br>
 
 #### 2023
 
-[[link](https://osf.io/preprints/psyarxiv/q8t2k)]  Coretta, Stefano, Joseph Casillas, … Thomas Kettig, … Timo Roettger. 2023. Multidimensional signals and analytic flexibility: Estimating degrees of freedom in human speech analyses. _Advances in Methods and Practices in Psychological Science_.  
+[[paper](https://osf.io/preprints/psyarxiv/q8t2k)] Coretta, Stefano, Joseph Casillas, … Thomas Kettig, … Timo Roettger. 2023. Multidimensional signals and analytic flexibility: Estimating degrees of freedom in human speech analyses. _Advances in Methods and Practices in Psychological Science_.  
 
 [[slides](https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_1d0a03b120ea475288a93228f0ee4dac.pdf)] Kettig, Thomas. 2023. Inter- and intra-speaker /ai~ei/ variation in ʻōlelo Hawaiʻi. Acoustic and historical-comparative evidence. _NWAV 51_, New York, NY, 14 October.  
 
