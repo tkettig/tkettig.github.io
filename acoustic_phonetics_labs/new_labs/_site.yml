@@ -29,8 +29,7 @@ navbar:
   - text: "Contact"
     icon: fa-envelope-o
     menu:
-    - text: "E-mail"
-      href: mailto:tkettig@yorku.ca
+    - text: "E-mail: tkettig at yorku dot ca"
 
 output:
   html_document:
