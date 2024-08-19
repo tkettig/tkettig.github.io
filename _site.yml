@@ -7,9 +7,18 @@ navbar:
   - text: "About"
     href: about.html
   - text: "Research"
-    href: research.html
+    menu:
+    - text: "Research Topic (Option 1)"
+      href: topic_1.html
+    - text: "Research Topic (Option 2)"
+      href: topic_2.html
+    - text: "Chronological"
+      href: chrono.html
   - text: "Teaching"
     href: teaching.html
+    menu: 
+    - text: "LING 4220: Acoustic Phonetics"
+      href: acoustic_phonetics.html
   - text: "CV"
     href: CV.pdf
   right:

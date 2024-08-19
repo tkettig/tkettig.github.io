@@ -29,7 +29,19 @@ title: "Teaching"
 <details>
 <summary>LING 4220: Acoustic Phonetics (Winter 2025, Fall
 2024)</summary>
-<br> This is how you dropdown.
+<br> An investigation of acoustic-phonetic aspects of speech and their relation to speech perception and recognition. Practical experience in techniques of acoustic-phonetic research.  
+
+-----
+
+[Lab 1 - Exploring Praat](acoustic_phonetics_labs/new_labs/Lab1.html)  
+[Lab 2 - Voicing in Stop Consonants](acoustic_phonetics_labs/new_labs/Lab2.html)  
+[Lab 3 - Vowel Properties](acoustic_phonetics_labs/new_labs/Lab3.html)  
+[Lab 4 - The Source-Filter Model of Speech: Fundamental frequency, harmonics and formants](acoustic_phonetics_labs/new_labs/Lab4.html)  
+[Lab 5 - Glides and Liquids](acoustic_phonetics_labs/new_labs/Lab5.html)  
+[Lab 6 - Obstruent Place of Articulation](acoustic_phonetics_labs/new_labs/Lab6.html)  
+[Lab 7 - Phonation Types](acoustic_phonetics_labs/new_labs/Lab7.html)  
+[Lab 8 - Nasals](acoustic_phonetics_labs/new_labs/Lab8.html)  
+
 </details>
 
 <br>

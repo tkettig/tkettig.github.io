@@ -1,0 +1,43 @@
+---
+title: "Research sorted by topic (Option 2)"
+output: html_document
+---
+-----
+
+<h3> Hawaiian phonetics </h3> 
+Blurb can go here!
+
+[[link](https://www.youtube.com/)] Paper, Here (2001). Title of Paper.  
+[[link](https://www.youtube.com/)] Paper, Paper (2002). Title of Paper.  
+
+<br>
+
+<h3> Canadian shift production & perception </h3>
+Blurb can go here!
+
+[[link](https://www.youtube.com/)] Paper, Here (2001). Title of Paper.  
+[[link](https://www.youtube.com/)] Paper, Paper (2002). Title of Paper. 
+
+<br>
+
+<h3> BAD-LAD split in SSBE </h3>
+Blurb can go here!
+
+[[link](https://www.youtube.com/)] Paper, Here (2001). Title of Paper.  
+[[link](https://www.youtube.com/)] Paper, Paper (2002). Title of Paper.  
+
+<br>
+
+<h3> Vowel shift theory </h3>
+Blurb can go here!
+
+[[link](https://www.youtube.com/)] Paper, Here (2001). Title of Paper.  
+[[link](https://www.youtube.com/)] Paper, Paper (2002). Title of Paper.  
+
+<br>
+
+<h3> Forensic phonetics </h3>
+Blurb can go here!
+
+[[link](https://www.youtube.com/)] Paper, Here (2001). Title of Paper.  
+[[link](https://www.youtube.com/)] Paper, Paper (2002). Title of Paper.  
