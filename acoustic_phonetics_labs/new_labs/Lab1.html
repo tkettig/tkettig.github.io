@@ -14,7 +14,7 @@
 
 <title>Lab 1: Exploring Praat</title>
 
-<script src="site_libs/header-attrs-2.26/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.27/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
@@ -292,9 +292,7 @@ $(document).ready(function () {
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="mailto:tkettig@yorku.ca">E-mail</a>
-    </li>
+    <li class="dropdown-header">E-mail: tkettig at yorku dot ca</li>
   </ul>
 </li>
       </ul>
@@ -313,21 +311,22 @@ al.</h4>
 </div>
 
 
+<hr />
 <div id="goal-of-lab-1" class="section level3">
 <h3><strong>Goal of Lab 1:</strong></h3>
-<h4>
-<p>The goal of this first lab is to explore some of the basic features
-of PRAAT (www.praat.org), which we will be using for speech analysis
-throughout the term. You will learn to make recordings, bring up visual
-displays of these recordings (waveforms and spectrograms), segment and
-label various components of these recordings, and export the visual
-displays into a word document.</p>
-The skills you learn today will be useful for your lab work throughout
-the remainder of this course and beyond…
-</h4>
+<p><font size= "4.0"> The goal of this first lab is to explore some of
+the basic features of PRAAT (www.praat.org), which we will be using for
+speech analysis throughout the term. You will learn to make recordings,
+bring up visual displays of these recordings (waveforms and
+spectrograms), segment and label various components of these recordings,
+and export the visual displays into a word document.</p>
+<p>The skills you learn today will be useful for your lab work
+throughout the remainder of this course and beyond… </font></p>
 <hr />
-<font size= "3.5"> <br> 1. Open Praat: double click on the following
-icon:
+<p><font size= "4.0"></p>
+<p><br></p>
+<ol style="list-style-type: decimal">
+<li><p>Open Praat by double clicking on the following icon:</p>
 <center>
 <div class="float">
 <img src="Images/Figure1_praatlogo.png"
@@ -335,9 +334,8 @@ alt="Figure 1.1: Praat icon" />
 <div class="figcaption">Figure 1.1: Praat icon</div>
 </div>
 </center>
-<p><br></p>
-<ol start="2" style="list-style-type: decimal">
-<li>Get to know the Praat layout
+<p><br></p></li>
+<li><p>Get to know the Praat layout.</p>
 <center>
 <div class="float">
 <img src="Images/Figure1_praatlayout.png"
@@ -345,26 +343,28 @@ alt="Figure 1.2: Praat layout" />
 <div class="figcaption">Figure 1.2: Praat layout</div>
 </div>
 </center>
-<br></li>
+<p><br></p></li>
 </ol>
 <blockquote>
-<p><strong>TIP:</strong> The tools you see in the Analysis and Synthesis
-Tool Panel (see Figure 1.2 above) are specific to the highlighted
-object(s) in the list. For example, the tools that are listed for a
-sound object such as “name” or “Fargo_vowels” are different from that
-for a Textgrid object. When you first open Praat, there will be nothing
-in your object list. Therefore, nothing will show up in your Analysis
-and Synthesis Tool Panel.</p>
+<p><strong>TIP:</strong><br />
+The tools you see in the Analysis and Synthesis Tool Panel (see Figure
+1.2 above) are specific to the highlighted object(s) in the list.</p>
+<p>For example, the tools that are listed for a sound object such as
+“name” or “Fargo_vowels” are different from that for a Textgrid object.
+When you first open Praat, there will be nothing in your object list.
+Therefore, nothing will show up in your Analysis and Synthesis Tool
+Panel.</p>
 </blockquote>
 <p><br></p>
 <ol start="3" style="list-style-type: decimal">
-<li>Record the sentence: <strong>“My name is [first-name]
-[last-name]”</strong></li>
+<li>Record the sentence - <strong>“My name is [first-name]
+[last-name]”</strong>. In the main menu of the Objects window (see
+Figure 1.2):</li>
 </ol>
-<p>In the main menu of the Objects window (see Figure 1.2):</p>
 <ul>
 <li>Click <strong>New &gt; Record mono Sound (sampling rate: 44 100
-Hz)</strong> (Figure 1.3)</li>
+Hz)</strong> (Figure 1.3)
+<ul>
 <li>Make sure the volume bar is fluctuating as you record – if it isn’t,
 you’re not recording or you’re not speaking loudly enough. You may need
 to find the correct microphone under “Input source”.</li>
@@ -372,6 +372,7 @@ to find the correct microphone under “Input source”.</li>
 high and you go into the red on the volume bar, you’ll end up with what
 is called a “clipped” signal – this is very bad for speech
 analysis!</li>
+</ul></li>
 <li>Give the recording a name (in the box above “Save to list”)</li>
 <li>Click <strong>Save to list</strong></li>
 </ul>
@@ -397,8 +398,11 @@ recording has a square-like form, because the sound is “bursting out” of
 the maximum and minimum levels that can be plotted. In a good recording,
 the waveform will be touching the top and bottom of the plot only once
 or twice. The scale/zoom of the waveform will adjust such that it’s
-always showing exactly the</p>
-<p><br> 4. Open the sound file in the Edit window:</p>
+always showing exactly the (finish this thought!)</p>
+<p><br></p>
+<ol start="4" style="list-style-type: decimal">
+<li>Open the sound file in the Edit window:</li>
+</ol>
 <ul>
 <li>In the Objects window (see Figure 1.2), highlight the sound file
 you’ve just recorded.</li>
@@ -414,8 +418,7 @@ Figure 1.5). If you don’t need these displays for your current purposes
 (you don’t for this lab!), you can tidy up the visual display by doing
 the following:</p>
 <p><br></p>
-<ul>
-<li>In the menu of the View &amp; Edit window:
+<p>In the menu of the View &amp; Edit window:</p>
 <ul>
 <li><strong>Pulses &gt; Show pulses</strong> (click on this to unselect
 it)</li>
@@ -423,7 +426,6 @@ it)</li>
 unselect it)</li>
 <li><strong>Pitch &gt; Show pitch</strong> (click on this to unselect
 it)</li>
-</ul></li>
 </ul>
 <p><br></p>
 <p>Two things are being displayed now in the Edit window: <strong>the
@@ -439,8 +441,8 @@ alt="Figure 1.5: A crowded edit window" />
 </center>
 <p><br></p>
 <blockquote>
-<p><strong>TIP:</strong> Below are some common manipulations you will
-find useful.</p>
+<p><strong>TIP:</strong><br />
+Below are some common manipulations you will find useful.</p>
 <p><u> Selecting a portion of the sound file and measure the duration of
 the portion</u></p>
 <ol style="list-style-type: decimal">
@@ -546,8 +548,10 @@ alt="Figure 1.7: Creating a textgrid" />
 <div class="figcaption">Figure 1.7: Creating a textgrid</div>
 </div>
 </center>
-<p><br> 9. Open the sound file and textgrid together (see Figure
-1.8):</p>
+<p><br></p>
+<ol start="9" style="list-style-type: decimal">
+<li>Open the sound file and textgrid together (see Figure 1.8):</li>
+</ol>
 <p>In order to segment and/or label a sound file, you have to open the
 sound file <strong><em>together</em></strong> with its textgrid
 file.</p>
@@ -559,7 +563,7 @@ highlight them both</li>
 <br>
 <center>
 <div class="float">
-<img src=".\Images\Figure1_textgrid_sound.png"
+<img src="Images/Figure1_textgrid_sound.png"
 alt="Figure 1.8: Opening a textgrid file with its corresponding sound file" />
 <div class="figcaption">Figure 1.8: Opening a textgrid file with its
 corresponding sound file</div>
@@ -569,7 +573,10 @@ corresponding sound file</div>
 spectrogram (middle) and the textgrid (bottom) corresponding to your
 sound file (see Figure 1.9). We will talk about waveforms and
 spectrograms in detail later on.</p>
-<p><br> 10. Segment the file (see Figure 1.9):</p>
+<p><br></p>
+<ol start="10" style="list-style-type: decimal">
+<li>Segment the file (see Figure 1.9):</li>
+</ol>
 <p>In the sound file, identify your first name and last name. Use the
 following steps to segment each:</p>
 <ul>
@@ -591,7 +598,10 @@ Remove</strong> or click <strong>Alt + Backspace</strong></li>
 <li>Move a boundary by clicking on the boundary to highlight it (should
 go red as a result) and drag it to the desired location</li>
 </ul>
-<p><br> 11. Label the intervals (see Figure 1.9)</p>
+<p><br></p>
+<ol start="11" style="list-style-type: decimal">
+<li>Label the intervals (see Figure 1.9)</li>
+</ol>
 <ul>
 <li>Select/highlight the target interval by clicking between two
 boundaries, the selected interval should go yellow</li>
@@ -608,27 +618,32 @@ alt="Figure 1.9: Segmenting and labeling" />
 <div class="figcaption">Figure 1.9: Segmenting and labeling</div>
 </div>
 </center>
-<p><br> 12. Follow steps (10) and (11) to segment your [first name +
-last name] into segments.</p>
-<blockquote>
-<p><strong>TIP:</strong> To use phonetic symbols in your segment
-tiers:</p>
-<ol style="list-style-type: decimal">
+<p><br></p>
+<ol start="12" style="list-style-type: decimal">
+<li>Follow steps (10) and (11) to segment your [first name + last name]
+into segments. To use phonetic symbols in your segment tiers:</li>
+</ol>
+<ul>
 <li>In the TextGrid editing window, go to <strong>Help &gt; Phonetic
 symbols</strong></li>
 <li>From here, you can see what keystrokes you need to create special
 fonts (using them is not recommended as they end up looking a bit
 wonky…)</li>
+</ul>
+<p><br></p>
+<ol start="13" style="list-style-type: decimal">
+<li>Save your textgrid onto the desktop:</li>
 </ol>
-</blockquote>
-<p><br> 13. Save your textgrid onto the desktop:</p>
 <ul>
 <li><strong>File &gt; Save TextGrid as textfile…</strong></li>
 </ul>
-<p><br> 14. Take a screenshot of your labeled waveform and spectrogram
-to Word and paste it into your document (see Figure 1.10). Instructions
-on how to take a screenshot for your system and paste it can be found <a
-href="https://www.take-a-screenshot.org/">here</a>.</p>
+<p><br></p>
+<ol start="14" style="list-style-type: decimal">
+<li>Take a screenshot of your labeled waveform and spectrogram to Word
+and paste it into your document (see Figure 1.10). Instructions on how
+to take a screenshot for your system and paste it can be found <a
+href="https://www.take-a-screenshot.org/">here</a>.</li>
+</ol>
 <br>
 <center>
 <div class="float">
@@ -637,7 +652,10 @@ alt="Figure 1.10: Example of Word output" />
 <div class="figcaption">Figure 1.10: Example of Word output</div>
 </div>
 </center>
-<p><br> 15. Save the file: you must upload this to eClass.</p>
+<p><br></p>
+<ol start="15" style="list-style-type: decimal">
+<li>Save the file: you must upload this to eClass.</li>
+</ol>
 <p>If you complete all of these steps, you should end up with a word
 file with an image of the labeled waveform/spectrogram corresponding to
 your name, as in Fig. 1.10. You can save this file, and your Praat files
@@ -646,19 +664,19 @@ a flash drive (memory stick).</p>
 <p>Your lab report should include one Figure, corresponding to the
 segmented and labeled spectrogram and waveform of your name.</p>
 <p></font></p>
-<hr />
+<p><br></p>
 <hr />
 <br>
 <center>
 <font size= "4.5"> <strong>LAB 1 REPORT</strong> </font>
 </center>
-<p><font size= "4.5"> <br> <strong>Upload to eClass</strong> a PDF with
-your answers to the following questions as well as the .wav and
-.TextGrid files that you created for this lab. Each student must
-complete and submit this lab on their own.</p>
+<p><font size= "4.5"> <br> On eClass, submit a PDF with your answers to
+the following questions and also submit the .wav and .TextGrid files
+that you created for this lab. Each student must complete and submit
+this lab on their own.</p>
 <p><strong>Q1:</strong> How can you tell where one word ends and another
-word begins?<br />
-<br> <strong>Q2:</strong> Do you notice any patterns in terms of how
+word begins?</p>
+<p><strong>Q2:</strong> Do you notice any patterns in terms of how
 different sounds look visually, on either the waveform or the
 spectrogram?</p>
 <ul>
@@ -668,7 +686,7 @@ on the spectrogram?</font></li>
 </ul>
 <p><br></p>
 <hr />
-<p><font size="2.0"> Disclaimer: The original lab materials on which
+<p><font size="2.5"> Disclaimer: The original lab materials on which
 this lab is based was put together in 2015 (updated 2019) by Sonya Bird,
 Qian Wang, Sky Onosson, and Allison Benner for the LING 380 Acoustic
 Phonetics course at the University of Victoria. Their materials are

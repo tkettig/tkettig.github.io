@@ -6,12 +6,13 @@ output: html_document
 *** 
 
 ### __Goal of Lab 2:__
-<h4> One of the most common acoustic features that is measured and manipulated in speech research is voicing in stop consonants (in particular voice onset time), so this is a good place to start. In this lab, we are going to explore the acoustic correlates of different stop consonants in terms of two parameters: _voicing_ and _place of articulation_. </h4>
+<font size= "4.0">
+One of the most common acoustic features that is measured and manipulated in speech research is voicing in stop consonants (in particular voice onset time), so this is a good place to start. In this lab, we are going to explore the acoustic correlates of different stop consonants in terms of two parameters: _voicing_ and _place of articulation_. </font>
 
 ***
-<font size= "3.5">
+<font size= "4.0">
 
-##### __RECORDING__
+#### __RECORDING__
 
 Generate the following sound files, containing the sound sequences listed.  
 
@@ -31,26 +32,29 @@ If you are a fluent French speaker, also generate the following sound files. Oth
 |Lab2_Fr_a_stop.wav   |   nappe, nab, latte, lad, sac, vague|
 
 <br>
+
 Three important acoustic correlates of voicing in English stops are:
 
 * The voice bar
 * VOT
 * The duration of the preceding vowel
 
+<br>
+
 For each of the stops in the file, take the three measurements according to the instructions below and fill out Table 2.1, Table 2.2 and Table 2.3 accordingly. Answer the related questions by comparing your measurements across stops.
 
 ***
 
-##### __INSTRUCTIONS__
+#### __INSTRUCTIONS__
 
 1. Open the following sound files in Praat: **Eng_stop_a.wav** and **Fr_stop_a.wav**. Measure the VOT of each stop (see Figure 2.1) and fill in Table 2.1. Compare voiced/voiceless counterparts (p/b, t/d, k/g):
 
   +	Zoom in so that you can clearly see the transition between the stop and vowel
-  + Measure the time between the end of the stop closure ( = the beginning of the release burst) and the onset of voicing ( = the onset of _regular_ pitch pulses in the waveform). This is the __voice onset time__, or VOT.
-    + If the onset of voicing <u> follows </u> the release of the stop clouse, then VOT is calculated as _positive_; stops with positive VOT are termed _voiceless_.
+  + Measure the time between the end of the stop closure ( = the beginning of the release burst) and the onset of voicing ( = the onset of <u>regular</u> pitch pulses in the waveform). This is the __voice onset time__, or VOT.
+    + If the onset of voicing _follows_ the release of the stop clouse, then VOT is calculated as __positive__; stops with positive VOT are termed __voiceless__.
       + VOTs between 0-20ms correspond to __voiceless unaspirated stops__
       + VOTS above 20ms correspond to __voiceless aspirated stops__
-    + If the onset of voicing <u> precedes </u> the release of the stop closure, then VOT is calculated as _negative_; stops with negative VOT are termed __prevoiced__ or more generally, __voiced__. (See bottom of Figure 1.2)
+    + If the onset of voicing _precedes_ the release of the stop closure, then VOT is calculated as _negative_; stops with negative VOT are termed __prevoiced__ or more generally, __voiced__. (See bottom of Figure 1.2)
     
 <center>
 ![Figure 2.1: Positive and negative VOT measurements](./Images/Figure2_VOT_measurements.png)
@@ -58,7 +62,7 @@ For each of the stops in the file, take the three measurements according to the 
 
 <br>
 
-> __TIP:__
+> __TIP:__  
 Praat reports time values in seconds, but in phonetic analysis we report in milliseconds, so the values need to be converted. Once you have converted to milliseconds, you do not need to report any decimal places.
 
 <br>
@@ -84,7 +88,7 @@ In order to measure the duration of the vowel, you will need to identify the sec
 
 ***
 <br>
-<center> <h4> __LAB 2 REPORT__ </h4> </center> 
+<center> <font size= "4.5"> __LAB 2 REPORT__ </font> </center> 
 
 <font size= "4.0">
 
@@ -135,12 +139,16 @@ __Q6:__ Summarizing what you’ve seen in this lab, what are the possible acoust
 
 <br>
 
-<center> <h4> __REFERENCES__ </h4> </center> 
+<center> <font size= "4.5"> __REFERENCES__ </font> </center>  
 
-__Q7:__ Provide a reference and very brief summary of one academic paper that uses the methods covered in this lab.
+<br>
+
+__Q7:__ Provide a reference and very brief summary of one academic paper that uses the methods covered in this lab.  
+
+<br>
 
 ***
 
-<font size="1.5"> Disclaimer: The original lab materials on which this lab is based was put together in 2015 (updated 2019) by Sonya Bird, Qian Wang, Sky Onosson, and Allison Benner for the LING 380 Acoustic Phonetics course at the University of Victoria. Their materials are released under a Creative Commons license (CC BY-NC-SA 4.0) which allows for non-commercial use as well as copying and distribution and the creation of derivative works for non-commercial purposes. Thomas Kettig (with assistance from Taylor Potter) has modified these materials as needed for the York University LING 4220 Acoustic Phonetics course.</font>
+<font size="2.5"> Disclaimer: The original lab materials on which this lab is based was put together in 2015 (updated 2019) by Sonya Bird, Qian Wang, Sky Onosson, and Allison Benner for the LING 380 Acoustic Phonetics course at the University of Victoria. Their materials are released under a Creative Commons license (CC BY-NC-SA 4.0) which allows for non-commercial use as well as copying and distribution and the creation of derivative works for non-commercial purposes. Thomas Kettig (with assistance from Taylor Potter) has modified these materials as needed for the York University LING 4220 Acoustic Phonetics course.</font>
 
 <br>
