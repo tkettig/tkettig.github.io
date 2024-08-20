@@ -11,40 +11,35 @@ title: "Teaching"
 <br>
 
 <details>
-<summary>LING 1430: Language, Power, and Persuasion (Winter
-2025)</summary>
+<summary>LING 1430: Language, Power, and Persuasion (Winter 2025)</summary>
 <br> This is how you dropdown.
 </details>
 
 <br>
 
 <details>
-<summary>LING 4400: Research in Sociolinguistic Variation and Change
-(Fall 2024)</summary>
+<summary>LING 4400: Research in Sociolinguistic Variation and Change (Fall 2024)</summary>
 <br> This is how you dropdown.
 </details>
 
 <br>
 
 <details>
-<summary>LING 4220: Acoustic Phonetics (Winter 2025, Fall
-2024)</summary>
+<summary>LING 4220: Acoustic Phonetics (Winter 2025, Fall 2024)</summary>
 <br> An investigation of acoustic-phonetic aspects of speech and their relation to speech perception and recognition. Practical experience in techniques of acoustic-phonetic research.  
 </details>
 
 <br>
 
 <details>
-<summary>LAL 6600: Graduate Research Seminar in Theoretical Linguistics
-(Winter 2024, Winter 2025)</summary>
+<summary>LAL 6600: Graduate Research Seminar in Theoretical Linguistics (Winter 2024, Winter 2025)</summary>
 <br> This is how you dropdown.
 </details>
 
 <br>
 
 <details>
-<summary>LING 2430: Language, Power, and Persuasion (Winter
-2024)</summary>
+<summary>LING 2430: Language, Power, and Persuasion (Winter 2024)</summary>
 <br> This is how you dropdown.
 </details>
 
