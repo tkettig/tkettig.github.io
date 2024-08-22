@@ -292,9 +292,7 @@ $(document).ready(function () {
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="mailto:tkettig@yorku.ca">E-mail</a>
-    </li>
+    <li class="dropdown-header">E-mail: tkettig at yorku dot ca</li>
   </ul>
 </li>
       </ul>
@@ -317,34 +315,34 @@ al.</h4>
 <hr />
 <div id="goal-of-lab-4" class="section level3">
 <h3><strong>Goal of Lab 4:</strong></h3>
-<h4>
-The goal of this lab is to explore the relationships between
-<em>fundamental frequency, harmonics</em>, and <em>formants</em>, as
-explained by the Source-Filter model of speech. Understanding these
-relationships is crucial to understanding the properties of the complex
-wave that is associated with the speech signal.
-</h4>
+<p><font size= "4.0"> The goal of this lab is to explore the
+relationships between <em>fundamental frequency, harmonics</em>, and
+<em>formants</em>, as explained by the Source-Filter model of speech.
+Understanding these relationships is crucial to understanding the
+properties of the complex wave that is associated with the speech
+signal.</font></p>
 <hr />
-<p><font size= "3.5"></p>
+<p><font size= "4.0"></p>
 <div id="recording" class="section level4">
 <h4><strong>RECORDING</strong></h4>
-<p>Generate a single sound file, “Lab4_SourceFilter.wav”, containing the
-vowel [ɛ] produced at three different pitches: low, mid, high – try to
-get the biggest range in pitch you can (if you can’t remember how to
-record yourself, refer to Lab 1).</p>
+<p>Generate a single sound file,
+<strong>“Lab4_SourceFilter.wav”</strong>, containing the vowel [ɛ]
+produced at three different pitches: low, mid, high – try to get the
+biggest range in pitch you can (if you can’t remember how to record
+yourself, refer to Lab 1).</p>
 <hr />
 </div>
 <div id="instructions" class="section level4">
 <h4><strong>INSTRUCTIONS</strong></h4>
+</div>
 <div id="section-i.-fundamental-frequency-f0-or-pitch"
-class="section level5">
-<h5><strong>SECTION I. FUNDAMENTAL FREQUENCY (F<sub>0</sub>) OR
-PITCH</strong></h5>
-<p><br></p>
+class="section level4">
+<h4><strong>SECTION I. FUNDAMENTAL FREQUENCY (F0) OR PITCH</strong></h4>
 <ol style="list-style-type: decimal">
 <li>Measure the fundamental frequency (pitch) in the middle of each [ɛ],
 using the three techniques described below, and fill out Table 4.1.</li>
 </ol>
+<p><br></p>
 <!-- > __TIP:__ -->
 <!-- For the purposes of this lab, you will have to change the "longest analysis" setting as follows: -->
 <!-- > -->
@@ -354,16 +352,18 @@ using the three techniques described below, and fill out Table 4.1.</li>
 <!-- > Ensure that you change this setting back once the lab is completed! This can be done by clicking 'Standards' in the same __Show analyses__ window. -->
 <!-- <br> -->
 <blockquote>
-<p><strong>TIP</strong>: If you notice that your pitch tracks are not
-corresponding to the sound that you recorded, such as the middle pitch
-being higher than the final pitch, this means that you’ve possibly gone
-beyond your normal speaking range! In this case, you’ll need to adjust
-your pitch ranges beyond the standard pitch ranges.</p>
+<p><strong>TIP</strong>:<br />
+If you notice that your pitch tracks are not corresponding to the sound
+that you recorded, such as the middle pitch being higher than the final
+pitch, this means that you’ve possibly gone beyond your normal speaking
+range! In this case, you’ll need to adjust your pitch ranges beyond the
+standard pitch ranges.</p>
 </blockquote>
+<p><br></p>
 <p><u> Three ways to measure fundamental frequency: </u></p>
 <ol style="list-style-type: lower-alpha">
 <li>By displaying the pitch track and having Praat measure the pitch
-automatically (see Figure 4.1; this is the technique you used in Lab
+automatically (see Figure 4.1 - this is the technique you used in Lab
 3):</li>
 </ol>
 <ul>
@@ -382,14 +382,35 @@ Figure 4.1):</li>
 <li>A red horizontal bar should appear, with the pitch value (in dark
 blue) on the right side of the window.</li>
 </ul>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>By looking at the waveform (top of the display) (see Figure
+4.2):</li>
+</ol>
+<ul>
+<li>Zoom in to a small piece of the waveform in the middle of the vowel
+and measure the period by highlighting one complete cycle, going from
+zero-crossing to zero-crossing, and noting the time associated with it
+(in the panel above the waveform)</li>
+<li>To get the frequency ( <strong>f</strong> ) from the period (
+<strong>T</strong> ): <strong>f =1/T</strong></li>
+</ul>
 <p><br></p>
 <blockquote>
-<p><strong>TIP:</strong> The fundamental frequency value is always
-displayed on the <em>right</em> side of the window in dark blue; formant
-frequencies are displayed on the <em>left</em> side in red – be careful
-not to get these two confused!</p>
+<p><strong>TIP:</strong><br />
+The fundamental frequency value is always displayed on the <u>right</u>
+side of the window in dark blue; formant frequencies are displayed on
+the <u>left</u> side in red – be careful not to get these two
+confused!</p>
+<p>You can get Praat to place the cursor at the nearest zero-crossing by
+using the hotkey <strong>Ctrl-0</strong> (zero), or
+<strong>Command-0</strong> on a Mac. Additionally, if you highlight a
+section of a waveform, the hotkeys <strong>Ctrl/Command-</strong>, and
+<strong>Command-</strong>. will move the left and right edges of the
+selection to the closest zero-crossing.</p>
+<p>If you zoom in enough, the panel above the waveform will include both
+the period and the frequency (in parentheses), so you don’t have to do
+any calculations.</p>
 </blockquote>
-<p><br></p>
 <center>
 <div class="float">
 <img src="Images/Figure4_pitch_value.png"
@@ -397,32 +418,6 @@ alt="Figure 4.1: Getting a pitch value in Praat" />
 <div class="figcaption">Figure 4.1: Getting a pitch value in Praat</div>
 </div>
 </center>
-<p><br></p>
-<ol start="3" style="list-style-type: lower-alpha">
-<li>By looking at the waveform (top of the display) (see Figure
-4.2):</li>
-</ol>
-<ul>
-<li>Zoom in to a small piece of the waveform in the middle of the vowel
-and measure the period by highlighting <u> one complete cycle, going
-from zero-crossing to zero-crossing </u>, and noting the time associated
-with it (in the panel above the waveform)</li>
-<li>To get the frequency ( <strong>f</strong> ) from the period (
-<strong>T</strong> ): <strong>f =1/T</strong></li>
-</ul>
-<p><br></p>
-<blockquote>
-<p><strong>TIP:</strong> You can get Praat to place the cursor at the
-nearest zero-crossing by using the hotkey <strong>Ctrl-0</strong>
-(zero), or <strong>Command-0</strong> on a Mac. Additionally, if you
-highlight a section of a waveform, the hotkeys
-<strong>Ctrl/Command-</strong>, and <strong>Command-</strong>. will move
-the left and right edges of the selection, respectively, to the closest
-zero-crossing.</p>
-<p>If you zoom in enough, the panel above the waveform will include both
-the period and the frequency (in parentheses), so you don’t have to do
-any calculations.</p>
-</blockquote>
 <p><br></p>
 <center>
 <div class="float">
@@ -432,9 +427,11 @@ alt="Figure 4.2: Calculating pitch by waveform" />
 </div>
 </center>
 <p><br></p>
+<hr />
+<p><br></p>
 </div>
-<div id="section-ii.-harmonics" class="section level5">
-<h5><strong>SECTION II. HARMONICS</strong></h5>
+<div id="section-ii.-harmonics" class="section level4">
+<h4><strong>SECTION II. HARMONICS</strong></h4>
 <p>When our vocal folds vibrate, the result is a complex wave,
 consisting of the fundamental frequency (which you just measured) plus
 other higher frequencies, called <strong>harmonics</strong>. To see
@@ -473,22 +470,24 @@ measurements.</li>
 </ol>
 <ul>
 <li>Click on the centre (horizontally) of each harmonic, in the centre
-(vertically) of each [ɛ]</li>
+(vertically) of each [ɛ].</li>
 <li>A red horizontal bar should appear, with the frequency value on the
 left side of the window, in red.</li>
 </ul>
 <p><br></p>
 <blockquote>
-<p><strong>TIP:</strong> If you’re having trouble seeing the lower
-harmonics, you may want to reduce the spectrogram range that Praat is
-displaying for you: Go to Spectrogram &gt; Spectrogram settings and
-reduce the maximum of the range from the default of 5000 Hz to 3000
-Hz.</p>
+<p><strong>TIP:</strong><br />
+If you’re having trouble seeing the lower harmonics, you may want to
+reduce the spectrogram range that Praat is displaying for you: Go to
+Spectrogram &gt; Spectrogram settings and reduce the maximum of the
+range from the default of 5000 Hz to 3000 Hz.</p>
 </blockquote>
 <p><br></p>
+<hr />
+<p><br></p>
 </div>
-<div id="section-iii.-formants" class="section level5">
-<h5><strong>SECTION III. FORMANTS</strong></h5>
+<div id="section-iii.-formants" class="section level4">
+<h4><strong>SECTION III. FORMANTS</strong></h4>
 <p>Looking at the narrow-band spectrogram, you should notice that some
 harmonics are darker than others (see Figure 4.3). Darkness corresponds
 to loudness, i.e. the darkest harmonics are the ones that are the most
@@ -577,9 +576,10 @@ This may take some trial and error.</p>
 alt="Figure 4.4: Measuring formants" />
 <div class="figcaption">Figure 4.4: Measuring formants</div>
 </div>
-<center>
+</center>
 <p><br></p>
-</div>
+<hr />
+<p><br></p>
 <div id="section-iv.-the-relationship-between-harmonics-and-formants"
 class="section level5">
 <h5><strong>SECTION IV. THE RELATIONSHIP BETWEEN HARMONICS AND

@@ -6,14 +6,14 @@ output: html_document
 ***
 
 ### __Goal of Lab 6:__
-<h4> In this lab, we are going to explore the acoustic correlates of _obstruent place of articulation_. We shall see that the location of these correlates differ in stops vs. fricatives: while they are mainly “intrinsic” (within the consonant) for fricatives, they are mainly “extrinsic” (in the transitions to adjacent vowels) for stops. This phonetic fact can help to explain cross-linguistic phonological restrictions on adjacent consonants. </h4>
+<font size= "4.0"> In this lab, we are going to explore the acoustic correlates of _obstruent place of articulation_. We shall see that the location of these correlates differ in stops vs. fricatives: while they are mainly “intrinsic” (within the consonant) for fricatives, they are mainly “extrinsic” (in the transitions to adjacent vowels) for stops. This phonetic fact can help to explain cross-linguistic phonological restrictions on adjacent consonants. </font>
 
 ***
-<font size= "3.5">
+<font size= "4.0">
 
 #### __RECORDING__
 
-Go to eClass and download the zip file "Lab6_Soundfiles", containing the following files. Note, you can also generate these sound files or, optionally, you can use your "a_stop_a.wav" and "a_stop.wav" files from Lab 2 and generate the other two sound files.
+Go to eClass and download the zip file __"Lab6_Soundfiles"__, containing the following files. Note, you can also generate these sound files or, optionally, you can use your __"a_stop_a.wav"__ and __"a_stop.wav"__ files from Lab 2 and generate the other two sound files.
 
 | _File name_            | _Sounds to record_             |
 |:----------------------:|:------------------------------:|
@@ -27,37 +27,44 @@ Go to eClass and download the zip file "Lab6_Soundfiles", containing the followi
 ***
 
 #### __INSTRUCTIONS__
-##### __SECTION I. STOP CONSONANTS__
+#### __SECTION I. STOP CONSONANTS__
 
-Several acoustic correlates distinguish different places of articulation in stops. The main ones are VOT, spectral pattern during aspiration (voiceless stops), and transition into the adjacent vowels. For this lab, we will focus on formant transitions in this section; we will discuss __VOT__ and __spectral pattern__ in class. Focus on the differences associated with place of articulation (i.e. the differences between /p b/, /t d/ and /k g/.
+Several acoustic correlates distinguish different places of articulation in stops. The main ones are:
+
+* VOT
+* Spectral pattern during aspiration (voiceless stops)
+* Transition into the adjacent vowels
+
+<br>
+
+We will focus on formant transitions in this section; we will discuss _VOT_ and _spectral pattern_ in class. Focus on the differences associated with place of articulation (i.e. the differences between /p b/, /t d/ and /k g/.
 
 * Open the following sound files in Praat: __Lab6_a_stop_a.wav__ and __Lab6_i_stop_i.wav__  
-
-* Focus on the voiced stops for now
-
-<br>
-
-1. In Table 6.1, note down the formant transition shape (particularly F2) between each voiced stop and the following [a] or [i] vowel (see Figure 6.1).
-
-* Zoom in so that you can clearly see the formant transition from the stop into the following vowel.
+* Focus on the voiced stops for now.
 
 <br>
+
+1. In Table 6.1, note down the formant transition shape (particularly F2) between each voiced stop and the following [a] or [i] vowel (see Figure 6.1). Zoom in so that you can clearly see the formant transition from the stop into the following vowel.  
 
 2. Note down the movement contour of __F2__ (and F1 if you can see it) into the following vowel.
+
+<br>
 
 <center>
 ![Figure 5.1: Formant transitions from the stop to the following vowel](./Images/Figure6_formant_stop.png)
 </center>
 
 <br>
--------
-##### __SECTION II. FRICATIVES__
+
+***
+
+#### __SECTION II. FRICATIVES__
 
 Different places of articulation in fricatives are correlated with two main properties: spectral content and relative amplitude. By examining the overall spectral contour, peak frequency and the amplitude of peak frequency, we can have an idea of the properties of a fricative.
 
 <br>
 
-3. Use Table 6.2 to fill in the measurements you take on these three dimensions and compare between fricatives of different POA.
+3. Use Table 6.2 to fill in the measurements you take on these three dimensions and compare between fricatives of different POA.  
 
 <br>
 
@@ -140,7 +147,7 @@ __Q5:__ Provide a reference and very brief summary of one academic paper that us
 
 ***
 
-<font size="1.5"> Disclaimer: The original lab materials on which this lab is based was put together in 2015 (updated 2019) by Sonya Bird, Qian Wang, Sky Onosson, and Allison Benner for the LING 380 Acoustic Phonetics course at the University of Victoria. Their materials are released under a Creative Commons license (CC BY-NC-SA 4.0) which allows for non-commercial use as well as copying and distribution and the creation of derivative works for non-commercial purposes. Thomas Kettig (with assistance from Taylor Potter) has modified these materials as needed for the York University LING 4220 Acoustic Phonetics course.</font>
+<font size="2.0"> Disclaimer: The original lab materials on which this lab is based was put together in 2015 (updated 2019) by Sonya Bird, Qian Wang, Sky Onosson, and Allison Benner for the LING 380 Acoustic Phonetics course at the University of Victoria. Their materials are released under a Creative Commons license (CC BY-NC-SA 4.0) which allows for non-commercial use as well as copying and distribution and the creation of derivative works for non-commercial purposes. Thomas Kettig (with assistance from Taylor Potter) has modified these materials as needed for the York University LING 4220 Acoustic Phonetics course.</font>
 
 <br>
 

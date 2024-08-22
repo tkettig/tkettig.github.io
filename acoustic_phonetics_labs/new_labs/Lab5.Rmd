@@ -6,19 +6,19 @@ output: html_document
 ***
 
 ### __Goal of Lab 5:__
-<h4> Sonorants are:
+<font size= "4.0"> Sonorants are:
 
 * similar to vowels in that they have formants
 * different from vowels in that they are generally lower amplitude (and behave as consonants phonologically)
 
-In this lab, we are going to explore the acoustic correlates of two types of sonorants: _glides_ [w j] and _liquids_ [ɹ l]. </h4>
+In this lab, we are going to explore the acoustic correlates of two types of sonorants: _glides_ [w j] and _liquids_ [ɹ l]. </font>
 
 ***
-<font size= "3.5">
+<font size= "4.0">
 
 #### __RECORDING__
 
-Go to eClass and download the zip file "Lab5_Soundfiles", containing the following files. Note, you can also generate these yourself; I have done it for you here to make sure that the sound files are clear enough for taking measurements.
+Go to eClass and download the zip file __"Lab5_Soundfiles"__, containing the following files. Note, you can also generate these yourself; I have done it for you here to make sure that the sound files are clear enough for taking measurements.
 
 | _File name_     | _Sounds to record_  |
 |:---------------:|:-------------------:|
@@ -30,17 +30,17 @@ Go to eClass and download the zip file "Lab5_Soundfiles", containing the followi
 ***
 
 #### __INSTRUCTIONS__
-##### __SECTION I. GLIDES__
+#### __SECTION I. GLIDES__
 
 <br>
 
-1. Open the file __Lab5_Wi_Ju.wav__. Follow the instructions below and fill in Table 5.1 on the acoustic correlates of different glides.
+1. Open the file __Lab5_Wi_Ju.wav__. Follow the instructions below and fill in Table 5.1 on the acoustic correlates of different glides.  
+
+<br>
 
 <u> A. Formants </u>
 
 * In Table 5.1, note down the frequency of F1, F2 and F3 for each glide, as measured around the midpoint of the glide. The midpoint of __[w]__ should be at about __1.23s__ and the midpoint of __[j]__ should be at about __3.25s__.
-
-<br>
 
 <u> B. Formant transitions </u>
 
@@ -48,9 +48,9 @@ Go to eClass and download the zip file "Lab5_Soundfiles", containing the followi
 
 <br>
 
-------
+***
 
-##### __SECTION II. LIQUIDS__
+#### __SECTION II. LIQUIDS__
 
 <br>
 
@@ -64,15 +64,11 @@ Use only the coda [ɹ] and [l] (the 3~rd~ word [iɹ] and the 4~th~ word [il] in 
 
 * In Table 5.2, note down the frequency of F1, F2 and F3 for each liquid, as measured around the midpoint of the liquid. The midpoint of __[ɹ]__ should be at about __6.25s__ and the midpoint of __[l]__ should be at about __8.3s__.
 
-<br>
-
 <u> B. Formant transitions </u>
 
 Again, use only the coda [ɹ] and [l] ([iɹ] and [il]) for these measurements.
 
 * In Table 5.2, draw lines to indicate the F1, F2 and F3 contours throughout each VL sequence, or describe them in prose.
-
-<br> 
 
 <u> C. Formant transition durations: Onsets vs. Codas </u>
 

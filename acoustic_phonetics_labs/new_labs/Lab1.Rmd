@@ -237,7 +237,7 @@ Your lab report should include one Figure, corresponding to the segmented and la
 ***
 
 <br>
-<center> <font size= "4.5"> __LAB 1 REPORT__ </font> </center>
+<center> <h4> __LAB 1 REPORT__ </h4> </center>
 
 <font size= "4.5"> <br>
 On eClass, submit a PDF with your answers to the following questions and also submit the .wav and .TextGrid files that you created for this lab. Each student must complete and submit this lab on their own.
