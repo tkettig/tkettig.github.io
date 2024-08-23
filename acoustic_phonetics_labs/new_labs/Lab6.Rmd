@@ -6,7 +6,7 @@ output: html_document
 ***
 
 ### __Goal of Lab 6:__
-<font size= "4.0"> In this lab, we are going to explore the acoustic correlates of _obstruent place of articulation_. We shall see that the location of these correlates differ in stops vs. fricatives: while they are mainly “intrinsic” (within the consonant) for fricatives, they are mainly “extrinsic” (in the transitions to adjacent vowels) for stops. This phonetic fact can help to explain cross-linguistic phonological restrictions on adjacent consonants. </font>
+<font size= "4.5"> In this lab, we are going to explore the acoustic correlates of _obstruent place of articulation_. We shall see that the location of these correlates differ in stops vs. fricatives: while they are mainly “intrinsic” (within the consonant) for fricatives, they are mainly “extrinsic” (in the transitions to adjacent vowels) for stops. This phonetic fact can help to explain cross-linguistic phonological restrictions on adjacent consonants. </font>
 
 ***
 <font size= "4.0">
@@ -39,7 +39,7 @@ Several acoustic correlates distinguish different places of articulation in stop
 
 We will focus on formant transitions in this section; we will discuss _VOT_ and _spectral pattern_ in class. Focus on the differences associated with place of articulation (i.e. the differences between /p b/, /t d/ and /k g/.
 
-* Open the following sound files in Praat: __Lab6_a_stop_a.wav__ and __Lab6_i_stop_i.wav__  
+* Open the following sound files in Praat: __"Lab6_a_stop_a.wav"__ and __"Lab6_i_stop_i.wav"__  
 * Focus on the voiced stops for now.
 
 <br>
@@ -73,7 +73,7 @@ __9000 Hz__:
 
 * Spectrum > Spectrogram settings...
 * View range: up to 9,000 Hz
-* Open the following sound file in Praat: __Lab6_a_fricative_a.png__
+* Open the following sound file in Praat: __"Lab6_a_fricative_a.png"__
 * Select approximately __40ms__ in the middle of each fricative
 * __Spectrum > View spectral slice__  
 
@@ -91,7 +91,7 @@ __9000 Hz__:
 > __TIP__:  
 You can also get a good idea of the frequency ranges and their relative amplitudes by looking at the spectrogram.
 >
-For English, "ballpark" measurements for [s] will be around 9,000Hz or higher, and for [ʃ] will be somewhere close to 5,000Hz.
+For English, 'ballpark' measurements for [s] will be around 9,000Hz or higher, and for [ʃ] will be somewhere close to 5,000Hz.
 
 </font>
 <br>

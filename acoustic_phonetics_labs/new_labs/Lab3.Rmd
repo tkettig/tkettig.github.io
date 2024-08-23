@@ -6,7 +6,7 @@ output: html_document
 ***
 
 ### __Goal of Lab 3:__
-<font size= "4.0">
+<font size= "4.5">
 In this lab, we are going to explore vowel properties: _intrinsic pitch_ and _spectral make-up (formant structure)_. </font>
 
 ***
@@ -22,7 +22,7 @@ Generate the following a single sound file called __"Lab3_EnglishVowels"__ which
 Try to use a level (monotone) pitch throughout each of the vowels. (This will be easiest if you pause between vowels, rather than uttering the sequence of vowels as if it were part of a sentence.)
 
 <br>
-Take a quick look at your vowels in the View & Edit window, and make sure you can clearly see the vowel formants (see Lab 1 on formant display). If you have trouble seeing them, you can download the file __Lab3_ EnglishVowels.wav__ from eClass and take your measurements on this file. If you do this, please make a note of it on your report.
+Take a quick look at your vowels in the View & Edit window, and make sure you can clearly see the vowel formants (see Lab 1 on formant display). If you have trouble seeing them, you can download the file __"Lab3_ EnglishVowels.wav"__ from eClass and take your measurements on this file. If you do this, please make a note of it on your report.
 
 ***
 

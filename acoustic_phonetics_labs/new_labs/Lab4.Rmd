@@ -6,7 +6,7 @@ output: html_document
 ***
 
 ### __Goal of Lab 4:__
-<font size= "4.0">
+<font size= "4.5">
 The goal of this lab is to explore the relationships between _fundamental frequency, harmonics_, and _formants_, as explained by the Source-Filter model of speech. Understanding these relationships is crucial to understanding the properties of the complex wave that is associated with the speech signal.</font>
 
 ***
@@ -14,7 +14,7 @@ The goal of this lab is to explore the relationships between _fundamental freque
 
 #### __RECORDING__
 
-Generate a single sound file, __"Lab4_SourceFilter.wav"__, containing the vowel [ɛ] produced at three different pitches: low, mid, high – try to get the biggest range in pitch you can (if you can’t remember how to record yourself, refer to Lab 1).
+Generate a single sound file, __"Lab4_SourceFilter.wav"__, containing the vowel [ɛ] produced at three different pitches: low, mid & high. When recording this, try to get the biggest range in pitch you can (if you can’t remember how to record yourself, refer to Lab 1).
 
 
 ***

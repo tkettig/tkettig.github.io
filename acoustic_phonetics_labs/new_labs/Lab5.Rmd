@@ -6,7 +6,7 @@ output: html_document
 ***
 
 ### __Goal of Lab 5:__
-<font size= "4.0"> Sonorants are:
+<font size= "4.5"> Sonorants are:
 
 * similar to vowels in that they have formants
 * different from vowels in that they are generally lower amplitude (and behave as consonants phonologically)
@@ -34,7 +34,7 @@ Go to eClass and download the zip file __"Lab5_Soundfiles"__, containing the fol
 
 <br>
 
-1. Open the file __Lab5_Wi_Ju.wav__. Follow the instructions below and fill in Table 5.1 on the acoustic correlates of different glides.  
+1. Open the file __"Lab5_Wi_Ju.wav"__. Follow the instructions below and fill in Table 5.1 on the acoustic correlates of different glides.  
 
 <br>
 

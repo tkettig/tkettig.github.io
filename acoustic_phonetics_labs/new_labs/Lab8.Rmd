@@ -6,48 +6,43 @@ output: html_document
 ***
 
 ### __Goal of Lab 7:__
-<h4> In this lab, we are going to explore the acoustic correlates of another class of sonorants,
+<font size= "4.5"> In this lab, we are going to explore the acoustic correlates of another class of sonorants,
 __nasals__ - [m n ŋ]. Like other sonorants, nasals are:  
+
 *	similar to vowels in that they have formants
-* different from vowels in that they are generally lower amplitude (and behave as consonants phonologically), and have a more complex spectral composition. </h4>
+* different from vowels in that they are generally lower amplitude (and behave as consonants phonologically), and have a more complex spectral composition. </font>
 
 ***
-<font size= "3.5">
+<font size= "4.0">
 
 #### __RECORDING__
 Generate the following sound file, containing the sound sequences listed.
 
-| _File name_          | _sounds to record_ |
+| _File name_          | _Sounds to record_ |
 |:--------------------:|:------------------:|
 |Lab8_Nasals.wav       |ama, ana, aŋa       |
 
-In this lab, you should focus on what is common between <u> all three</u> nasals.
+In this lab, you should focus on what is common between __all three__ nasals.
 
 ***
 
 #### __INSTRUCTIONS__
 
-<br>
-
-1. Open the file __Lab8_Nasals.wav__. Follow the instructions below to fill in Table 8.1 on the acoustic correlates of different nasals.
+1. Open the file __"Lab8_Nasals.wav"__. Follow the instructions below to fill in Table 8.1 on the acoustic correlates of different nasals.
 
 <br>
 
-<u><h5> A. Nasal F1 Values </u></h5>
+<u> A. Nasal F1 Values </u>
 
 If you can't remember how to measure formants, refer back to Lab 4.
 
 * In Table 8.1, note down F1 for each nasal, as measured in the middle of the nasal.
 
-<br>
-
-<u><h5> B. Spectral slice </u></h5>
+<u> B. Spectral slice </u>
 
 * Create spectral slices for each nasal and for one example of [a] (see Lab 5), from a 30ms selection for each sound. Take a screenshot of each spectral slice and paste them into your lab report document. Be sure to give the spectral slice an appropriate title.
 
-<br>
-
-<u><h5> C. Waveform </u></h5>
+<u> C. Waveform </u>
 
 * Nasals have very distinctive waveforms. To see this, zoom in on 10 or so cycles of each nasal. Take a screenshot of the visible waveform and paste it into your lab report. Be sure to give the waveform an appropriate title.
 
@@ -57,7 +52,7 @@ If you can't remember how to measure formants, refer back to Lab 4.
 
 <br>
 
-<u><h5> D. Antiformants </u></h5>
+<u> D. Antiformants </u>
 
 Antiformants are the _opposite_ of formants – they are bands of frequencies that are actively damped rather than amplified (we’ll talk about this in class). They show up on the spectrogram as bands of white, i.e. bands of ‘silence’ at particular frequencies (see Figure 8.2). They can be hard to see, so don’t worry if their measurement seems hard. For finding antiformants, you may find it easier to get rid of the formant tracking.
 
@@ -103,9 +98,11 @@ __Q4:__ Are there any systematic patterns across nasals: is there one antiforman
 
 __Q5:__ Provide a reference and very brief summary of one academic paper that uses the methods covered in this lab.
 
+<br>
+
 ***
 
-<font size="1.5"> Disclaimer: The original lab materials on which this lab is based was put together in 2015 (updated 2019) by Sonya Bird, Qian Wang, Sky Onosson, and Allison Benner for the LING 380 Acoustic Phonetics course at the University of Victoria. Their materials are released under a Creative Commons license (CC BY-NC-SA 4.0) which allows for non-commercial use as well as copying and distribution and the creation of derivative works for non-commercial purposes. Thomas Kettig (with assistance from Taylor Potter) has modified these materials as needed for the York University LING 4220 Acoustic Phonetics course.</font>
+<font size="2.0"> Disclaimer: The original lab materials on which this lab is based was put together in 2015 (updated 2019) by Sonya Bird, Qian Wang, Sky Onosson, and Allison Benner for the LING 380 Acoustic Phonetics course at the University of Victoria. Their materials are released under a Creative Commons license (CC BY-NC-SA 4.0) which allows for non-commercial use as well as copying and distribution and the creation of derivative works for non-commercial purposes. Thomas Kettig (with assistance from Taylor Potter) has modified these materials as needed for the York University LING 4220 Acoustic Phonetics course.</font>
 
 <br>
 
