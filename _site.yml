@@ -2,7 +2,7 @@ name: "thomas-kettig"
 output_dir: "."
 navbar:
   title: "Thomas Kettig"
-  type: default
+  type: inverse
   left:
   - text: "About"
     href: about.html
