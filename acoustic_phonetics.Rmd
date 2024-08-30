@@ -1,10 +1,11 @@
 ---
-title: 'LING 4220: Acoustic Phonetics'
+title: 'Acoustic Phonetics Lab Manual'
 output: html_document
 ---
 
 -----
 
+These tutorials for learning how to use Praat are based on the [University of Victoria LING 380 Acoustic Phonetics Lab Manual](https://dspace.library.uvic.ca/items/68b5b175-ebd5-4294-b514-48aa2e58ac98). They are adapted to fit the needs of the York University LING 4220 Acoustic Phonetics class.
 
 <h3> [Lab 1 - Exploring Praat](acoustic_phonetics_labs/new_labs/Lab1.html) </h3> 
 
@@ -29,44 +30,44 @@ The reading to prepare fo this lab is:
 
 * Johnson (2012) Chapter 2.  
 
-<br>
+<!-- <br> -->
 
-<h3> [Lab 4 - The Source-Filter Model of Speech: Fundamental frequency, harmonics and formants](acoustic_phonetics_labs/new_labs/Lab4.html) </h3> 
+<!-- <h3> [Lab 4 - The Source-Filter Model of Speech: Fundamental frequency, harmonics and formants](acoustic_phonetics_labs/new_labs/Lab4.html) </h3>  -->
 
-The reading to prepare for this lab is:
+<!-- The reading to prepare for this lab is: -->
 
-* Johnson (2012) Chapter 6.
+<!-- * Johnson (2012) Chapter 6. -->
 
-<br>
+<!-- <br> -->
 
-<h3> [Lab 5 - Glides and Liquids](acoustic_phonetics_labs/new_labs/Lab5.html) </h3> 
+<!-- <h3> [Lab 5 - Glides and Liquids](acoustic_phonetics_labs/new_labs/Lab5.html) </h3>  -->
 
-The reading to prepare for this lab is:
+<!-- The reading to prepare for this lab is: -->
 
-* Johnson (2012) Chapter 7.
+<!-- * Johnson (2012) Chapter 7. -->
 
-<br>
+<!-- <br> -->
 
-<h3> [Lab 6 - Obstruent Place of Articulation](acoustic_phonetics_labs/new_labs/Lab6.html) </h3> 
+<!-- <h3> [Lab 6 - Obstruent Place of Articulation](acoustic_phonetics_labs/new_labs/Lab6.html) </h3>  -->
 
-The reading to prepare for this lab is:
+<!-- The reading to prepare for this lab is: -->
 
-* Johnson (2012) Chapter 8.
+<!-- * Johnson (2012) Chapter 8. -->
 
-<br>
+<!-- <br> -->
 
-<h3> [Lab 7 - Phonation Types](acoustic_phonetics_labs/new_labs/Lab7.html) </h3> 
+<!-- <h3> [Lab 7 - Phonation Types](acoustic_phonetics_labs/new_labs/Lab7.html) </h3>  -->
 
-The reading to prepare for this lab is:
+<!-- The reading to prepare for this lab is: -->
 
-* Johnson (2012) Chapter 3.
+<!-- * Johnson (2012) Chapter 3. -->
 
-<br>
+<!-- <br> -->
 
-<h3> [Lab 8 - Nasals](acoustic_phonetics_labs/new_labs/Lab8.html) </h3> 
+<!-- <h3> [Lab 8 - Nasals](acoustic_phonetics_labs/new_labs/Lab8.html) </h3>  -->
 
-The reading to prepare for this lab is:
+<!-- The reading to prepare for this lab is: -->
 
-* Baart (2011) Chapter 4.
+<!-- * Baart (2011) Chapter 4. -->
 
 

@@ -8,9 +8,9 @@ navbar:
     href: about.html
   - text: "Research"
     menu:
-    - text: "Research Topic"
+    - text: "Topics"
       href: topic.html
-    - text: "Chronological"
+    - text: "Papers, posters, and presentations"
       href: chrono.html
   - text: "Teaching"
     menu:
