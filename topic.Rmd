@@ -40,7 +40,7 @@ I've done various work on the Canadian Shift in Montreal.
 
 * [[slides](papers_etc/KettigDrager2018SocioSymposium22_slides.pptx)] Kettig, Thomas and Katie Drager. 2018. The social evaluation of TRAP-backing in Montreal. _Sociolinguistics Symposium 22_. Auckland, New Zealand, 30 June.
 
-* [[paper](papers_etc/KettigWinter2017LVC.pdf)]  Kettig, Thomas and Bodo Winter. 2017. “Producing and Perceiving the Canadian Vowel Shift: Evidence from a Montreal Community.” _Language Variation and Change_ 29(1): 79–100. DOI:[https://doi.org/10.1017/S0954394517000023](https://doi.org/10.1017/S0954394517000023.) https://doi.org/10.1017/S0954394517000023.  
+* [[paper](papers_etc/KettigWinter2017LVC.pdf)]  Kettig, Thomas and Bodo Winter. 2017. “Producing and Perceiving the Canadian Vowel Shift: Evidence from a Montreal Community.” _Language Variation and Change_ 29(1): 79–100. DOI:https://doi.org/10.1017/S0954394517000023
 
 <br>
 
@@ -48,7 +48,7 @@ I've done various work on the Canadian Shift in Montreal.
 
 * [[poster](papers_etc/Kettig2017PAPE_poster.pdf)] Kettig, Thomas. 2017. “Diachronically stable, lexically specific variation: The phonological representation of secondary /æ/-lengthening”. _Phonetics and Phonology in Europe_. Cologne, Germany, 12-14 June. (Poster) 
 
-* [[poster](papers_etc/Kettig2016LSA_poster.pdf)] [[extended abstract](https://doi.org/10.3765/plsa.v1i0.3732)] Kettig, Thomas. 2016. “The BAD-LAD split: Secondary /æ/-lengthening in Southern Standard British English” (Poster). _90th Annual Meeting of the Linguistic Society of America_. Washington, DC, 8 January. DOI: [http://dx.doi.org/10.3765/plsa.v1i0.3732.](http://dx.doi.org/10.3765/plsa.v1i0.3732)  
+* [[poster](papers_etc/Kettig2016LSA_poster.pdf)] [[extended abstract](https://doi.org/10.3765/plsa.v1i0.3732)] Kettig, Thomas. 2016. “The BAD-LAD split: Secondary /æ/-lengthening in Southern Standard British English” (Poster). _90th Annual Meeting of the Linguistic Society of America_. Washington, DC, 8 January. DOI: http://dx.doi.org/10.3765/plsa.v1i0.3732.
 
 * [[paper](papers_etc/Kettig2016MPhil.pdf)] Kettig, Thomas. The BAD-LAD Split: A Phonetic Investigation. Masters Thesis, University of Cambridge.
 
