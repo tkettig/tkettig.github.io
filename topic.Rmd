@@ -8,49 +8,53 @@ output: html_document
 
 While I was pursuing a PhD in the [Department of Linguistics at the University of Hawaiʻi at Mānoa](https://manoa.hawaii.edu/linguistics/), I studied [ʻōlelo Hawaiʻi](https://en.wikipedia.org/wiki/Hawaiian_language) at [Kawaihuelani Center for Hawaiian Language](https://www.kawaihuelani.org/), part of the [Hawaiʻinuiākea School of Hawaiian Knowledge](https://manoa.hawaii.edu/hshk/). I realized that there had been very little linguistic research on Hawaiian pronunciation and decided to focus my doctoral research on the phonetic properties of the language's vowels. I have been measuring the acoustic properties of elders whose voices were recorded in the 1970s-1980s on [Ka Leo Hawaiʻi](https://ulukau.org/kaniaina/?a=cl&cl=CL1&sp=A&ai=1&e=-------en-20--1--txt-txIN%7ctxTI%7ctxTA%7ctxCO%7ctxTY%7ctxLA%7ctxKE%7ctxPR%7ctxSG%7ctxTO%7ctxTG%7ctxSM%7ctxTR%7ctxSP%7ctxCT%7ctxET%7ctxHT----------------), a Hawaiian language radio show. Some outputs of this research have included:
 
-[[abstract](papers_etc/KettigDavidson2024LabPhon19_abstract.pdf)]
+* [[abstract](papers_etc/KettigDavidson2024LabPhon19_abstract.pdf)]
 [[poster](papers_etc/KettigDavidson2024LabPhon_Poster.jpg)]Kettig, Thomas, and Lisa Davidson. 2024. Acoustic correlates of stress in contrastive short and long vowels in ʻōlelo Hawaiʻi. _LabPhon19_. Seoul, Korea, 27–29 June. 
 
-[[slides](papers_etc/Kettig2023NWAV51_slides.pdf)] Kettig, Thomas. 2023. Inter- and intra-speaker /ai~ei/ variation in ʻōlelo Hawaiʻi. Acoustic and historical-comparative evidence. _NWAV 51_, New York, NY, 14 October.  
+* [[slides](papers_etc/Kettig2023NWAV51_slides.pdf)] Kettig, Thomas. 2023. Inter- and intra-speaker /ai~ei/ variation in ʻōlelo Hawaiʻi. Acoustic and historical-comparative evidence. _NWAV 51_, New York, NY, 14 October.  
 
-[[abstract](papers_etc/Kettig2023ICPhS_abstract.pdf)] [[slides](papers_etc/Kettig2023ICPhS_slides.pdf)] Kettig, Thomas. 2023. Word class and frequency effects in Hawaiian stressed vowel clusters. _International Congress of Phonetic Sciences 2023_. Prague, Czechia, 9 August.
+* [[abstract](papers_etc/Kettig2023ICPhS_abstract.pdf)] [[slides](papers_etc/Kettig2023ICPhS_slides.pdf)] Kettig, Thomas. 2023. Word class and frequency effects in Hawaiian stressed vowel clusters. _International Congress of Phonetic Sciences 2023_. Prague, Czechia, 9 August.
 
-[[slides](papers_etc/Kettig2022NWAV50_slides.pdf)] Kettig, Thomas. 2022. Word class and diphthong reduction in ʻōlelo Hawaiʻi. _NWAV 50_. San Jose, CA, USA, 14 October.  
+* [[slides](papers_etc/Kettig2022NWAV50_slides.pdf)] Kettig, Thomas. 2022. Word class and diphthong reduction in ʻōlelo Hawaiʻi. _NWAV 50_. San Jose, CA, USA, 14 October.  
 
-[[video](https://youtu.be/PdPxQGXSX64?si=L9T25u1TVCq-kIXl)] Kettig, Thomas. 2021. Nānā i ke kumu: Acoustic phonetic research on archival recordings of ʻōlelo Hawaiʻi. _International Conference on Language Documentation and Conservation 7_. Online.  
+* [[video](https://youtu.be/PdPxQGXSX64?si=L9T25u1TVCq-kIXl)] Kettig, Thomas. 2021. Nānā i ke kumu: Acoustic phonetic research on archival recordings of ʻōlelo Hawaiʻi. _International Conference on Language Documentation and Conservation 7_. Online.  
 
-[[paper](https://scholarspace.manoa.hawaii.edu/server/api/core/bitstreams/49cdaa29-f832-43d3-bb57-1c2b7d5694f3/content)] Kettig, Thomas. 2021. Haʻina ʻia mai ana ka puana: The vowels of ʻōlelo Hawaiʻi. PhD Dissertation, University of Hawaiʻi at Mānoa.  
+* [[paper](https://scholarspace.manoa.hawaii.edu/server/api/core/bitstreams/49cdaa29-f832-43d3-bb57-1c2b7d5694f3/content)] Kettig, Thomas. 2021. Haʻina ʻia mai ana ka puana: The vowels of ʻōlelo Hawaiʻi. PhD Dissertation, University of Hawaiʻi at Mānoa.  
 
-<br>
-
-<h3> Canadian shift production & perception </h3>
-Blurb can go here!
-
-[[link](https://www.youtube.com/)] Paper, Here (2001). Title of Paper.  
-[[link](https://www.youtube.com/)] Paper, Paper (2002). Title of Paper. 
-
-<br>
-
-<h3> BAD-LAD split in SSBE </h3>
-Blurb can go here!
-
-[[link](https://www.youtube.com/)] Paper, Here (2001). Title of Paper.  
-[[link](https://www.youtube.com/)] Paper, Paper (2002). Title of Paper.  
-
-<br>
-
-<h3> Vowel shift theory </h3>
-Blurb can go here!
-
-[[link](https://www.youtube.com/)] Paper, Here (2001). Title of Paper.  
-[[link](https://www.youtube.com/)] Paper, Paper (2002). Title of Paper.  
+* [[abstract](https://assta.org/proceedings/ICPhS2019/papers/ICPhS_3607.pdf)] [[poster](papers_etc/Kettig2019ICPhS_poster.pdf)] Kettig, Thomas. 2019. Spectral coarticulation in Hawaiian /aV/ and /aCV/ sequences. _International Congress of Phonetic Sciences 2019_. Melbourne, Australia, 8 August. (Poster)
 
 <br>
 
 <h3> Forensic phonetics </h3>
 
-I conducted postdoctoral research at the [University of York](https://www.york.ac.uk/language/) on [Vincent Hughes'](https://scholar.google.com/citations?user=ddZncLsAAAAJ&hl=en&oi=ao) and [Carmen Llamas'](https://scholar.google.com/citations?user=f47LQuAAAAAJ&hl=en) AHRC-funded project [Humans and Machines: Novel Methods for Assessing Speaker Recognition Performance](https://sites.google.com/york.ac.uk/humans-machines/home?authuser=0). We developed a bespoke computer game that elicits judgments of voice similarity in pairs of voices with various UK regional accents. We wanted to explore what factors affect sameness judgments in humans (for instance, jurors in trials involving voice-matching evidence) and we wanted to compare their outputs 
+I conducted postdoctoral research at the [University of York](https://www.york.ac.uk/language/) on [Vincent Hughes'](https://scholar.google.com/citations?user=ddZncLsAAAAJ&hl=en&oi=ao) and [Carmen Llamas'](https://scholar.google.com/citations?user=f47LQuAAAAAJ&hl=en) AHRC-funded project [Humans and Machines: Novel Methods for Assessing Speaker Recognition Performance](https://sites.google.com/york.ac.uk/humans-machines/home?authuser=0). We developed a bespoke computer game that elicits judgments of voice similarity in pairs of voices with various UK regional accents. We wanted to explore what factors affect sameness judgments in humans (for instance, jurors in trials involving voice-matching evidence) and we wanted to compare these judgments to the outputs of automatic speech recognition systems. 
 
-[[abstract](https://vincent-hughes.com/wp-content/uploads/2022/06/490_paper.pdf)] Hughes, Vincent, Carmen Llamas, and Thomas Kettig. 2022. Eliciting and evaluating likelihood ratios for speaker recognition by human listeners under forensically realistic channel-mismatched conditions. _Proceedings of Interspeech_. Incheon, Korea.  
+* [[abstract](https://vincent-hughes.com/wp-content/uploads/2022/06/490_paper.pdf)] Hughes, Vincent, Carmen Llamas, and Thomas Kettig. 2022. Eliciting and evaluating likelihood ratios for speaker recognition by human listeners under forensically realistic channel-mismatched conditions. _Proceedings of Interspeech_. Incheon, Korea.  
 
-[[abstract](papers_etc/HughesLlamasKettig2022IAFPA30_abstract.pdf)] Hughes, Vincent, Carmen Llamas, and Thomas Kettig. 2022. A game-based approach to eliciting and evaluating likelihood ratios for speaker recognition. _30th Annual Conference of the International Association for Forensic Phonetics and Acoustics_. Prague, Czechia, 10-13 July.  
+* [[abstract](papers_etc/HughesLlamasKettig2022IAFPA30_abstract.pdf)] Hughes, Vincent, Carmen Llamas, and Thomas Kettig. 2022. A game-based approach to eliciting and evaluating likelihood ratios for speaker recognition. _30th Annual Conference of the International Association for Forensic Phonetics and Acoustics_. Prague, Czechia, 10-13 July.  
+
+<br>
+
+<h3> Canadian shift production & perception </h3>
+I've done various work on the Canadian Shift in Montreal.
+
+* [[slides](papers_etc/KettigDrager2018SocioSymposium22_slides.pptx)] Kettig, Thomas and Katie Drager. 2018. The social evaluation of TRAP-backing in Montreal. _Sociolinguistics Symposium 22_. Auckland, New Zealand, 30 June.
+
+* [[paper](papers_etc/KettigWinter2017LVC.pdf)]  Kettig, Thomas and Bodo Winter. 2017. “Producing and Perceiving the Canadian Vowel Shift: Evidence from a Montreal Community.” _Language Variation and Change_ 29(1): 79–100. DOI:[https://doi.org/10.1017/S0954394517000023](https://doi.org/10.1017/S0954394517000023.) https://doi.org/10.1017/S0954394517000023.  
+
+<br>
+
+<h3> [BAD-LAD split in SSBE](https://en.wikipedia.org/wiki/Pronunciation_of_English_%E2%9F%A8a%E2%9F%A9#Bad%E2%80%93lad_split) </h3>
+
+* [[poster](papers_etc/Kettig2017PAPE_poster.pdf)] Kettig, Thomas. 2017. “Diachronically stable, lexically specific variation: The phonological representation of secondary /æ/-lengthening”. _Phonetics and Phonology in Europe_. Cologne, Germany, 12-14 June. (Poster) 
+
+* [[poster](papers_etc/Kettig2016LSA_poster.pdf)] [[extended abstract](https://doi.org/10.3765/plsa.v1i0.3732)] Kettig, Thomas. 2016. “The BAD-LAD split: Secondary /æ/-lengthening in Southern Standard British English” (Poster). _90th Annual Meeting of the Linguistic Society of America_. Washington, DC, 8 January. DOI: [http://dx.doi.org/10.3765/plsa.v1i0.3732.](http://dx.doi.org/10.3765/plsa.v1i0.3732)  
+
+* [[paper](papers_etc/Kettig2016MPhil.pdf)] Kettig, Thomas. The BAD-LAD Split: A Phonetic Investigation. Masters Thesis, University of Cambridge.
+
+<br>
+
+<h3> Vowel shift theory </h3>
+I have a soft spot for vowel shifts.
+
+* [[paper](papers_etc/Kettig2017Now_Say_Ah.pdf)] Kettig, Thomas. 2017. “Now say ‘Ah’: Internal factors of shifting and the English low vowel space.” E. Louviot & C. Delesse (eds), _Studies in Language Variation and Change 2 Shifting, Switching and Alternating Patterns in the History of English_. Newcastle upon Tyne: Cambridge Scholars Publishing.  
