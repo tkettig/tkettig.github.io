@@ -1,5 +1,5 @@
 ---
-title: "Prof. Thomas Kettig"
+title: "Thomas Kettig"
 ---
 <br>
 
@@ -9,9 +9,9 @@ title: "Prof. Thomas Kettig"
 <br>
 
 
-#### About me
+### About me
 I'm currently an Assistant Professor in the [Department of Languages, Literatures, and Linguistics at York University](https://www.yorku.ca/laps/dlll/) in Toronto. Before this job, I was an Associate Lecturer and a postdoctoral researcher in the [Department of Language and Linguistic Science at the University of York](https://www.york.ac.uk/language/). I have also done adjunct teaching at [Queens College, City University of New York](https://www.qc.cuny.edu/academics/lcd/).
 I'm originally from [Jackson Heights](https://en.wikipedia.org/wiki/Jackson_Heights,_Queens), a neighborhood in New York City's borough of Queens and the most [linguistically diverse community in the world](https://www.csmonitor.com/USA/Society/2019/0705/Saving-vanishing-words-Why-Queens-is-the-Noah-s-Ark-of-languages). I speak English, Hawaiian, French, Finnish, and German, understand Hawaiʻi Creole English (Pidgin), and have a reading knowledge of Yiddish and Latin.
 
-#### [Research interests](./topic.html)
+### [Research interests](./topic.html)
 I study how the sounds of language vary and change through space and time. Some of my research aims to understand why the vowel sounds of English change from one generation of speakers to the next. I have also undertaken the first large-scale, multi-speaker investigation of the vowels of Hawaiian. This means that my work touches on issues in endangered language description, sociolinguistics, quantitative experimental methods, theoretical phonology, historical linguistics, and articulatory and acoustic phonetics.
