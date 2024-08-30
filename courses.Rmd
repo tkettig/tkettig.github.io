@@ -9,7 +9,7 @@ title: "Teaching"
 #### Taught in 2024-2025
 
 * [LING 4220: Acoustic Phonetics (Fall 2024)](acoustic_phonetics.html/)
-* LING 4400: Research in Sociolinguistic Variation and Change (Fall 2024)
+* LING 4400/LAL 5400: Research in Sociolinguistic Variation and Change (Fall 2024)
 * LING 1430: Language, Power, and Persuasion (Winter 2025)
 * LAL 6600: Graduate Research Seminar in Theoretical Linguistics (Winter 2025)
 
