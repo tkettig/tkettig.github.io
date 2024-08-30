@@ -9,7 +9,7 @@ output: html_document
 While I was pursuing a PhD in the [Department of Linguistics at the University of Hawaiʻi at Mānoa](https://manoa.hawaii.edu/linguistics/), I studied [ʻōlelo Hawaiʻi](https://en.wikipedia.org/wiki/Hawaiian_language) at [Kawaihuelani Center for Hawaiian Language](https://www.kawaihuelani.org/), part of the [Hawaiʻinuiākea School of Hawaiian Knowledge](https://manoa.hawaii.edu/hshk/). I realized that there had been very little linguistic research on Hawaiian pronunciation and decided to focus my doctoral research on the phonetic properties of the language's vowels. I have been measuring the acoustic properties of elders whose voices were recorded in the 1970s-1980s on [Ka Leo Hawaiʻi](https://ulukau.org/kaniaina/?a=cl&cl=CL1&sp=A&ai=1&e=-------en-20--1--txt-txIN%7ctxTI%7ctxTA%7ctxCO%7ctxTY%7ctxLA%7ctxKE%7ctxPR%7ctxSG%7ctxTO%7ctxTG%7ctxSM%7ctxTR%7ctxSP%7ctxCT%7ctxET%7ctxHT----------------), a Hawaiian language radio show. Some outputs of this research have included:
 
 * [[abstract](papers_etc/KettigDavidson2024LabPhon19_abstract.pdf)]
-[[poster](papers_etc/KettigDavidson2024LabPhon_Poster.jpg)]Kettig, Thomas, and Lisa Davidson. 2024. Acoustic correlates of stress in contrastive short and long vowels in ʻōlelo Hawaiʻi. _LabPhon19_. Seoul, Korea, 27–29 June. 
+[[poster](papers_etc/KettigDavidson2024LabPhon_Poster.jpg)] Kettig, Thomas, and Lisa Davidson. 2024. Acoustic correlates of stress in contrastive short and long vowels in ʻōlelo Hawaiʻi. _LabPhon19_. Seoul, Korea, 27–29 June. 
 
 * [[slides](papers_etc/Kettig2023NWAV51_slides.pdf)] Kettig, Thomas. 2023. Inter- and intra-speaker /ai~ei/ variation in ʻōlelo Hawaiʻi. Acoustic and historical-comparative evidence. _NWAV 51_, New York, NY, 14 October.  
 
