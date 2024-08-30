@@ -1,42 +1,17 @@
 ---
-title: "Hello!"
+title: "Prof. Thomas Kettig"
 ---
 <br>
 
 ![](./images/me_round.png)
-&nbsp; &nbsp; &nbsp; Welcome to my humble internet abode, I'm Thomas!
+&nbsp; &nbsp; &nbsp; Welcome to my humble internet abode. I'm Thomas!
 
 <br>
 
-#### Research interests
+
+#### About me
+I'm currently an Assistant Professor in the [Department of Languages, Literatures, and Linguistics at York University](https://www.yorku.ca/laps/dlll/) in Toronto. Before this job, I was an Associate Lecturer and a postdoctoral researcher in the [Department of Language and Linguistic Science at the University of York](https://www.york.ac.uk/language/). I have also done adjunct teaching at [Queens College, City University of New York](https://www.qc.cuny.edu/academics/lcd/).
+I'm originally from [Jackson Heights](https://en.wikipedia.org/wiki/Jackson_Heights,_Queens), a neighborhood in New York City's borough of Queens and the most [linguistically diverse community in the world](https://www.csmonitor.com/USA/Society/2019/0705/Saving-vanishing-words-Why-Queens-is-the-Noah-s-Ark-of-languages). I speak English, Hawaiian, French, Finnish, and German, understand Hawaiʻi Creole English (Pidgin), and have a reading knowledge of Yiddish and Latin.
+
+#### [Research interests](./topic.html)
 I study how the sounds of language vary and change through space and time. Some of my research aims to understand why the vowel sounds of English change from one generation of speakers to the next. I have also undertaken the first large-scale, multi-speaker investigation of the vowels of Hawaiian. This means that my work touches on issues in endangered language description, sociolinguistics, quantitative experimental methods, theoretical phonology, historical linguistics, and articulatory and acoustic phonetics.
-
-#### Current & past work
-I'm currently an Assistant Professor in the Department of Languages, Literatures, and Linguistics at York University in Toronto. I was previously an Associate Lecturer in the Department of Language and Linguistic Science at the University of York and a postdoctoral researcher on the AHRC-funded project Humans and Machines: Novel Methods for Assessing Speaker Recognition Performance.
-
-#### My background!
-I'm from Jackson Heights, a neighborhood in New York City's borough of Queens and the most linguistically diverse community in the world. I speak English, Hawaiian, French, Finnish, and German, understand Hawaiʻi Creole English (Pidgin), and have a reading knowledge of Yiddish and Latin.
-
-<br>
-
-### Education
-
-__University of Hawai'i at Mānoa (2016-2021)__  
-Honolulu, HI  
-PhD student, [Department of Linguistics](https://manoa.hawaii.edu/linguistics/)  
-Dissertation: [Ha'ina 'ia mai ana ka puana: The vowels of ʻōlelo Hawaiʻi](https://scholarspace.manoa.hawaii.edu/items/a7a4013a-8942-4764-9820-335583e74c03)    
-Advised by [Rory Turnbull](https://roryturnbull.github.io/)
-
-<br>
-
-__University of Cambridge - St Edmund's College (2014-2015)__  
-Cambridge, England  
-MPhil (Distinction), [Theoretical and Applied Linguistics](https://www.mmll.cam.ac.uk/dtal)    
-Thesis: [The BAD-LAd Split: A Phonetic Investigation](https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_05e3218b7ea948909115c933c02cecae.pdf)    
-
-<br>
-
-__McGill University (2009-2013)__   
-Montreal, Québec, Canada   
-BA (Honours), [Department of Linguistics](https://www.mcgill.ca/linguistics/)  
-Thesis: [The Canadian Shift in a Montreal Community: Change and Variation in Perception and Production of the Non-Hight Short Vowels](https://51ed8184-a689-4ab2-b681-36917114b814.filesusr.com/ugd/931844_349a6e092ae9421084af8f2b5c7be087.pdf)    

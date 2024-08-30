@@ -107,4 +107,6 @@ Kettig, Thomas and Bodo Winter. 2015. “The Canadian Vowel Shift in Production 
 
 #### 2013
 
+[[paper](papers_etc/Kettig2013UndergradThesis.pdf)] Kettig, Thomas. 2013. "The Canadian Shift in a Montreal Community: Change and Variation in Perception and Production of the Non-Hight Short Vowels." Undergraduate thesis, McGill University.
+
 [[slides](papers_etc/Kettig2013McCCLU_slides.pdf)] Kettig, Thomas. 2013. “Production and Perception of Short Vowels in Montréal.” _McGill Canadian Conference for Linguistics Undergraduates_. Montréal, QC, 18 March.
