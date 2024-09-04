@@ -34,17 +34,17 @@ You'll now need to add a tier for each of your speakers. Go to _Tier > Add New T
 
 <br>
 <center>
-![This is how you'll fill in the tier information](./images/add_tier.png)
+![](./images/add_tier.png)
 </center>
 <br>
 
 You'll see that there are different tabs to _Add_, _Change_, _Delete_, and _Import_ tiers. Your file will come with a "default" tier that you can delete, or you can change it so that it's one of your speaker tiers.
 
 Once you've added all your speakers' tiers and closed the Add Tier window, your ELAN window should look something like this:
-
 <br>
+
 <center>
-![Your window should look something like this](./images/annotation_mode.png)
+![](./images/annotation_mode.png)
 </center>
 <br>
 
@@ -70,7 +70,12 @@ To destroy the last created boundary, hover over the segment so that it turns gr
 
 You can go back and re-insert additional boundary points by splitting and merging segments. To do this, hover over a segment so that it highlights in green and then right click to bring up the segment menu. If you select _Split Annotation_ it will split the segment at the point of your cursor.
 
-You have been assigned a section of the interview that's under 5 minutes long. Finish the segmentation of all three speakers in your assigned section and submit it with your Homework 1. Ideally, your segments should be present whenever the speaker on that tier is making noise.
+You have been assigned a section of the interview that's under 5 minutes long. Finish the segmentation of all three speakers in your assigned section and submit it with your Homework 1. Ideally, your segments should be present whenever the speaker on that tier is making noise. After fully segmenting who is speaking when, your file will look something like this:
+
+<br>
+![](./images/segmentation_mode.png)
+</center>
+<br>
 
 Next week we'll start on transcription.
 
