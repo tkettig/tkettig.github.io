@@ -74,7 +74,7 @@ To destroy the last created boundary, hover over the segment so that it turns gr
 
 You can go back and re-insert additional boundary points by splitting and merging segments. To do this, hover over a segment so that it highlights in green and then right click to bring up the segment menu. If you select _Split Annotation_ it will split the segment at the point of your cursor.
 
-You have been assigned a section of the interview that's under 5 minutes long. Finish the segmentation of all three speakers in your assigned section and submit it with your Homework 1. Ideally, your segments should be present whenever the speaker on that tier is making noise. After fully segmenting who is speaking when, your file will look something like this:
+You have been assigned a section of the interview that's under 5 minutes long. Finish the segmentation of all three speakers in your assigned section and submit your .eaf file as part of Homework 1. Ideally, your segments should be present whenever the speaker on that tier is making noise. After fully segmenting who is speaking when, your file will look something like this:
 
 <br>
 ![](./images/segmentation_mode.png)
