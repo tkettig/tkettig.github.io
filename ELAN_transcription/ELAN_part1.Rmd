@@ -28,6 +28,10 @@ SAVE YOUR ELAN FILE RIGHT NOW. Until it has a beginning save point, ELAN cannot 
 
 <br>
 
+Please save this file with the name "Snowd4y_Interview_FIRSTNAME_LASTNAME" (with your own first and last name).
+
+When you save this, two files will be created: an .eaf file and a .pfsx file. The .eaf file is the more important one, and is what we'll mean when we refer to an "ELAN file". The .pfsx file is just a preferences file that keeps track of things like where in the .eaf you were last working. It's not important and you won't need to submit it with your work this semester.
+
 ### __Preparing your transcript__
 
 You'll now need to add a tier for each of your speakers. Go to _Tier > Add New Tier..._ and add the Tier Name, Participant, and Annotator information to one tier per speaker. You can leave the other fields the way they are.
