@@ -15,3 +15,7 @@ I'm originally from [Jackson Heights](https://en.wikipedia.org/wiki/Jackson_Heig
 
 ### [Research interests](./topic.html)
 I study how the sounds of language vary and change through space and time. Some of my research aims to understand why the vowel sounds of English change from one generation of speakers to the next. I have also undertaken the first large-scale, multi-speaker investigation of the vowels of Hawaiian. This means that my work touches on issues in endangered language description, sociolinguistics, quantitative experimental methods, theoretical phonology, historical linguistics, and articulatory and acoustic phonetics.
+
+<!--html_preserve-->
+<meta name="google-site-verification" content="K6AUxJ7LVYCnI1ifeyDdNQXcs4joKytd9JufRNh-s3U" />
+<!--/html_preserve-->
