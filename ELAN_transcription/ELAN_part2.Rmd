@@ -12,6 +12,12 @@ Now that you've segmented a portion of the interview, it's time to transcribe. T
 
 A window called _Transcription mode settings_ will pop up. Where it says _\<select a type>_, click and select _default-lt_. Then click _Apply_. Your screen should look something like this:
 
+<br>
+<center>
+![](./images/transcription_mode.png)
+</center>
+<br>
+
 Your segments are represented as blank lines, with changes in speaker represented in coloured bars. You can click on any empty segment to hear that segment played as you transcribe. To move to the next segment, hit the ENTER key, and to edit a previous segment click on that segment. 
 
 > __TIP:__  
