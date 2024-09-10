@@ -33,5 +33,3 @@ output:
     css: style.css
     theme: readable
     highlight: textmate
-    includes:
-       in_header: googleac49650e97ee7ca0.html
