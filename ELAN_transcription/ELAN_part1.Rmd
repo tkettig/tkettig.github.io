@@ -1,5 +1,5 @@
 ---
-title: "ELAN Transcription Exercise, Part 1"
+title: "Transcription and coding tutorial, Part 1"
 author: "Thomas Kettig, based on work by Jessi Grieser"
 output: html_document
 ---

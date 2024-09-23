@@ -1,0 +1,9 @@
+---
+title: "Transcription and coding tutorial, Part 3"
+author: "Thomas Kettig, based on work by Jessi Grieser"
+output: html_document
+---
+<font size= "3.5">
+
+***
+### __Coding a dependent variable in ELAN__
