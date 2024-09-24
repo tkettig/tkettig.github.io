@@ -7,23 +7,23 @@ output: html_document
 
 ### __Goal of Lab 2:__
 <font size= "4.5">
-One of the most common acoustic features that is measured and manipulated in speech research is voicing in stop consonants (in particular voice onset time), so this is a good place to start. In this lab, we are going to explore the acoustic correlates of different stop consonants in terms of two parameters: _voicing_ and _place of articulation_. </font>
+One of the most common acoustic features that is measured and manipulated in speech research is voicing in stop consonants (in particular voice onset time). In this lab, we are going to explore the acoustic correlates of different stop consonants in terms of two parameters: _voicing_ and _place of articulation_. </font>
 
 ***
 <font size= "4.0">
 
 #### __RECORDING__
 
-Generate the following sound files, containing the sound sequences listed.  
+Generate the following sound files containing the sequences listed in the right column, and save them with the file names provided in the left column. You may also choose to use the Lab 2 English files contained in our "Lab sound files" folder on eClass. Make sure that in your lab report, you specify whether you recorded the files yourself or chose to use the pre-recorded eClass ones.
 
 |    _File name_       |   _Sounds to record_              |
 |:--------------------:|:---------------------------------:|
 |Lab2_Eng_stop_a.wav   |  pa, ba, ta, da, ka, ga           |
 |Lab2_Eng_a_stop_a.wav |  apa, aba, ata, ada, aka, aga     |
-|Lab2_Eng_a_stop.wave  |  lap, lab, bat, bad, rack, rag    |
+|Lab2_Eng_a_stop.wav   |  lap, lab, bat, bad, rack, rag    |
 
 <br>
-If you are a fluent French speaker, also generate the following sound files. Otherwise, you can go to eClass and download the zip file __"Lab2_SoundFiles"__, which contains these files.
+If you are an L1 French speaker, also generate the following sound files. Otherwise, go to eClass and download the Lab 2 French files from our "Lab sound files" folder. Make clear in your lab report whether you've used the pre-recorded files or generated your own. (Don't worry that the pre-recorded a_stop ones are nonce words rather than the real ones I suggest in the right column; the initial consonant shouldn't make much difference in terms of what you'll need to measure for the a_stop files.)
 
 |    _File name_      |   _Sounds to record_                |
 |:-------------------:|:-----------------------------------:|
@@ -33,7 +33,7 @@ If you are a fluent French speaker, also generate the following sound files. Oth
 
 <br>
 
-Three important acoustic correlates of voicing in English stops are:
+Three important acoustic correlates of voicing in stops are:
 
 * The voice bar
 * VOT
@@ -41,7 +41,7 @@ Three important acoustic correlates of voicing in English stops are:
 
 <br>
 
-For each of the stops in the file, take the three measurements according to the instructions below and fill out Table 2.1, Table 2.2 and Table 2.3 accordingly. Answer the related questions by comparing your measurements across stops.
+For each of the stops in each file, take measurements according to the instructions below and fill out Table 2.1, Table 2.2 and Table 2.3 accordingly. Answer the related questions by comparing your measurements across stops.
 
 ***
 
@@ -52,8 +52,8 @@ For each of the stops in the file, take the three measurements according to the 
   +	Zoom in so that you can clearly see the transition between the stop and vowel.  
   + Measure the time between the end of the stop closure ( = the beginning of the release burst) and the onset of voicing ( = the onset of regular pitch pulses in the waveform). This is the voice onset time or VOT.  
     + If the onset of voicing __follows__ the release of the stop clouse, then VOT is calculated as __positive__; stops with positive VOT are termed __voiceless__.
-      + VOTs between 0-20ms correspond to <u>_voiceless unaspirated stops_</u>.
-      + VOTS above 20ms correspond to <u>_voiceless aspirated stops_</u>.
+      + VOTs of 0ms to about 20ms or 30ms correspond to <u>_voiceless unaspirated stops_</u>.
+      + VOTs above 20-30ms correspond to <u>_voiceless aspirated stops_</u>.
     + If the onset of voicing __precedes__ the release of the stop closure, then VOT is calculated as __negative__; stops with negative VOT are termed __prevoiced__ or more generally, __voiced__. (See bottom of Figure 1.2).
     
 <center>
@@ -63,20 +63,14 @@ For each of the stops in the file, take the three measurements according to the 
 <br>
 
 > __TIP:__  
-Praat reports time values in seconds, but in phonetic analysis we report in milliseconds, so the values need to be converted. Once you have converted to milliseconds, you do not need to report any decimal places.
+Praat reports time values in seconds, but in phonetic analysis we report in milliseconds, so the values need to be converted. Once you have converted to milliseconds, you do not need to report any decimal places. <br> Also remember that you might want to change the dynamic range from its default setting of 70dB to 50dB in __Spectrogram > Spectrogram settings__. This helps to remove background noise that might otherwise look like a voicing bar.
 
 <br>
 
-2. Open the following sound files in Praat: __"Eng_a_stop_a.wav"__ and __"Fr_a_stop_a.wav"__. Note down the presence vs. absence of the voice bar (see Figure 2.2) during the stop closure of each consonant in Table 2.2 in the report.
+2. Open the following sound files in Praat: __"Eng_a_stop_a.wav"__ and __"Fr_a_stop_a.wav"__. Note in in Table 2.2 of your report the presence vs. absence of the voice bar (see Figure 2.2) during the stop closure of each consonant and, if present, how long the voice bar lasts.
+
 
 <br>
-
-3. Open the following sound files in Praat: __"Eng_a_stop.wav"__ and __"Fr_a_stop.wav"__. Measure the duration of the vowel preceding each stop, and fill in Table 2.3 in the report. Compare vowel durations in the voiced vs. voiceless series.
-
-<br>
-
-> __TIP:__
-In order to measure the duration of the vowel, you will need to identify the section of the spectrogram which makes up the vowel. One common means of doing so is to measure where there are clearly visible vowel formants. Whatever method you do use, the most important thing is to be consistent and use the same method for <u>all</u> your measurements.
 
 <center>
 ![Figure 2.2: Voice bar and VOT measurements](./Images/Figure2_voicebar.png)
@@ -84,13 +78,22 @@ In order to measure the duration of the vowel, you will need to identify the sec
 </font>
 <br>
 
-***
+
+3. Open the following sound files in Praat: __"Eng_a_stop.wav"__ and __"Fr_a_stop.wav"__. Measure the duration of the vowel preceding each stop, and fill in Table 2.3 in the report. Compare vowel durations in the voiced vs. voiceless series.
+
+<br>
+
+> __TIP:__
+In order to measure the duration of the vowel, you will need to identify the section of the sound which makes up the vowel. One common means of doing so is to measure where there are clearly visible vowel formants in the spectrogram. You may also find that the waveform helps you see where the vowel's periodic, high-intensity sound waves begin and end. Whatever method you use, the most important thing is to be consistent and use the same method for <u>all</u> your measurements.
+
 
 ***
 <br>
 <center> <h4> __LAB 2 REPORT__ </h4> </center> 
 
-<font size= "4.0">
+<font size= "4.5">
+
+You may work in pairs for this lab. On eClass, submit: 1) all .wav files you created for this lab (but not ones you downloaded from eClass) and 2) a PDF with filled-in tables and answers to the questions below. Make sure the PDF file name follows the convention __LING4220_Lab2_LastName_FirstName.pdf__ or, if submitted as a pair, __LING4220_Lab2_LastName1_FirstName1_LastName2_FirstName2.pdf__. If submitting as a pair, only one person in each pair should submit the .wav and .pdf files.
 
 <font size= "3.5"> _Table 2.1 VOT_ </font>
 
@@ -101,7 +104,7 @@ In order to measure the duration of the vowel, you will need to identify the sec
 
 <br>
 
-__Q1:__ How does VOT differ in voiced vs. voiceless stops and what explanation can you come up with for this?
+__Q1:__ How does VOT differ between voiced vs. voiceless stops? How do English and French seem to differ in terms of how they use VOT as a cue to voiced vs. voiceless stops?
 
 <br>
 
@@ -135,18 +138,18 @@ __Q4:__ How does the duration of the preceding vowel differ depending on the voi
 
 __Q5:__ What differences (if any) do you observe in the preceding vowel duration between English and French?
 
-__Q6:__ Summarizing what you’ve seen in this lab, what are the possible acoustic correlates of the phonemic voicing (voiced vs. voiceless) contrast across languages?
+__Q6:__ Based on what you’ve seen in this lab, summarize the possible acoustic correlates of the phonemic voicing contrast (voiced vs. voiceless) across languages.
 
 <br>
 
 <center> <h4> __REFERENCES__ </h4> </center>  
 
-__Q7:__ Provide a reference and very brief summary of one academic paper that uses the methods covered in this lab.  
+__Q7:__ Provide a reference and very brief (one paragraph) summary of one academic paper that uses the methods covered in this lab.
 
 <br>
 
 ***
 
-<font size="2.5"> Disclaimer: The original lab materials on which this lab is based was put together in 2015 (updated 2019) by Sonya Bird, Qian Wang, Sky Onosson, and Allison Benner for the LING 380 Acoustic Phonetics course at the University of Victoria. Their materials are released under a Creative Commons license (CC BY-NC-SA 4.0) which allows for non-commercial use as well as copying and distribution and the creation of derivative works for non-commercial purposes. Thomas Kettig (with assistance from Taylor Potter) has modified these materials as needed for the York University LING 4220 Acoustic Phonetics course.</font>
+<font size="2.5"> Disclaimer: The original lab materials on which this lab is based were put together in 2015 (updated 2019) by Sonya Bird, Qian Wang, Sky Onosson, and Allison Benner for the LING 380 Acoustic Phonetics course at the University of Victoria. Their materials are released under a Creative Commons license (CC BY-NC-SA 4.0) which allows for non-commercial use as well as copying and distribution and the creation of derivative works for non-commercial purposes. Thomas Kettig (with assistance from Taylor Potter) has modified these materials as needed for the York University LING 4220 Acoustic Phonetics course.</font>
 
 <br>

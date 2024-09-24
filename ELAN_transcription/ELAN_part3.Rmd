@@ -1,9 +1,13 @@
 ---
 title: "Transcription and coding tutorial, Part 3"
-author: "Thomas Kettig, based on work by Jessi Grieser"
+author: "Thomas Kettig, based on work by Naomi Nagy"
 output: html_document
 ---
 <font size= "3.5">
 
 ***
 ### __Coding a dependent variable in ELAN__
+
+Now that you have a portion of the interview transcribed, we can start to code a sociolinguistic variable. In experimental terms, sociolinguistic variables are dependent variables. Independent variables might include demographic features of a speaker (e.g. gender, age, race), stylistic and discourse factors (e.g. interlocutor, formality, topic), contextual linguistic factors (e.g. part of speech, preceding or following phoneme, word frequency) and anything else that might cause our dependent variables to vary. We'll start by coding occurrences of a sociolinguistic (dependent) variable.
+
+Open your .eaf file and select Options > Annotation mode.
