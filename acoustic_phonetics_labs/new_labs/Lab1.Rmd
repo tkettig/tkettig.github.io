@@ -35,7 +35,7 @@ For example, the tools that are listed for a sound object such as "name" or "Far
 
 <br>
 
-3. Record the sentence - __“My name is [first-name] [last-name]”__. In the main menu of the Objects window (see Figure 1.2):
+3. Record the sentence - __“My name is [first-name] [last-name]”__. Say the sentence in a natural way at a normal pace __do not insert an any artificial pauses__ between the words. In the main menu of the Objects window (see Figure 1.2):
 
 * Click __New > Record mono Sound (sampling rate: 44 100 Hz)__ (Figure 1.3)
   + Make sure the volume bar is fluctuating as you record – if it isn’t, you’re not recording or you’re not speaking loudly enough. You may need to find the correct microphone under “Input source”.
@@ -140,6 +140,7 @@ Two things are being displayed now in the Edit window: **the waveform** on the u
 * Highlight the file in the object list
 * **Save > Save as WAV file…** (this is the most widely acceptable extension)
 * Select the desktop as the save-to location
+* Name the file __Lab1_Firstname_Lastname.wav__  (with your own first and last names).
 
 <br>
 8. Create a **textgrid**: textgrids let you label or annotate the spectrogram (and sound file) – they are particularly helpful for acoustic analysis, to keep track of where you’ve taken measurements, etc.
@@ -211,7 +212,8 @@ To remove a boundary you have made, do the following:
 
 13. Save your textgrid onto the desktop:
 
-* **File > Save TextGrid as textfile...**
+* **File > Save TextGrid as textfile...** 
+* Name the file __Lab1_Firstname_Lastname.TextGrid__ (with your own first and last names).
 
 <br>
 

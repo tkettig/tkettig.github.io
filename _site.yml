@@ -18,7 +18,7 @@ navbar:
         href: courses.html
       - text: "Acoustic Phonetics Lab Manual"
         href: acoustic_phonetics.html
-      - text: "ELAN Transcription Manual"
+      - text: "ELAN Transcription and Coding Tutorials"
         href: elan_manual.html
   - text: "CV"
     href: CV.pdf
