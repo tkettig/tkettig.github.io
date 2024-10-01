@@ -144,7 +144,7 @@ It can be somewhat tricky to click precisely on the data label; try increasing t
 <center> <h4> __LAB 3 REPORT__ </h4></center> 
 <center> <h4> __SECTION I. INTRINSIC PITCH__ </h4> </center> 
 
-You may work in pairs for this lab. On eClass, submit: 1) the .wav files you created for this lab (but not ones you downloaded from eClass) and 2) a PDF with filled-in tables and answers to the questions below. Make sure the PDF file name follows the convention __LING4220_Lab3_LastName_FirstName.pdf__ or, if submitted as a pair, __LING4220_Lab3_LastName1_FirstName1_LastName2_FirstName2.pdf__. If submitting as a pair, only one person in each pair should submit the .wav and .pdf files.
+You may work in pairs for this lab. On eClass, submit: 1) the .wav file you created for this lab (but not the one you downloaded from eClass, if you chose to use that one) and 2) a PDF with filled-in tables and answers to the questions below. Make sure the PDF file name follows the convention __LING4220_Lab3_LastName_FirstName.pdf__ or, if submitted as a pair, __LING4220_Lab3_LastName1_FirstName1_LastName2_FirstName2.pdf__. If submitting as a pair, only one person in each pair should submit the .wav and .pdf files.
 
 <font size= "4.0">
 
