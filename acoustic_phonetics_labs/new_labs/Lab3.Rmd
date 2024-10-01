@@ -98,7 +98,7 @@ Do note that the column chart can be made in other word processors such as Googl
 4. Now focus on the spectrogram and measure the first and second formants (F1 and F2) of each vowel (see Figure 3.3). Enter the obtained values in Table 3.2. Note that measurements should be rounded to the nearest whole number – no decimal points!
 
 * Display the formant track: __Formant > Show formants__
-* Place your cursor in the centre of each formant, in the middle of the vowel
+* Place your cursor in the centre of each formant, in the middle of the vowel. If your "bait" and "boat" vowels are very diphthongal, you may want to measure these around one-third of the way through the vowel (closer to the beginning) rather than at the midpoint.
 * A red horizontal bar should appear, with the frequency value on the left side of the window, in red
 
 <br>
