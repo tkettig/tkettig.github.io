@@ -118,7 +118,7 @@ It is not always easy locating formants. Don’t get discouraged, just do the be
 * Select (highlight) columns C and D and create a scatterplot: __Insert > Scatter__
 * Reverse the order of both axes by right-clicking on each axis to open Format Axis: and check the box beside __Values in reverse order__
 * Double-click on the plot title and enter __Vowel Space__
-* Create the titles __F2-F1__ for the x-axis and __F1__ for the y-axis: __Chart Design > Add Chart Element > Axis Titles__
+* Create the titles __F2__ for the x-axis and __F1__ for the y-axis: __Chart Design > Add Chart Element > Axis Titles__
 * Create labels for your data points: Right-click on any datapoint in the plot and select __Add Data Labels__
   + By default, the labels will display the y-axis value (F1); click on the displayed value and re-enter the applicable IPA vowel symbol
   
