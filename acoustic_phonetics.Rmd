@@ -30,13 +30,13 @@ The reading to prepare fo this lab is:
 
 * Johnson (2012) Chapter 2.  
 
-<!-- <br> -->
+<br>
 
-<!-- <h3> [Lab 4 - The Source-Filter Model of Speech: Fundamental frequency, harmonics and formants](acoustic_phonetics_labs/new_labs/Lab4.html) </h3>  -->
+<h3> [Lab 4 - Fundamental frequency, harmonics and formants](acoustic_phonetics_labs/new_labs/Lab4.html) </h3>
 
-<!-- The reading to prepare for this lab is: -->
+The reading to prepare for this lab is:
 
-<!-- * Johnson (2012) Chapter 6. -->
+* Johnson (2012) Chapter 6.
 
 <!-- <br> -->
 
