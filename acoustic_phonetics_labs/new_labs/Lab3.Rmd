@@ -14,7 +14,7 @@ In this lab, we are going to explore vowel properties: _intrinsic pitch_ and _sp
 
 #### __RECORDING__
 
-Generate the following a single sound file called __"Lab3_EnglishVowels"__ which will contain one repetition each of the following words:  
+Record a single sound file with one repetition each of the following words, and save it as __"Lab3_EnglishVowels"__:  
 <center> _beat, bit, bait, bet, bat, boat, but, boot_.</center>  
 
 <br>
