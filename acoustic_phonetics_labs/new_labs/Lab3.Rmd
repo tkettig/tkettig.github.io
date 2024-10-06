@@ -114,7 +114,7 @@ It is not always easy locating formants. Don’t get discouraged, just do the be
 
 5. Enter the formant values into the Excel spreadsheet you created in 3 above, and create your vowel plot (see Figure 3.4).
 
-* Calculate and enter the value of F1 for each vowel in column C, and enter the F2 value in column D.
+* Calculate and enter the value of __F2__ for each vowel in column C, and enter the __F1__ value in column D.
 * Select (highlight) columns C and D and create a scatterplot: __Insert > Scatter__
 * Reverse the order of both axes by right-clicking on each axis to open Format Axis: and check the box beside __Values in reverse order__
 * Double-click on the plot title and enter __Vowel Space__
