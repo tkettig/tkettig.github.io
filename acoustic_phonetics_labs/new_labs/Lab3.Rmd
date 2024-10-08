@@ -148,7 +148,7 @@ You may work in pairs for this lab. On eClass, submit: 1) the .wav file you crea
 
 <font size= "4.0">
 
-__Q1:__ In this lab, you should take all of your measurements in approximately the same spot (except potentially for diphthongs). What spot is this, and why? Why wouldn't this spot potentially be problematic for diphthongs?
+__Q1:__ In this lab, you should take all of your measurements in approximately the same spot (except potentially for diphthongs). What spot is this, and why? Why wouldn this spot potentially be problematic for diphthongs?
 
 <font size= "3.5"> _Table 3.1 Intrinsic vowel pitches (F0)_ </font>
 
