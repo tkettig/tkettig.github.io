@@ -379,7 +379,8 @@ the pitch value in it.</li>
 <li>Display the pitch track: <strong>Pitch &gt; Show pitch</strong></li>
 <li>Click on the blue pitch track in the middle of the vowel</li>
 <li>A red horizontal bar should appear, with the pitch value (in dark
-blue) on the right side of the window.</li>
+blue or dark red, depending on your version of Praat) on the right side
+of the window.</li>
 </ul>
 <ol start="3" style="list-style-type: lower-alpha">
 <li>By looking at the <em>waveform</em> (top of the display) (see Figure
@@ -390,25 +391,26 @@ blue) on the right side of the window.</li>
 and measure the period by highlighting one complete cycle, going from
 zero-crossing to zero-crossing, and noting the time associated with it
 (in the panel above the waveform)</li>
-<li>To get the frequency ( <strong>f</strong> ) from the period (
-<strong>T</strong> ): <strong>f =1/T</strong></li>
+<li>To get the frequency <strong>f</strong> from the period
+<strong>T</strong>, remeber the formula: <strong>f=1÷T</strong>. Or if
+you zoom in enough, the panel above the waveform will include both the
+period and the frequency (in parentheses), so you don’t have to do any
+calculations.</li>
 </ul>
 <p><br></p>
 <blockquote>
 <p><strong>TIP:</strong><br />
 The fundamental frequency value is always displayed on the <u>right</u>
 side of the window in dark red (or dark blue, on older versions of
-Praat); formant frequencies are displayed on the <u>left</u> side in red
-– be careful not to get these two confused!</p>
+Praat); formant frequencies corresponding to the vertical point at which
+you clicked are displayed on the <u>left</u> side in red – be careful
+not to get these two confused!</p>
 <p>You can get Praat to place the cursor at the nearest zero-crossing by
 using the shortcut <strong>Ctrl-0</strong> (zero), or
 <strong>Command-0</strong> on a Mac. Additionally, if you highlight a
-section of a waveform, the shortcuts <strong>Ctrl/Command-</strong>, and
-<strong>Command-</strong>. will move the left and right edges of the
-selection to the closest zero-crossing.</p>
-<p>If you zoom in enough, the panel above the waveform will include both
-the period and the frequency (in parentheses), so you don’t have to do
-any calculations.</p>
+section of a waveform, the shortcuts <strong>Ctrl/Command-,</strong>
+(comma) and <strong>Ctrl/Command-.</strong> (period) will move the left
+and right edges of the selection to the closest zero-crossing.</p>
 </blockquote>
 <center>
 <div class="float">
@@ -449,16 +451,12 @@ Figure 4.3)</li>
 spectrogram)</li>
 </ul>
 <p><br></p>
-<p>NOTE: the narrow-band and wide-band spectrograms illustrate the
-time/frequency trade-off. A spectrogram can have very high resolution in
-frequency (narrow-band) or in time (wide-band), but not in both!</p>
-<p><br></p>
-<center>
-<div class="float">
-<img src="Images/Figure4_harmonics.png" alt="Figure 4.3: Harmonics" />
-<div class="figcaption">Figure 4.3: Harmonics</div>
-</div>
-</center>
+<blockquote>
+<p><strong>NOTE:</strong><br />
+The narrow-band and wide-band spectrograms illustrate the time/frequency
+trade-off. A spectrogram can have very high resolution in frequency
+(narrow-band) or in time (wide-band), but not in both!</p>
+</blockquote>
 <p><br></p>
 <ol start="3" style="list-style-type: decimal">
 <li>Looking at each [ɛ], notice the grey horizontal bands: these
@@ -474,12 +472,20 @@ measurements.</li>
 left side of the window, in red.</li>
 </ul>
 <p><br></p>
+<center>
+<div class="float">
+<img src="Images/Figure4_harmonics.png" alt="Figure 4.3: Harmonics" />
+<div class="figcaption">Figure 4.3: Harmonics</div>
+</div>
+</center>
+<p><br></p>
 <blockquote>
 <p><strong>TIP:</strong><br />
 If you’re having trouble seeing the lower harmonics, you may want to
 reduce the spectrogram range that Praat is displaying for you: Go to
 Spectrogram &gt; Spectrogram settings and reduce the maximum of the
-range from the default of 5000 Hz to 3000 Hz.</p>
+range from the default of 5000 Hz to 3000 Hz. Remember to set this back
+to 5000 Hz when you’re finished with this step.</p>
 </blockquote>
 <p><br></p>
 <hr />
@@ -490,8 +496,8 @@ range from the default of 5000 Hz to 3000 Hz.</p>
 <p>Looking at the narrow-band spectrogram, you should notice that some
 harmonics are darker than others (see Figure 4.3). Darkness corresponds
 to loudness, i.e. the darkest harmonics are the ones that are the most
-amplified. These amplified harmonics form the <u>formants</u> that are
-characteristic of sonorant speech sounds.</p>
+amplified. These amplified harmonics comprise the <u>formants</u> that
+are characteristic of sonorant speech sounds.</p>
 <p><br></p>
 <ol start="4" style="list-style-type: decimal">
 <li>Now, go back to the wide-band spectrogram:</li>
@@ -502,7 +508,7 @@ characteristic of sonorant speech sounds.</p>
 </ul>
 <p><br></p>
 <p>You will see that the formants appear on the wide-band spectrogram as
-thich dark bands.</p>
+thick dark bands.</p>
 <p><br></p>
 <ol start="5" style="list-style-type: decimal">
 <li>Measure the first and second formants (F1 and F2) in the middle of
@@ -553,7 +559,7 @@ left side of the window, in red.</li>
 <blockquote>
 <p><strong>TIP:</strong> Praat can sometimes track formants incorrectly
 - it may introduce red and white dots where no formant actually exists,
-or may miss a formant and fail to track them with dots. Listen to the
+or may miss a formant and fail to track it with dots. Listen to the
 vowel you’re trying to track, and with your knowledge of approximately
 what that particular vowel’s formants <em>should</em> look like, deduce
 whether or not the tracking you’re seeing needs to be adjusted. For
@@ -564,10 +570,10 @@ compared to its F1.</p>
 Formant settings</strong> and adjust the formant ceiling. A decent
 baseline for many voices is to look for 5.0 formants with a 5000 Hz to
 5500 Hz ceiling: for smaller vocal tracts and for fronter/higher vowels,
-you may need to <em>raise</em> the formant ceiling to 6000 Hz or above
-to get good tracking, while for larger vocal tracts and backer/lower
-vowels you may need to <em>lower</em> the ceiling to 4500 Hz or below.
-This may take some trial and error.</p>
+you may need to <em>raise</em> the formant ceiling to 6000 Hz or more to
+get good tracking, while for larger vocal tracts and backer/lower vowels
+you may need to <em>lower</em> the ceiling to 4500 Hz or less. This may
+take some trial and error.</p>
 </blockquote>
 <br>
 <center>
@@ -593,7 +599,8 @@ this model.</p>
 pitch</strong> (unclick) <br></p></li>
 <li><p>What is the ordinal number of the harmonic (H2, H5, H8, etc.)
 that is at the <em>centre</em> of the first formant, for each [ɛ]? Use
-Table 4.4 to note down your answer.</p></li>
+Table 4.4 to note down your answer. Remember that you’ll need to switch
+back to a narrow-band spectrogram view to see the harmonics!</p></li>
 </ol>
 <p><br></p>
 <hr />
@@ -699,16 +706,16 @@ frequencies measured in 1 above. Based on this comparison, what does the
 first harmonic (H1) correspond to?</p>
 <blockquote>
 <p><strong>TIP:</strong> If you have a very low voice, the first dark
-line you see may be H2, instead of H1. Ask your instructor if in
-doubt…</p>
+line you see may be H2 instead of H1. You may want to adjust the maximum
+in the spectrogram range so it’s easier to see.</p>
 </blockquote>
 <p><strong>Q3:</strong> What is the relationship between the first and
 subsequent harmonics? (The relationship should be the same across
 [ɛ]s.)</p>
 <blockquote>
-<p><strong>TIP:</strong> Keep in mind there will be measurement error
-here, so various relationships may not be as clear as they would be in
-an ideal world…</p>
+<p><strong>TIP:</strong> Keep in mind there will be some measurement
+error here, so various relationships may not be as clear as they would
+be in an ideal world…</p>
 </blockquote>
 <br>
 <center>
@@ -774,9 +781,10 @@ an ideal world…</p>
 </table>
 <p><br></p>
 <p><strong>Q4:</strong> Which method do you prefer and why?</p>
-<p><strong>Q5:</strong> Would you say the formant frequencies are the
-same or different across [ɛ]s? (Be sure to take measurement error into
-account when answering this question.)</p>
+<p><strong>Q5:</strong> Would you say the formant frequencies are
+approximately the same or different across [ɛ]s? (Be sure to take into
+account measurement error and minor articulatory variation between
+otherwise identical vowels.)</p>
 <br>
 <center>
 <h4>
@@ -816,9 +824,9 @@ in narrow-band spectrogram (e.g. H1, H4)</th>
 <p><br> <strong>Q6:</strong> Does this harmonic have the same number
 across [ɛ]s? Why or why not?</p>
 <p><strong>Q7:</strong> What explanation is there for the pattern
-observed in Table 4.3 and Table 4.4: why would the harmonic number be
-different across [ɛ]s (Table 4.4), but the frequency of this harmonic
-(approximately = F1) be (approximately) the same across [ɛ]s (Table
+observed in Table 4.3 and Table 4.4: Why would the harmonic
+<em>number</em> vary across [ɛ]s (Table 4.4), but the <em>frequency</em>
+of this harmonic (approximately F1) be consistent across [ɛ]s (Table
 4.3)?</p>
 <br>
 <center>
