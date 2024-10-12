@@ -19,7 +19,7 @@ Record a single sound file with one repetition each of the following words, and 
 
 <br>
 
-Try to use a level (monotone) pitch throughout each of the vowels. (This will be easiest if you pause between vowels, rather than uttering the sequence of vowels as if it were part of a sentence.)
+Try to use a level (monotone) pitch throughout each of the vowels. __Do not use your typical English listing intonation.__ Pretend you are a robot and try to hold your pitch as constant as possible both within and between words. This will be easiest if you pause between vowels, rather than uttering the sequence of vowels as if it were part of a sentence.
 
 <br>
 Take a quick look at your vowels in the View & Edit window, and make sure you can clearly see the vowel formants (see Lab 1 on formant display). If you have trouble seeing them, you can download the file __"Lab3_ EnglishVowels.wav"__ from eClass and take your measurements on this file. If you do this, please make a note of it on your report.
@@ -75,7 +75,7 @@ Also ensure that your 'analysis method' under Pitch settings is set to <u>raw au
 
 * Open a new spreadsheet in Excel: enter the IPA symbols for each vowel in column A, and your pitch (F0) measurements in column B (see Figure 3.2)
 * Select (highlight) columns A and B and create a chart: __Insert > 2-D Column > Clustered column__
-* Copy and paste both the table of measurements and the chart into a Word document for your lab report
+* Copy and paste the chart into a Word document for your lab report to display alongside Table 3.1.
 
 <br>
 
@@ -144,11 +144,9 @@ It can be somewhat tricky to click precisely on the data label; try increasing t
 <center> <h4> __LAB 3 REPORT__ </h4></center> 
 <center> <h4> __SECTION I. INTRINSIC PITCH__ </h4> </center> 
 
-You may work in pairs for this lab. On eClass, submit: 1) the .wav file you created for this lab (but not the one you downloaded from eClass, if you chose to use that) and 2) a PDF with filled-in tables and answers to the questions below. Make sure the PDF file name follows the convention __LING4220_Lab3_LastName_FirstName.pdf__ or, if submitted as a pair, __LING4220_Lab3_LastName1_FirstName1_LastName2_FirstName2.pdf__. If submitting as a pair, only one person in each pair should submit the .wav and .pdf files.
+You may work in pairs for this lab. On eClass, submit: 1) the .wav file you created for this lab (but not the one you downloaded from eClass, if you chose to use that) and 2) a PDF with filled-in tables and answers to the questions below. Make sure the PDF file name follows the convention __LING4220_Lab3_LastName_FirstName.pdf__ or, if submitted as a pair, __LING4220_Lab3_LastName1_FirstName1_LastName2_FirstName2.pdf__. If submitting as a pair, only one person in each pair should submit the .wav and .pdf files. Remember to always add unit labels (Hz, ms, etc.) to all your tables and figures.
 
 <font size= "4.0">
-
-__Q1:__ In this lab, you should take all of your measurements in approximately the same spot (except potentially for diphthongs). What spot is this, and why? Why would this spot potentially be problematic for diphthongs?
 
 <font size= "3.5"> _Table 3.1 Intrinsic vowel pitches (F0)_ </font>
 
@@ -156,7 +154,7 @@ __Q1:__ In this lab, you should take all of your measurements in approximately t
 |:-----------------------|:----:|:----:|:----:|:----:|:----:|:----:|:---:|:----:|
 |Manual measurement      |      |      |      |      |      |      |     |      |
 
-__Q2:__ Is pitch the same across all vowels? Do you notice any patterns with it?
+__Q1:__ Is pitch the same across all vowels? Do you notice any patterns with it?
 
 <br>
 
@@ -169,14 +167,19 @@ __Q2:__ Is pitch the same across all vowels? Do you notice any patterns with it?
 |F1 (Hz)        |      |      |      |      |      |      |     |      |
 |F2 (Hz)        |      |      |      |      |      |      |     |      |
 
-__Q3:__ Look at the formant values associated with different vowels:
+__Q2:__ Look at the formant values associated with different vowels:
 
   a. Why do formants differ across vowels?
   b. What does F1 seem to correspond to, in terms of articulation?
   c. What about F2?
   
 <br>
-__Q4:__ Does your vowel chart look as you expected that it would, based on similar ones you may have encountered in your previous courses/textbook(s)? Note anything that strikes you about your vowel chart as being unusual, or different from your expectations.
+
+__Q3:__ Does your vowel chart look as you expected that it would, based on similar ones you may have encountered in your previous courses/textbook(s)? Note anything that strikes you about your vowel chart as being unusual, or different from your expectations.
+
+<br>
+
+__Q4:__ In this lab, you should take all of your measurements in approximately the same spot (except potentially for diphthongs). What spot is this, and why? Why would this spot potentially be problematic for diphthongs?
 
 <br>
 

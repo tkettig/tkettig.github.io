@@ -196,6 +196,11 @@ The relationship between the harmonics and the formants is captured in the _sour
 ***
 <br>
 <center> <h4> __LAB 4 REPORT__ </h4> </center> 
+
+You may work in pairs for this lab. On eClass, submit: 1) the .wav file you created for this lab (but not the one you downloaded from eClass, if you chose to use that) and 2) a PDF with filled-in tables and answers to the questions below. Make sure the PDF file name follows the convention __LING4220_Lab4_LastName_FirstName.pdf__ or, if submitted as a pair, __LING4220_Lab4_LastName1_FirstName1_LastName2_FirstName2.pdf__. If submitting as a pair, only one person in each pair should submit the .wav and .pdf files. Remember to always add unit labels (Hz, ms, etc.) to all your tables and figures.
+
+<br>
+
 <center> <h4> __SECTION I. FUNDAMENTAL FREQUENCY (F~0~) OR PITCH__ </h4> </center> 
 
 <font size= "4.0">
