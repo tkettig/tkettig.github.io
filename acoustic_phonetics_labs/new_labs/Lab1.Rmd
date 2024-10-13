@@ -2,6 +2,7 @@
 title: "Lab 1: Exploring Praat"
 author: "Thomas Kettig, based on work by Sonya Bird et al."
 output: html_document
+
 ---
 
 ***

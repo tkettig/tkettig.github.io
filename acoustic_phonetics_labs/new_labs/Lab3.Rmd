@@ -22,6 +22,7 @@ Record a single sound file with one repetition each of the following words, and 
 Try to use a level (monotone) pitch throughout each of the vowels. __Do not use your typical English listing intonation.__ Pretend you are a robot and try to hold your pitch as constant as possible both within and between words. This will be easiest if you pause between vowels, rather than uttering the sequence of vowels as if it were part of a sentence.
 
 <br>
+
 Take a quick look at your vowels in the View & Edit window, and make sure you can clearly see the vowel formants (see Lab 1 on formant display). If you have trouble seeing them, you can download the file __"Lab3_ EnglishVowels.wav"__ from eClass and take your measurements on this file. If you do this, please make a note of it on your report.
 
 ***
@@ -144,9 +145,11 @@ It can be somewhat tricky to click precisely on the data label; try increasing t
 <center> <h4> __LAB 3 REPORT__ </h4></center> 
 <center> <h4> __SECTION I. INTRINSIC PITCH__ </h4> </center> 
 
+<font size= "4.0">
+
 You may work in pairs for this lab. On eClass, submit: 1) the .wav file you created for this lab (but not the one you downloaded from eClass, if you chose to use that) and 2) a PDF with filled-in tables and answers to the questions below. Make sure the PDF file name follows the convention __LING4220_Lab3_LastName_FirstName.pdf__ or, if submitted as a pair, __LING4220_Lab3_LastName1_FirstName1_LastName2_FirstName2.pdf__. If submitting as a pair, only one person in each pair should submit the .wav and .pdf files. Remember to always add unit labels (Hz, ms, etc.) to all your tables and figures.
 
-<font size= "4.0">
+<br>
 
 <font size= "3.5"> _Table 3.1 Intrinsic vowel pitches (F0)_ </font>
 
