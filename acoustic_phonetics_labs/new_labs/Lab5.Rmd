@@ -16,14 +16,14 @@ In this lab, we are going to explore the acoustic correlates of two types of son
 ***
 <font size= "4.0">
 
-#### __RECORDING__
+#### __OBTAIN FILES__
 
-Go to eClass and download the zip file __"Lab5_Soundfiles"__, containing the following files. Note, you can also generate these yourself; I have done it for you here to make sure that the sound files are clear enough for taking measurements.
+Go to eClass and download the following Lab 5 files. Note, you could also generate these yourself, but I have done it for you here to make sure that the sound files are clear enough for taking measurements.
 
-| _File name_     | _Sounds to record_  |
-|:---------------:|:-------------------:|
-|Lab5_Wi_Ju.wav   |  wi, ju             |
-|Lab5_Ri_Ri.wav   |  ɹi, li, iɹ, il     |
+| _File name_         | _Words_      |
+|:-------------------:|:------------:|
+|Lab5_We_You.wav      |  we, you     |
+|Lab5_Leer_Reel.wav   |  leer, reel  |
 
 <br>
 
@@ -34,13 +34,16 @@ Go to eClass and download the zip file __"Lab5_Soundfiles"__, containing the fol
 
 <br>
 
-1. Open the file __"Lab5_Wi_Ju.wav"__. Follow the instructions below and fill in Table 5.1 on the acoustic correlates of different glides.  
+1. Open the file __Lab5_We_You.wav__. Follow the instructions below and fill in Table 5.1 on the acoustic correlates of different glides.
 
 <br>
 
 <u> A. Formants </u>
 
-* In Table 5.1, note down the frequency of F1, F2 and F3 for each glide, as measured around the midpoint of the glide. The midpoint of __[w]__ should be at about __1.23s__ and the midpoint of __[j]__ should be at about __3.25s__.
+* In Table 5.1, note down the frequency of F1, F2 and F3 for each glide, as measured around the midpoint of the glide. The midpoint of __[w]__ should be at about __0.23s__ and the midpoint of __[j]__ should be at about __1.55s__. For the measurements of formants in this section, you'll want to turn __on__ formant tracking (_Formants > Show formants_).
+
+> __TIP:__
+My voice works best with formant tracking set to a ceiling of 5000 Hz, and the rest of the settings at default/standard. Double check these settings each time you open each of the files for this lab.
 
 <u> B. Formant transitions </u>
 
@@ -54,38 +57,44 @@ Go to eClass and download the zip file __"Lab5_Soundfiles"__, containing the fol
 
 <br>
 
-2. Open the file Lab5_Ri_iR.wav. Follow the instructions below and fill in Table 5.2 on the acoustic correlates of different liquids.
+2. Open the file __Lab5_Leer_Reel.wav__. Follow the instructions below and fill in Table 5.2 on the acoustic correlates of different liquids.
 
 <br>
 
 <u> A. Formants </u>
 
-Use only the coda [ɹ] and [l] (the 3~rd~ word [iɹ] and the 4~th~ word [il] in Lab5_Ri_iR.wav) for these measurements: formants are easier to see in coda position because they are more “stretched out”.  
+Certain sounds are pronounced differently in onset vs. coda position, including liquids. For the measurements of formants in this section, you'll also want to turn __on__ formant tracking (_Formants > Show formants_).
 
-* In Table 5.2, note down the frequency of F1, F2 and F3 for each liquid, as measured around the midpoint of the liquid. The midpoint of __[ɹ]__ should be at about __6.25s__ and the midpoint of __[l]__ should be at about __8.3s__.
+First consider the onset [ɹ] and [l]. (Think back to your phonology classes: you'll find the onset [ɹ] in "reel" and the onset [l] in "leer").
 
-<u> B. Formant transitions </u>
+* In Table 5.2, note down the frequency of F1, F2 and F3 for each onset liquid, as measured around the liquid's midpoint. (Finding a midpoint requires figuring out a start and end point, but that's sometimes tough due to transition zones. But a good measurement spot for onset __[ɹ]__ should be at about __1.74s__ and for onset __[l]__ at about __0.12s__.)
 
-Again, use only the coda [ɹ] and [l] ([iɹ] and [il]) for these measurements.
+Now, consider the coda [ɹ] and [l].
 
-* In Table 5.2, draw lines to indicate the F1, F2 and F3 contours throughout each VL sequence, or describe them in prose.
+* In Table 5.2, note down the frequency of F1, F2 and F3 for each liquid, as measured around the midpoint of the coda liquid. (Again, finding a midpoint requires figuring out a start and end point, but it's hard to find a single place where each liquid coda starts since there's less of a starting point than a transition zone. A good measurement spot for coda __[ɹ]__ should be at about __0.56s__ and for __[l]__ at about __2.17s__.)
+
+<u> B. Formant transition shapes </u>
+
+Consider the __coda__ [ɹ] and [l] transition zones:
+
+* In Table 5.2, draw lines to indicate the F1, F2 and F3 contours throughout each vowel-liquid sequence, or describe them in prose.
 
 <u> C. Formant transition durations: Onsets vs. Codas </u>
 
-Certain sounds are pronounced differently in onset vs. coda position, including liquids. In this last part of the lab, you will compare one acoustic correlate of liquids across syllabic positions: _duration_.
+In this last part, you will compare the _duration_ of liquids across syllabic positions. You may want to turn __off__ formant tracking for this section and instead eyeball the spectrogram's dark streaks.
 
-* __Onset__: Use [ɹi] [li] for the measurement of onset liquids. Measure the duration from the beginning of the Liquid-Vowel transition (where the formants start to move) to the point at which the formants stabilize in the following vowel (see Figure 5.1). Note down your measurement in Table 5.2.
+* __Onset__: Consider the onset [ɹ] and [l]. Measure the duration from the beginning of the liquid-vowel transition (where the formants start to move) to the point at which the formants stabilize in the following vowel. That is, the transition zone will be a region where at least one formant looks very diagonal rather than basically horizontal (see Figure 5.1 for an example). Note down your measurement in Table 5.2.
 
 <center>
-![Figure 5.1: Formant transition in onset position](./Images/Figure5_formant_onset.png)
+![Figure 5.1: An example of formant transition in onset position](./Images/Figure5_formant_onset.png)
 </center>
 
 <br>
 
-* __Coda__: Use [iɹ] [il] for the measurement of coda liquids. Measure the duration between the beginning of the V-L transition (where the formants start to move) to the point at which the formants stabilize in the following liquid (see Figure 5.2). Note down your measurement in Table 5.2.
+* __Coda__: Use the coda [ɹ] and [l] for these measurements. Measure the duration between the beginning of the vowel-liquid transition (where the formants start to move) to the point at which the formants stabilize in the following liquid - again, where one or more formants looks strikingly diagonal rather than basically horizontal (see Figure 5.2). Note down your measurement in Table 5.2.
 
 <center>
-![Figure 5.2: Formant transition in coda position](./Images/Figure5_formant_coda.png)
+![Figure 5.2: An example of formant transition in coda position](./Images/Figure5_formant_coda.png)
 </center>
 
 </font>
@@ -110,11 +119,10 @@ Certain sounds are pronounced differently in onset vs. coda position, including 
 |Formant transitions (Glide-Vowel) as a drawing or a brief description |                |                  |
 
 <br>
-<br>
 
 __Q1:__ Look at the formant structure of the glides: which vowel does each glide resemble?
 
-__Q2:__ Are any differences between the two Glide-Vowel contours, i.e. between the transitions out of the two glides? Articulatorily, what do you think causes these differences, and how are these articulatory differences reflected in the acoustics?
+__Q2:__ What differences do you note between the two glide-vowel contours, i.e. between the transitions out of the two glides? Articulatorily, what do you think causes these differences, and how are these articulatory differences reflected in the acoustics?
 
 <br>
 
@@ -124,20 +132,23 @@ __Q2:__ Are any differences between the two Glide-Vowel contours, i.e. between t
 
 |                                   |   [ɹ]          |      [l]         |
 |:----------------------------------|:---------------|:-----------------|
-|Formants (Liquids)                 |F1:             |F1:               |
+|Formants (Liquids) in onset        |F1:             |F1:               |
 |                                   |F2:             |F2:               |
 |                                   |F3:             |F3:               |
-|Formant transitions (Vowel-Liquid) as a drawing or a brief description|                |                  |
+|Formants (Liquids) in coda         |F1:             |F1:               |
+|                                   |F2:             |F2:               |
+|                                   |F3:             |F3:               |
+|Formant transitions (vowel-liquid) as a drawing or a brief description|                |                  |
 |Formant transition duration        |Onset:          |Onset:            |
 |                                   |Coda:           |Coda:             |
 
 <br>
 
-__Q3:__ Make note of the differences between each liquid – which formant is most different between the two?
+__Q3:__ Which formant is most strikingly different between the two liquids?
 
-__Q4:__ Do you notice any differences between the contours, i.e. between the transitions into the two liquids? What do you think causes these differences?
+__Q4:__ Describe the differences you see between the two vowel-liquid contours, i.e. between the transitions into the two liquids.
 
-__Q5:__ Compare the transition durations in onset vs. coda position (ɹi vs. iɹ and li vs. il) : which are longer?
+__Q5:__ Compare the transition durations in onset vs. coda position (ɹi vs. iɹ and li vs. il): which transitions are longer, onset or coda?
 
 __Q6:__ Think about **articulatory** differences between /l/ in onset vs. coda position. Given what you know about these differences (think of the **allophones** of /l/ in English), do you expect any acoustic differences? If so, do your observations match your expectations?
 

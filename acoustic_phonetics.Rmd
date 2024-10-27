@@ -9,44 +9,23 @@ These tutorials for learning how to use Praat are based on the [University of Vi
 
 <h3> [Lab 1 - Exploring Praat](acoustic_phonetics_labs/new_labs/Lab1.html) </h3> 
 
-Readings to prepare for this lab are:
-
-* Johnson (2012). Chapter 1.
-* Baart (2011). Chapter 2.3, 2.4 & 4.2.
-
 <br>
 
 <h3> [Lab 2 - Voicing in Stop Consonants](acoustic_phonetics_labs/new_labs/Lab2.html) </h3> 
-
-The reading to prepare for this lab is:
-
-* Baart (2011) Chapter 3.
 
 <br>
 
 <h3> [Lab 3 - Vowel Properties](acoustic_phonetics_labs/new_labs/Lab3.html) </h3> 
 
-The reading to prepare fo this lab is:
-
-* Johnson (2012) Chapter 2.  
-
 <br>
 
 <h3> [Lab 4 - Fundamental frequency, harmonics and formants](acoustic_phonetics_labs/new_labs/Lab4.html) </h3>
 
-The reading to prepare for this lab is:
+<br>
 
-* Johnson (2012) Chapter 6.
+<h3> [Lab 5 - Glides and Liquids](acoustic_phonetics_labs/new_labs/Lab5.html) </h3>
 
-<!-- <br> -->
-
-<!-- <h3> [Lab 5 - Glides and Liquids](acoustic_phonetics_labs/new_labs/Lab5.html) </h3>  -->
-
-<!-- The reading to prepare for this lab is: -->
-
-<!-- * Johnson (2012) Chapter 7. -->
-
-<!-- <br> -->
+<br>
 
 <!-- <h3> [Lab 6 - Obstruent Place of Articulation](acoustic_phonetics_labs/new_labs/Lab6.html) </h3>  -->
 
