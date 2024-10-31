@@ -1,0 +1,42 @@
+---
+title: "Transcription and coding tutorial, Part 4"
+author: "Thomas Kettig, based on work by Naomi Nagy"
+output: html_document
+---
+<font size= "3.5">
+
+***
+### __Creating a PivotTable in Excel__
+
+To show the distribution of your variants based on the independent variables, you can use PivotTables, a valuable Excel tool.
+
+First, open the .txt or .csv file containing your data in Excel. Select all your data. 
+
+If you're using the computer version of Excel: 
+
+In the __Data__ menu (the one at the very top of the screen where you also see File, Edit, View, etc.), click "Summarize with PivotTable". Make sure "New worksheet" is selected for the location of your PivotTable; you shouldn't need to change anything else in that pop-up window. Click "OK."
+
+A new worksheet will open up. (You'll be able to toggle between this worksheet and the spreadsheet with all of your data by clicking the little tabs at the bottom of the screen.) You'll now have the power to create PivotTables by checking various columns from the "Field Name" list at the top right of the screen and then dragging them between the "Filters", "Columns", "Rows", and "Values" boxes below. 
+
+For instance, check the boxes for _Snowd4y_token_ and _Snowd4y_th_. Then drag _Snowd4y_th_ into the Rows box, leaving _Count of Snowd4y_token_ in the Values box. Voilà! You should now see a nice summary of your data which counts up the number of 
+
+
+If you're using the online version of Excel:
+
+Click the __Insert__ menu (the one next to File, Home, Share, etc.). Click PivotTable. On the right of your screen you should see a list of possible PivotTables automatically suggested. Look through these to find 
+
+
+
+
+Either experiment and see if you can see how to make the tables you need intuitively, or follow these instructions.
+In the new sheet, you'll see "PivotTable Fields" on the right.
+From the "Field Name" list at the top, select the name of your dependent variable column and drag it to the "Columns" field. Also drag it to the "Values" field.
+In the "Values" field, click the little "i" to the right of the variable name and make sure that "Count" is selected.
+Select the name of one independent variable column and drag it to the "Rows" field.
+Your new pivot table displays a list of how many tokens for each variant of your dependent variable exist in each level of your independent variable. [See sample pivot table for a small subset of data.] If this looks good, hide any "blank" rows/columns, then copy the table and "Paste Special > Values" to a different (new) sheet in your Excel file.
+In the copied version, add a column to calculate the "Percent [r]"
+In the row for the first level of the independent variable, in that new column, type a formula that gives you the count of [r-1] / total for that row.
+Fill that formula down to every row of the table.
+Choose the "%" format from the Number formatting options. Here is an illustration of the copied table and then an improved version of it below.
+You can now see how often [r-1], rather than [r-0], was produced for each level of the independent variable, across all your speakers. What does it show you?
+Repeat these steps to make a similar table for each linguistic and each social independent variable, always reporting the dependent variable in your columns.
