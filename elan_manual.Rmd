@@ -14,3 +14,5 @@ These tutorials for learning how to do transcription and coding ELAN are based o
 <h3> [Part 3 - Coding a dependent variable](ELAN_transcription/ELAN_part3.html) </h3> 
 
 <h3> [Part 4 - Coding independent variables and exporting to Excel](ELAN_transcription/ELAN_part4.html) </h3> 
+
+<h3> [Part 5 - Creating a PivotTable in Excel](ELAN_transcription/ELAN_part5.html) </h3> 
