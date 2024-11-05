@@ -43,7 +43,7 @@ We will focus on formant transitions in this section. Focus on the differences a
 
 <br>
 
-1. In Table 6.1, note the F2 formant transition shape (and F1 if you can see it) between each voiced stop and the _following_ [a] or [i] vowel (see Figure 6.1). Zoom so that you can clearly see the formant transitions from the stop into the following vowel. (I find that zooming in too close our zooming out too far make doing this difficult, so if you have about 0.5 to about 1 second visible in your window, that should be good.)
+1. In Table 6.1, note the F2 formant transition shape (and F1 if you can see it) between each voiced stop and the _following_ [a] or [i] vowel (see Figure 6.1). Zoom so that you can clearly see the formant transitions from the stop into the following vowel. (I find that zooming in too close or zooming out too far make doing this difficult, so if you have about 0.5 to about 1 second visible in your window, that should be good.)
 
 2. Note the movement contour of __F2__ (and F1 if you can see it) into the _following_ vowel. You can make a little sketch, or describe the shape in words.
 
