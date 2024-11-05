@@ -27,13 +27,9 @@ These tutorials for learning how to use Praat are based on the [University of Vi
 
 <br>
 
-<!-- <h3> [Lab 6 - Obstruent Place of Articulation](acoustic_phonetics_labs/new_labs/Lab6.html) </h3>  -->
+<h3> [Lab 6 - Obstruent Place of Articulation](acoustic_phonetics_labs/new_labs/Lab6.html) </h3>
 
-<!-- The reading to prepare for this lab is: -->
-
-<!-- * Johnson (2012) Chapter 8. -->
-
-<!-- <br> -->
+<br>
 
 <!-- <h3> [Lab 7 - Phonation Types](acoustic_phonetics_labs/new_labs/Lab7.html) </h3>  -->
 

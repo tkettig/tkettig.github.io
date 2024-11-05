@@ -6,19 +6,18 @@ output: html_document
 ***
 
 ### __Goal of Lab 6:__
-<font size= "4.5"> In this lab, we are going to explore the acoustic correlates of _obstruent place of articulation_. We shall see that the location of these correlates differ in stops vs. fricatives: while they are mainly “intrinsic” (within the consonant) for fricatives, they are mainly “extrinsic” (in the transitions to adjacent vowels) for stops. This phonetic fact can help to explain cross-linguistic phonological restrictions on adjacent consonants. </font>
+<font size= "4.5"> In this lab, we are going to explore the acoustic correlates of _obstruent place of articulation_. We shall see that the location of these correlates differ in stops vs. fricatives: while they are mainly “intrinsic” (within the consonant) for fricatives, they are mainly “extrinsic” (in the transitions to adjacent vowels) for stops. </font>
 
 ***
 <font size= "4.0">
 
 #### __RECORDING__
 
-Go to eClass and download the zip file __"Lab6_Soundfiles"__, containing the following files. Note, you can also generate these sound files or, optionally, you can use your __"a_stop_a.wav"__ and __"a_stop.wav"__ files from Lab 2 and generate the other two sound files.
+Go to eClass and download the Lab6 sound files listed in the table below.
 
 | _File name_            | _Sounds to record_             |
 |:----------------------:|:------------------------------:|
 |Lab6_a_stop_a.wav       |  apa, aba, ata, ada, aka, aga  |
-|Lab6_a_stop.wav         |  lap, lab, bat, bad, rack, rag |
 |Lab6_i_stop_i.wav       |  ipi ibi, iti, idi iki, igi    |
 |Lab6_a_fricative_a.wav  |  afa, aθa, asa, aʃa, aha       |
 
@@ -37,21 +36,21 @@ Several acoustic correlates distinguish different places of articulation in stop
 
 <br>
 
-We will focus on formant transitions in this section; we will discuss _VOT_ and _spectral pattern_ in class. Focus on the differences associated with place of articulation (i.e. the differences between /p b/, /t d/ and /k g/.
+We will focus on formant transitions in this section. Focus on the differences associated with place of articulation (i.e. the differences between /p b/, /t d/ and /k g/.
 
 * Open the following sound files in Praat: __"Lab6_a_stop_a.wav"__ and __"Lab6_i_stop_i.wav"__  
-* Focus on the voiced stops for now.
+* Focus on the __voiced__ stops for now.
 
 <br>
 
-1. In Table 6.1, note down the formant transition shape (particularly F2) between each voiced stop and the following [a] or [i] vowel (see Figure 6.1). Zoom in so that you can clearly see the formant transition from the stop into the following vowel.  
+1. In Table 6.1, note the F2 formant transition shape (and F1 if you can see it) between each voiced stop and the _following_ [a] or [i] vowel (see Figure 6.1). Zoom so that you can clearly see the formant transitions from the stop into the following vowel. (I find that zooming in too close our zooming out too far make doing this difficult, so if you have about 0.5 to about 1 second visible in your window, that should be good.)
 
-2. Note down the movement contour of __F2__ (and F1 if you can see it) into the following vowel.
+2. Note the movement contour of __F2__ (and F1 if you can see it) into the _following_ vowel. You can make a little sketch, or describe the shape in words.
 
 <br>
 
 <center>
-![Figure 5.1: Formant transitions from the stop to the following vowel](./Images/Figure6_formant_stop.png)
+![Figure 6.1: Formant transitions from the stop to the following vowel](./Images/Figure6_formant_stop.png)
 </center>
 
 <br>
@@ -69,21 +68,21 @@ Different places of articulation in fricatives are correlated with two main prop
 <br>
 
 For this portion of the lab, make sure that the spectrogram is set to display frequencies up to
-__9000 Hz__:
+__9,000 Hz__:
 
 * Spectrum > Spectrogram settings...
 * View range: up to 9,000 Hz
-* Open the following sound file in Praat: __"Lab6_a_fricative_a.png"__
-* Select approximately __40ms__ in the middle of each fricative
+* Open the following sound file in Praat: __Lab6_a_fricative_a.wav__
+* Select approximately __50-60ms__ in the middle of each fricative (where the sound is most stable)
 * __Spectrum > View spectral slice__  
 
 * For each fricative:
-  + Take a screenshot of the spectral slice and paste it into your lab Word document. (If you can’t remember how to do this, refer to in in LAB 1 Figure 1.10). Be sure to give the spectral slice an appropriate title.
+  + [Take a screenshot](https://www.take-a-screenshot.org/) of the spectral slice and paste it into your lab document. Be sure to give the spectral slice an appropriate title.
   + Note down the __spectral peak__ in Table 6.2: the frequency or frequencies around which most of the energy is centered, i.e. the highest amplitude frequencies (the highest peaks)
-  + Note down the __amplitude__ of the peak frequency or frequencies in Table 6.2 (this is the amplitude of those noted down in the previous bullet point). Note that the positive dB values are louder than the negative dB values
+  + Note down the __amplitude__ of the peak frequency in Table 6.2 (this is the amplitude of the frequency noted in the previous bullet point). Note that the positive dB values are louder than the negative dB values.
 
 <center>
-![Figure 5.2: Fricative spectral analysis](./Images/Figure6_fricative_spectral.png)
+![Figure 6.2: Fricative spectral analysis. Note that you can automatically see the peak frequency in blue at top right (here, 20.6dB) or you can manually click as high on the window as possible to see the peak amplitude in red at top left.](./Images/Figure6_fricative_spectral.png)
 </center>
 
 <br>
@@ -91,7 +90,7 @@ __9000 Hz__:
 > __TIP__:  
 You can also get a good idea of the frequency ranges and their relative amplitudes by looking at the spectrogram.
 >
-For English, 'ballpark' measurements for [s] will be around 9,000Hz or higher, and for [ʃ] will be somewhere close to 5,000Hz.
+For English, 'ballpark' measurements for [s] will be around 9,000Hz or higher, and for [ʃ] will be somewhere close to 5,000Hz. This will vary speaker by speaker, though.
 
 </font>
 <br>
@@ -112,12 +111,12 @@ For English, 'ballpark' measurements for [s] will be around 9,000Hz or higher, a
 |1. Formant transitions  | [i] context |       |       |       |
 |                        | [a] context |       |       |       |
 
+Describe or do a basic sketch of the F2 transition (and F1, if visible) from these voiced stops into the __following__ vowel. 
 <br>
 
-__Q1:__ How do the different places of articulation differ with respect to the F2 transitions into the following vowels? What causes these differences?
+__Q1:__ How do the different places of articulation differ with respect to the F2 transitions into the following vowels? What causes these differences by place of articulation?
 
-__Q2:__ Looking specifically at [ada] and [idi], do you notice a difference in the formant transitions?
-What do you think causes this difference?
+__Q2:__ Looking specifically at [ada] and [idi], do you notice a difference in the formant transitions? What do you think causes this difference?
 
 <br>
 
@@ -135,9 +134,9 @@ What do you think causes this difference?
 
 <br>
 
-__Q3:__ Among the fricatives you measured, which ones are highest/lowest in amplitude? What do you think is the reason for this (think about articulation)?
+__Q3:__ Among the fricatives you measured, which ones are highest/lowest in amplitude? What do you think is the articulatory reason for this?
 
-__Q4:__ Compare the spectral peaks of [s] vs. [ʃ]. What do you think causes the difference between these two fricatives?
+__Q4:__ Compare the spectral peaks of [s] vs. [ʃ]. Articulatorily, what do you think causes the difference between these two fricatives?
 
 <br> 
 
