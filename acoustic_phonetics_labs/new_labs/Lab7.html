@@ -14,7 +14,7 @@
 
 <title>Lab 7: Phonation Types</title>
 
-<script src="site_libs/header-attrs-2.27/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.26/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
@@ -318,13 +318,14 @@ al.</h4>
 <p><font size= "4.5"> In this lab we are going to explore the acoustic
 correlates of the three main phonation types used across languages:
 <em>modal voicing</em>, <em>creaky voicing</em>, and <em>breathy
-voicing</em>. </font></p>
+voicing</em>. <strong>This lab deals with a large number of
+measurements, so I would encourage working together in pairs for this
+report!</strong> </font></p>
 <hr />
 <p><font size= "4.0"></p>
-<div id="recording" class="section level4">
-<h4><strong>RECORDING</strong></h4>
-<p>Go to eClass and download the zip file
-<strong>“Lab7_SoundFiles”</strong>, containing the files:</p>
+<div id="sound-files" class="section level4">
+<h4><strong>SOUND FILES</strong></h4>
+<p>Go to eClass and download the sound files:</p>
 <table>
 <thead>
 <tr class="header">
@@ -333,62 +334,42 @@ voicing</em>. </font></p>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center">Lab7_Breathy_voice.wav</td>
+<td align="center">Lab7_breathyvoice.wav</td>
 </tr>
 <tr class="even">
-<td align="center">Lab7_Modal_voice.wav</td>
+<td align="center">Lab7_modalvoice.wav</td>
 </tr>
 <tr class="odd">
-<td align="center">Lab7_Creaky_voice.wav</td>
+<td align="center">Lab7_creakyvoice.wav</td>
 </tr>
 </tbody>
 </table>
 <p>Once these files have been downloaded, open them in Praat and fill in
 the cells of Table 7.1 on the lab report to compare voicing types in
-terms of different parameters. Follow the instructions below for taking
-the appropriate measurements.</p>
+terms of different parameters. The table will be very large, so you may
+want to split it up over a few pages in such a way that each time you
+start a new page, the table header is repeated (otherwise, it won’t be
+possible for your reader to know what column goes with what
+measurement!). Follow the instructions below for taking the appropriate
+measurements.</p>
 <p><br></p>
-<blockquote>
-<p><strong>TIP:</strong><br />
-Since the word “voice” occurs in all three recordings, this is a good
-word to use for comparing across phonation types. Unless otherwise
-noted, measurements should be taken using ~30ms selections around the
-transition point between [o] and [i] in [oi] of voice, i.e. where the
-formants start spreading out. Here are approximate transition points in
-each file:</p>
-<ul>
-<li>Modal voicing: 0.640s (see Figure 8.1)</li>
-<li>Creaky voicing: 0.703s</li>
-<li>Breathy voicing: 0.654s</li>
-</ul>
-</blockquote>
-<p><br></p>
-<blockquote>
-<p><strong>TIP:</strong><br />
-Keep in mind that what matters in comparing measurements are
-<em>relative</em> values rather than <em>absolute</em> values. For
-example, in measuring jitter, what matters is which phonation type has
-the most jitter, not what the exact measurement is.</p>
-</blockquote>
 <hr />
 </div>
 <div id="instructions" class="section level4">
 <h4><strong>INSTRUCTIONS</strong></h4>
-</div>
-<div id="a.-fundamental-frequency-f0" class="section level4">
-<h4><strong>A. FUNDAMENTAL FREQUENCY (F0)</strong></h4>
-<p>Fundamental frequency can be a good indication of phonation type.
-Note down F0 averaged over about 30ms around the measurement point of
-the three phonation types in Table 7.1 (if you can’t remember how to do
-this, see LAB 3).</p>
-<p><br></p>
-<blockquote>
-<p><strong>TIP:</strong><br />
-When you select a range in the view window, the values of F0, amplitude
-etc. at the right of the view window will report averages calculated
-over the selected region – note that this does not work for formants
-(displayed at the left), however.</p>
-</blockquote>
+<p>Since the word “voice” occurs in all three recordings, this is a good
+word to use for comparing across phonation types. Unless otherwise
+noted, measurements should be taken around the transition point between
+[o] and [i] in [oi] of <em>voice</em>, i.e. where the formants start
+spreading out. Each measurement may require a different length of speech
+to get the best results, so approximate durations to measure are
+provided in the instructions for each. Here are approximate transition
+points in each file around which you can centre your measurements:</p>
+<ul>
+<li>Modal voicing: 0.640s (see Figure 7.1)</li>
+<li>Creaky voicing: 0.703s</li>
+<li>Breathy voicing: 0.654s</li>
+</ul>
 <center>
 <div class="float">
 <img src="Images/Figure7_measurement_point.png"
@@ -396,6 +377,30 @@ alt="Figure 7.1: Measurement point" />
 <div class="figcaption">Figure 7.1: Measurement point</div>
 </div>
 </center>
+<p><br></p>
+<blockquote>
+<p><strong>TIP:</strong> Keep in mind that what matters in comparing
+measurements are <em>relative</em> values rather than <em>absolute</em>
+values. For example, in analyzing jitter, what matters is which
+phonation type has the most jitter, not what the exact measurement
+is.</p>
+</blockquote>
+</div>
+<div id="a.-fundamental-frequency-f0" class="section level4">
+<h4><strong>A. FUNDAMENTAL FREQUENCY (F0)</strong></h4>
+<p>Fundamental frequency can be a good indication of phonation type.
+Note down F0 averaged over about <strong>30ms</strong> around the
+transition point of [oi] for the three phonation types in Table 7.1 (if
+you can’t remember how to do this, see Lab 3).</p>
+<p><br></p>
+<blockquote>
+<p><strong>TIP:</strong><br />
+When you select a range in the view window, the values of F0 and
+amplitude at the right of the view window will report averages
+calculated over the selected region. Note, however that this does not
+work for formants (displayed at the left) because there are usually many
+formants at any point in time, but just one average F0/amplitutde.</p>
+</blockquote>
 <p><br></p>
 <hr />
 </div>
@@ -422,10 +427,27 @@ source</strong>
 <p><strong>TIP:</strong><br />
 You will not be able to get a jitter value unless the pitch pulses are
 showing up correctly in the waveform (the vertical lines on the
-waveform, see Figure 7.2). If at the suggested point of measurement (see
-above), there are no pitch pulses, measure jitter at some other point
-where you do see the pitch pulses.</p>
+waveform, see Figure 7.2). If at the suggested point of measurement in
+transition of [oi] there are no pitch pulses, measure jitter at some
+other point where you do see the pitch pulses.</p>
+<p>If you notice that there are no pitch pulses on the waveform, you
+might need to adjust the ‘Pitch’ settings! Go to Pitch and click the
+“Standards’ button. This will reset any previous settings and might help
+show the pitch pulses on the waveform.</p>
 </blockquote>
+<p><br></p>
+<ul>
+<li>Measure jitter value:
+<ul>
+<li>Pulses &gt; Show pulses.</li>
+<li>Select a portion of the waveform around the centre of the /oi/ vowel
+(OR where you see pitch pulses clearly) which is around
+<strong>70-80ms</strong>.</li>
+<li>Pulses &gt; Voice report.</li>
+<li>In the report window, find the value for <strong>Jitter
+(local)</strong>, and note this down in Table 7.1.</li>
+</ul></li>
+</ul>
 <center>
 <div class="float">
 <img src="Images/Figure7_jitter.png"
@@ -434,28 +456,7 @@ alt="Figure 7.2: Jitter measurement" />
 </div>
 </center>
 <p><br></p>
-<ul>
-<li>Measure jitter value:
-<ul>
-<li>Pulses &gt; Show pulses.</li>
-<li>Select a small portion (using a slightly larger value for this
-measurement, e.g. 70- 80ms, can increase reliability) of the waveform
-around the measurement point OR where you see pitch pulses clearly.</li>
-<li>Pulses &gt; Voice report.</li>
-<li>In the report window, get value for <strong>Jitter (local)</strong>,
-and note this down in Table 7.1.</li>
-</ul></li>
-</ul>
-<p><br></p>
-<blockquote>
-<p><strong>TIP:</strong><br />
-If you notice that there are no pitch pulses on the waveform, you might
-need to reset the ‘Pitch’ settings! To do this, go to Pitch and click
-the “Standards’ button. This will reset any previous settings and will
-show the pitch pulses on the waveform.</p>
-</blockquote>
-<p><br></p>
-<p>Also, on the waveform you can see how much spectral noise there is in
+<p>On the waveform you can also see how much spectral noise there is in
 the signal by how complex the waveform looks (see Figure 7.3).</p>
 <p><br></p>
 <center>
@@ -488,11 +489,11 @@ phonation types in Table 7.1.</li>
 </ul>
 <p><br></p>
 <center>
-<strong>relative darkness = loudness (spectrogram)</strong>
+<strong>in spectrograms, relative darkness = loudness</strong>
 </center>
 <center>
-<strong>relative size of deviations from zero waveform = loudness
-(waveform)</strong>
+<strong>in waveforms, relative size of deviations from 0 line =
+loudness</strong>
 </center>
 <p><br></p>
 <ul>
@@ -509,7 +510,6 @@ contour) during the vowel <strong>[oi]</strong></li>
 screen</li>
 </ul></li>
 </ul>
-<p><br></p>
 <center>
 <div class="float">
 <img src="Images/Figure7_acoustic_intensity.png"
@@ -528,18 +528,18 @@ waveform, which gives the component frequencies and their amplitudes
 (see Figure 7.5). Note down the overall slope of the spectrum for
 different phonation types in Table 7.1 (steep, gradual, etc.).</p>
 <ul>
-<li>Select a portion (40 ms) of the waveform around the measurement
-point (given above).</li>
+<li>Select about <strong>50-60ms</strong> of the waveform around the
+measurement point given above.</li>
 <li><strong>Spectrum &gt; View spectral slice</strong></li>
 <li>The overall slope of the spectrum (= how quickly the amplitude drops
-off in the higher frequencies) is an indication of spectral tilt.</li>
+off in the <u>higher</u> frequencies, above the F1 peak) is an
+indication of spectral tilt.</li>
 </ul>
 <p><br></p>
 <center>
 <strong>steep slope = highly negative spectral tilt = rapid drop off in
-A of higher frequencies</strong>
+higher frequencies</strong>
 </center>
-<p><br></p>
 <center>
 <div class="float">
 <img src="Images/Figure7_spectral_tilt_out.png"
@@ -557,33 +557,16 @@ subtracting the amplitude of the second harmonic (H2) from the amplitude
 of F0 (H1) (see Figure 7.6). Fill in Table 7.1 with the spectral tilt
 value of the three phonation types.</p>
 <ul>
-<li>Select the first few peaks (around 10 peaks) and <u> zoom in </u> so
-that you can see H1 and H2 clearly.</li>
-<li>In the spectral slice, click on the peak of H1 and get its amplitude
-- the number on the <u> left </u> of the screen corresponds to the
-amplitude; the number at the top of the screen corresponds to the
-frequency.</li>
-<li>Click on the peak of H2 and get its <u> amplitude </u>.</li>
+<li>In the spectral slice, select the first ~10 peaks (that is, the
+first ~10 harmonics) and <u>zoom in</u> so that you can see H1 and H2
+clearly.</li>
+<li>Click on the peak of H1 and get its amplitude - the number on the
+<u>left</u> of the screen corresponds to the amplitude; the number at
+the top of the screen corresponds to the frequency.</li>
+<li>Click on the peak of H2 and get its <u>amplitude</u>.</li>
 <li>Calculate spectral tilt by this formula:
 <strong>A(H1)-A(H2)</strong></li>
 </ul>
-<p><br></p>
-<blockquote>
-<p><strong>TIP:</strong><br />
-Measurements for these H1-H2 calculations are much more reliable when
-using a longer section of the sound being analysed. It is recommended
-that you select 50 - 60 ms of the diphthong to get better figures for
-this calculation.</p>
-<p>H1 is the <em>first</em> big-sized peak; H2 is the <em>second</em>
-one. There may often be one or two lower amplitude peaks before H1, so
-make sure you’re measuring the right peaks. If you click on the first
-big peak (H1), the value at the top of the vertical red bar gives you
-its frequency. Make sure this frequency corresponds to F0 (as verified
-by some other measurement technique – see LAB 3). Also make sure that
-the frequency of H2 is approximately twice the frequency of H1 (see LAB
-4 for the reasoning here).</p>
-</blockquote>
-<p><br></p>
 <center>
 <div class="float">
 <img src="Images/Figure7_spectral_tilt_in.png"
@@ -593,6 +576,18 @@ view</div>
 </div>
 </center>
 <p><br></p>
+<blockquote>
+<p><strong>TIP:</strong><br />
+H1 is the <em>first</em> big-sized peak; H2 is the <em>second</em> one.
+There may be one or two lower amplitude peaks before H1, so make sure
+you’re measuring the right peaks. If you click on the first big peak
+(H1), the value at the top of the vertical red bar gives you its
+frequency. Make sure this frequency corresponds to F0 (as verified by
+some other measurement technique – see Lab 3). Also make sure that the
+frequency of H2 is approximately twice the frequency of H1 (see Lab 4
+for the reasoning here).</p>
+</blockquote>
+<p><br></p>
 <hr />
 </div>
 <div id="e.-formant-frequency" class="section level4">
@@ -600,12 +595,13 @@ view</div>
 <p>Non-modal phonation can affect the formant frequencies, particularly
 the first formant (F1). Note down F1 for each phonation type.</p>
 <ul>
-<li>For this measurement, select about 30ms in the stable (middle) part
-of the <strong>[o]</strong> portion of the <strong>[oi]</strong>
-diphthong, <em>not</em> the transition point between [o] and [i].</li>
+<li>For this measurement, select about <strong>30ms</strong> in the
+<strong>stable (middle) part of the [o] portion of the [oi]
+diphthong</strong>, <u><em>not</em></u> the transition point between [o]
+and [i].</li>
 <li>On the spectrogram, click in the centre (vertical) of the first
 formant (F1).</li>
-<li>The number at the <u> left </u> of the screen, at the end of the red
+<li>The number at the <u>left</u> of the screen at the end of the red
 horizontal bar gives you the frequency (in Hz).</li>
 </ul>
 <p><br></p>
@@ -619,7 +615,7 @@ formants</strong>.</p>
 </div>
 <div id="f.-duration-of-oi" class="section level4">
 <h4><strong>F. DURATION OF [oi]</strong></h4>
-<p>Duration can also be a good indication of phonation type (see Figure
+<p>Duration can also be an indication of phonation type (see Figure
 7.7). Note down the duration of [oi] for each phonation type.</p>
 <ul>
 <li>Measure the duration for the whole diphthong <strong>[oi]</strong>
@@ -631,7 +627,9 @@ segment</li>
 <blockquote>
 <p><strong>TIP:</strong><br />
 To isolate [oi], you can use visual information (look for the change in
-the shape of the spectrogram/waveform). You can also use your ears.</p>
+the shape of the spectrogram/waveform). You can also use your ears to
+verify that you haven’t captured any portions of the preceding [v] or
+following [s].</p>
 </blockquote>
 <center>
 <div class="float">
@@ -643,12 +641,12 @@ alt="Figure 7.7: Duration measurement" />
 <p><br></p>
 <hr />
 </div>
-<div id="g.overall-clarity-of-the-spectrogram" class="section level4">
-<h4><strong>G.OVERALL CLARITY OF THE SPECTROGRAM</strong></h4>
+<div id="g.-overall-clarity-of-the-spectrogram" class="section level4">
+<h4><strong>G. OVERALL CLARITY OF THE SPECTROGRAM</strong></h4>
 <p>Finally, phonation types differ in the overall clarity of the
-spectrogram – this has to do with the amount of noise in the signal,
-etc. Note down your impressions of overall clarity of the spectrogram of
-each phonation type.</p>
+spectrogram, which mainly has to do with the amount of noise in the
+signal. Note down your impressions of overall clarity of the spectrogram
+of each phonation type - e.g. how clear or blurry are the formants?</p>
 <p></font> <br></p>
 <hr />
 <hr />
@@ -664,11 +662,11 @@ different phonation types (enter values where measurements were taken;
 otherwise enter general comments)</em> </font></p>
 <table>
 <colgroup>
-<col width="27%" />
-<col width="18%" />
+<col width="14%" />
+<col width="33%" />
+<col width="16%" />
 <col width="17%" />
 <col width="18%" />
-<col width="19%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -681,8 +679,8 @@ otherwise enter general comments)</em> </font></p>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">1. Fundamental frequency</td>
 <td align="left"></td>
+<td align="left">1. Fundamental frequency</td>
 <td align="center"></td>
 <td align="center"></td>
 <td align="center"></td>
@@ -731,22 +729,22 @@ deviation on waveform</td>
 <td align="center"></td>
 </tr>
 <tr class="even">
-<td align="left">8. Formant frequency (F1 value)</td>
 <td align="left"></td>
+<td align="left">8. Formant frequency (F1 value)</td>
 <td align="center"></td>
 <td align="center"></td>
 <td align="center"></td>
 </tr>
 <tr class="odd">
-<td align="left">9. Duration of [oi] (ms)</td>
 <td align="left"></td>
+<td align="left">9. Duration of [oi] (ms)</td>
 <td align="center"></td>
 <td align="center"></td>
 <td align="center"></td>
 </tr>
 <tr class="even">
-<td align="left">10. Overall clarity of spectrogram</td>
 <td align="left"></td>
+<td align="left">10. Overall clarity of spectrogram</td>
 <td align="center"></td>
 <td align="center"></td>
 <td align="center"></td>
@@ -756,7 +754,7 @@ deviation on waveform</td>
 <p><br></p>
 <p><strong>Q1:</strong> Based on your observations, what
 measurements/cues seem to be the most and least reliable for
-distinguishing phonation types?</p>
+distinguishing phonation types, at least with this speaker’s voice?</p>
 <p><br></p>
 <center>
 <h4>
