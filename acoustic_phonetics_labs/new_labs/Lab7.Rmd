@@ -160,7 +160,7 @@ Spectral tilt can be quantified by comparing the amplitude of F0 to that of high
 * In the spectral slice, select the first ~10 peaks (that is, the first ~10 harmonics) and <u>zoom in</u> so that you can see H1 and H2 clearly.
 * Click on the peak of H1 and get its amplitude - the number on the <u>left</u> of the screen corresponds to the amplitude; the number at the top of the screen corresponds to the frequency.
 * Click on the peak of H2 and get its <u>amplitude</u>.
-* Calculate spectral tilt by this formula: __A(H1)-A(H2)__
+* Calculate spectral tilt by this formula: __A(H1)-A(H2)__, that is, __the amplitude of H1 minus the amplitude of H2__. (No need to worry about frequencies for this measure, only amplitudes.)
   
 <center>
 ![Figure 7.6: Measuring spectral tilt, zoomed-in view](./Images/Figure7_spectral_tilt_in.png)
