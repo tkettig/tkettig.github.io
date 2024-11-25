@@ -35,10 +35,5 @@ These tutorials for learning how to use Praat are based on the [University of Vi
 
 <br>
 
-<!-- <h3> [Lab 8 - Nasals](acoustic_phonetics_labs/new_labs/Lab8.html) </h3>  -->
-
-<!-- The reading to prepare for this lab is: -->
-
-<!-- * Baart (2011) Chapter 4. -->
-
+<h3> [Lab 8 - Nasals](acoustic_phonetics_labs/new_labs/Lab8.html) </h3>
 

@@ -89,7 +89,7 @@ __Q2:__ Compare the spectral slices of the nasals vs. [a] – do you see any ove
 
 __Q3:__ How does the shape of the waveform of the nasals differ from that of [a]? What causes this pattern? (Relate this to Q1 and Q2 above.)
 
-__Q4:__ Are there any systematic patterns across nasals: is there one antiformant with a similar frequency for all places of articulation?
+__Q4:__ Are there any systematic patterns across nasals in terms of antiformants? Is there one antiformant with a similar frequency for all places of articulation?
 
 <br>
 
