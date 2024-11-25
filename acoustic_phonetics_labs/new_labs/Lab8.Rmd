@@ -5,22 +5,21 @@ output: html_document
 ---
 ***
 
-### __Goal of Lab 7:__
-<font size= "4.5"> In this lab, we are going to explore the acoustic correlates of another class of sonorants,
-__nasals__ - [m n ŋ]. Like other sonorants, nasals are:  
+### __Goal of Lab 8:__
+<font size= "4.5"> In this lab, we are going to explore the acoustic correlates of another class of sonorants, the __nasals__ [m n ŋ]. Like other sonorants, nasals are:  
 
-*	similar to vowels in that they have formants
-* different from vowels in that they are generally lower amplitude (and behave as consonants phonologically), and have a more complex spectral composition. </font>
++	similar to vowels in that they have formants
++ different from vowels in that they are generally lower amplitude (and behave as consonants phonologically), and have a more complex spectral composition. </font>
 
 ***
 <font size= "4.0">
 
-#### __RECORDING__
-Generate the following sound file, containing the sound sequences listed.
+#### __SOUND FILE__
+Find the file __"Lab8_nasals.wav"__ on eClass and download it.
 
-| _File name_          | _Sounds to record_ |
+| _File name_          | _Sounds_ |
 |:--------------------:|:------------------:|
-|Lab8_Nasals.wav       |ama, ana, aŋa       |
+|Lab8_nasals.wav       |ama, ana, aŋa       |
 
 In this lab, you should focus on what is common between __all three__ nasals.
 
@@ -28,7 +27,7 @@ In this lab, you should focus on what is common between __all three__ nasals.
 
 #### __INSTRUCTIONS__
 
-1. Open the file __"Lab8_Nasals.wav"__. Follow the instructions below to fill in Table 8.1 on the acoustic correlates of different nasals.
+1. Open the file __"Lab8_nasals.wav"__. Follow the instructions below to fill in Table 8.1 on the acoustic correlates of different nasals.
 
 <br>
 
@@ -36,11 +35,11 @@ In this lab, you should focus on what is common between __all three__ nasals.
 
 If you can't remember how to measure formants, refer back to Lab 4.
 
-* In Table 8.1, note down F1 for each nasal, as measured in the middle of the nasal.
+* In Table 8.1, note down F1 for each nasal, as measured in the centre of the nasal.
 
 <u> B. Spectral slice </u>
 
-* Create spectral slices for each nasal and for one example of [a] (see Lab 5), from a 30ms selection for each sound. Take a screenshot of each spectral slice and paste them into your lab report document. Be sure to give the spectral slice an appropriate title.
+* Create spectral slices for each nasal and for one example of [a], from a 30ms selection for each sound (see Lab 7 for how to take a spectral slice). Take a screenshot of each spectral slice and paste them into your lab report document. Be sure to give each spectral slice an appropriate title.
 
 <u> C. Waveform </u>
 
@@ -54,18 +53,18 @@ If you can't remember how to measure formants, refer back to Lab 4.
 
 <u> D. Antiformants </u>
 
-Antiformants are the _opposite_ of formants – they are bands of frequencies that are actively damped rather than amplified (we’ll talk about this in class). They show up on the spectrogram as bands of white, i.e. bands of ‘silence’ at particular frequencies (see Figure 8.2). They can be hard to see, so don’t worry if their measurement seems hard. For finding antiformants, you may find it easier to get rid of the formant tracking.
+Antiformants are the _opposite_ of formants – they are bands of frequencies that are actively damped rather than amplified (we’ll talk about this in class). They show up on the spectrogram as bands of white, i.e. bands of ‘silence’ at particular frequencies (Figure 8.2). For finding antiformants, you may find it easier to get rid of the formant tracking. You may also see them in the spectral slice as deep "valleys" in the spectrum (Figure 8.3). They can be difficult to see, so don’t worry if their measurement seems hard. 
 
-* Again, in Table 8.1, note down the frequency of A1 (Antiformant 1), A2, and A3 for each nasal, as measured in the middle of the nasal.
+* Again, in Table 8.1, note down the centre frequency of A1 (Antiformant 1), A2, and A3 for each nasal, as measured in the centre of the nasal.
 
 <center>
-![Figure 8.2: Antiformants](./Images/Figure8_antiformants.png)
+![Figure 8.2: Antiformants in a spectrogram](./Images/Figure8_antiformants.png)
+
+![Figure 8.3: Antiformants in a spectrum](./Images/Figure8_antiformants_spectrum.png)
 </center>
 
 </font>
 <br>
-
-***
 
 ***
 <br>
@@ -84,9 +83,9 @@ Antiformants are the _opposite_ of formants – they are bands of frequencies th
 
 <br>
 
-__Q1:__ Look at your measurements of F1 for the three nasals. Do these measurements vary across different places of articulation? Can you think of an explanation for this result?
+__Q1:__ Look at your measurements of F1 for the three nasals. Do these measurements vary across different places of articulation?
 
-__Q2:__ Compare the spectral slices of the nasals vs. [a] – do you see any overall differences between the nasals on the one hand and [a] on the other? (Relate this to your answer to Q1 and Q3.)
+__Q2:__ Compare the spectral slices of the nasals vs. [a] – do you see any overall differences between the nasals on the one hand and [a] on the other? (Relate this to your answer to Q1.)
 
 __Q3:__ How does the shape of the waveform of the nasals differ from that of [a]? What causes this pattern? (Relate this to Q1 and Q2 above.)
 
