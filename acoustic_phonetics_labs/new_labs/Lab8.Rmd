@@ -60,6 +60,8 @@ Antiformants are the _opposite_ of formants – they are bands of frequencies th
 <center>
 ![Figure 8.2: Antiformants in a spectrogram](./Images/Figure8_antiformants.png)
 
+<br> 
+
 ![Figure 8.3: Antiformants in a spectrum](./Images/Figure8_antiformants_spectrum.png)
 </center>
 
