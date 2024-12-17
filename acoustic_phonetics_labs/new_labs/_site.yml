@@ -6,6 +6,8 @@ navbar:
   left:
   - text: "About"
     href: index.html
+  - text: "Sound Files"
+    href: soundfiles.html 
   - text: "Labs"
     menu:
     - text: "Lab 1"
