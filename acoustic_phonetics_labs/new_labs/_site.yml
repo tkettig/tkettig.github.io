@@ -4,7 +4,7 @@ navbar:
   title: "Lab Manual for LING 4220: Acoustic Phonetics"
   type: inverse
   left:
-  - text: "About"
+  - text: "Menu"
     href: index.html
   - text: "Sound Files"
     href: soundfiles.html 

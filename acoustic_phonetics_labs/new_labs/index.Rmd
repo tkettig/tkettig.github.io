@@ -1,4 +1,37 @@
 ---
-title: "About"
+title: 'Acoustic Phonetics Lab Manual'
 output: html_document
 ---
+
+These tutorials for learning how to use Praat are based on the [University of Victoria LING 380 Acoustic Phonetics Lab Manual](https://dspace.library.uvic.ca/items/68b5b175-ebd5-4294-b514-48aa2e58ac98). They are adapted to fit the needs of the York University LING 4220 Acoustic Phonetics class.
+
+<h3> [Lab 1 - Exploring Praat](Lab1.html) </h3> 
+
+<br>
+
+<h3> [Lab 2 - Voicing in Stop Consonants](Lab2.html) </h3> 
+
+<br>
+
+<h3> [Lab 3 - Vowel Properties](Lab3.html) </h3> 
+
+<br>
+
+<h3> [Lab 4 - Fundamental frequency, harmonics and formants](Lab4.html) </h3>
+
+<br>
+
+<h3> [Lab 5 - Glides and Liquids](Lab5.html) </h3>
+
+<br>
+
+<h3> [Lab 6 - Obstruent Place of Articulation](Lab6.html) </h3>
+
+<br>
+
+<h3> [Lab 7 - Phonation Types](Lab7.html) </h3>
+
+<br>
+
+<h3> [Lab 8 - Nasals](Lab8.html) </h3>
+

@@ -1,0 +1,37 @@
+---
+title: "Acoustic Phonetics Sound Files"
+output: html_document
+---
+
+Below are the sound files that you will be using for each lab that we do this term. This webpage will act as a 'hub' for the sound files so that you have easy access!
+
+<h3> Lab 1 - Exploring Praat </h3> 
+* [Sample recording](new_sound_files/Lab1_samplerecording.wav)
+
+<h3> Lab 2 - Voicing in Stop Consonants </h3> 
+* [English a-stop](new_sound_files/Lab2_Eng_a_stop.wav)
+* [English a-stop-a](new_sound_files/Lab2_Eng_a_stop_a.wav)
+* [English stop-a](new_sound_files/Lab2_Eng_stop_a.wav)
+
+<h3> Lab 3 - Vowel Properties </h3> 
+* [Model vowels](new_sound_files/Lab3_modelvowels.wav)
+
+<h3> Lab 4 - Fundamental frequency, harmonics and formants] </h3>
+* [Sound filter](new_sound_files/Lab4_SoundFilter.wav)
+
+<h3> Lab 5 - Glides and Liquids </h3>
+* [Leer/Reel](new_sound_files/Lab5_Leer_Reel.wav)
+* [We/You](new_sound_files/Lab5_We_You.wav)
+
+<h3> Lab 6 - Obstruent Place of Articulation </h3>
+* [a-fricative-a](new_sound_files/Lab6_a_fricative_a.wav)
+* [a-stop-a](new_sound_files/Lab6_a_stop_a.wav)
+* [i-stop-i](new_sound_files/Lab6_i_stop_i.wav)
+
+<h3> Lab 7 - Phonation Types </h3>
+* [Breathy voice](new_sound_files/Lab7_breathyvoice.wav)
+* [Creaky voice](new_sound_files/Lab7_creakyvoice.wav)
+* [Modal voice](new_sound_files/Lab7_modalvoice.wav)
+
+<h3> Lab 8 - Nasals </h3>
+* [Nasals](new_sound_files/Lab8_nasals.wav)
