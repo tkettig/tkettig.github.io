@@ -5,7 +5,7 @@ output: html_document
 
 -----
 
-These tutorials for learning how to do transcription and coding ELAN are based on [Jessi Grieser's ELAN transcription manual](ELAN_transcription/Transcribing in ELAN.pdf) and coding guides developed by Naomi Nagy for University of Toronto's [LIN351 course](http://individual.utoronto.ca/ngn/LIN/courses/LIN351/LIN351_23W_schedule.htm). They are adapted to fit the needs of the York University LING 4400 / LAL 5400 Sociolinguistic Research class.
+These tutorials are based on [Jessi Grieser's ELAN transcription manual](ELAN_transcription/Transcribing in ELAN.pdf) and coding guides developed by Naomi Nagy for University of Toronto's [LIN351 course](http://individual.utoronto.ca/ngn/LIN/courses/LIN351/LIN351_23W_schedule.htm). They are adapted to fit the needs of the York University LING 4400 / LAL 5400 Sociolinguistic Research class.
 
 <h3> [Part 1 - File preparation and segmentation](ELAN_transcription/ELAN_part1.html) </h3> 
 
