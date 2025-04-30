@@ -6,17 +6,18 @@ title: "Teaching"
 
 ---
 
-#### Taught in 2024-2025
+#### Taught in 2025-2026
 
-* [LING 4220: Acoustic Phonetics (Fall 2024)](acoustic_phonetics.html/)
-* LING 4400/LAL 5400: Research in Sociolinguistic Variation and Change (Fall 2024)
-* LING 1430: Language, Power, and Persuasion (Winter 2025)
-* LAL 6600: Graduate Research Seminar in Theoretical Linguistics (Winter 2025)
+* LING 1430: Language, Power, and Persuasion (Fall 2025)
+* LING 2110: Phonetics (Fall 2025)
+* LING 3300: Statistical Methods for Language Science (Winter 2026)
+* LAL 6600: Graduate Research Seminar in Theoretical Linguistics (Winter 2026)
 
-#### Other courses taught at York University
+#### Other courses previously taught at York University
 
 * LING 2430: Language, Power, and Persuasion
-* LING 2110: Phonetics
+* [LING 4220: Acoustic Phonetics](acoustic_phonetics.html/)
+* LING 4400/LAL 5400: Research in Sociolinguistic Variation and Change
 
 #### Courses taught at the University of York
 
