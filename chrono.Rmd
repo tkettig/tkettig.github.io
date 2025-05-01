@@ -4,6 +4,12 @@ title: "Papers, posters, and presentations"
 
 <br>
 
+#### 2025
+
+[[slides](papers_etc/Kettig2025moth_slides.pdf)] Kettig, Thomas. Dissimilation of /t/ to [k] in Niʻihau Hawaiian. _[motʰ]_ 2025. Toronto, ON, 4–5 April. 
+
+<br>
+
 #### 2024
 
 [[abstract](papers_etc/KettigDavidson2024LabPhon19_abstract.pdf)]
