@@ -23,6 +23,10 @@ While I was pursuing a PhD in the [Department of Linguistics at the University o
 
 * [[abstract](https://assta.org/proceedings/ICPhS2019/papers/ICPhS_3607.pdf)] [[poster](papers_etc/Kettig2019ICPhS_poster.pdf)] Kettig, Thomas. 2019. Spectral coarticulation in Hawaiian /aV/ and /aCV/ sequences. _International Congress of Phonetic Sciences 2019_. Melbourne, Australia, 8 August. (Poster)
 
+I have recently also been trying to work out how speakers of [Niʻihau](https://en.wikipedia.org/wiki/Niihau) Hawaiian decide whether to pronounce the letter _k_ as [t] or [k]. This /t~k/ variation is very complex, but probably points to an underlying form of /t/, overlayed with a (highly variable) process of coronal dissimilation; the presence of some minimal pairs in both the native and borrowed vocabulary further complicate the situation.
+
+* [[slides](papers_etc/Kettig2025CLS_slides.pdf)] Kettig, Thomas. 2025. Niʻihau Hawaiian /t/>[k] allophony is driven by coronal dissimilation. _CLS61_. Chicago, IL, 9 May.
+
 <br>
 
 <h3> Forensic phonetics </h3>
