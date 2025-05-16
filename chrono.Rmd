@@ -6,6 +6,8 @@ title: "Papers, posters, and presentations"
 
 #### 2025
 
+[[paper](https://eprints.whiterose.ac.uk/id/eprint/226525/)] Hughes, Vincent, Carmen Llamas, and Thomas Kettig. Human and automatic voice comparison with regionally variable speech samples. _Speech Communication_ (in press).
+
 [[slides](papers_etc/Kettig2025CLS_slides.pdf)] Kettig, Thomas. Niʻihau Hawaiian /t/>[k] allophony is driven by coronal dissimilation. _CLS61_. Chicago, IL, 9 May. 
 
 [[slides](papers_etc/Kettig2025moth_slides.pdf)] Kettig, Thomas. Dissimilation of /t/ to [k] in Niʻihau Hawaiian. _[motʰ]_ 2025. Toronto, ON, 4 April. 
