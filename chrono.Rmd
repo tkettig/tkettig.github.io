@@ -6,6 +6,8 @@ title: "Papers, posters, and presentations"
 
 #### 2025
 
+[[slides](papers_etc/Kettig2025CLS_slides.pdf)] Kettig, Thomas. 2025. Internal linguistic conditioning of /t~k/ variation in Niʻihau Hawaiian. _NWAV-AP 8_. Singapore, 5 August.
+
 [[paper](https://eprints.whiterose.ac.uk/id/eprint/226525/)] Hughes, Vincent, Carmen Llamas, and Thomas Kettig. Human and automatic voice comparison with regionally variable speech samples. _Speech Communication_ 172.
 
 [[slides](papers_etc/Kettig2025CLS_slides.pdf)] Kettig, Thomas. Niʻihau Hawaiian /t/>[k] allophony is driven by coronal dissimilation. _CLS61_. Chicago, IL, 9 May. 
