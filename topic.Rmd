@@ -25,7 +25,7 @@ While I was pursuing a PhD in the [Department of Linguistics at the University o
 
 I have recently also been trying to work out how speakers of [Niʻihau](https://en.wikipedia.org/wiki/Niihau) Hawaiian decide whether to pronounce the letter _k_ as [t] or [k]. This /t~k/ variation is very complex, but probably points to an underlying form of /t/, overlayed with a (highly variable) process of coronal dissimilation; the presence of some minimal pairs in both the native and borrowed vocabulary further complicate the situation.
 
-* [[slides](papers_etc/Kettig2025CLS_slides.pdf)] Kettig, Thomas. 2025. Internal linguistic conditioning of /t~k/ variation in Niʻihau Hawaiian. _NWAV-AP 8_. Singapore, 5 August.
+* [[slides](papers_etc/Kettig2025NWAV-AP_slides.pdf)] Kettig, Thomas. 2025. Internal linguistic conditioning of /t~k/ variation in Niʻihau Hawaiian. _NWAV-AP 8_. Singapore, 5 August.
 
 <br>
 
