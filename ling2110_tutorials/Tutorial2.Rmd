@@ -1,0 +1,58 @@
+---
+title: "Tutorial 2: Measuring VOT"
+author: "Thomas Kettig, based on work by Sonya Bird et al."
+output: html_document
+---
+*** 
+
+### __Goal of Tutorial 2:__
+<font size= "4.5">
+In this tutorial, you will explore how to measure Voice Onset Time, one of the main acoustic correlates of plosive _voicing_. Languages differ in how they implement voicing distinctions, so you will be measuring both English and French consonants in order to compare them. </font>
+
+***
+<font size= "4.0">
+
+#### __INSTRUCTIONS__
+
+For each of the stops in each file, take measurements according to the instructions below and fill out Table 2.1, Table 2.2 and Table 2.3 accordingly. Answer the related questions by comparing your measurements across stops.
+
+1. Open the following sound files in Praat: __"Eng_stop_a.wav"__ and __"Fr_stop_a.wav"__. Measure the VOT of each stop (see Figure 2.1) and fill in Table 2.1. Compare voiced/voiceless counterparts (p/b, t/d, k/g):
+
+  +	Zoom in so that you can clearly see the transition between the stop and vowel.  
+  + Measure the time between the end of the stop closure ( = the beginning of the release burst) and the onset of voicing ( = the onset of regular pitch pulses in the waveform). This is the voice onset time or VOT.  
+    + If the onset of voicing __follows__ the release of the stop clouse, then VOT is calculated as __positive__; stops with positive VOT are termed __voiceless__.
+      + VOTs of 0ms to about 20ms or 30ms correspond to <u>_voiceless unaspirated stops_</u>.
+      + VOTs above 20-30ms correspond to <u>_voiceless aspirated stops_</u>.
+    + If the onset of voicing __precedes__ the release of the stop closure, then VOT is calculated as __negative__; stops with negative VOT are termed __prevoiced__ or more generally, __voiced__. (See bottom of Figure 1.2).
+    
+<center>
+![Figure 2.1: Positive and negative VOT measurements](./Images/Figure2_VOT_measurements.png)
+</center>
+
+<br>
+
+> __TIP:__  
+Praat reports time values in seconds, but in phonetic analysis we report in milliseconds, so the values need to be converted. Once you have converted to milliseconds, you do not need to report any decimal places. <br> You might also want to change the dynamic range to 50dB from its default setting of 70dB in __Spectrogram > Spectrogram settings__. This helps to remove background noise that might otherwise look like a voicing bar.
+
+<br>
+
+
+<font size= "3.5"> _Table 2.1 VOT_ </font>
+
+|                              |  p   |   b  |   t  |   d  |   k  |   g  |
+|:-----------------------------|:----:|:----:|:----:|:----:|:----:|:----:|
+|English VOT (ms) (Eng_stop_a) |      |      |      |      |      |      |
+|French VOT (ms) (Fr_stop_a)   |      |      |      |      |      |      |
+
+<br>
+
+__Q1:__ How does VOT differ between voiced vs. voiceless stops? 
+
+__Q2:__ How do English and French seem to differ in terms of how they use VOT as a cue to voiced vs. voiceless stops?
+
+__Q3:__ How would we transcribe each of these stops in IPA narrow transcription?
+
+__Q4:__ Now that you've explored some sounds up close, can you think of any potential issues with the IPA's goal to have a one-to-one mapping between symbol and sound?
+
+<br>
+

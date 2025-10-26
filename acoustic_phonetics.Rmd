@@ -37,3 +37,14 @@ These tutorials for learning how to use Praat are based on the [University of Vi
 
 <h3> [Lab 8 - Nasals](acoustic_phonetics_labs/new_labs/Lab8.html) </h3>
 
+<br>
+
+-----
+
+<br>
+
+These two tutorials are for use in York's LING 2110 Phonetics class.
+
+<h3> [Tutorial 1: Discovering Praat, Measuring Vowelst](ling2110_tutorials/Tutorial1.html) </h3> 
+
+<br>

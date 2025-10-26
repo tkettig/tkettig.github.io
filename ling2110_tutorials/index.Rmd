@@ -1,0 +1,12 @@
+---
+title: 'LING 2110 Tutorials'
+output: html_document
+---
+
+These tutorials for learning how to use Praat are based on the [University of Victoria LING 380 Acoustic Phonetics Lab Manual](https://dspace.library.uvic.ca/items/68b5b175-ebd5-4294-b514-48aa2e58ac98).
+
+<h3> [Tutorial 1 - Discovering Praat, Measuring Vowels](Tutorial1.html) </h3> 
+
+<br>
+
+<h3> [Tutorial 2 - Measuring VOT](Tutorial2.html) </h3> 
