@@ -45,6 +45,10 @@ These tutorials for learning how to use Praat are based on the [University of Vi
 
 These two tutorials are for use in York's LING 2110 Phonetics class.
 
-<h3> [Tutorial 1: Discovering Praat, Measuring Vowelst](ling2110_tutorials/Tutorial1.html) </h3> 
+<h3> [Tutorial 1: Discovering Praat, Measuring Vowels](ling2110_tutorials/Tutorial1.html) </h3> 
+
+<br>
+
+<h3> [Tutorial 2: Measuring VOT and Fundamental Frequency (F0)](ling2110_tutorials/Tutorial2.html) </h3> 
 
 <br>

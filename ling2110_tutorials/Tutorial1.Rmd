@@ -18,7 +18,7 @@ The goal of this first tutorial is to explore some of the basic features of [PRA
 
 1. Open Praat by double clicking on the following icon:
 <center>
-![Praat icon](./Images/Figure1_praatlogo.png)
+![Praat icon](./Images/Tutorial1_praatlogo.png)
 </center>
 
 <br>
@@ -27,7 +27,7 @@ The goal of this first tutorial is to explore some of the basic features of [PRA
 
 <center>
 
-![Praat layout](./Images/Figure1_praatlayout.png)
+![Praat layout](./Images/Tutorial1_praatlayout.png)
 </center>
 
 <br>
@@ -41,7 +41,7 @@ Two things are being displayed now in the Edit window: **the waveform** on the u
 
 <center>
 
-![How it looks when you click "View & Edit" for the sound file](./Images/sound.png)
+![How it looks when you click "View & Edit" for the sound file](./Images/Tutorial1_sound.png)
 </center>
 
 <br>
@@ -99,7 +99,7 @@ We'll now begin our measurements of the Tongan vowel system.
 7. Zoom into _ifi_ and select the first /i/ vowel. The beginning and ending of a vowel is usually based on where F2 begins and ends. Look closely at the spectrogram to identify those beginning and end points.
 
 <center>
-![The first /i/ of _ifi_ selected](./Images/ifi.png)
+![The first /i/ of _ifi_ selected](./Images/Tutorial1_ifi.png)
 </center>
 
 8. To move cursor the midpoint of the selection, click _Time_ then _Move cursor to…_. The midpoint will automatically be calculcated. Click _OK_.
@@ -107,7 +107,7 @@ We'll now begin our measurements of the Tongan vowel system.
 <br> 
 
 <center>
-![The midpoint is automatically calculated](./Images/midpoint.png)
+![The midpoint is automatically calculated](./Images/Tutorial1_midpoint.png)
 </center>
 
 <br>
@@ -116,7 +116,7 @@ We'll now begin our measurements of the Tongan vowel system.
 
 <center>
 
-![Formant listing window](./Images/formant_listing.png)
+![Formant listing window](./Images/Tutorial1_formant_listing.png)
 </center>
 
 <br>
@@ -133,7 +133,7 @@ Calculate the frequency.
 
 <center>
 
-![Finding the fundamental frequency](./Images/fundamental_frequency.png)
+![Finding the fundamental frequency](./Images/Tutorial1_fundamental_frequency.png)
 </center>
 
 <br>
