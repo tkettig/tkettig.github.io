@@ -21,9 +21,9 @@ You'll also be learning how to measure the _fundamental frequency_ of vowels, al
 
 ##### __Part 1: Measuring VOT__
 
-1. Download __Tutorial2_measurements.xlsx__ and open it in Excel.
+1. Download __Tutorial2_measurements.xlsx__ from eClass and open it in Excel.
 
-2. Download __Tutorial2_Eng_stop_a.wav__ and open the sound in Praat. Select it in the Objects Window and click _View and Edit_.
+2. Download __Tutorial2_Eng_stop_a.wav__ from eClass and open the sound in Praat. Select it in the Objects Window and click _View and Edit_.
 
 Take a listen to the syllables spoken in the file. You should hear __"pa ba ta da ka ga"__.
 
