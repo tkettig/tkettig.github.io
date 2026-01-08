@@ -471,6 +471,8 @@ For example, you might copy out some of the questions and put the answer in code
 # Thomas Kettig
 # January 8, 2026
 
+# Practice with unit variables
+
 # 1. Create a variable called "cats". Assign the value 200 to it.
 cats <- 200
 
