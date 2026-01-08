@@ -1,0 +1,92 @@
+---
+title: "LING 3300 - Week 4"
+author: "Thomas Kettig"
+date: "January 8, 2026"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+### Simple if-else statements 
+If-else statements are a staple of almost all programming languages. As their name suggests, these are statements that make a certain change to an element *if* a condition is met, otherwise (or *else*), it makes a different change. For example, we could create a new column in the dataset that tries to guess the gender of a speaker based on their f0. If the f0 is less than, say, 200 Hz, let's call it "male", otherwise (else), we'll call it female. 
+
+There are a few ways to write if-else statements in R. One way is using the ifelse() function. 
+ifelse() takes three arguments: the condition that needs to be met (jury$f0 < 200), what to do if that condition is TRUE (indicate "male"), what to do if the condition is FALSE (indicate "female")
+Here we create a new column where we guess the gender of the speaker based on their F0:
+```{r eval = FALSE}
+jury$guessG <- ifelse(jury$F0 < 200, "male", "female")
+View(jury)
+```
+
+### Cross tabulation
+For character vectors, we can get the overall number of cells per category using the xtabs() function. xtabs() tabulates, or counts up, the number of cells with each unique label. Here we can look at how many rows were guessed as "male" and how many as "female" in our new guessG column. Note the use of the tilde (~) in this formulation. The use of the tilde is a bit idiosyncratic in R, and frequently means "as a function of", but just go with it for now. Like natural languages, computer languages sometimes also have idiosyncratic features. (Side note from Thomas: There are also other, possibly more intuitive, ways to do the same thing using tidyverse syntax we'll be introducing next week.)
+
+```{r eval = FALSE}
+xtabs(~guessG, jury)
+```
+
+We can get further breakdowns of the counts using the plus sign: 
+The following example breaks down the counts by guessed gender and the talker who produced those values
+```{r eval = FALSE}
+xtabs(~guessG + Talker, jury)
+```
+
+We can also count how many tokens we have per fricative:
+```{r eval = FALSE}
+xtabs(~Fricative, jury)
+```
+
+And how many tokens we have per fricative and talker:
+```{r eval = FALSE}
+xtabs(~Fricative + Talker, jury)
+```
+
+How many items per fricative and talker and vowel:
+```{r eval = FALSE}
+xtabs(~Talker + Fricative + Vowel, jury)
+```
+
+### Subsetting data
+You can take a subset of the dataset using the subset() function. subset() takes two arguments: the name of the dataset, and the condition to subset on. Let's say we just want to look at the data from Talker "M3". We can take the subset in the following way. Note the use of the double equals sign!
+
+```{r eval = FALSE}
+m3 <- subset(jury, Talker == "M3")
+View(m3)
+```
+
+Let's say we instead want to look at the dataset where the f0 value is below 75 Hz:
+
+```{r eval = FALSE}
+lowf0 <- subset(jury, F0 < 75)
+View(lowf0)
+```
+
+You can combine subset conditions using the ampersand (&) which means "AND"
+```{r eval = FALSE}
+lowf0 <- subset(jury, F0 < 200 & Talker == "M3")
+View(lowf0)
+
+lowf0 <- subset(jury, F0 < 100 & Talker == "M3")
+View(lowf0)
+```
+
+
+
+
+#### Practice with datasets: new columns and xtabs
+1. Let's say your measurement of reaction time (RT) was systematically off by 20 ms. For example, the program recording RT may have started 20 ms after some event, but for the participant, the 20 ms was still technically part of the RT. Create a new column in 'lex' called 'updatedRT' and add 20 to lex\$RT. 
+2. Now delete the old RT column (lex\$RT). If things go horribly wrong here, just reload the dataset back in to start over. :) 
+3. Create another column in lex called 'gender'. If the sex of the participant is equal to 1, then the new value in the 'gender' column should be "m" for male, otherwise the new value should be "f". (See the if-else code). 
+4. Get a count of how many male and female participants there are using cross-tabulation on the gender column.
+
+#### Practice with datasets: subsets
+1. Create a subset of the lex data that includes only data from male participants. Call this new dataset lex_m.
+2. Create another subset of the lex data that includes only reaction times greater than 3000 ms. Call this new dataset sus_long for suspiciously long. How many rows (data points) are there? What is the range of this data? (use the summary() function). 
+3. Create another subset of the lex data that includes only reaction times less than 100 ms. Call this new dataset sus_short for suspiciously short. How many rows (data points) are there? What is the range of this data? (use the summary() function). 
+
+
+
+<font size="1.5"> Disclaimer: Some of these original materials were put together by Eleanor Chodroff and Elisa Passoni for the University of York. Thomas Kettig then inherited it and modified as needed, particularly based on notes by Nathan Sanders from the University of Toronto. The R software and the packages are distributed under the terms of the GNU General Public License, either Version 2, June 1991 or Version 3, June 2007 (run the command licence () for more information)</font>

@@ -1,0 +1,282 @@
+---
+title: "LING 3300 - Tutorial 1"
+author: "Thomas Kettig"
+date: "January 8, 2026"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+### Introduction to R and RStudio
+R is a computer programming language that is particularly well-suited for statistical analysis and data visualisation, but also can handle text processing and phonetic analysis, among other functions. For data science, R is typically considered one of the best programming languages alongside Python; it is one of the most popular programming languages along with C, C++, Python, and JavaScript. 
+
+RStudio is a user-friendly interface for running the R language. If you click on just the R application, it displays what's called a "console" that is a very simple interface that allows you to enter code interactively. You write a line, and it prints out the response, very much like a calculator. RStudio also has a console at the bottom left space of your screen. You'll see that each line begins with a '>' and a blinking cursor; this '>' means you should start entering your code there. 
+
+In addition to having a console down below, RStudio also has a display window that takes up the upper left portion of the screen. Here you view objects like your datasets and scripts (which contain saved code). This is one of the most useful aspects of RStudio.
+
+In the upper righthand corner is your environment window. This lists all of the objects you have saved in your workspace. These objects might be things like datasets, general variables, etc. 
+
+Finally, in the lower righthand corner is another display window with a few tabs: Files, Plots, Packages, Help, and Viewer. We won't cover all of these, but as the module progresses, you'll see that any plot you create will be displayed in this window. If you need to access the manual to look up how a specific R function, the manual in the Help tab will also be displayed here. 
+
+Note that you can customize how this all looks! Is the font size too small, or does the bright white screen bother your eyes? Feel free to customize RStudio to work best for you. Under RStudio>Preferences (on a Mac), RStudio>Options (on a Windows) you can find the Appearances option to change aspects of the editor window.
+
+Now that you've had a very brief orientation, let's get started! For more detail, I recommend the introductions to R and RStudio in [yarRrr! The Pirate's Guide to R](https://bookdown.org/ndphillips/YaRrr/) as well as Bodo Winter's textbook [Statistics for Linguists: An Introduction Using R](https://appliedstatisticsforlinguists.org/bwinter_stats_proofs.pdf).
+  
+### R as a calculator
+  
+#### Mathematical operators
++ \+ addition, - subtraction, * multiplication, / division, ^ power, () parentheses / bracketing
++ these characters are generally reserved for these mathematical operations
++ spacing generally doesn't matter, but please keep your script clean - messy scripts are incredibly difficult to read and follow and more likely to contain mistakes
+
+```{r eval = F}
+3+5
+3 + 5
+3                      +5
+3-5
+3*2
+3/2
+3^2
+3^0.5
+```
+
+R follows the mathematical order of operations. From left to right, it will first evaluate:
+
++ elements in parentheses, brackets
++ exponents, powers, indices, logs (from left to right)
++ multiplication/division (from left to right)
++ addition/subtraction (from left to right)
+
+```{r eval = F}
+3+5*2
+(3+5)*2
+```
+#### Mathematical functions
+
+R has several built-in functions that you can use. Try not to overwrite built-in functions when you start to use variables. A function (the thing just before the parentheses) takes at least one argument, and can frequently also take more than one argument. The following functions demonstrate the use of *one* argument:
+
+Square root function:
+```{r eval = F}
+sqrt(4)
+```
+
+Square root expressed with an operator instead of the function (since the square root is the same as raising a number to the power of 1/2):
+```{r eval = F}
+4^(1/2)
+```
+
+As for logarithmic functions (i.e. the inverse of the exponential): log functions can have different bases. The default log(x) uses base e, the natural log (aka ln); you can also specify log10(x) which is log base 10. Related built-in functions include:
+
++ sine function: sin(x)
++ cosine function: cos(x)
++ tangent function: tan(x)
++ exponent function (e to the power of x; inverse of log(x)): exp(x)
+
+Right now, you do *not* need to remember what all of these functions mean yourself. The goal is to simply see how R works, how functions in R work, and how operators in R works. One of the main uses of R is as a very powerful calculator -- exactly what one needs for statistical analysis.
+
+```{r eval = FALSE}
+log(1)
+log(2)
+log10(2)
+sin(2)
+tan(2)
+exp(2)
+```
+
+#### Comparing numbers and strings
+Why's this useful? When you start extending this to lots of data, you might to generate truth values on two whole columns of data at once. One practical example is perhaps calculating accuracy in a dataset: did a participant's response (indicated in column 1) match the actual answer (indicated in column 2)?
+
++ is equal to: == 
++ is not equal to: != (the exclamation point typically means NOT)
++ less than: <
++ greater than: >
++ less than or equal to: <=
++ greater than or equal to: >=
+
+These statements will return a value of TRUE or FALSE (also known as a "logical").
+```{r eval = FALSE}
+1 == 2
+1 == 1
+"linguistics" == "lingiustics"
+1 != 2
+1 != 1
+"linguistics" != "lingiustics"
+1 < 2
+1 > 2
+1 <= 2
+2 >= 2
+```
+
+### Variables
+Ok, as much as this is fun, R is a programming language and in order to use its full potential (and do interesting things), we need to assign values to objects, i.e. create variables. 
+To create a variable, we need to give it a name followed by the 'assign' operator **<-**. This is the most commonly used one in the R community. On Windows and Linux, a keyboard shortcut for this operator is **ALT** + **-**; on Mac, it's **Option** + **-**. It is directional, so you can use 5 + 3 -> x or x <- 5 + 3
+```{r eval = FALSE}
+5 + 3
+x <- 5 + 3
+5 + 3 -> y
+```
+
+**=** is another assignment operator (but it can be dodgy as it also means other things, among which 'equal to' - so let's stick to the other one). It is not directional. The variable name must be on the left.
+
+```{r eval = FALSE}
+z = 5 + 3
+```
+
+As a consequence, the statement below won't work:
+```{r eval=F}
+5 + 3 = z
+```
+
+Note that you can reuse the variable to update the variable (as in x <- x+2):
+```{r eval = FALSE}
+x <- x+1
+x <- x*100
+y <- x*25
+```
+
+#### Constraints on variable names
++ Variable names must begin with a letter and only contain letters, numbers, _ (underscore), or . (period)
++ Spaces are not allowed
++ To make your life easier, do not name your columns with spaces (R will automatically change spaces into . when you import your file and you most likely end up wasting your time trying to figure out why your variable names are returned as error)
++ To make your life easier, do not use spaces in any variable or filename on the computer
+
+```{r eval = FALSE}
+vot <- 25
+vot
+```
+
+Bad examples below:
+```{r eval = F}
+vot*2
+vot* <- 52
+```
+
+Good examples below:
+```{r eval = FALSE}
+SetA <- 10
+setA <- 20
+setA <- "cats"
+seta <- "cats"
+```
+
+Important: R is case sensitive, so setA and seta will be considered different variables!
+
+### Some useful functions and notations
+#### Comments
+Comments are made with hashmark. The hashmark tells R not to evaluate anything written from the \# to the end of the line.
+```{r eval = FALSE}
+# hi, this is more of a comment than a question
+```
+
+#### Listing objects
+Use ls() to list the items that are currently in your environment/workspace. Personally, I don't use this much, because you can also see this information by just looking in the Environment tab in the upper-right corner of the screen in R Studio.
+```{r eval = FALSE}
+ls()
+```
+
+#### Viewing objects
+To view an object in the display window, you can use the View() function. As always, capitalisation matters! Again, I don't use this one much because you can also do the same thing by clicking an object in the Environment tab in the upper-right corner of the screen in R Studio.
+```{r eval = FALSE}
+View(y)
+```
+### Vectors
+A vector is a one-dimensional list of items of the same type. Vectors are the base structure of R and you can think of them as columns in a spreadsheet. 
+As an example, you can create a range of integers with the colon :
+```{r eval = FALSE}
+x <- 1:5
+x
+y <- 20:27
+y
+```
+
+A sequence of numbers (also called doubles or floats) can be created with seq(). The function seq() takes at least two arguments: a start value and an end value. You can also specify a third argument indicating the interval between subsequent numbers.
+```{r eval = FALSE}
+x <- seq(1, 5)
+x
+x <- seq(1, 5, by=0.1)
+```
+
+You can get the length of a vector (number of elements inside it) with length()
+```{r eval = FALSE}
+length(x)
+```
+
+#### Accessing parts of a vector
+You can use an index (numerical position) within square brackets to get the value of the cell at that position. A vector is one-dimensional, so there's just one index inside the brackets. When we start trying to access cells within data frames, which have two dimensions (rows and columns), we'll start to use two numbers inside the brackets.
+```{r eval = FALSE}
+x <- 1:50
+x[20]
+x[25]
+```
+
+You can also access parts of the vector with comparison operators or ranges. Here we're starting to combine functions:
+```{r eval = FALSE}
+x[x>25]
+x[20:25]
+```
+
+Before, we created vectors by specifying a range of numbers. We can also create a vector that is an arbitrary list of elements with the c() function. In this case, c stands for combine, concatenate, collect or whatever word makes most sense to you.
+```{r eval = FALSE}
+y <- c(1, 5, 9, 11, 2)
+y
+```
+
+We can also create a list of strings; strings must be in quotes!
+```{r eval = FALSE}
+y <- c("cat", "dog", "mouse")
+y
+x
+```
+
+We can then use this c() function to identify items 1, 20 and 40 in a vector (a random set of indices)
+```{r eval = FALSE}
+x[c(1, 20, 40)]
+```
+
+### Practice
+
+Before starting this practice, we're going to set up a way to save the code we write. To do this, we're going to create an "R script". This is a simple text document that contains R code and has a .R extension (like .txt or .docx, etc.). 
+
+An easy way to create an R script is through RStudio itself. Select the File menu --> New File --> R Script, and a new R script should pop up in your RStudio View window (upper left). You can now paste your code in this script, and re-run it at a later date. To include non-code comments, use the \# symbol. 
+
+For example, you might copy out some of the questions and put the answer in code below it, like the following:
+  
+```{r eval = FALSE}
+# LING 3300 Week 1 Practice 
+# Thomas Kettig
+# January 8, 2026
+
+# 1. Create a variable called "cats". Assign the value 200 to it.
+cats <- 200
+
+# 2. Create a second variable called "dog". Assign the value 100 to it.
+```
+
+There's the example for setting your R script up, and the answer to the first question.
+
+#### Practice with unit variables
+1. Create a variable called *cats*. Assign the value 200 to it.
+2. Create a second variable called *dog*. Assign the value 100 to it.
+3. Update the variable *cats* by dividing it by 2. Before looking at the value of *cats*, what do you think it should be?
+4. Hopefully **you** know whether *cats* is greater than, equal to, or less than *dog*. Write a line of code that tests **each** of these qualities. (There should be three lines of code for your answer.)
+5. Update the variable *dog* by adding 5 to it. 
+6. Write a line of code that tests whether *dog* is greater than or equal to *cats*, greater than *cats*, equal to *cats*, less than *cats*, or less than or equal to *cats*. (There should be five lines of code for your answer.)
+
+#### Practice with vectors: numerical
+1. Create a vector called *myNumbers* that contains a sequence of numbers from 0 to 49, increased by 1 (e.g., 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, ...)
+2. Update the vector *myNumbers* by adding 1 to it. 
+3. Update the vector *myNumbers* by multiplying it by 4. 
+4. What is the 21st element of the vector?
+5. What is the 43rd element of the vector?
+6. Create a new vector from *myNumbers* called *mySmallNumbers* that contain only the elements that have values less than 20. 
+
+#### Practice with vectors: strings
+1. Create a vector called *colors* with the values *green*, *blue*, *red*, and *yellow* in it.
+2. What is the second element in the vector *colors*?
+3. Get the length of the vector *colors* (Before you run the line of code, what do you think the answer should be?)
+
+
+<font size="1.5"> Disclaimer: Some of these original materials were put together by Eleanor Chodroff and Elisa Passoni for the University of York. Thomas Kettig then inherited it and modified as needed, particularly based on notes by Nathan Sanders from the University of Toronto. The R software and the packages are distributed under the terms of the GNU General Public License, either Version 2, June 1991 or Version 3, June 2007 (run the command licence () for more information)</font>

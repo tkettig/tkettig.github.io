@@ -20,6 +20,8 @@ navbar:
         href: acoustic_phonetics.html
       - text: "ELAN Transcription and Coding Tutorials"
         href: elan_manual.html
+      - text: "R Coding Tutorials"
+        href: R_tutorials.html
   - text: "CV"
     href: CV.pdf
   right:

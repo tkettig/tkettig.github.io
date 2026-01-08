@@ -1,0 +1,252 @@
+---
+title: "LING 3300 - Week 2 (Part 1)"
+author: "Thomas Kettig"
+date: "January 8, 2026"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Data types in R
+There are 5 types of data in R:
+
++ integers (whole numbers)
++ numerics (also called doubles or floats, numbers that allow decimal points)
++ characters (also known as strings; have quotes around them)
++ logicals (TRUE or FALSE)
++ complex numbers (remember i, the imaginary number? like 5+5i -- you probably won't come across these)
+
+You can find the type of data R thinks you're working with with the function typeof().
+*IMPORTANT: R assumes that all elements in a vector are of the same type.* You can not have both a character and a numeric in the same vector. This will become important when we start thinking of individual columns in a dataset as vectors. 
+
+```{r eval = FALSE}
+x <- 5
+typeof(x)
+myIntegers <- 1:5
+typeof(myIntegers)
+
+myCharacters <- c("cat", "dog", "idunno")
+typeof(myCharacters)
+
+myLogicals <- c(TRUE, FALSE)
+myLogicals
+typeof(myLogicals)
+
+myLogicals <- c("TRUE", "FALSE")
+typeof(myLogicals)
+
+test <- 1 == 1
+typeof(test)
+
+test2 <- 1+2i
+typeof(test2)
+```
+
+What type will the following vector have?
+```{r eval = FALSE}
+cat_vector <- c("cat", 10.2, 1)
+```
+
+#### Data types with respect to vectors
+Recall that a vector is a one-dimensional list of elements, like a column in a spreadsheet. The elements in a vector in R must all be of the same type. If there is any ambiguity in the type of element in the vector, R uses the following ranking to ensure uniformity in the data type: 
+
+character > complex > numeric (double) > integer > logical
+
+This means that if just one element in the vector is a character, then all the elements will be characters (even if you thought you were entering integers or numerics).
+
+```{r eval = F}
+x <- c(5, "cat", 62.1)
+typeof(x)
+```
+
+#### Type coercion
+Vectors can be *coerced* into other data types using the as.X functions: (as.numeric, as.character, as.integer, as.logical)
+```{r eval = FALSE}
+y <- c(5, "NA", 62.1)
+typeof(y)
+as.numeric(y)
+typeof(y)
+y <- as.numeric(y)
+y/2
+```
+
+You can check the data type using typeof() or is.X (is.numeric, is.character, etc.):
+
+```{r eval = FALSE}
+is.numeric(y)
+is.character(y)
+typeof(y)
+```
+
+A note on NA: 
+NA means not applicable -- it will be treated as an empty cell. It doesn't need quotes and it can coexist with numbers. It's a special string that can easily be converted to a numeric and R won't be annoyed. However, if NA is in quotes, like "NA", it will be treated as a character. 
+
+The following vector will be a character vector because of the quotes around NA:
+
+```{r eval = F}
+x <- c(100, 200.2, 120.6, "NA")
+typeof(x)
+```
+
+We can force that vector to be numeric and NA is readily interpretable as simply an empty cell:
+```{r eval = F}
+x <- as.numeric(x)
+typeof(x)
+new_x <- x - 5
+new_x
+```
+
+*Side note:* When coercing a character vector to a numeric, sometimes you need to wrap the vector in as.character() before doing the numeric conversion. This arises when the vector is actually a FACTOR in R. You don't need to know what a factor is yet, but just know that if you try to do numeric type coercion, and R returns a bunch of unexpected 0, 1, 2, 3 etc to you, then you should try this line of code instead:
+
+```{r eval = FALSE}
+z <- c(2, 20, 200)
+z <- factor(z)
+z
+notgood <- as.numeric(z)
+notgood
+
+good <- as.numeric(as.character(z))
+good
+```
+
+### Datasets
+
+#### Loading in a dataset
+There are a few ways to read in a dataset. One is to use the GUI (Graphical User Interface) in RStudio: From the Environments window in RStudio, select Import Dataset --> From Text (base). This will let you navigate to a file and select how you want to name it.
+
+An alternative is to type the code and the *path* directly. The path to the file goes in quotes. Note that using the Import Dataset option will automatically produce this code for you and run it in the console. 
+
+*An important note about paths*: The path to a file is the computer address to your file. It is important that you get the address right so the computer can locate the file. A useful life tip is to keep your project files and more generally, your computer very organized so that the paths are easy (or at least intuitive) to type out. It seems that R *can* sometimes spaces in pathnames, but in general be wary of using spaces because they can cause problems - so instead of giving your folders titles like **LING 3300 R files**, try to get into the habit of making them more like **LING3300_R** without spaces.
+
+
+*Important note part two*: You may need to adjust \\ symbols to / depending on your computer - sometimes this causes issues, especially on Windows machines.
+
+Let's now read the jury_data_basic.csv dataset file in to R, and assign it the name *jury*. You can do this by replacing the path in the following code with your own path to the data, or by finding it through RStudio's GUI. If you do it through the GUI, make sure you tell it that *heading* is set to *Yes*; that way it will know that the first line of the dataset is the column titles.
+
+
+```{r eval = FALSE}
+jury <- read.csv("/Users/Thomas/Documents/York (Canada)/LING 3300/Datasets/Jury/jury_data_basic.csv", header = TRUE)
+```
+
+#### Viewing the dataset
+Take a look at the dataset using View(). You can also view the dataset by clicking on it in the RStudio Environment window.
+```{r eval = FALSE}
+View(jury)
+```
+While we won't use these functions too frequently, you can see the top of the dataset in the console using head() and bottom using tail(). These functions are important if you ever find yourself in a situation where you can't use RStudio and have to use a basic console. 
+
+```{r eval = FALSE}
+head(jury)
+tail(jury)
+```
+
+#### Getting a summary of the dataset
+Get the dimensions of the dataset using nrow() (number of rows) and ncol() (number of columns): Notice that you can also find this information by glancing at the Environment window.
+
+```{r eval = FALSE}
+nrow(jury)
+ncol(jury)
+```
+
+Get a summary of all the columns in the dataset using summary(). If the vector is numeric, R will tell you the quartiles (a type of quantile which divides the number of data points into four parts, or quarters), the mean, and the number of NAs, if any.
+
+```{r eval = FALSE}
+summary(jury)
+```
+
+### Extracting parts of the dataset 
+Remember that to get an element in a specific location from a vector, we could give it the index in square brackets.
+So if we wanted to get the 3rd element in the vector x, then we would type:
+```{r eval = FALSE}
+x[3]
+```
+
+We can extend this logic to datasets, but now we are in a two-dimensional space. The dataset has Rows and Columns, so we need to provide the coordinates in square brackets, with Rows before Columns (*R before C because we're using R*). When both the row and the column are specified, R will return the individual cell.
+```{r eval = F}
+jury[3,2]
+jury[1000, 10]
+```
+
+We can also extract an entire row by leaving the column specification blank (the location AFTER the comma):
+```{r eval = FALSE}
+jury[1000,]
+myrow <- jury[1000,]
+View(myrow)
+```
+
+We can extract a subset of the dataset by specifying a RANGE of rows using the colon:
+```{r eval = FALSE}
+myrow <- jury[1000:1100,]
+View(myrow)
+```
+
+We can also extract an entire column by leaving the row specification blank (the location BEFORE the comma):
+```{r eval = FALSE}
+mycol <- jury[,10]
+View(mycol)
+```
+
+We can get a set of columns using our vector notation c(). We can get columns 1, 5 and 7 by specifying it as follows:
+```{r eval = FALSE}
+mycol <- jury[,c(1,5,7)]
+```
+
+#### The dollar sign: \$
+
+The dollar sign is incredibly useful when it comes to dealing with columns in a dataset! The dollar sign allows you to name the column that you want to refer to. For example, we can identify and extract the column "SimilarityAnswer" from the jury dataset by calling jury$SimilarityAnswer:
+```{r eval = FALSE}
+mycol <- jury$SimilarityAnswer
+View(mycol)
+```
+
+We can also create new columns. For instance, if we wanted to create a column for AjustedSimilarityAnswer that takes the SimilarityAnswer given by the participant and multiplies it by 10, we could do this:
+```{r eval = FALSE}
+jury$AjustedSimilarityAnswer <- jury$SimilarityAnswer*10
+View(jury)
+```
+
+### Deleting columns
+You can delete a column by assigning NULL to it. As with many functions in R, there are multiple ways to do this. Assigning NULL to it is something we can do in "base-R", or the syntax that R comes along with; I prefer to use a different method for deleting columns, using syntax from the "tidyverse" package. We'll introduce that next week.
+```{r eval = FALSE}
+jury$AjustedSimilarityAnswer <- NULL
+View(jury)
+```
+
+### Pasting strings together
+We can paste strings together using the paste() function. In this example, we'll create a single column that contains information on what the pair of accents presented to the listener was. To do this, we can pasting together the Audio1Accent and Audio2Accent columns with an underscore separating the two elements:
+```{r eval = FALSE}
+jury$AccentPair <- paste(jury$Audio1Accent, jury$Audio2Accent, sep="_")
+View(jury)
+```
+
+The "sep=" argument refers to the character that should separate the two elements being pasted together. Since we have quotes wrapped around an underscore ("_"), then the underscore will separate the two elements. If we wanted nothing separating the two elements, then we could have quotes wrapped around nothing:
+```{r eval = FALSE}
+jury$AccentPair <- paste(jury$Audio1Accent, jury$Audio2Accent, sep="")
+View(jury)
+```
+
+### Practice
+Create an R script to save the answers to these questions.
+
+#### Practice with data types and type coercion
+1. Create a vector called 'myNumbers' and store three numbers in it.
+2. Create a new vector called 'myCharacters' that turns the myNumbers vector into characters.
+3. Create a new vector called 'myNumbers2' that turns myCharacters back into numbers.
+4. Create a vector called 'mixed' that contains a mixture of strings, numbers, and/or logicals.
+5. Figure out what the data type of the 'mixed' vector is. 
+
+#### Practice with datasets: basics
+1. There is another dataset on the VLE called 'L2_English_Lexical_Decision_Data.csv'. Import this dataset into R and call it 'lex' for lexical decision. This data set contains reaction times (RT) in milliseconds to words and nonwords of English from L2 English speaking participants. More info about the data and project [here](https://osf.io/msnpr/).
+2. Get the number of rows in the dataset using the console (don't just look at the Environment window).
+3. Get the number of columns in the dataset using the console (don't just look at the Environment window).
+4. Get a summary of the dataset.
+
+#### Practice with datasets: extracting parts
+1. Create a new variable vector called 'myRows' that contains rows 1 to 10 from the new dataset.
+2. Create a new variable vector called 'myCols' that contains columns 3 to 5 from the new dataset. 
+3. Create a variable vector called 'accuracy' that contains the accuracy column in the dataset ('acc'). Use the dollar sign when referring to this column.
+
+
+

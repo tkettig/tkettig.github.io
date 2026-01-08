@@ -1,0 +1,227 @@
+---
+title: "LING 3300 - Week 3"
+author: "Thomas Kettig"
+date: "January 8, 2026"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+### Introduction to dplyr
+One of the most useful packages within the tidyverse is **dplyr**. If you've already loaded in the whole tidyverse using library(tidyverse), then dplyr has been loaded and you're ready to go! In the future, though, if you want to save a few seconds of loading time, you can load the individual packages within tidyverse instead of everything at once. In the case of dplyr, you'd run:
+
+```{r eval = FALSE}
+library(dplyr)
+```
+
+dplyr has a few very useful functions: 
+
++ filter()
++ select()
++ mutate()
++ group_by()
++ summarise()
+
+Note that some of these are effectively equivalent to things we've seen before, but dplyr code is sometimes a little cleaner (and by clean, I don't mean that what we were doing doesn't work; I just mean dplyr syntax is more streamlined, less clunky, etc.). We'll be focusing on the filter(), group_by(), and summarise() functions, but I highly recommend looking up how select() and mutate() work if you like this style of coding. 
+
+
+#### filter()
+Get a subset of the rows in the dataset using the filter() function. This is basically the same as the subset() function.
+```{r eval = FALSE}
+mcm2 <- filter(mcm, dur_f > 100)
+View(mcm2)
+```
+
+#### The pipe %>%
+dplyr, however, lets you use what's called a pipe, which is written like this: %>%
+
+The pipe allows for an assembly line of functions: you start with the original dataset, then apply a function to that dataset. Using %>% allows you to think of your code as a sequence of actions.
+
+For instance, the two lines of code below do *the exact same thing*:
+```{r eval = FALSE}
+mcm3 <- filter(mcm, dur_f > 150)
+
+mcm3 <- mcm %>% 
+  filter(dur_f > 150)
+```
+
+In the first line, we type out the "verb" -- in this case, filter() -- then within the parentheses we define the dataframe of interest as mcm, followed by an operation on the variable dur_f.
+
+In the second line, we type out the "topic" -- in this case, our dataframe mcm -- and then after the pipe we tell it what "verb" we want to operate on the data -- in this case, filtering based on a particular variable dur_f.
+
+In both cases, the leftmost part of the code will be the name we want our new dataframe to be, plus the assign <- function.
+
+Avoid using the pipe when: (1) You need to manipulate more than one object at a time. Reserve pipes for a sequence of steps applied to one primary object; (2) There are meaningful intermediate objects that could be given informative names. You may find that you sometimes prefer using R base syntax for some things and prefer to use dplyr's %>% for other things.
+
+Note: %>% should always have a space before it, and should usually be followed by a new line. After the first step, each line should be indented by two spaces. This structure makes it easier to add new steps (or rearrange existing steps) and harder to overlook a step.
+
+
+Typing %>% over and over can be tedious! Thankfully, RStudio provides a keyboard shortcut for inserting the pipe operator into your R code.
+
+On Mac type shift + command + m.
+
+On Windows type shift + control + m
+
+It may not seem totally intuitive at first, but this shortcut is handy once you get used to it.
+
+
+#### Getting descriptive statistics: group_by() %>% summarise()
+
+Allowing multiple pipes brings us to one of the most useful sequences of functions in R / dplyr: **group_by() %>% summarise()**
+
+*SUPER USEFUL!* 
+
+Why do we need this? 
+
+Remember the summary() function? Well, that was useful, but let's say we wanted to get the mean duration of all 8 fricative categories in our dataset. We would have to create 8 separate subsets of the data and run the mean() function (or summary()) function on all 8 subsets. That's effortful. Instead, we can use the group_by() function to create subsets, and then derive the mean using the summarise() function (or summarize(), which also works). 
+
+In this example, we'll store these means in a new dataset that we're calling f_means:
+
+```{r eval = FALSE}
+f_means <- mcm %>% 
+  group_by(Fricative) %>% 
+  summarise(meandur = mean(dur_f))
+View(f_means)
+```
+
+The above line of code takes the mcm dataset, groups by the fricative category, then gets the mean of the dur_f column and fills that value into a column we're calling "meandur" in f_means.
+
+**An important note**
+If you have "NA" values in your vector (column), R will be unable to take the mean or perform other standard mathematical functions on it. You'll know if this happens to you because the returned value (e.g., for the mean) will be "NA". To fix this, you can use the optional argument "na.rm = TRUE", where na.rm means "remove the NA values".
+
+```{r eval = FALSE}
+f_means <- mcm %>% 
+  group_by(Fricative) %>% 
+  summarise(meandur = mean(dur_f, na.rm = TRUE))
+```
+
+Another way to do the same thing but not have to type na.rm = TRUE over and over again is to first use the drop_na() function. What this does is it removes all rows that contain *any* NA values -- not just rows where there are NA values for dur_f, but for any other variable. So if our data contained rows that contained a number in the dur_f column but an NA in any other column, we probably wouldn't want to use the drop_na() function because it would remove *too many* rows. But in this particular dataset, it looks like when NA values appaear, they're present in all of the measurement columns and not just one at a time -- so this drop_na() is a good shortcut if you found running the code without it returned NAs.
+
+```{r eval = FALSE}
+# Here's what happens when we just run drop_na()
+na_dropped <- mcm %>%
+  drop_na()
+View(na_dropped)
+
+# Now let's just use that as our first step, and add our group and summarise functions after:
+f_means <- mcm %>% 
+  drop_na() %>%
+  group_by(Fricative) %>% 
+  summarise(meandur = mean(dur_f))
+```
+
+Alright. Back to summarise(). You can have all sorts of functions embedded in the summarise function. *These will be useful on your assignments if you need to find means and standard deviations.*
+
++ mean()
++ sd()
++ median()
++ max()
++ min()
++ length() -- this is one way to get the number of tokens
+
+```{r eval = FALSE}
+f_means <- mcm %>% 
+  drop_na() %>%
+  group_by(Fricative) %>% 
+  summarise(meandur = mean(dur_f), sddur = sd(dur_f))
+
+f_means <- mcm %>% 
+  drop_na() %>%
+  group_by(Fricative) %>% 
+  summarise(meandur = mean(dur_f), 
+            sddur = sd(dur_f), 
+            mediandur = median(dur_f))
+
+f_means <- mcm %>% 
+  drop_na() %>%
+  group_by(Fricative) %>% 
+  summarise(meandur = mean(dur_f), 
+            sddur = sd(dur_f), 
+            mediandur = median(dur_f), 
+            maxdur = max(dur_f), 
+            mindur = min(dur_f), 
+            count = length(dur_f))
+
+View(f_means)
+```
+
+Note that within the summarise() function, on the *left* side of the = we specify a new name that we make up for each column in our output, and on the *right* side of the = we specify the function to run on a column in the input. There's nothing special about the word "mediandur" -- we could cal this column "median_dur" or "medianduration" or anything we wanted. It's best if we choose a clear, descriptive name that's short enough to easily type.
+
+Let's say you wanted to get talker-specific means for each fricative. You can add more groups to the group_by function:
+
+```{r eval = FALSE}
+f_means <- mcm %>% 
+  drop_na() %>%
+  group_by(Talker, Fricative) %>% 
+  summarise(meandur = mean(dur_f), 
+            sddur = sd(dur_f), 
+            mediandur = median(dur_f), 
+            maxdur = max(dur_f), 
+            mindur = min(dur_f), 
+            count = length(dur_f))
+
+View(f_means)
+```
+
+#### Get unique elements
+Use the unique() function to see the individual categories in a column
+
+```{r eval = FALSE}
+unique(mcm$Talker)
+unique(mcm$Fricative)
+```
+
+#### Get the length of unique elements
+You can use length(unique()) to get the number of unique categories in a column. The length() function is simply wrapped around the unique() function.
+
+```{r eval = FALSE}
+length(unique(mcm$Talker))
+```
+
+You could alternatively write two lines of code to get this:
+
+```{r eval = FALSE}
+unique_items <- unique(mcm$Talker)
+length(unique_items)
+```
+
+Or even use the pipe %>% :
+
+```{r eval = FALSE}
+unique(mcm$Talker) %>%
+  length()
+```
+
+### Getting help
+You can get help using a question mark preceding the function that you want more information on. You can also get help via Google or the Help tab in the lower righthand corner. I highly recommend Google!
+```{r eval = FALSE}
+?mean
+?max
+?filter
+?subset
+```
+
+### Practice
+Create an R script to save the answers to these questions.
+
+1. Import 'L2_English_Lexical_Decision_Data.csv' into R and call it 'lex'. This data set contains reaction times (RT) in milliseconds to words and nonwords of English from L2 English speaking participants. More info about the data and project [here](https://osf.io/msnpr/).
+2. Create a subset of lex using filter() that contains only the data points where the dominant language (lex$domLang) is **not** English.
+3. Create a variable called 'langs' that contains a list of the unique dominant languages in the newly created subset.
+4. Get the number of unique languages in 'langs' using code. (Don't just look at the environment window.)
+5. Get the number of unique participants in the subset. Participant IDs are in the 'workerID' column.
+6. From the subset of non-English participants, remove data points that have reaction times below 500 ms and above 2000 ms. This will likely require two steps. 
+7. For each participant in this new subset, get the mean reaction time, the standard deviation of the reaction time, and the median reaction time. Store this data in a dataset called 'subj_data'. 
+8. What is the mean, median and range of by-participant means?
+9. What is the mean, median and range of by-participant standard deviations? 
+10. What is the mean, median and range of by-participant medians?
+11. For each dominant language in the new subset, get the mean reaction time. Which language has the lowest mean, which has the highest mean?
+12. For each dominant language in the new subset, get the number of unique participants. Hint: in the summarise() function you will need to use length(unique()). 
+
+
+
+
+
+<font size="1.5"> Disclaimer: Some of these original materials were put together by Eleanor Chodroff and Elisa Passoni for the University of York. Thomas Kettig then inherited it and modified as needed, particularly based on notes by Nathan Sanders from the University of Toronto. The R software and the packages are distributed under the terms of the GNU General Public License, either Version 2, June 1991 or Version 3, June 2007 (run the command licence () for more information)</font>

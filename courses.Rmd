@@ -10,7 +10,7 @@ title: "Teaching"
 
 * LING 1430: Language, Power, and Persuasion (Fall 2025)
 * LING 2110: Phonetics (Fall 2025)
-* LING 3300: Statistical Methods for Language Science (Winter 2026)
+* [LING 3300: Statistical Methods for Language Science](ling3300_R.html/) (Winter 2026)
 * LAL 6600: Graduate Research Seminar in Theoretical Linguistics (Winter 2026)
 
 #### Other courses previously taught at York University
