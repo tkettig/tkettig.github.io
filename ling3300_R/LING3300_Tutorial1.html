@@ -13,7 +13,7 @@
 
 <meta name="date" content="2026-01-08" />
 
-<title>LING 3300 - Week 1</title>
+<title>LING 3300 - Tutorial 1</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -350,7 +350,7 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">LING 3300 - Week 1</h1>
+<h1 class="title toc-ignore">LING 3300 - Tutorial 1</h1>
 <h4 class="author">Thomas Kettig</h4>
 <h4 class="date">January 8, 2026</h4>
 
@@ -620,6 +620,238 @@ vector (a random set of indices)</p>
 <pre class="r"><code>x[c(1, 20, 40)]</code></pre>
 </div>
 </div>
+<div id="data-types-in-r" class="section level3">
+<h3>Data types in R</h3>
+<p>There are 5 types of data in R:</p>
+<ul>
+<li>integers (whole numbers)</li>
+<li>numerics (also called doubles or floats, numbers that allow decimal
+points)</li>
+<li>characters (also known as strings; have quotes around them)</li>
+<li>logicals (TRUE or FALSE)</li>
+<li>complex numbers (remember i, the imaginary number? like 5+5i – you
+probably won’t come across these)</li>
+</ul>
+<p>You can find the type of data R thinks you’re working with with the
+function typeof(). <em>IMPORTANT: R assumes that all elements in a
+vector are of the same type.</em> You can not have both a character and
+a numeric in the same vector. This will become important when we start
+thinking of individual columns in a dataset as vectors.</p>
+<pre class="r"><code>x &lt;- 5
+typeof(x)
+myIntegers &lt;- 1:5
+typeof(myIntegers)
+
+myCharacters &lt;- c(&quot;cat&quot;, &quot;dog&quot;, &quot;idunno&quot;)
+typeof(myCharacters)
+
+myLogicals &lt;- c(TRUE, FALSE)
+myLogicals
+typeof(myLogicals)
+
+myLogicals &lt;- c(&quot;TRUE&quot;, &quot;FALSE&quot;)
+typeof(myLogicals)
+
+test &lt;- 1 == 1
+typeof(test)
+
+test2 &lt;- 1+2i
+typeof(test2)</code></pre>
+<p>What type will the following vector have?</p>
+<pre class="r"><code>cat_vector &lt;- c(&quot;cat&quot;, 10.2, 1)</code></pre>
+<div id="data-types-with-respect-to-vectors" class="section level4">
+<h4>Data types with respect to vectors</h4>
+<p>Recall that a vector is a one-dimensional list of elements, like a
+column in a spreadsheet. The elements in a vector in R must all be of
+the same type. If there is any ambiguity in the type of element in the
+vector, R uses the following ranking to ensure uniformity in the data
+type:</p>
+<p>character &gt; complex &gt; numeric (double) &gt; integer &gt;
+logical</p>
+<p>This means that if just one element in the vector is a character,
+then all the elements will be characters (even if you thought you were
+entering integers or numerics).</p>
+<pre class="r"><code>x &lt;- c(5, &quot;cat&quot;, 62.1)
+typeof(x)</code></pre>
+</div>
+<div id="type-coercion" class="section level4">
+<h4>Type coercion</h4>
+<p>Vectors can be <em>coerced</em> into other data types using the as.X
+functions: (as.numeric, as.character, as.integer, as.logical)</p>
+<pre class="r"><code>y &lt;- c(5, &quot;NA&quot;, 62.1)
+typeof(y)
+as.numeric(y)
+typeof(y)
+y &lt;- as.numeric(y)
+y/2</code></pre>
+<p>You can check the data type using typeof() or is.X (is.numeric,
+is.character, etc.):</p>
+<pre class="r"><code>is.numeric(y)
+is.character(y)
+typeof(y)</code></pre>
+<p>A note on NA: NA means not applicable – it will be treated as an
+empty cell. It doesn’t need quotes and it can coexist with numbers. It’s
+a special string that can easily be converted to a numeric and R won’t
+be annoyed. However, if NA is in quotes, like “NA”, it will be treated
+as a character.</p>
+<p>The following vector will be a character vector because of the quotes
+around NA:</p>
+<pre class="r"><code>x &lt;- c(100, 200.2, 120.6, &quot;NA&quot;)
+typeof(x)</code></pre>
+<p>We can force that vector to be numeric and NA is readily
+interpretable as simply an empty cell:</p>
+<pre class="r"><code>x &lt;- as.numeric(x)
+typeof(x)
+new_x &lt;- x - 5
+new_x</code></pre>
+<p><em>Side note:</em> When coercing a character vector to a numeric,
+sometimes you need to wrap the vector in as.character() before doing the
+numeric conversion. This arises when the vector is actually a FACTOR in
+R. You don’t need to know what a factor is yet, but just know that if
+you try to do numeric type coercion, and R returns a bunch of unexpected
+0, 1, 2, 3 etc to you, then you should try this line of code
+instead:</p>
+<pre class="r"><code>z &lt;- c(2, 20, 200)
+z &lt;- factor(z)
+z
+notgood &lt;- as.numeric(z)
+notgood
+
+good &lt;- as.numeric(as.character(z))
+good</code></pre>
+</div>
+</div>
+<div id="datasets" class="section level3">
+<h3>Datasets</h3>
+<div id="loading-in-a-dataset" class="section level4">
+<h4>Loading in a dataset</h4>
+<p>There are a few ways to read in a dataset. One is to use the GUI
+(Graphical User Interface) in RStudio: From the Environments window in
+RStudio, select Import Dataset –&gt; From Text (base). This will let you
+navigate to a file and select how you want to name it.</p>
+<p>An alternative is to type the code and the <em>path</em> directly.
+The path to the file goes in quotes. Note that using the Import Dataset
+option will automatically produce this code for you and run it in the
+console.</p>
+<p><em>An important note about paths</em>: The path to a file is the
+computer address to your file. It is important that you get the address
+right so the computer can locate the file. A useful life tip is to keep
+your project files and more generally, your computer very organized so
+that the paths are easy (or at least intuitive) to type out. It seems
+that R <em>can</em> sometimes spaces in pathnames, but in general be
+wary of using spaces because they can cause problems - so instead of
+giving your folders titles like <strong>LING 3300 R files</strong>, try
+to get into the habit of making them more like
+<strong>LING3300_R</strong> without spaces.</p>
+<p><em>Important note part two</em>: You may need to adjust \ symbols to
+/ depending on your computer - sometimes this causes issues, especially
+on Windows machines.</p>
+<p>Let’s now read the jury_data_basic.csv dataset file in to R, and
+assign it the name <em>jury</em>. You can do this by replacing the path
+in the following code with your own path to the data, or by finding it
+through RStudio’s GUI. If you do it through the GUI, make sure you tell
+it that <em>heading</em> is set to <em>Yes</em>; that way it will know
+that the first line of the dataset is the column titles.</p>
+<pre class="r"><code>jury &lt;- read.csv(&quot;/Users/Thomas/Documents/York (Canada)/LING 3300/Datasets/Jury/jury_data_basic.csv&quot;, header = TRUE)</code></pre>
+</div>
+<div id="viewing-the-dataset" class="section level4">
+<h4>Viewing the dataset</h4>
+<p>Take a look at the dataset using View(). You can also view the
+dataset by clicking on it in the RStudio Environment window.</p>
+<pre class="r"><code>View(jury)</code></pre>
+<p>While we won’t use these functions too frequently, you can see the
+top of the dataset in the console using head() and bottom using tail().
+These functions are important if you ever find yourself in a situation
+where you can’t use RStudio and have to use a basic console.</p>
+<pre class="r"><code>head(jury)
+tail(jury)</code></pre>
+</div>
+<div id="getting-a-summary-of-the-dataset" class="section level4">
+<h4>Getting a summary of the dataset</h4>
+<p>Get the dimensions of the dataset using nrow() (number of rows) and
+ncol() (number of columns): Notice that you can also find this
+information by glancing at the Environment window.</p>
+<pre class="r"><code>nrow(jury)
+ncol(jury)</code></pre>
+<p>Get a summary of all the columns in the dataset using summary(). If
+the vector is numeric, R will tell you the quartiles (a type of quantile
+which divides the number of data points into four parts, or quarters),
+the mean, and the number of NAs, if any.</p>
+<pre class="r"><code>summary(jury)</code></pre>
+</div>
+</div>
+<div id="extracting-parts-of-the-dataset" class="section level3">
+<h3>Extracting parts of the dataset</h3>
+<p>Remember that to get an element in a specific location from a vector,
+we could give it the index in square brackets. So if we wanted to get
+the 3rd element in the vector x, then we would type:</p>
+<pre class="r"><code>x[3]</code></pre>
+<p>We can extend this logic to datasets, but now we are in a
+two-dimensional space. The dataset has Rows and Columns, so we need to
+provide the coordinates in square brackets, with Rows before Columns
+(<em>R before C because we’re using R</em>). When both the row and the
+column are specified, R will return the individual cell.</p>
+<pre class="r"><code>jury[3,2]
+jury[1000, 10]</code></pre>
+<p>We can also extract an entire row by leaving the column specification
+blank (the location AFTER the comma):</p>
+<pre class="r"><code>jury[1000,]
+myrow &lt;- jury[1000,]
+View(myrow)</code></pre>
+<p>We can extract a subset of the dataset by specifying a RANGE of rows
+using the colon:</p>
+<pre class="r"><code>myrow &lt;- jury[1000:1100,]
+View(myrow)</code></pre>
+<p>We can also extract an entire column by leaving the row specification
+blank (the location BEFORE the comma):</p>
+<pre class="r"><code>mycol &lt;- jury[,10]
+View(mycol)</code></pre>
+<p>We can get a set of columns using our vector notation c(). We can get
+columns 1, 5 and 7 by specifying it as follows:</p>
+<pre class="r"><code>mycol &lt;- jury[,c(1,5,7)]</code></pre>
+<div id="the-dollar-sign" class="section level4">
+<h4>The dollar sign: $</h4>
+<p>The dollar sign is incredibly useful when it comes to dealing with
+columns in a dataset! The dollar sign allows you to name the column that
+you want to refer to. For example, we can identify and extract the
+column “SimilarityAnswer” from the jury dataset by calling
+jury$SimilarityAnswer:</p>
+<pre class="r"><code>mycol &lt;- jury$SimilarityAnswer
+View(mycol)</code></pre>
+<p>We can also create new columns. For instance, if we wanted to create
+a column for AjustedSimilarityAnswer that takes the SimilarityAnswer
+given by the participant and multiplies it by 10, we could do this:</p>
+<pre class="r"><code>jury$AjustedSimilarityAnswer &lt;- jury$SimilarityAnswer*10
+View(jury)</code></pre>
+</div>
+</div>
+<div id="deleting-columns" class="section level3">
+<h3>Deleting columns</h3>
+<p>You can delete a column by assigning NULL to it. As with many
+functions in R, there are multiple ways to do this. Assigning NULL to it
+is something we can do in “base-R”, or the syntax that R comes along
+with; I prefer to use a different method for deleting columns, using
+syntax from the “tidyverse” package. We’ll introduce that next week.</p>
+<pre class="r"><code>jury$AjustedSimilarityAnswer &lt;- NULL
+View(jury)</code></pre>
+</div>
+<div id="pasting-strings-together" class="section level3">
+<h3>Pasting strings together</h3>
+<p>We can paste strings together using the paste() function. In this
+example, we’ll create a single column that contains information on what
+the pair of accents presented to the listener was. To do this, we can
+pasting together the Audio1Accent and Audio2Accent columns with an
+underscore separating the two elements:</p>
+<pre class="r"><code>jury$AccentPair &lt;- paste(jury$Audio1Accent, jury$Audio2Accent, sep=&quot;_&quot;)
+View(jury)</code></pre>
+<p>The “sep=” argument refers to the character that should separate the
+two elements being pasted together. Since we have quotes wrapped around
+an underscore (“_“), then the underscore will separate the two elements.
+If we wanted nothing separating the two elements, then we could have
+quotes wrapped around nothing:</p>
+<pre class="r"><code>jury$AccentPair &lt;- paste(jury$Audio1Accent, jury$Audio2Accent, sep=&quot;&quot;)
+View(jury)</code></pre>
+</div>
 <div id="practice" class="section level3">
 <h3>Practice</h3>
 <p>Before starting this practice, we’re going to set up a way to save
@@ -677,18 +909,54 @@ of numbers from 0 to 49, increased by 1 (e.g., 0, 1, 2, 3, 4, 5, 6, 7,
 <li>What is the 43rd element of the vector?</li>
 <li>Create a new vector from <em>myNumbers</em> called
 <em>mySmallNumbers</em> that contain only the elements that have values
-less than 20.</li>
-</ol>
-</div>
-<div id="practice-with-vectors-strings" class="section level4">
-<h4>Practice with vectors: strings</h4>
-<ol style="list-style-type: decimal">
+less than 20. #### Practice with vectors: strings</li>
 <li>Create a vector called <em>colors</em> with the values
 <em>green</em>, <em>blue</em>, <em>red</em>, and <em>yellow</em> in
 it.</li>
 <li>What is the second element in the vector <em>colors</em>?</li>
 <li>Get the length of the vector <em>colors</em> (Before you run the
 line of code, what do you think the answer should be?)</li>
+</ol>
+</div>
+<div id="practice-with-data-types-and-type-coercion" class="section level4">
+<h4>Practice with data types and type coercion</h4>
+<ol style="list-style-type: decimal">
+<li>Create a vector called ‘myNumbers’ and store three numbers in
+it.</li>
+<li>Create a new vector called ‘myCharacters’ that turns the myNumbers
+vector into characters.</li>
+<li>Create a new vector called ‘myNumbers2’ that turns myCharacters back
+into numbers.</li>
+<li>Create a vector called ‘mixed’ that contains a mixture of strings,
+numbers, and/or logicals.</li>
+<li>Figure out what the data type of the ‘mixed’ vector is.</li>
+</ol>
+</div>
+<div id="practice-with-datasets-basics" class="section level4">
+<h4>Practice with datasets: basics</h4>
+<ol style="list-style-type: decimal">
+<li>Find the Lexical Decision Dataset on eClass and download it. Import
+‘L2_English_Lexical_Decision_Data.csv’ into R and call it ‘lex’ for
+lexical decision. This data set contains reaction times (RT) in
+milliseconds to words and nonwords of English from L2 English speaking
+participants. More info about the data and project <a href="https://osf.io/msnpr/">here</a>.</li>
+<li>Get the number of rows in the dataset using the console (don’t just
+look at the Environment window).</li>
+<li>Get the number of columns in the dataset using the console (don’t
+just look at the Environment window).</li>
+<li>Get a summary of the dataset.</li>
+</ol>
+</div>
+<div id="practice-with-datasets-extracting-parts" class="section level4">
+<h4>Practice with datasets: extracting parts</h4>
+<ol style="list-style-type: decimal">
+<li>Create a new variable vector called ‘myRows’ that contains rows 1 to
+10 from the new dataset.</li>
+<li>Create a new variable vector called ‘myCols’ that contains columns 3
+to 5 from the new dataset.</li>
+<li>Create a variable vector called ‘accuracy’ that contains the
+accuracy column in the dataset (‘acc’). Use the dollar sign when
+referring to this column.</li>
 </ol>
 <p><font size="1.5"> Disclaimer: Some of these original materials were
 put together by Eleanor Chodroff and Elisa Passoni for the University of

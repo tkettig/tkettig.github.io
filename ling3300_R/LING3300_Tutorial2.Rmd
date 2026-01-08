@@ -1,5 +1,5 @@
 ---
-title: "LING 3300 - Week 2 (Part 1)"
+title: "LING 3300 - Tutorial 2"
 author: "Thomas Kettig"
 date: "January 8, 2026"
 output: html_document
@@ -9,244 +9,382 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-### Data types in R
-There are 5 types of data in R:
 
-+ integers (whole numbers)
-+ numerics (also called doubles or floats, numbers that allow decimal points)
-+ characters (also known as strings; have quotes around them)
-+ logicals (TRUE or FALSE)
-+ complex numbers (remember i, the imaginary number? like 5+5i -- you probably won't come across these)
+### Installing packages
+In general, it's useful to know how to install and update packages. Packages are bundles of code that you can import into R. They're sort of like software applications that you install and then open up when needed. They give you way more coding options and power than just using the stuff that R comes pre-loaded with - imagine buying an iPad and then not downloading any new apps to it! That wouldn't be very fun. 
 
-You can find the type of data R thinks you're working with with the function typeof().
-*IMPORTANT: R assumes that all elements in a vector are of the same type.* You can not have both a character and a numeric in the same vector. This will become important when we start thinking of individual columns in a dataset as vectors. 
+One package we'll be using today is called **tidyverse**. Actually, the tidyverse contains *several* R packages that are incredibly useful for data analysis and visualization. These packages include ggplot2, dplyr, tidyr, readr, and some others. The tidyverse is also a philosophy for maintaining datasets and general data and code hygiene. While we may not have enough time to go over this in detail, we will implicitly be adhering to several (but possibly not all) of these principles throughout the module. The principles are definitely worth reading about, so Google "tidyverse" if you're interested in knowing more.
+
+If you're connected to the internet, you can install/update a package with the following code:
 
 ```{r eval = FALSE}
-x <- 5
-typeof(x)
-myIntegers <- 1:5
-typeof(myIntegers)
-
-myCharacters <- c("cat", "dog", "idunno")
-typeof(myCharacters)
-
-myLogicals <- c(TRUE, FALSE)
-myLogicals
-typeof(myLogicals)
-
-myLogicals <- c("TRUE", "FALSE")
-typeof(myLogicals)
-
-test <- 1 == 1
-typeof(test)
-
-test2 <- 1+2i
-typeof(test2)
+install.packages("tidyverse")
 ```
 
-What type will the following vector have?
-```{r eval = FALSE}
-cat_vector <- c("cat", 10.2, 1)
+You're not done yet! You now "own" the package but you still need to pull the package "off the shelf" to use the code. You can import the package with either the library() or require() functions -- they're basically the same thing. Yes, you do have to write this line of code everytime you restart R and want to access the code again! That means that most of your scripts will begin with two bits of code: reading in the data you want to work with and reading in the packages you need.
+
+```{r eval = T}
+library(tidyverse)
+# or
+require(tidyverse)
 ```
 
-#### Data types with respect to vectors
-Recall that a vector is a one-dimensional list of elements, like a column in a spreadsheet. The elements in a vector in R must all be of the same type. If there is any ambiguity in the type of element in the vector, R uses the following ranking to ensure uniformity in the data type: 
+Alternatively, you can click the "Packages" tab in the lower righthand corner, and check the box for the packages you want to use.
 
-character > complex > numeric (double) > integer > logical
+Don't worry if some warnings come up when you load in packages. They just contain information like the version of R that they were built in. You usually won't have to worry about this.
 
-This means that if just one element in the vector is a character, then all the elements will be characters (even if you thought you were entering integers or numerics).
 
-```{r eval = F}
-x <- c(5, "cat", 62.1)
-typeof(x)
+## Data visualization in R with ggplot2
+
+One of the main (best) packages for **data visualization in R** is the [ggplot2](https://ggplot2.tidyverse.org/).  package. This package is also part of the tidyverse suite of packages, and is commonly referred to as "ggplot". If you have installed tidyverse and loaded it in using the library() or require() functions, then ggplot2 will automatically be loaded too. You can read more about the background to ggplot2 [here](https://qz.com/1007328/all-hail-ggplot2-the-code-powering-all-those-excellent-charts-is-10-years-old/). 
+
+ggplot code is fairly templatic, and works by creating "layers" to a plot. You will always need the following three components in your ggplot code:
+
++ the ggplot() function that tells R you want to create a graph with some data frame
++ the geom_X() function where X refers to the specific type of plot you want to make (histogram, scatterplot, etc.). We'll go over some possible geom_X functions below
++ an aesthetics mapping aes() that tells R how to arrange the variables on the plot
+
+### Some examples of the ggplot() structure:
+```{r eval = T}
+ggplot(mydata) + 
+  geom_histogram(aes(x = var1))
+
+ggplot(mydata) + 
+  geom_boxplot(aes(x = var1, y = var2))
+
+ggplot(mydata) + 
+  geom_point(aes(x = var1, y = var2))
+
+ggplot(mydata) + 
+  geom_bar(aes(x = var1, y = the_count))
 ```
 
-#### Type coercion
-Vectors can be *coerced* into other data types using the as.X functions: (as.numeric, as.character, as.integer, as.logical)
-```{r eval = FALSE}
-y <- c(5, "NA", 62.1)
-typeof(y)
-as.numeric(y)
-typeof(y)
-y <- as.numeric(y)
-y/2
+You can put the aesthetics mapping in either the geom_X() function or the ggplot() function. Sometimes it makes a difference; sometimes not: if you find yourself running into an issue, I would recommend putting the aes() mapping in the main ggplot() function.
+
+```{r eval = T}
+ggplot(mydata, aes(x = var1, y = var2)) + 
+  geom_point() 
 ```
 
-You can check the data type using typeof() or is.X (is.numeric, is.character, etc.):
-
-```{r eval = FALSE}
-is.numeric(y)
-is.character(y)
-typeof(y)
-```
-
-A note on NA: 
-NA means not applicable -- it will be treated as an empty cell. It doesn't need quotes and it can coexist with numbers. It's a special string that can easily be converted to a numeric and R won't be annoyed. However, if NA is in quotes, like "NA", it will be treated as a character. 
-
-The following vector will be a character vector because of the quotes around NA:
-
-```{r eval = F}
-x <- c(100, 200.2, 120.6, "NA")
-typeof(x)
-```
-
-We can force that vector to be numeric and NA is readily interpretable as simply an empty cell:
-```{r eval = F}
-x <- as.numeric(x)
-typeof(x)
-new_x <- x - 5
-new_x
-```
-
-*Side note:* When coercing a character vector to a numeric, sometimes you need to wrap the vector in as.character() before doing the numeric conversion. This arises when the vector is actually a FACTOR in R. You don't need to know what a factor is yet, but just know that if you try to do numeric type coercion, and R returns a bunch of unexpected 0, 1, 2, 3 etc to you, then you should try this line of code instead:
-
-```{r eval = FALSE}
-z <- c(2, 20, 200)
-z <- factor(z)
-z
-notgood <- as.numeric(z)
-notgood
-
-good <- as.numeric(as.character(z))
-good
-```
-
-### Datasets
-
-#### Loading in a dataset
-There are a few ways to read in a dataset. One is to use the GUI (Graphical User Interface) in RStudio: From the Environments window in RStudio, select Import Dataset --> From Text (base). This will let you navigate to a file and select how you want to name it.
-
-An alternative is to type the code and the *path* directly. The path to the file goes in quotes. Note that using the Import Dataset option will automatically produce this code for you and run it in the console. 
-
-*An important note about paths*: The path to a file is the computer address to your file. It is important that you get the address right so the computer can locate the file. A useful life tip is to keep your project files and more generally, your computer very organized so that the paths are easy (or at least intuitive) to type out. It seems that R *can* sometimes spaces in pathnames, but in general be wary of using spaces because they can cause problems - so instead of giving your folders titles like **LING 3300 R files**, try to get into the habit of making them more like **LING3300_R** without spaces.
-
-
-*Important note part two*: You may need to adjust \\ symbols to / depending on your computer - sometimes this causes issues, especially on Windows machines.
-
-Let's now read the jury_data_basic.csv dataset file in to R, and assign it the name *jury*. You can do this by replacing the path in the following code with your own path to the data, or by finding it through RStudio's GUI. If you do it through the GUI, make sure you tell it that *heading* is set to *Yes*; that way it will know that the first line of the dataset is the column titles.
-
-
-```{r eval = FALSE}
+### Load in the dataset
+```{r eval = T}
 jury <- read.csv("/Users/Thomas/Documents/York (Canada)/LING 3300/Datasets/Jury/jury_data_basic.csv", header = TRUE)
-```
-
-#### Viewing the dataset
-Take a look at the dataset using View(). You can also view the dataset by clicking on it in the RStudio Environment window.
-```{r eval = FALSE}
 View(jury)
 ```
-While we won't use these functions too frequently, you can see the top of the dataset in the console using head() and bottom using tail(). These functions are important if you ever find yourself in a situation where you can't use RStudio and have to use a basic console. 
 
-```{r eval = FALSE}
-head(jury)
-tail(jury)
+Remember - here you should change the path that's between the " " so that it points to where on YOUR computer the .csv is. If you don't know how to do this easily, Google "how to find the path name of a file" + your operating system (Mac, Windows 10, etc.). This will be a very valuable skill going forward, so master it now!
+
+Also remember that the reason we put header = TRUE is so that R knows that the first line of our csv is the names of our columns, not data itself.
+
+
+### Histograms
+
+When you want to plot the distribution of **one continuous variable**, use a histogram:
+```{r eval = T}
+ggplot(mcm) + 
+  geom_histogram(aes(x = dur_f))
 ```
 
-#### Getting a summary of the dataset
-Get the dimensions of the dataset using nrow() (number of rows) and ncol() (number of columns): Notice that you can also find this information by glancing at the Environment window.
+The binwidth warning simply tells you that it's using a default binwidth for grouping the counts together.
+The other warning indicating it removed rows refers to the fact that 7 of the values in the dur_f column are actually "NA" values, so can't be represented in the histogram. You'll frequently see this warning below; it's usually safe to ignore unless you know that none of the values are missing. 
 
-```{r eval = FALSE}
-nrow(jury)
-ncol(jury)
+### Boxplots
+When you want to plot the distribution of one continuous variable, but for separate categories, you can use a boxplot.
+
+```{r eval = T}
+ggplot(mcm) + 
+  geom_boxplot(aes(x = Fricative, y = dur_f))
 ```
 
-Get a summary of all the columns in the dataset using summary(). If the vector is numeric, R will tell you the quartiles (a type of quantile which divides the number of data points into four parts, or quarters), the mean, and the number of NAs, if any.
+### Scatterplots
+When you have **two continuous variables** and you want to show the relationship between them, you'll want a scatterplot. Think carefully about which variable you'll want on the x-axis, and which one on the y-axis:
 
-```{r eval = FALSE}
-summary(jury)
+```{r eval = T}
+ggplot(mcm) + 
+  geom_point(aes(x = dur_f, y = F0))
 ```
 
-### Extracting parts of the dataset 
-Remember that to get an element in a specific location from a vector, we could give it the index in square brackets.
-So if we wanted to get the 3rd element in the vector x, then we would type:
-```{r eval = FALSE}
-x[3]
+### Bar graphs
+When you want to display the **count or proportion** of different levels of a categorical variable, you'll want a bar graph:
+
+```{r eval = T}
+ggplot(mcm) + 
+  geom_bar(aes(x = Fricative))
 ```
 
-We can extend this logic to datasets, but now we are in a two-dimensional space. The dataset has Rows and Columns, so we need to provide the coordinates in square brackets, with Rows before Columns (*R before C because we're using R*). When both the row and the column are specified, R will return the individual cell.
+That bar graph is a little boring and uninformative, though, as we have an equal number of occurrences for each fricative! Let's make a new categorical variable in our dataset that simply categorizes someone's F0 into a "high F0" category and a "low F0" category. If the F0 is greater than 200, let's call it "high", otherwise it's low. Note the use of the ifelse() function in this case:
+
+```{r eval = T}
+mcm$highf0 <- ifelse(mcm$F0 > 200, "high", "low")
+xtabs(~highf0, mcm)
+```
+
+Now let's create a bar graph that shows us the number of tokens in each F0 bin. We'll use x = highf0 which will list each level of the highf0 column ("high", "low") along the x-axis.
+
+```{r eval = T}
+ggplot(mcm) + geom_bar(aes(x = highf0))
+```
+
+Some of the f0 values are "NA", which is now showing up in our plot. To drop these values, we need to take a *subset* of the dataset which drops the NA values. Remember that the exclamation point ! means "not" 
+
+```{r eval = T}
+mcm_subset <- subset(mcm, !is.na(highf0))
+ggplot(mcm_subset) + 
+  geom_bar(aes(x = highf0))
+```
+
+### Layering
+
+#### Facetting
+
+Let's say we want a separate scatterplot looking at the relationship between the duration of the fricative (dur_f) and the duration of the vowel (dur_v) for each fricative **separately**. We can use facet_wrap(~Fricative) to split this up:
+
+```{r eval = T}
+ggplot(mcm) + 
+  geom_point(aes(x = dur_f, y = dur_v)) + 
+  facet_wrap(~Fricative)
+```
+
+You can combine facet_wrap() with any plot. Here's an example with a histogram:
+
+```{r eval = T}
+ggplot(mcm) + 
+  geom_histogram(aes(x = dur_f)) + 
+  facet_wrap(~Fricative)
+```
+
+#### Axis labels
+It's important to put informative labels on your x- and y-axes, and your column names might not provide that. You can use the xlab() and ylab() functions to add an axis label. 
+
+For example:
+
+```{r eval = T}
+ggplot(mcm) + 
+  geom_boxplot(aes(x = Fricative, y = dur_f)) +
+  xlab("fricative") + 
+  ylab("fricative duration (ms)") 
+```
+
+#### Axis limits
+Sometimes you want to truncate the displayed data on the axes, or make sure it's very consistent. You can specify an exact range by using the functions xlim(number1, number2) and ylim(number1, number2). Example below:
+
+```{r eval = T}
+ggplot(mcm) + 
+  geom_point(aes(x = F0, y = F1)) +
+  xlim(50, 400) +
+  ylim(100, 1000)
+```
+
+#### Colors
+There are [so many colors in R!](http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf)
+
+There are confusingly two ggplot arguments that will make use of color:
+
++ the **color** argument
++ the **fill** argument
+
+The color argument actually just changes the outline color. The fill argument will refer to the color of a column in e.g., a bar graph or histogram. 
+
+We'll first start with an example where we keep the outline color **constant** across every variable in the figure. When you want everything to be the same color, you put the color variable **outside** of the aes() function, but within the geom_X() function:
+
+```{r eval = T}
+ggplot(mcm) + 
+  geom_histogram(aes(x = dur_f), color = "rosybrown2")
+```
+
+So you can see how the color doesn't change, let's add the facet_wrap() argument:
+```{r eval = T}
+ggplot(mcm) + 
+  geom_histogram(aes(x = dur_f), color = "rosybrown2") +
+  facet_wrap(~Fricative)
+```
+
+We can do the exact same thing with **fill**. Note the difference:
+```{r eval = T}
+ggplot(mcm) + 
+  geom_histogram(aes(x = dur_f), fill = "rosybrown2")
+```
+
+You can also combine the two; order doesn't matter:
+```{r eval = T}
+ggplot(mcm) + 
+  geom_histogram(aes(x = dur_f), color = "black", fill = "rosybrown2")
+```
+
+The second set of examples will be where the color **changes** with the level of a categorical variable. This can be a pretty powerful mapping in your figures. For example, we can have boxplots of the fricative duration for each fricative, that's plotted on the x-axis, and use color to split the boxplots by gender (another categorical variable). To do this, we put **color** or **fill** **inside the aes() mapping.** When we do this, the color or fill is **mapped** to some variable. Note that we then lose the immediate ability to specify the color that R uses, but we'll return to that in a moment. Also important to note is that there are several options that can go inside the aes() mapping besides **color** or **fill** including the size of a point, the shape of a point, the line type (dashed or solid), etc. I recommend looking this up online if it interests you. 
+
+First we also need to create the gender column -- just go with me on this code:
+
+```{r eval = T}
+mcm$gender <- substr(mcm$Talker, 1, 1)
+ggplot(mcm) + 
+  geom_boxplot(aes(x = Fricative, y = dur_f, fill = gender))
+```
+
+Further examples:
+```{r eval = T}
+ggplot(mcm) + 
+  geom_boxplot(aes(x = Fricative, y = dur_f, color = Fricative))
+ggplot(mcm) + 
+  geom_boxplot(aes(x = Fricative, y = dur_f, color = Vowel))
+```
+
+
+#### Change the color of the mapping
+You can see how R used some default colors to map gender to the boxplot. You can also overwrite this using the scale_fill_manual() function. Let's take look at how this works:
+
+```{r eval = T}
+ggplot(mcm) + 
+  geom_boxplot(aes(x = Fricative, y = dur_f, fill = gender)) + 
+  scale_fill_manual(values = c("rosybrown2", "lightblue"))
+```
+
+There are also some automatic color scales in R, and ones that work for colorblindness, etc. Some more info can be found by googling "color palettes" in R, and some good examples are on [this page](https://www.datanovia.com/en/blog/top-r-color-palettes-to-know-for-great-data-visualization/). 
+
+#### Background theme
+You can change the "theme" of the R plot, which generally includes the background color, the presence of grid lines, the font size, and a few other things using some theme_X() functions. The default theme with the gray background is theme_gray(); many people like the theme_bw() background which uses a white background. There are several more theme_X() options in the ggthemes package.
+
+Let's first take a look at the theme_bw() function. You can put the font size in the parentheses *if you want*. (Note also the specification of the binwidth in this histogram):
+
+```{r eval = T}
+ggplot(mcm) + 
+  geom_histogram(aes(x = dur_f), fill = "rosybrown2", color = "black", binwidth = 10) + 
+  xlab("fricative duration (ms)") + 
+  theme_bw(20)
+```
+
+We can also install the [ggthemes](https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/) package to gain access to a few more themes:
 ```{r eval = F}
-jury[3,2]
-jury[1000, 10]
+install.packages("ggthemes")
+```
+```{r eval = T}
+library(ggthemes)
 ```
 
-We can also extract an entire row by leaving the column specification blank (the location AFTER the comma):
-```{r eval = FALSE}
-jury[1000,]
-myrow <- jury[1000,]
-View(myrow)
+Let's use The Economist theme on a scatterplot of the vowel F1 and F2 just for fun...
+```{r eval = T}
+ggplot(mcm) + 
+  geom_point(aes(x = F2, y = F1, color = Vowel)) + 
+  theme_economist(18) + 
+  xlab("F2 (Hz)") +
+  ylab("F1 (Hz)") 
 ```
 
-We can extract a subset of the dataset by specifying a RANGE of rows using the colon:
-```{r eval = FALSE}
-myrow <- jury[1000:1100,]
-View(myrow)
+#### Reversing continuous axes
+You can also reverse an axis, which can be very useful for creating things like vowel plots! Let's take the example above of the F1 x F2 space for vowels, and make it look like a standard vowel plot by reversing the direction of the two axes. You can do this with the functions scale_x_reverse() and scale_y_reverse(). Let's use a different theme from the ggthemes package too -- one of my favorites is theme_few():
+
+```{r eval = T}
+ggplot(mcm) + 
+  geom_point(aes(x = F2, y = F1, color = Vowel)) + 
+  theme_few(18) + 
+  xlab("F2 (Hz)") +
+  ylab("F1 (Hz)") +
+  scale_x_reverse() + 
+  scale_y_reverse()
 ```
 
-We can also extract an entire column by leaving the row specification blank (the location BEFORE the comma):
-```{r eval = FALSE}
-mycol <- jury[,10]
-View(mycol)
+#### Reordering levels of a variable
+By default, R orders the levels of a categorical variable **alphabetically**. In the above example with Vowel, you can see that it first listed "a", then "eh", then "ei", then "i", then "o", then "u". Sometimes this is fine, but sometimes you want to change the order that's presented. For example, you might want the order of the Vowels to be a little more phonetically ordered, so something like
+
++ i
++ ei
++ eh
++ a
++ o 
++ u
+
+which creates somewhat of a circle around the F1xF2 vowel space (or articulatory goes from high front, down the front vowels, and up the back vowels). To do this, you have to use the factor() function on the column you want to reorder.
+
+```{r eval = T}
+mcm$Vowel <- factor(mcm$Vowel, levels = c("i", "ei", "eh", "a", "o", "u"))
 ```
 
-We can get a set of columns using our vector notation c(). We can get columns 1, 5 and 7 by specifying it as follows:
-```{r eval = FALSE}
-mycol <- jury[,c(1,5,7)]
+Now try replotting:
+```{r eval = T}
+ggplot(mcm) + 
+  geom_point(aes(x = F2, y = F1, color = Vowel)) + 
+  theme_few(18) + 
+  xlab("F2 (Hz)") +
+  ylab("F1 (Hz)") +
+  scale_x_reverse() + 
+  scale_y_reverse()
 ```
 
-#### The dollar sign: \$
+### Saving images
+You can save an image using various file formats. The simplest way to save an image is to click on the Export... button in the Plots panel. You should have the option save either as a PNG or as a PDF file there. One tip: increase the dimensions by a lot, otherwise the resolution will be crap. PNG is actually pretty hard to work with in my opinion. You'll need to bump the numbers up to around 1000-2000 pixels, and then play around with the font size. 
 
-The dollar sign is incredibly useful when it comes to dealing with columns in a dataset! The dollar sign allows you to name the column that you want to refer to. For example, we can identify and extract the column "SimilarityAnswer" from the jury dataset by calling jury$SimilarityAnswer:
-```{r eval = FALSE}
-mycol <- jury$SimilarityAnswer
-View(mycol)
+The Export option for Save as PDF is a little easier to work with, but note that PDF images **do not** transfer well between Mac and Windows computers. It's usually the case that PDF images created on Macs do not work well on Windows, but it could also be vice versa... In any case, a PDF image should probably be around 7 to 12 inches. (This one only works in inches.) 
+
+The alternative option is to wrap the figure you want to save with the pdf() - dev.off() sequence, or alternatively a png() - dev.off() sequence. I'll show the pdf() example first, but because PDFs do not transfer well from Macs to Windows, the best option might be the last one presented here (the png() - dev.off() sequence). In any case, the first argument in the pdf() function is the name and location of the file you want to create, and then the height and width in inches. For PDF, you can only specify the dimensions in inches. 
+```{r eval = F}
+pdf("C:/Users/ep1290/OneDrive - University of York/Desktop/QM/vowelplot.pdf", height = 7, width = 10)
+ggplot(mcm) + 
+  geom_point(aes(x = F2, y = F1, color = Vowel)) + 
+  theme_few(18) + 
+  xlab("F2 (Hz)") +
+  ylab("F1 (Hz)") +
+  scale_x_reverse() + 
+  scale_y_reverse()
+dev.off()
 ```
 
-We can also create new columns. For instance, if we wanted to create a column for AjustedSimilarityAnswer that takes the SimilarityAnswer given by the participant and multiplies it by 10, we could do this:
-```{r eval = FALSE}
-jury$AjustedSimilarityAnswer <- jury$SimilarityAnswer*10
-View(jury)
-```
+Alternatively, you can do png()-dev.off() or jpeg()-dev.off or tiff()-dev.off(). You can and should specify the units and resolution with these. Example units include pixels, inches, centimeters, or millimeters. If you use a unit besides pixels, you need to specify the resolution in pixels per inch (or per cm, etc.). A basic resolution is 72ppi, but I would recommend using resolutions between 200 and 300ppi.  The file just takes up more space on your computer. (300ppi is commonly recommended for print in books and journals.) To see more about your options, check the help page:
+```{r eval = F}
+?png
 
-### Deleting columns
-You can delete a column by assigning NULL to it. As with many functions in R, there are multiple ways to do this. Assigning NULL to it is something we can do in "base-R", or the syntax that R comes along with; I prefer to use a different method for deleting columns, using syntax from the "tidyverse" package. We'll introduce that next week.
-```{r eval = FALSE}
-jury$AjustedSimilarityAnswer <- NULL
-View(jury)
-```
+png("C:/Users/ep1290/OneDrive - University of York/Desktop/QM/vowelplot.png", units = "in", height = 7, width = 10, res = 300)
+ggplot(mcm) + 
+  geom_point(aes(x = F2, y = F1, color = Vowel)) + 
+  theme_few(18) + 
+  xlab("F2 (Hz)") +
+  ylab("F1 (Hz)") +
+  scale_x_reverse() + 
+  scale_y_reverse()
+dev.off()
 
-### Pasting strings together
-We can paste strings together using the paste() function. In this example, we'll create a single column that contains information on what the pair of accents presented to the listener was. To do this, we can pasting together the Audio1Accent and Audio2Accent columns with an underscore separating the two elements:
-```{r eval = FALSE}
-jury$AccentPair <- paste(jury$Audio1Accent, jury$Audio2Accent, sep="_")
-View(jury)
-```
-
-The "sep=" argument refers to the character that should separate the two elements being pasted together. Since we have quotes wrapped around an underscore ("_"), then the underscore will separate the two elements. If we wanted nothing separating the two elements, then we could have quotes wrapped around nothing:
-```{r eval = FALSE}
-jury$AccentPair <- paste(jury$Audio1Accent, jury$Audio2Accent, sep="")
-View(jury)
+ggsave("myplot.jpeg", width = 7, height = 10, dpi = 300)
 ```
 
 ### Practice
 Create an R script to save the answers to these questions.
 
-#### Practice with data types and type coercion
-1. Create a vector called 'myNumbers' and store three numbers in it.
-2. Create a new vector called 'myCharacters' that turns the myNumbers vector into characters.
-3. Create a new vector called 'myNumbers2' that turns myCharacters back into numbers.
-4. Create a vector called 'mixed' that contains a mixture of strings, numbers, and/or logicals.
-5. Figure out what the data type of the 'mixed' vector is. 
+1. Import 'L2_English_Lexical_Decision_Data.csv' into R and call it 'lex'. This data set contains reaction times (RT) in milliseconds to words and nonwords of English from L2 English speaking participants. More info about the data and project [here](https://osf.io/msnpr/).
 
-#### Practice with datasets: basics
-1. There is another dataset on the VLE called 'L2_English_Lexical_Decision_Data.csv'. Import this dataset into R and call it 'lex' for lexical decision. This data set contains reaction times (RT) in milliseconds to words and nonwords of English from L2 English speaking participants. More info about the data and project [here](https://osf.io/msnpr/).
-2. Get the number of rows in the dataset using the console (don't just look at the Environment window).
-3. Get the number of columns in the dataset using the console (don't just look at the Environment window).
-4. Get a summary of the dataset.
+2. Create a histogram of the reaction times (RT column). It will probably look weird because of the extreme range of RTs.
+3. Get a summary of the RT values, and take a look at the maximum value. Something can't be right there.
+4. Create another histogram of the reaction times where the x-axis only includes values from 0 to 5000 ms.
+5. Based on the histogram, it looks like values above 2500 seem pretty improbable. Create a subset of lex which only retains reaction times below 2500 ms. Call this lex again.
+6. Create another histogram of reaction times using the new dataset and change the background theme, along with the outline color and fill of the bars. 
 
-#### Practice with datasets: extracting parts
-1. Create a new variable vector called 'myRows' that contains rows 1 to 10 from the new dataset.
-2. Create a new variable vector called 'myCols' that contains columns 3 to 5 from the new dataset. 
-3. Create a variable vector called 'accuracy' that contains the accuracy column in the dataset ('acc'). Use the dollar sign when referring to this column.
+7. Let's say we're interested in comparing reaction times of L1 English speakers against L2 English speakers. Create a new column called 'L2' that indicates whether a speaker's dominant language is English or not English. Specifically, if the domLang column is equal to English, the value in the L2 column should be "L1 English", otherwise the value in the L2 column should be "L2 English".
+8. Let's also say we might want to look at any potential effects of gender. Create another column in lex called 'gender'. If the sex of the participant is equal to 1, then the new value in the 'gender' column should be "m" for male, otherwise the new value should be "f".
+9. Create a boxplot with the L2 status on the x-axis and the reaction time on the y-axis.
+10. Recreate the same boxplot in 8, but use the aesthetic mapping to map color to the gender column. 
+11. Recreate the same boxplot in 9, but also change the background theme and provide more descriptive labels. 
 
 
+12. Create a new column called 'accuracy'. If the column 'acc' is equal to 1, then the value in 'accuracy' should be equal to "right", otherwise the value should be equal to "wrong".
+13. Create a bar graph with accuracy on the x-axis and the fill of the bar mapped to the L2 status. This should create what's called a "stacked" bar graph, where the number of "right" answers for L1 English speakers is stacked on top of the number of "right" answers for L2 English speakers.
+14. To create a "dodged" bar graph where the bars are **next to each other**, you'll need to use the following argument:
+
+```{r eval = F}
+geom_bar(aes(x = accuracy, fill = L2), position = "dodge")
+```
+
+Give that a try. 
+
+15. Now take the same graph from 14 and change the background theme and colors.
+
+16. Now we need to practice creating a scatterplot, but sadly there aren't two **good** continuous variables in the lex dataset. We'll instead use the **mcm** dataset. If you don't have that loaded in to your R workspace, load that in now. 
+17. Make sure you have the column for 'gender'. If you don't have this column, you can recreate it using the following line of code:
+
+```{r eval = F}
+mcm$gender <- substr(mcm$Talker, 1, 1)
+```
+
+18. Create a scatterplot that allows us to visualize the relationship between F1 and F0. Put F1 on the x-axis and F0 on the y-axis.
+19. You might have noticed that F0 looks a little bimodal. This is likely due to gender differences. Create the same scatterplot in 18 but map color to gender.
+20. Now take the same scatterplot from 18 and facet by vowel category (Vowel). 
+21. Reorder the vowel category so it shows up as: "i", "ei", "eh", "a", "o", "u". 
+22. Now recreate the scatterplot from 20 and also change the background theme and add a little more detail to the axis labels (i.e., that these measures are in Hz).
 
