@@ -498,7 +498,7 @@ There's the example for setting your R script up, and the answer to the first qu
 6. Create a new vector from *myNumbers* called *mySmallNumbers* that contain only the elements that have values less than 20. 
 
 #### Practice with vectors: strings
-1. Create a vector called *colors* with the values *green*, *blue*, *red*, and *yellow* in it.
+4. Create a vector called *colors* with the values *green*, *blue*, *red*, and *yellow* in it.
 2. What is the second element in the vector *colors*?
 3. Get the length of the vector *colors* (Before you run the line of code, what do you think the answer should be?)
 
