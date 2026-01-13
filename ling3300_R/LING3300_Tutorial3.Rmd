@@ -10,6 +10,27 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
+Ifelse statements
+
+```{r eval = T}
+mcm$highf0 <- ifelse(mcm$F0 > 200, "high", "low")
+xtabs(~highf0, mcm)
+```
+
+Now let's create a bar graph that shows us the number of tokens in each F0 bin. We'll use x = highf0 which will list each level of the highf0 column ("high", "low") along the x-axis.
+
+```{r eval = T}
+ggplot(mcm) + geom_bar(aes(x = highf0))
+```
+
+Some of the f0 values are "NA", which is now showing up in our plot. To drop these values, we need to take a *subset* of the dataset which drops the NA values. Remember that the exclamation point ! means "not" 
+
+```{r eval = T}
+mcm_subset <- subset(mcm, !is.na(highf0))
+ggplot(mcm_subset) + 
+  geom_bar(aes(x = highf0))
+```
+
 
 
 <font size="1.5"> Disclaimer: Some of these original materials were put together by Eleanor Chodroff and Elisa Passoni for the University of York. Thomas Kettig then inherited it and modified as needed, particularly based on notes by Nathan Sanders from the University of Toronto. The R software and the packages are distributed under the terms of the GNU General Public License, either Version 2, June 1991 or Version 3, June 2007 (run the command licence () for more information)</font>

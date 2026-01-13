@@ -476,18 +476,18 @@ For example, you might copy out some of the questions and put the answer in code
 # 1. Create a variable called "cats". Assign the value 200 to it.
 cats <- 200
 
-# 2. Create a second variable called "dog". Assign the value 100 to it.
+# 2. Create a second variable called "dogs". Assign the value 100 to it.
 ```
 
 There's the example for setting your R script up, and the answer to the first question.
 
 #### Practice with unit variables
 1. Create a variable called *cats*. Assign the value 200 to it.
-2. Create a second variable called *dog*. Assign the value 100 to it.
+2. Create a second variable called *dogs*. Assign the value 100 to it.
 3. Update the variable *cats* by dividing it by 2. Before looking at the value of *cats*, what do you think it should be?
-4. Hopefully **you** know whether *cats* is greater than, equal to, or less than *dog*. Write a line of code that tests **each** of these qualities. (There should be three lines of code for your answer.)
-5. Update the variable *dog* by adding 5 to it. 
-6. Write a line of code that tests whether *dog* is greater than or equal to *cats*, greater than *cats*, equal to *cats*, less than *cats*, or less than or equal to *cats*. (There should be five lines of code for your answer.)
+4. Hopefully **you** know whether *cats* is greater than, equal to, or less than *dogs*. Write a line of code that tests **each** of these qualities. (There should be three lines of code for your answer.)
+5. Update the variable *dogs* by adding 5 to it. 
+6. Write a line of code that tests whether *dogs* is greater than or equal to *cats*, greater than *cats*, equal to *cats*, less than *cats*, or less than or equal to *cats*. (There should be five lines of code for your answer.)
 
 #### Practice with vectors: numerical
 1. Create a vector called *myNumbers* that contains a sequence of numbers from 0 to 49, increased by 1 (e.g., 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, ...)
@@ -496,6 +496,7 @@ There's the example for setting your R script up, and the answer to the first qu
 4. What is the 21st element of the vector?
 5. What is the 43rd element of the vector?
 6. Create a new vector from *myNumbers* called *mySmallNumbers* that contain only the elements that have values less than 20. 
+
 #### Practice with vectors: strings
 1. Create a vector called *colors* with the values *green*, *blue*, *red*, and *yellow* in it.
 2. What is the second element in the vector *colors*?

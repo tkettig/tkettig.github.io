@@ -44,31 +44,9 @@ ggplot code is fairly templatic, and works by creating "layers" to a plot. You w
 + the geom_X() function where X refers to the specific type of plot you want to make (histogram, scatterplot, etc.). We'll go over some possible geom_X functions below
 + an aesthetics mapping aes() that tells R how to arrange the variables on the plot
 
-### Some examples of the ggplot() structure:
-```{r eval = T}
-ggplot(mydata) + 
-  geom_histogram(aes(x = var1))
-
-ggplot(mydata) + 
-  geom_boxplot(aes(x = var1, y = var2))
-
-ggplot(mydata) + 
-  geom_point(aes(x = var1, y = var2))
-
-ggplot(mydata) + 
-  geom_bar(aes(x = var1, y = the_count))
-```
-
-You can put the aesthetics mapping in either the geom_X() function or the ggplot() function. Sometimes it makes a difference; sometimes not: if you find yourself running into an issue, I would recommend putting the aes() mapping in the main ggplot() function.
-
-```{r eval = T}
-ggplot(mydata, aes(x = var1, y = var2)) + 
-  geom_point() 
-```
-
 ### Load in the dataset
 ```{r eval = T}
-jury <- read.csv("/Users/Thomas/Documents/York (Canada)/LING 3300/Datasets/Jury/jury_data_basic.csv", header = TRUE)
+jury <- read.csv("/Users/Thomas/Library/CloudStorage/OneDrive-YorkUniversity/LING 3300/Datasets/Jury/jury_data_basic.csv", header = TRUE)
 View(jury)
 ```
 
@@ -79,78 +57,81 @@ Also remember that the reason we put header = TRUE is so that R knows that the f
 
 ### Histograms
 
-When you want to plot the distribution of **one continuous variable**, use a histogram:
+When you want to plot the distribution of **one continuous variable**, you can use a histogram. Here, we'll demonstrate with participants' self-rating of familiarity with Standard Southern British English. (Let's set aside debates over whether Likert-style ordinal ratings are truly quantitative, and treat this variable as continuous.)
 ```{r eval = T}
-ggplot(mcm) + 
-  geom_histogram(aes(x = dur_f))
+ggplot(jury) + 
+  geom_histogram(aes(x = SSBEFamiliarity))
 ```
 
-The binwidth warning simply tells you that it's using a default binwidth for grouping the counts together.
-The other warning indicating it removed rows refers to the fact that 7 of the values in the dur_f column are actually "NA" values, so can't be represented in the histogram. You'll frequently see this warning below; it's usually safe to ignore unless you know that none of the values are missing. 
+The stat_bin() warning simply tells you that it's using a default binwidth for grouping the counts together; here it's chosen to chop up all possible values from 0 to 100 so that they're in 30 different 'bins' each of which is about 3.33 units wide. It's usually safe to ignore warnings like this.
+
+As we can see, most people rate themselves as very familiar with SSBE.
+
+### Density plots
+
+Density plots are very similar to histograms, but instead of dealing with bins of observations and their raw counts, these estimate "kernel density". No need to know what this is, but basically this is just a smoothed version of a histogram.
+
+```{r eval = T}
+ggplot(jury) + 
+  geom_density(aes(x = SSBEFamiliarity))
+```
 
 ### Boxplots
 When you want to plot the distribution of one continuous variable, but for separate categories, you can use a boxplot.
 
 ```{r eval = T}
-ggplot(mcm) + 
-  geom_boxplot(aes(x = Fricative, y = dur_f))
+ggplot(jury) + 
+  geom_boxplot(aes(x = CorrectAnswer, y = SameAnswer))
 ```
+
+Here, we can see that listeners' answers on a 0-100 scale for the question "Are these the same or different people?" differ by whether the pair was actually the same or different; when the correct answer is that they're different people, respondents give lower ratings for sameness than when the correct answer is that they're the same person.
 
 ### Scatterplots
 When you have **two continuous variables** and you want to show the relationship between them, you'll want a scatterplot. Think carefully about which variable you'll want on the x-axis, and which one on the y-axis:
 
 ```{r eval = T}
-ggplot(mcm) + 
-  geom_point(aes(x = dur_f, y = F0))
+ggplot(jury) + 
+  geom_point(aes(x = SimilarityAnswer, y = SameAnswer))
 ```
+
+Here we're plotting people's 0-100 answer to "How similar are these voices" on the x-axis and their 0-100 answer to "Are these the same or different people?" on the y-axis. In RStudio, kyou can click the "Zoom" button in the Plots tab to see a larger version of the plot. One of the things we see here is that if people give low ratings for similarity, they're very unlikely to give high ratings for sameness. There seems to be more instances of people giving high ratings for voice similarity but also saying they're pretty sure that they're not actually the same person.
 
 ### Bar graphs
 When you want to display the **count or proportion** of different levels of a categorical variable, you'll want a bar graph:
 
 ```{r eval = T}
-ggplot(mcm) + 
-  geom_bar(aes(x = Fricative))
+ggplot(jury) + 
+  geom_bar(aes(x = Level))
 ```
 
-That bar graph is a little boring and uninformative, though, as we have an equal number of occurrences for each fricative! Let's make a new categorical variable in our dataset that simply categorizes someone's F0 into a "high F0" category and a "low F0" category. If the F0 is greater than 200, let's call it "high", otherwise it's low. Note the use of the ifelse() function in this case:
-
-```{r eval = T}
-mcm$highf0 <- ifelse(mcm$F0 > 200, "high", "low")
-xtabs(~highf0, mcm)
-```
-
-Now let's create a bar graph that shows us the number of tokens in each F0 bin. We'll use x = highf0 which will list each level of the highf0 column ("high", "low") along the x-axis.
-
-```{r eval = T}
-ggplot(mcm) + geom_bar(aes(x = highf0))
-```
-
-Some of the f0 values are "NA", which is now showing up in our plot. To drop these values, we need to take a *subset* of the dataset which drops the NA values. Remember that the exclamation point ! means "not" 
-
-```{r eval = T}
-mcm_subset <- subset(mcm, !is.na(highf0))
-ggplot(mcm_subset) + 
-  geom_bar(aes(x = highf0))
-```
+We see here that when this experiment was run, we collected equal amounts of data for Level 1 (when it's boring and beige) and Level 2 (when we first introduce the jury vs. robot scenario). Because we had two versions of Level 3 which we ran on different participants, we have less data for each of those levels. We have a small amount of data for a version of Level 3 where we gave listeners an extra piece of "evidence" in the "case" (showing them a little picture of a DNA strand, footprint, or fingerprint); we have a larger amount of data for the version of Level 3 where we gave listeners access to an "expert witness" who supplied them with "testimony" in favour of the voices belonging to the same or to different people.
 
 ### Layering
 
 #### Facetting
 
-Let's say we want a separate scatterplot looking at the relationship between the duration of the fricative (dur_f) and the duration of the vowel (dur_v) for each fricative **separately**. We can use facet_wrap(~Fricative) to split this up:
+Let's say we want a separate scatterplot looking at the relationship between similarity and sameness rating for each correct answer condition **separately**. We can use facet_wrap(~CorrectAnswer) to split this up:
 
 ```{r eval = T}
-ggplot(mcm) + 
-  geom_point(aes(x = dur_f, y = dur_v)) + 
-  facet_wrap(~Fricative)
+ggplot(jury) + 
+  geom_point(aes(x = SimilarityAnswer, y = SameAnswer)) + 
+  facet_wrap(~CorrectAnswer)
 ```
 
 You can combine facet_wrap() with any plot. Here's an example with a histogram:
 
 ```{r eval = T}
-ggplot(mcm) + 
-  geom_histogram(aes(x = dur_f)) + 
-  facet_wrap(~Fricative)
+ggplot(jury) + 
+  geom_histogram(aes(x = SameAnswer)) + 
+  facet_wrap(~CorrectAnswer)
+```
+
+For every five different-speaker sound pairs in this experiment there were just three same-speaker pairs, so the raw numbers for the different-speaker conditions are higher. That being said, it is also apparent here that the same-speaker pairs were trickier for listeners than the different-speaker pairs. The mode of the different-speaker pair distribution is clearly very low; for the same-speaker pairs, the sameness answers seem to be bimodally distributed, showing about the same number of high sameness ratings as low ratings. We can plot these as density plots instead of histograms to verify that the shape of the same-answer distribution is more strongly bimodal than the different-answer distribution.
+
+```{r eval = T}
+ggplot(jury) + 
+  geom_density(aes(x = SameAnswer)) + 
+  facet_wrap(~CorrectAnswer)
 ```
 
 #### Axis labels
@@ -159,20 +140,10 @@ It's important to put informative labels on your x- and y-axes, and your column 
 For example:
 
 ```{r eval = T}
-ggplot(mcm) + 
-  geom_boxplot(aes(x = Fricative, y = dur_f)) +
-  xlab("fricative") + 
-  ylab("fricative duration (ms)") 
-```
-
-#### Axis limits
-Sometimes you want to truncate the displayed data on the axes, or make sure it's very consistent. You can specify an exact range by using the functions xlim(number1, number2) and ylim(number1, number2). Example below:
-
-```{r eval = T}
-ggplot(mcm) + 
-  geom_point(aes(x = F0, y = F1)) +
-  xlim(50, 400) +
-  ylim(100, 1000)
+ggplot(jury) + 
+  geom_density(aes(x = SameAnswer)) + 
+  xlab("Sameness rating") + 
+  ylab("Density") 
 ```
 
 #### Colors
@@ -188,27 +159,20 @@ The color argument actually just changes the outline color. The fill argument wi
 We'll first start with an example where we keep the outline color **constant** across every variable in the figure. When you want everything to be the same color, you put the color variable **outside** of the aes() function, but within the geom_X() function:
 
 ```{r eval = T}
-ggplot(mcm) + 
-  geom_histogram(aes(x = dur_f), color = "rosybrown2")
-```
-
-So you can see how the color doesn't change, let's add the facet_wrap() argument:
-```{r eval = T}
-ggplot(mcm) + 
-  geom_histogram(aes(x = dur_f), color = "rosybrown2") +
-  facet_wrap(~Fricative)
+ggplot(jury) + 
+  geom_histogram(aes(x = SSBEFamiliarity), color = "rosybrown2")
 ```
 
 We can do the exact same thing with **fill**. Note the difference:
 ```{r eval = T}
-ggplot(mcm) + 
-  geom_histogram(aes(x = dur_f), fill = "rosybrown2")
+ggplot(jury) + 
+  geom_histogram(aes(x = SSBEFamiliarity), fill = "rosybrown2")
 ```
 
 You can also combine the two; order doesn't matter:
 ```{r eval = T}
-ggplot(mcm) + 
-  geom_histogram(aes(x = dur_f), color = "black", fill = "rosybrown2")
+ggplot(jury) + 
+  geom_histogram(aes(x = SSBEFamiliarity), color = "black", fill = "rosybrown2")
 ```
 
 The second set of examples will be where the color **changes** with the level of a categorical variable. This can be a pretty powerful mapping in your figures. For example, we can have boxplots of the fricative duration for each fricative, that's plotted on the x-axis, and use color to split the boxplots by gender (another categorical variable). To do this, we put **color** or **fill** **inside the aes() mapping.** When we do this, the color or fill is **mapped** to some variable. Note that we then lose the immediate ability to specify the color that R uses, but we'll return to that in a moment. Also important to note is that there are several options that can go inside the aes() mapping besides **color** or **fill** including the size of a point, the shape of a point, the line type (dashed or solid), etc. I recommend looking this up online if it interests you. 
@@ -348,21 +312,19 @@ ggsave("myplot.jpeg", width = 7, height = 10, dpi = 300)
 ### Practice
 Create an R script to save the answers to these questions.
 
-1. Import 'L2_English_Lexical_Decision_Data.csv' into R and call it 'lex'. This data set contains reaction times (RT) in milliseconds to words and nonwords of English from L2 English speaking participants. More info about the data and project [here](https://osf.io/msnpr/).
+1. We've seen that overall, people report being quite familiar with the SSBE accent: The mode of the distribution when plotting the histogram of SSBEFamiliarity scores was the highest bin (97-100). Is this also true for familiarity with Newcastle and Middlesbrough accents? Plot the histograms to find out.
 
+1. Import 'L2_English_Lexical_Decision_Data.csv' into R and call it 'lex'. This data set contains reaction times (RT) in milliseconds to words and nonwords of English from L2 English speaking participants. More info about the data and project [here](https://osf.io/msnpr/).
 2. Create a histogram of the reaction times (RT column). It will probably look weird because of the extreme range of RTs.
 3. Get a summary of the RT values, and take a look at the maximum value. Something can't be right there.
 4. Create another histogram of the reaction times where the x-axis only includes values from 0 to 5000 ms.
 5. Based on the histogram, it looks like values above 2500 seem pretty improbable. Create a subset of lex which only retains reaction times below 2500 ms. Call this lex again.
 6. Create another histogram of reaction times using the new dataset and change the background theme, along with the outline color and fill of the bars. 
-
 7. Let's say we're interested in comparing reaction times of L1 English speakers against L2 English speakers. Create a new column called 'L2' that indicates whether a speaker's dominant language is English or not English. Specifically, if the domLang column is equal to English, the value in the L2 column should be "L1 English", otherwise the value in the L2 column should be "L2 English".
 8. Let's also say we might want to look at any potential effects of gender. Create another column in lex called 'gender'. If the sex of the participant is equal to 1, then the new value in the 'gender' column should be "m" for male, otherwise the new value should be "f".
 9. Create a boxplot with the L2 status on the x-axis and the reaction time on the y-axis.
 10. Recreate the same boxplot in 8, but use the aesthetic mapping to map color to the gender column. 
 11. Recreate the same boxplot in 9, but also change the background theme and provide more descriptive labels. 
-
-
 12. Create a new column called 'accuracy'. If the column 'acc' is equal to 1, then the value in 'accuracy' should be equal to "right", otherwise the value should be equal to "wrong".
 13. Create a bar graph with accuracy on the x-axis and the fill of the bar mapped to the L2 status. This should create what's called a "stacked" bar graph, where the number of "right" answers for L1 English speakers is stacked on top of the number of "right" answers for L2 English speakers.
 14. To create a "dodged" bar graph where the bars are **next to each other**, you'll need to use the following argument:
