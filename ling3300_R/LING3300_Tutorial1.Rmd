@@ -224,7 +224,7 @@ y <- c(1, 5, 9, 11, 2)
 y
 ```
 
-We can also create a list of strings; strings must be in quotes!
+We can also create a list of strings; strings must be in quotes! 
 ```{r eval = FALSE}
 y <- c("cat", "dog", "mouse")
 y
