@@ -456,8 +456,6 @@ View(jury)
 ```
 
 
-
-
 ### Practice
 
 Before starting this practice, we're going to set up a way to save the code we write. To do this, we're going to create an "R script". This is a simple text document that contains R code and has a .R extension (like .txt or .docx, etc.). 
@@ -510,7 +508,7 @@ There's the example for setting your R script up, and the answer to the first qu
 5. Figure out what the data type of the 'mixed' vector is. 
 
 #### Practice with datasets: basics
-1. Find the Lexical Decision Dataset on eClass and download it. Import 'L2_English_Lexical_Decision_Data.csv' into R and call it 'lex' for lexical decision. This data set contains reaction times (RT) in milliseconds to words and nonwords of English from L2 English speaking participants. More info about the data and project [here](https://osf.io/msnpr/).
+4. Find the Lexical Decision Dataset on eClass and download it. Import 'L2_English_Lexical_Decision_Data.csv' into R and call it 'lex' for lexical decision. This data set contains reaction times (RT) in milliseconds to words and nonwords of English from L2 English speaking participants. More info about the data and project [here](https://osf.io/msnpr/).
 2. Get the number of rows in the dataset using the console (don't just look at the Environment window).
 3. Get the number of columns in the dataset using the console (don't just look at the Environment window).
 4. Get a summary of the dataset.
