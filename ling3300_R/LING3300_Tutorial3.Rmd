@@ -33,4 +33,30 @@ ggplot(mcm_subset) +
 
 
 
+**An important note**
+If you have "NA" values in your vector (column), R will be unable to take the mean or perform other standard mathematical functions on it. You'll know if this happens to you because the returned value (e.g., for the mean) will be "NA". To fix this, you would use the optional argument "na.rm = TRUE", where na.rm means "remove the NA values".
+
+```{r eval = FALSE}
+same_means <- jury %>% 
+  group_by(Level) %>% 
+  summarise(mean_sameness = mean(SameAnswer, na.rm = TRUE))
+```
+
+Another way to do the same thing but not have to type na.rm = TRUE over and over again is to first use the drop_na() function. What this does is it removes all rows that contain *any* NA values -- not just rows where there are NA values for dur_f, but for any other variable. So if our data contained rows that contained a number in the dur_f column but an NA in any other column, we probably wouldn't want to use the drop_na() function because it would remove *too many* rows. But in this particular dataset, it looks like when NA values appaear, they're present in all of the measurement columns and not just one at a time -- so this drop_na() is a good shortcut if you found running the code without it returned NAs.
+
+```{r eval = FALSE}
+# Here's what happens when we just run drop_na()
+na_dropped <- mcm %>%
+  drop_na()
+View(na_dropped)
+
+# Now let's just use that as our first step, and add our group and summarise functions after:
+f_means <- mcm %>% 
+  drop_na() %>%
+  group_by(Fricative) %>% 
+  summarise(meandur = mean(dur_f))
+```
+
+
+
 <font size="1.5"> Disclaimer: Some of these original materials were put together by Eleanor Chodroff and Elisa Passoni for the University of York. Thomas Kettig then inherited it and modified as needed, particularly based on notes by Nathan Sanders from the University of Toronto. The R software and the packages are distributed under the terms of the GNU General Public License, either Version 2, June 1991 or Version 3, June 2007 (run the command licence () for more information)</font>

@@ -8,3 +8,5 @@ output: html_document
 These tutorials are based on various resources developed at the University of York by Elisa Passoni and Eleanor Chodroff, with adjustments inspired by Nathan Sanders from the University of Toronto. They are adapted to fit the needs of the York University LING 3300 Statistics for Language Science class.
 
 <h3> [Tutorial 1 - Basics of R](ling3300_R/LING3300_Tutorial1.html) </h3> 
+
+<h3> [Tutorial 2 - dplyr and ggplot2](ling3300_R/LING3300_Tutorial2.html) </h3> 

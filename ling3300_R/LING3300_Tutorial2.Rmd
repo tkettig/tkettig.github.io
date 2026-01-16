@@ -1,7 +1,7 @@
 ---
 title: "LING 3300 - Tutorial 2"
 author: "Thomas Kettig"
-date: "January 8, 2026"
+date: "January 15, 2026"
 output: html_document
 ---
 
@@ -9,11 +9,20 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+### Load in the dataset we'll be working with for these examples
+
+```{r eval = T}
+jury <- read.csv("/Users/Thomas/Library/CloudStorage/OneDrive-YorkUniversity/LING 3300/Datasets/Jury/jury_data_basic.csv", header = TRUE)
+```
+
+Remember - here you should change the path that's between the " " so that it points to where on YOUR computer the .csv is. If you don't know how to do this easily, Google "how to find the path name of a file" + your operating system (Mac, Windows 10, etc.). This will be a very valuable skill going forward, so master it now!
+
+Also remember that the reason we put header = TRUE is so that R knows that the first line of our csv is the names of our columns, not data itself.
 
 ### Installing packages
 In general, it's useful to know how to install and update packages. Packages are bundles of code that you can import into R. They're sort of like software applications that you install and then open up when needed. They give you way more coding options and power than just using the stuff that R comes pre-loaded with - imagine buying an iPad and then not downloading any new apps to it! That wouldn't be very fun. 
 
-One package we'll be using today is called **tidyverse**. Actually, the tidyverse contains *several* R packages that are incredibly useful for data analysis and visualization. These packages include ggplot2, dplyr, tidyr, readr, and some others. The tidyverse is also a philosophy for maintaining datasets and general data and code hygiene. While we may not have enough time to go over this in detail, we will implicitly be adhering to several (but possibly not all) of these principles throughout the module. The principles are definitely worth reading about, so Google "tidyverse" if you're interested in knowing more.
+One package we'll be using today is called **tidyverse**. Actually, the tidyverse contains *several* R packages that are incredibly useful for data analysis and visualization. Think of it like "Microsoft Suite" (which I guess is what we used to call "Microsft Office") -- it's a collection of pieces of software to do certain specific things, like Word, PowerPoint, Excel, etc. By installing and loading tidyverse, you're availing yourself of a bunch of individual specialized packages including ggplot2, dplyr, tidyr, readr, and some others. The tidyverse is also a philosophy for maintaining datasets and general data and code hygiene; for instance, it allows us to construct our code in a different way from the default R language (which we call "Base R").
 
 If you're connected to the internet, you can install/update a package with the following code:
 
@@ -21,38 +30,204 @@ If you're connected to the internet, you can install/update a package with the f
 install.packages("tidyverse")
 ```
 
-You're not done yet! You now "own" the package but you still need to pull the package "off the shelf" to use the code. You can import the package with either the library() or require() functions -- they're basically the same thing. Yes, you do have to write this line of code everytime you restart R and want to access the code again! That means that most of your scripts will begin with two bits of code: reading in the data you want to work with and reading in the packages you need.
+You're not done yet! You now "own" the package but you still need to pull the package "off the shelf" to use the code. You can import the package with the library() function. Yes, you do have to write this line of code every time you restart R and want to access the code again! That means that most of your scripts will begin with two bits of code: reading in the data you want to work with and reading in the packages you need.
 
 ```{r eval = T}
 library(tidyverse)
-# or
-require(tidyverse)
 ```
 
-Alternatively, you can click the "Packages" tab in the lower righthand corner, and check the box for the packages you want to use.
+Alternatively, you can click the "Packages" tab in the lower righthand corner of RStudio, and check the box for the packages you want to use.
 
-Don't worry if some warnings come up when you load in packages. They just contain information like the version of R that they were built in. You usually won't have to worry about this.
+Don't worry if some warnings come up when you load in packages or run other code. They just contain information like the version of R that they were built in. You usually won't have to worry about this. "Warnings" are often fine, while "errors" are almost always bad.
+
+### Introduction to dplyr
+One of the most useful packages within the tidyverse is **dplyr**. If you've already loaded in the whole tidyverse using library(tidyverse), then dplyr has been loaded and you're ready to go! In the future, though, if you'd like you you can load the individual packages within tidyverse instead of everything at once. In the case of dplyr, you'd run:
+
+```{r eval = FALSE}
+library(dplyr)
+```
+
+dplyr has a few very useful functions: 
+
++ filter()
++ select()
++ mutate()
++ group_by()
++ summarize()
+
+Note that there are also ways to do all of these things in Base R, but dplyr code is sometimes a little more logical and streamlined.
+
+
+
+#### filter()
+You can select just a subset of the rows in the dataset using the filter() function. This works really similarly to the Base R subset() function; in fact, in this simple case, they look basically identical. Let's create some new dataframes (which will show up in our Environment at upper right) with of just the jury data from Level 1 (beige and boring) and just the data from Level 2 (after being introduced to the robot jury scenario).
+```{r eval = FALSE}
+jury_level1 <- filter(jury, Level == "1")
+View(jury_level1)
+
+jury_level2 <- subset(jury, Level == "2")
+View(jury_level2)
+```
+
+#### The pipe %>%
+Unlike Base R, dplyr lets you use what's called a **pipe**, which is written like this: %>%
+
+The pipe allows for an assembly line of functions: you start with the original dataset, then apply a function to that dataset. Using %>% allows you to think of your code as a sequence of actions.
+
+For instance, the two sets of code below do *the exact same thing*:
+```{r eval = FALSE}
+jury_level1 <- filter(jury, Level == "1")
+
+jury_level1 <- jury %>% 
+  filter(Level == "1")
+```
+
+In the first set of code, we type out the "verb" -- in this case, filter() -- then within the parentheses we define the dataframe of interest as jury, followed by an operation on the variable Level. In the second set, we type out the "topic" -- in this case, our dataframe jury -- and then after the pipe we tell it what "verb" we want to operate on the data -- in this case, filtering based on a particular variable called Level. In both cases, the leftmost part of the code will be the name we want our new dataframe to be called, plus the assign <- function.
+
+You may find that you sometimes prefer using Base R syntax and functions for some things and prefer to use dplyr's functions and pipes for other things. It's fine to mix and match!
+
+Note: %>% should always have a space before it, and should usually be followed by a new line. After the first step, each line should be indented by two spaces. This structure makes it easier to add new steps (or rearrange existing steps) and harder to overlook a step.
+
+Typing %>% over and over can be tedious! Thankfully, RStudio provides a keyboard shortcut for inserting the pipe operator into your R code.
+
+On Mac type **shift + command + m**.
+
+On Windows type **shift + control + m**.
+
+It may not seem totally intuitive at first, but this shortcut can handy once you get used to it.
+
+
+#### Getting descriptive statistics: group_by() %>% summarise()
+
+Allowing multiple pipes brings us to one of the most useful sequences of functions: **group_by() %>% summarize()**
+
+*SUPER USEFUL!* 
+
+Remember the summary() function from the first tutorial? Well, that was useful, but let's say we wanted to get the mean sameness rating for each of our levels. In Base R, we would have to create four separate subsets of the data, and run the mean() (or summary()) function on all four subsets. That's effortful. Instead, we can use the group_by() function to create subsets, and then derive the mean using the summarize() function (or summarise(), which also works). 
+
+In this example, we'll store these means in a new dataset called same_means:
+
+```{r eval = FALSE}
+same_means <- jury %>% 
+  group_by(Level) %>% 
+  summarise(mean_sameness = mean(SameAnswer))
+
+View(same_means)
+```
+
+The above line of code takes the jury dataset, groups by the Level category, then gets the mean of the SameAnswer column and fills that value into a column we're calling "mean_sameness" in same_means dataframe. This is great, but wouldn't it be even better if we could distinguish between the same- and different-speaker pairs, too?
+
+```{r eval = FALSE}
+same_means <- jury %>% 
+  group_by(Level, CorrectAnswer) %>% 
+  summarise(mean_sameness = mean(SameAnswer))
+
+View(same_means)
+```
+
+We could also reverse the order of the grouping; note how the calculations of the means don't change, but we might prefer either seeing the rows clustered by Level or by CorrectAnswer, depending on what our research questions are.
+
+```{r eval = FALSE}
+same_means <- jury %>% 
+  group_by(CorrectAnswer, Level) %>% 
+  summarise(mean_sameness = mean(SameAnswer))
+
+View(same_means)
+```
+
+You can have all sorts of functions embedded in the summarise function. *These will be useful to find means, medians, standard deviations, etc.*
+
++ mean()
++ sd()
++ median()
++ max()
++ min()
++ length() -- this is one way to get the number of tokens
+
+```{r eval = FALSE}
+same_means <- jury %>% 
+  group_by(Level, CorrectAnswer) %>% 
+  summarize(mean_sameness = mean(SameAnswer), 
+            sd_sameness = sd(SameAnswer))
+
+same_means <- jury %>% 
+  group_by(Level, CorrectAnswer) %>% 
+  summarize(mean_sameness = mean(SameAnswer), 
+            sd_sameness = sd(SameAnswer),
+            median_sameness = median(SameAnswer))
+
+same_means <- jury %>% 
+  group_by(Level, CorrectAnswer) %>% 
+  summarize(mean_sameness = mean(SameAnswer), 
+            sd_sameness = sd(SameAnswer),
+            median_sameness = median(SameAnswer), 
+            max_sameness = max(SameAnswer), 
+            min_sameness = min(SameAnswer), 
+            count = length(SameAnswer))
+
+View(same_means)
+```
+
+Note that within the summarize() function, on the *left* side of the = we specify a new name that we make up for each column in our output, and on the *right* side of the = we specify the function to run on a column in the input. There's nothing special about the word "mean_sameness" -- we could cal this column "meansame" or "mean_sameness" or "Rumpelstiltskin" or anything we wanted. It's best if we choose a clear, unique, descriptive name that's short enough to easily type.
+
+
+#### Get unique elements
+Use the unique() function to see the individual categories in a column
+
+```{r eval = FALSE}
+unique(jury$Participant)
+unique(jury$Audio1Accent)
+```
+
+#### Get the length of unique elements
+You can use length(unique()) to get the number of unique categories in a column. The length() function is simply wrapped around the unique() function.
+
+```{r eval = FALSE}
+length(unique(jury$Participant))
+```
+This will tell us the number of participants who took the experiment. You could alternatively write two lines of code to get this:
+
+```{r eval = FALSE}
+unique_items <- unique(jury$Participant)
+length(unique_items)
+```
+
+Or even use the pipe %>% :
+
+```{r eval = FALSE}
+unique(jury$Participant) %>%
+  length()
+```
+
+### Simple if-else statements 
+If-else statements are a staple of almost all programming languages. As their name suggests, these are statements that make a certain change to an element *if* a condition is met, otherwise (or *else*), it makes a different change. For example, in this experiment, people heard pairs of sound files with voices that might have been same or different; in most cases, the pair of files were voices with the same accent, but sometimes we compared a Middlesbrough voice with a Newcastle voice. We could create a new column in the dataset that tells us whether the first and second audio files in a pair were matched or unmatched for accent.
+
+There are a few ways to write if-else statements in R. One way is using the ifelse() function. 
+ifelse() takes three arguments: the condition that needs to be met `(jury$Audio1Accent == jury$Audio2Accent)`, what to do if that condition is TRUE (indicate "matched"), what to do if the condition is FALSE (indicate "unmatched"). Here we create a new column called *accent_match* (on the left side of the line) using an if-else statement:
+```{r eval = FALSE}
+jury$accent_match <- ifelse(jury$Audio1Accent == jury$Audio2Accent, "matched", "unmatched")
+View(jury)
+```
+
+### Getting help
+You can get help using a question mark preceding the function that you want more information on. You can also get help via Google or the Help tab in the lower righthand corner.
+```{r eval = FALSE}
+?mean
+?max
+?filter
+?subset
+```
 
 
 ## Data visualization in R with ggplot2
 
-One of the main (best) packages for **data visualization in R** is the [ggplot2](https://ggplot2.tidyverse.org/).  package. This package is also part of the tidyverse suite of packages, and is commonly referred to as "ggplot". If you have installed tidyverse and loaded it in using the library() or require() functions, then ggplot2 will automatically be loaded too. You can read more about the background to ggplot2 [here](https://qz.com/1007328/all-hail-ggplot2-the-code-powering-all-those-excellent-charts-is-10-years-old/). 
+It's possible to do a lot of decent **data visualisation** just using Base R (that is, just the functions that come pre-loaded with R). [YaRrr! Chapter  11.1-11.5](https://bookdown.org/ndphillips/YaRrr/plotting1.html) demonstrates some of this Base-R plotting. But tidyverse contains a package called [ggplot2](https://ggplot2.tidyverse.org/) (commonly referred to as just "ggplot") which adds flexibility and has been widely adopted by linguists and other scientists. If you have installed tidyverse and loaded it in using the library() or require() functions, then ggplot2 will automatically be loaded too. You can read more about the background to ggplot2 [here](https://qz.com/1007328/all-hail-ggplot2-the-code-powering-all-those-excellent-charts-is-10-years-old/). 
 
 ggplot code is fairly templatic, and works by creating "layers" to a plot. You will always need the following three components in your ggplot code:
 
 + the ggplot() function that tells R you want to create a graph with some data frame
 + the geom_X() function where X refers to the specific type of plot you want to make (histogram, scatterplot, etc.). We'll go over some possible geom_X functions below
 + an aesthetics mapping aes() that tells R how to arrange the variables on the plot
-
-### Load in the dataset
-```{r eval = T}
-jury <- read.csv("/Users/Thomas/Library/CloudStorage/OneDrive-YorkUniversity/LING 3300/Datasets/Jury/jury_data_basic.csv", header = TRUE)
-View(jury)
-```
-
-Remember - here you should change the path that's between the " " so that it points to where on YOUR computer the .csv is. If you don't know how to do this easily, Google "how to find the path name of a file" + your operating system (Mac, Windows 10, etc.). This will be a very valuable skill going forward, so master it now!
-
-Also remember that the reason we put header = TRUE is so that R knows that the first line of our csv is the names of our columns, not data itself.
 
 
 ### Histograms
@@ -146,6 +321,24 @@ ggplot(jury) +
   ylab("Density") 
 ```
 
+
+#### Axis limits
+Sometimes you want to truncate the displayed data on the axes, or make sure it's very consistent. You can specify an exact range by using the functions xlim(number1, number2) and/or ylim(number1, number2). Compare the plots below. Perhaps we want to just zoom in on the SSBE familiarity responses above 75, in which case we could set the x-axis limits to be between 75 and 101 (or any maximum more than 100 -- setting it to 100 would exclude all the reponses that were exactly 100, which wouldn't be good.) Or we could zoom in on just lower responses and manually select a y-axis range.
+
+```{r eval = T}
+ggplot(jury) + 
+  geom_histogram(aes(x = SSBEFamiliarity))
+
+ggplot(jury) + 
+  geom_histogram(aes(x = SSBEFamiliarity)) +
+  xlim(75, 101)
+
+ggplot(jury) + 
+  geom_histogram(aes(x = SSBEFamiliarity)) +
+  xlim(-1, 80) +
+  ylim(-1, 3000)
+```
+
 #### Colors
 There are [so many colors in R!](http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf)
 
@@ -175,156 +368,83 @@ ggplot(jury) +
   geom_histogram(aes(x = SSBEFamiliarity), color = "black", fill = "rosybrown2")
 ```
 
-The second set of examples will be where the color **changes** with the level of a categorical variable. This can be a pretty powerful mapping in your figures. For example, we can have boxplots of the fricative duration for each fricative, that's plotted on the x-axis, and use color to split the boxplots by gender (another categorical variable). To do this, we put **color** or **fill** **inside the aes() mapping.** When we do this, the color or fill is **mapped** to some variable. Note that we then lose the immediate ability to specify the color that R uses, but we'll return to that in a moment. Also important to note is that there are several options that can go inside the aes() mapping besides **color** or **fill** including the size of a point, the shape of a point, the line type (dashed or solid), etc. I recommend looking this up online if it interests you. 
-
-First we also need to create the gender column -- just go with me on this code:
+The second set of examples will be where the color **changes** with the level of a categorical variable. This can be a pretty powerful mapping in your figures. For example, we can have boxplots of the sameness ratings plotted on the x-axis, broken up by level on the y-axis, and further use color to split the boxplots by same- and different-speaker pairs. To do this, we put **color** or **fill** **inside the aes() mapping.** When we do this, the color or fill is **mapped** to some variable. Note that we then lose the immediate ability to specify the color that R uses, but we'll return to that in a moment. Also important to note is that there are several options that can go inside the aes() mapping besides **color** or **fill** including the size of a point, the shape of a point, the line type (dashed or solid), etc. I recommend looking this up online if it interests you. 
 
 ```{r eval = T}
-mcm$gender <- substr(mcm$Talker, 1, 1)
-ggplot(mcm) + 
-  geom_boxplot(aes(x = Fricative, y = dur_f, fill = gender))
+ggplot(jury) + 
+  geom_boxplot(aes(x = Level, y = SameAnswer, fill = CorrectAnswer))
 ```
 
 Further examples:
 ```{r eval = T}
-ggplot(mcm) + 
-  geom_boxplot(aes(x = Fricative, y = dur_f, color = Fricative))
-ggplot(mcm) + 
-  geom_boxplot(aes(x = Fricative, y = dur_f, color = Vowel))
+ggplot(jury) + 
+  geom_boxplot(aes(x = Level, y = SimilarityAnswer, fill = CorrectAnswer))
+ggplot(jury) + 
+  geom_boxplot(aes(x = Level, y = SameAnswer, fill = Audio1Accent))
 ```
-
 
 #### Change the color of the mapping
 You can see how R used some default colors to map gender to the boxplot. You can also overwrite this using the scale_fill_manual() function. Let's take look at how this works:
 
 ```{r eval = T}
-ggplot(mcm) + 
-  geom_boxplot(aes(x = Fricative, y = dur_f, fill = gender)) + 
+ggplot(jury) + 
+  geom_boxplot(aes(x = Level, y = SameAnswer, fill = CorrectAnswer)) +
   scale_fill_manual(values = c("rosybrown2", "lightblue"))
 ```
 
 There are also some automatic color scales in R, and ones that work for colorblindness, etc. Some more info can be found by googling "color palettes" in R, and some good examples are on [this page](https://www.datanovia.com/en/blog/top-r-color-palettes-to-know-for-great-data-visualization/). 
 
 #### Background theme
-You can change the "theme" of the R plot, which generally includes the background color, the presence of grid lines, the font size, and a few other things using some theme_X() functions. The default theme with the gray background is theme_gray(); many people like the theme_bw() background which uses a white background. There are several more theme_X() options in the ggthemes package.
-
-Let's first take a look at the theme_bw() function. You can put the font size in the parentheses *if you want*. (Note also the specification of the binwidth in this histogram):
+You can change the "theme" of the R plot, which generally includes the background color, the presence of grid lines, the font size, and a few other things using some theme_X() functions. The default theme with the gray background is theme_gray(); many people like the theme_bw() or theme_classic() backgrounds. There are several more theme_X() options in the ggthemes package if you'd like to install that and experiment. Here you can see what it looks like with the theme_classic() function. You can put the font size in the parentheses if you want, or leave a number out and have it choose a default size. Note also the specification of the binwidth in this histogram, if you wanted to specify that bins should be 10 units wide:
 
 ```{r eval = T}
-ggplot(mcm) + 
-  geom_histogram(aes(x = dur_f), fill = "rosybrown2", color = "black", binwidth = 10) + 
-  xlab("fricative duration (ms)") + 
-  theme_bw(20)
-```
-
-We can also install the [ggthemes](https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/) package to gain access to a few more themes:
-```{r eval = F}
-install.packages("ggthemes")
-```
-```{r eval = T}
-library(ggthemes)
-```
-
-Let's use The Economist theme on a scatterplot of the vowel F1 and F2 just for fun...
-```{r eval = T}
-ggplot(mcm) + 
-  geom_point(aes(x = F2, y = F1, color = Vowel)) + 
-  theme_economist(18) + 
-  xlab("F2 (Hz)") +
-  ylab("F1 (Hz)") 
-```
-
-#### Reversing continuous axes
-You can also reverse an axis, which can be very useful for creating things like vowel plots! Let's take the example above of the F1 x F2 space for vowels, and make it look like a standard vowel plot by reversing the direction of the two axes. You can do this with the functions scale_x_reverse() and scale_y_reverse(). Let's use a different theme from the ggthemes package too -- one of my favorites is theme_few():
-
-```{r eval = T}
-ggplot(mcm) + 
-  geom_point(aes(x = F2, y = F1, color = Vowel)) + 
-  theme_few(18) + 
-  xlab("F2 (Hz)") +
-  ylab("F1 (Hz)") +
-  scale_x_reverse() + 
-  scale_y_reverse()
-```
-
-#### Reordering levels of a variable
-By default, R orders the levels of a categorical variable **alphabetically**. In the above example with Vowel, you can see that it first listed "a", then "eh", then "ei", then "i", then "o", then "u". Sometimes this is fine, but sometimes you want to change the order that's presented. For example, you might want the order of the Vowels to be a little more phonetically ordered, so something like
-
-+ i
-+ ei
-+ eh
-+ a
-+ o 
-+ u
-
-which creates somewhat of a circle around the F1xF2 vowel space (or articulatory goes from high front, down the front vowels, and up the back vowels). To do this, you have to use the factor() function on the column you want to reorder.
-
-```{r eval = T}
-mcm$Vowel <- factor(mcm$Vowel, levels = c("i", "ei", "eh", "a", "o", "u"))
-```
-
-Now try replotting:
-```{r eval = T}
-ggplot(mcm) + 
-  geom_point(aes(x = F2, y = F1, color = Vowel)) + 
-  theme_few(18) + 
-  xlab("F2 (Hz)") +
-  ylab("F1 (Hz)") +
-  scale_x_reverse() + 
-  scale_y_reverse()
+ggplot(jury) + 
+  geom_histogram(aes(x = SameAnswer), fill = "rosybrown2", color = "black", binwidth = 10) + 
+  xlab("Sameness Response") + 
+  theme_classic(20)
 ```
 
 ### Saving images
-You can save an image using various file formats. The simplest way to save an image is to click on the Export... button in the Plots panel. You should have the option save either as a PNG or as a PDF file there. One tip: increase the dimensions by a lot, otherwise the resolution will be crap. PNG is actually pretty hard to work with in my opinion. You'll need to bump the numbers up to around 1000-2000 pixels, and then play around with the font size. 
+You can save an image using various file formats. The simplest way to save an image is to click on the Export... button in the Plots panel. You should have the option save either as a PNG or as a PDF file there. You may need to play around with the sizes and settings to get one that's a decent resolution for PNGs. The Export option for Save as PDF is a little easier to work with, but note that PDF images often **do not** transfer well between Mac and Windows computers.
 
-The Export option for Save as PDF is a little easier to work with, but note that PDF images **do not** transfer well between Mac and Windows computers. It's usually the case that PDF images created on Macs do not work well on Windows, but it could also be vice versa... In any case, a PDF image should probably be around 7 to 12 inches. (This one only works in inches.) 
-
-The alternative option is to wrap the figure you want to save with the pdf() - dev.off() sequence, or alternatively a png() - dev.off() sequence. I'll show the pdf() example first, but because PDFs do not transfer well from Macs to Windows, the best option might be the last one presented here (the png() - dev.off() sequence). In any case, the first argument in the pdf() function is the name and location of the file you want to create, and then the height and width in inches. For PDF, you can only specify the dimensions in inches. 
+An alternative to clicking around at the bottom right is to use the ggsave() function. You specify the name and location of the new file you want to create, and then the height and width in inches and the resolution you'd like it to be (usually 300 is fine).
 ```{r eval = F}
-pdf("C:/Users/ep1290/OneDrive - University of York/Desktop/QM/vowelplot.pdf", height = 7, width = 10)
-ggplot(mcm) + 
-  geom_point(aes(x = F2, y = F1, color = Vowel)) + 
-  theme_few(18) + 
-  xlab("F2 (Hz)") +
-  ylab("F1 (Hz)") +
-  scale_x_reverse() + 
-  scale_y_reverse()
-dev.off()
-```
-
-Alternatively, you can do png()-dev.off() or jpeg()-dev.off or tiff()-dev.off(). You can and should specify the units and resolution with these. Example units include pixels, inches, centimeters, or millimeters. If you use a unit besides pixels, you need to specify the resolution in pixels per inch (or per cm, etc.). A basic resolution is 72ppi, but I would recommend using resolutions between 200 and 300ppi.  The file just takes up more space on your computer. (300ppi is commonly recommended for print in books and journals.) To see more about your options, check the help page:
-```{r eval = F}
-?png
-
-png("C:/Users/ep1290/OneDrive - University of York/Desktop/QM/vowelplot.png", units = "in", height = 7, width = 10, res = 300)
-ggplot(mcm) + 
-  geom_point(aes(x = F2, y = F1, color = Vowel)) + 
-  theme_few(18) + 
-  xlab("F2 (Hz)") +
-  ylab("F1 (Hz)") +
-  scale_x_reverse() + 
-  scale_y_reverse()
-dev.off()
-
-ggsave("myplot.jpeg", width = 7, height = 10, dpi = 300)
+ggsave("/Users/Thomas/Library/CloudStorage/OneDrive-YorkUniversity/LING 3300/Datasets/Jury/plot1.png", width = 7, height = 7, dpi = 300)
 ```
 
 ### Practice
+
 Create an R script to save the answers to these questions.
 
-1. We've seen that overall, people report being quite familiar with the SSBE accent: The mode of the distribution when plotting the histogram of SSBEFamiliarity scores was the highest bin (97-100). Is this also true for familiarity with Newcastle and Middlesbrough accents? Plot the histograms to find out.
+#### Data wrangling practice
 
 1. Import 'L2_English_Lexical_Decision_Data.csv' into R and call it 'lex'. This data set contains reaction times (RT) in milliseconds to words and nonwords of English from L2 English speaking participants. More info about the data and project [here](https://osf.io/msnpr/).
+2. Create a subset of lex using filter() that contains only the data points where the dominant language (lex$domLang) is **not** English.
+3. Create a variable called 'langs' that contains a list of the unique dominant languages in the newly created subset.
+4. Get the number of unique languages in 'langs' using code. (Don't just look at the environment window.)
+5. Get the number of unique participants in the subset. Participant IDs are in the 'workerID' column.
+6. From the subset of non-English participants, remove data points that have reaction times below 500 ms and above 2000 ms. This will likely require two steps. 
+7. For each participant in this new subset, get the mean reaction time, the standard deviation of the reaction time, and the median reaction time. Store this data in a dataset called 'subj_data'. 
+8. What is the mean, median and range of by-participant means?
+9. What is the mean, median and range of by-participant standard deviations? 
+10. What is the mean, median and range of by-participant medians?
+11. For each dominant language in the new subset, get the mean reaction time. Which language has the lowest mean, which has the highest mean?
+12. For each dominant language in the new subset, get the number of unique participants. Hint: in the summarise() function you will need to use length(unique()). 
+
+
+#### Data visualization practice
+
+1. Load in 'L2_English_Lexical_Decision_Data.csv' again R and call it 'lex', so we're starting over from the original dataset.
 2. Create a histogram of the reaction times (RT column). It will probably look weird because of the extreme range of RTs.
 3. Get a summary of the RT values, and take a look at the maximum value. Something can't be right there.
 4. Create another histogram of the reaction times where the x-axis only includes values from 0 to 5000 ms.
 5. Based on the histogram, it looks like values above 2500 seem pretty improbable. Create a subset of lex which only retains reaction times below 2500 ms. Call this lex again.
 6. Create another histogram of reaction times using the new dataset and change the background theme, along with the outline color and fill of the bars. 
-7. Let's say we're interested in comparing reaction times of L1 English speakers against L2 English speakers. Create a new column called 'L2' that indicates whether a speaker's dominant language is English or not English. Specifically, if the domLang column is equal to English, the value in the L2 column should be "L1 English", otherwise the value in the L2 column should be "L2 English".
-8. Let's also say we might want to look at any potential effects of gender. Create another column in lex called 'gender'. If the sex of the participant is equal to 1, then the new value in the 'gender' column should be "m" for male, otherwise the new value should be "f".
-9. Create a boxplot with the L2 status on the x-axis and the reaction time on the y-axis.
+7. Let's say we're interested in comparing reaction times of L1 English speakers against L2 English speakers. Create a new column called 'L2' that indicates whether a speaker's dominant language is English or not.
+8. Create a boxplot with L2 status on the x-axis and the reaction time on the y-axis.
+9. Let's also say we might want to look at any potential effects of gender. Create another column in lex called 'gender'. If the sex of the participant is equal to 1, then the new value in the 'gender' column should be "m" for male, otherwise the new value should be "f".
 10. Recreate the same boxplot in 8, but use the aesthetic mapping to map color to the gender column. 
-11. Recreate the same boxplot in 9, but also change the background theme and provide more descriptive labels. 
+11. Recreate the same boxplot in 9, but provide more descriptive axis labels. 
 12. Create a new column called 'accuracy'. If the column 'acc' is equal to 1, then the value in 'accuracy' should be equal to "right", otherwise the value should be equal to "wrong".
 13. Create a bar graph with accuracy on the x-axis and the fill of the bar mapped to the L2 status. This should create what's called a "stacked" bar graph, where the number of "right" answers for L1 English speakers is stacked on top of the number of "right" answers for L2 English speakers.
 14. To create a "dodged" bar graph where the bars are **next to each other**, you'll need to use the following argument:
@@ -332,21 +452,4 @@ Create an R script to save the answers to these questions.
 ```{r eval = F}
 geom_bar(aes(x = accuracy, fill = L2), position = "dodge")
 ```
-
-Give that a try. 
-
-15. Now take the same graph from 14 and change the background theme and colors.
-
-16. Now we need to practice creating a scatterplot, but sadly there aren't two **good** continuous variables in the lex dataset. We'll instead use the **mcm** dataset. If you don't have that loaded in to your R workspace, load that in now. 
-17. Make sure you have the column for 'gender'. If you don't have this column, you can recreate it using the following line of code:
-
-```{r eval = F}
-mcm$gender <- substr(mcm$Talker, 1, 1)
-```
-
-18. Create a scatterplot that allows us to visualize the relationship between F1 and F0. Put F1 on the x-axis and F0 on the y-axis.
-19. You might have noticed that F0 looks a little bimodal. This is likely due to gender differences. Create the same scatterplot in 18 but map color to gender.
-20. Now take the same scatterplot from 18 and facet by vowel category (Vowel). 
-21. Reorder the vowel category so it shows up as: "i", "ei", "eh", "a", "o", "u". 
-22. Now recreate the scatterplot from 20 and also change the background theme and add a little more detail to the axis labels (i.e., that these measures are in Hz).
-
+15. Now take the same graph from 14 and change the colors and background theme.
