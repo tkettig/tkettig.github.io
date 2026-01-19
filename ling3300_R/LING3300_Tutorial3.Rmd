@@ -9,8 +9,15 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+Data exploration
 
-Ifelse statements
+xtabs
+
+&  and |
+
+Data cleaning
+
+Scatterplots
 
 ```{r eval = T}
 mcm$highf0 <- ifelse(mcm$F0 > 200, "high", "low")
@@ -56,6 +63,17 @@ f_means <- mcm %>%
   group_by(Fricative) %>% 
   summarise(meandur = mean(dur_f))
 ```
+
+
+
+8. Let's also say we might want to look at any potential effects of gender. Create another column in lex called 'gender'. If the sex of the participant is equal to 1, then the new value in the 'gender' column should be "m" for male, otherwise the new value should be "f".
+
+# 7. Let' s say we are interested in comparing reaction times of L1 English speakers against L2 English speakers. Create a new column called L2 that indicates whether a speaker' s dominant language is English or not English. 
+# Specifically, if the domLang column is equal to English, the value in the L2 column should be L1 English, otherwise the value in the L2 column should be L2 English.
+lex$L2 <- ifelse(lex$domLang == "English", "L1 English", "L2 English")
+
+
+
 
 
 

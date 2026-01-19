@@ -443,8 +443,8 @@ Create an R script to save the answers to these questions.
 7. Let's say we're interested in comparing reaction times of L1 English speakers against L2 English speakers. Create a new column called 'L2' that indicates whether a speaker's dominant language is English or not.
 8. Create a boxplot with L2 status on the x-axis and the reaction time on the y-axis.
 9. Let's also say we might want to look at any potential effects of gender. Create another column in lex called 'gender'. If the sex of the participant is equal to 1, then the new value in the 'gender' column should be "m" for male, otherwise the new value should be "f".
-10. Recreate the same boxplot in 8, but use the aesthetic mapping to map color to the gender column. 
-11. Recreate the same boxplot in 9, but provide more descriptive axis labels. 
+10. Recreate the same boxplot in 9, but use the aesthetic mapping to map color to the gender column. 
+11. Recreate the same boxplot in 10, but provide more descriptive axis labels. 
 12. Create a new column called 'accuracy'. If the column 'acc' is equal to 1, then the value in 'accuracy' should be equal to "right", otherwise the value should be equal to "wrong".
 13. Create a bar graph with accuracy on the x-axis and the fill of the bar mapped to the L2 status. This should create what's called a "stacked" bar graph, where the number of "right" answers for L1 English speakers is stacked on top of the number of "right" answers for L2 English speakers.
 14. To create a "dodged" bar graph where the bars are **next to each other**, you'll need to use the following argument:
