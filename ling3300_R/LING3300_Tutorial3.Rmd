@@ -1,7 +1,7 @@
 ---
-title: "LING 3300 - Week 2 (Part 2)"
+title: "LING 3300 - Tutorial 3"
 author: "Thomas Kettig"
-date: "January 8, 2026"
+date: "January 21, 2026"
 output: html_document
 ---
 
@@ -9,71 +9,247 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Data exploration
-
-xtabs
-
-&  and |
-
-Data cleaning
-
-Scatterplots
+First, as always, let's load in the packages and dataset we'll be working with for these examples.
 
 ```{r eval = T}
-mcm$highf0 <- ifelse(mcm$F0 > 200, "high", "low")
-xtabs(~highf0, mcm)
-```
-
-Now let's create a bar graph that shows us the number of tokens in each F0 bin. We'll use x = highf0 which will list each level of the highf0 column ("high", "low") along the x-axis.
-
-```{r eval = T}
-ggplot(mcm) + geom_bar(aes(x = highf0))
-```
-
-Some of the f0 values are "NA", which is now showing up in our plot. To drop these values, we need to take a *subset* of the dataset which drops the NA values. Remember that the exclamation point ! means "not" 
-
-```{r eval = T}
-mcm_subset <- subset(mcm, !is.na(highf0))
-ggplot(mcm_subset) + 
-  geom_bar(aes(x = highf0))
+library(tidyverse)
+jury <- read.csv("/Users/Thomas/Library/CloudStorage/OneDrive-YorkUniversity/LING 3300/Datasets/Jury/jury_data_basic.csv")
 ```
 
 
 
-**An important note**
-If you have "NA" values in your vector (column), R will be unable to take the mean or perform other standard mathematical functions on it. You'll know if this happens to you because the returned value (e.g., for the mean) will be "NA". To fix this, you would use the optional argument "na.rm = TRUE", where na.rm means "remove the NA values".
+###  & and | 
+
+Something important we haven't covered yet is the AND and OR operators. The AND operator (typed as &, called "ampersand") takes two logical values and returns TRUE only if both values are TRUE themselves. For instance, suppose we have a variable x that is equal to 12, and another variable y equal to 17. We can then check if each of these variables is greater than 5 and less than 15:
+
+```{r eval = T}
+x <- 12
+x > 5 & x < 15
+
+y <- 17
+y > 5 & y < 15
+```
+
+The OR operator (typed as |, called "pike") takes two logical values and returns TRUE if either one (or both) values are TRUE themselves. If we replace the ANDs in the previous example with ORs, here's what we get:
+
+```{r eval = T}
+x <- 12
+x > 5 | x < 15
+
+y <- 17
+y > 5 | y < 15
+```
+
+Since y equals 17, and since 17 is greater than 5, the answer is TRUE to the question "Is y greater than 5 or less than 15?".
+
+These operators are very useful when you're filtering/subsetting your data, too. You can combine subset conditions using AND or OR. For instance, here we can subset out a dataframe of just the observations where the participants rated themselves under 50 on all three of the familiarity scales -- that is, they rated themselves under 50 for SSBE familiarity AND under 50 for Middlesbrough familiarity AND under 50 for Newcastle familiarity.
+
+```{r eval = T}
+lowfamiliarity <- subset(jury, SSBEFamiliarity < 50 & MiddlesbroughFamiliarity < 50 & NewcastleFamiliarity < 50)
+```
+
+...or maybe we want to make a new column that tells us whether the first sound clip in each pair is from a northern, rather than southern, voice (that is, either Middlesbrough or Newcastle is in the Audio1Accent column).
+
+```{r eval = T}
+jury$northern <- jury$Audio1Accent == "Newcastle" | jury$Audio1Accent == "Middlesbrough"
+```
+
+### Cross tabulation
+For character vectors, we can get the overall number of cells per category using the xtabs() function. xtabs() tabulates, or counts up, the number of cells with each unique label. Here we can look at the number of rows by Level -- that is, how many pairs of voices were compared in each level of this experiment. Note the use of the tilde (~) in this formulation. The use of the tilde is a bit idiosyncratic in R, and frequently means "as a function of", but just go with it for now. Like natural languages, computer languages sometimes also have idiosyncratic features.
+
+```{r eval = T}
+xtabs(~Level, jury)
+```
+
+We can get further breakdowns of the counts using the plus sign. The following example breaks down the number of pairs in each level that were different-speaker pairs vs. same-speaker pairs.
+```{r eval = T}
+xtabs(~Level + CorrectAnswer, jury)
+
+# or, if we wanted our table flipped around the other way:
+
+xtabs(~CorrectAnswer + Level, jury)
+```
+
+You can also obtain counts and proportions of vectors with categorical variables with tidyverse code.
 
 ```{r eval = FALSE}
-same_means <- jury %>% 
+counts <- jury %>% 
   group_by(Level) %>% 
-  summarise(mean_sameness = mean(SameAnswer, na.rm = TRUE))
+  summarize(count = n())
+
+# This should give you an ERROR because length() requires you to type out an argument, unlike n()
+counts <- jury %>% 
+  group_by(Level) %>% 
+  summarize(count = length())
+
+# This code should work. Note you can replace the argument inside length() with *any* of the column names (Level, Vowel, SSBEFamiliarity, Participant, etc.) and it will generate the same by-Level row count.
+counts <- jury %>% 
+  group_by(Level) %>% 
+  summarize(count = length(Level))
+
+# If you want to group by two variables, you just put them both in group_by(), separated by a comma:
+counts <- jury %>% 
+  group_by(Level, CorrectAnswer) %>% 
+  summarize(count = n())
+
 ```
 
-Another way to do the same thing but not have to type na.rm = TRUE over and over again is to first use the drop_na() function. What this does is it removes all rows that contain *any* NA values -- not just rows where there are NA values for dur_f, but for any other variable. So if our data contained rows that contained a number in the dur_f column but an NA in any other column, we probably wouldn't want to use the drop_na() function because it would remove *too many* rows. But in this particular dataset, it looks like when NA values appaear, they're present in all of the measurement columns and not just one at a time -- so this drop_na() is a good shortcut if you found running the code without it returned NAs.
+### Selecting columns and getting unique values
 
-```{r eval = FALSE}
-# Here's what happens when we just run drop_na()
-na_dropped <- mcm %>%
+If we run the following code, what we see is the number of ratings completed overall for each level. 
+
+```{r eval = T}
+jury %>% 
+  group_by(Level) %>% 
+  summarize(count = n())
+```
+
+Suppose we wanted to find out *how many participants* completed each level instead of *how many observations* we have per level (in this case, each participant rated eight pairs of voices per level). If we add "Participant" to the group_by() argument, that doesn't give us what we want -- it'll just tell us how many ratings were done by each participant for each level:
+
+```{r eval = T}
+jury %>% 
+  group_by(Level, Participant) %>% 
+  summarize(count = n())
+```
+One solution is to instead first collapse the "Participant" column such that we only have one row per participant per level, which we can then sum up. In this case, it's useful to select just the columns we're interested in: we can ignore all the other columns for now as we add up how many participants did each level. If we wanted to make a new dataframe with just these two columns, we can use the select() function to do so:
+
+```{r eval = T}
+participant_level <- jury %>% 
+  select(Participant, Level)
+```
+
+If you view this resulting dataframe, you can see that we now have lots of duplicate identical rows. We don't want to stop there! We can then use the unique() function to delete all the duplicate rows, keeping only one version of each unique row:
+
+```{r eval = T}
+participant_level <- jury %>% 
+  select(Participant, Level) %>%
+  unique()
+```
+
+We can now add our group_by() and summarize() functions to group by Level and then get the count for how many individual participants did each one:
+
+```{r eval = T}
+jury %>% 
+  select(Participant, Level) %>%
+  unique() %>%
+  group_by(Level) %>%
+  summarize(count = n())
+
+# or, if we want to create a dataframe with this table rather than just spitting out the answer in the console...
+
+participant_level <- jury %>% 
+  select(Participant, Level) %>%
+  unique() %>%
+  group_by(Level) %>%
+  summarize(count = n())
+```
+
+Here we see that all 1,505 participants did levels 1 and 2, but some did a version of level 3 involving expert witness testimony, and some did a version of level 3 involving the introduction of a new piece of evidence.
+
+### NA values
+
+For this example, let's load in another dataset. Download the *mandarin_f0.csv* file from eClass and load it in to your RStudio environment.
+
+```{r eval = T}
+mandarin <- read.csv("/Users/Thomas/Library/CloudStorage/OneDrive-YorkUniversity/LING 3300/From UoY QM course/datasets/mandarin_f0.csv")
+```
+
+This is a dataset containing f0 (pitch) measurements. Each sound file (named in the "file" column) contained several words; each vowel was located (named in the "vowel" column, along with the preceding "prec" and following "foll" sounds) and its start and end points were marked; from these start and end points the duration could be calculated ("dur"), and f0 could be measured at 10 time points through the vowel (so "f0_1" is the f0 at the beginning of the vowel, "f0_2" is the f0 at the next time point, all the way to "f0_10" at the end).
+
+Suppose we want to find the mean of all the f0 measurements at timepoint 5 (that is, f0_5), grouped by file, so that we get a sense of the average f0 within each file at about the midpoint of each vowel.
+
+```{r eval = T}
+mandarin %>% 
+  group_by(file) %>% 
+  summarise(mean_f0 = mean(f0_5))
+```
+
+If you look at the resulting table, everything is NA! That's not good. The reason is that if you have "NA" values in your vector (column), R will be unable to take the mean or perform other standard mathematical functions on it. You'll know if this happens to you because the returned value (e.g., for the mean) will be "NA". One way to omit NA values is to wrap the object within the function na.omit():
+
+```{r eval = T}
+mandarin %>% 
+  group_by(file) %>% 
+  summarise(mean_f0 = mean(na.omit(f0_5)))
+```
+
+Another strategy that does the same thing is using the optional argument "na.rm = TRUE", where na.rm means "remove the NA values".
+
+```{r eval = T}
+mandarin %>% 
+  group_by(file) %>% 
+  summarise(mean_f0 = mean(f0_5, na.rm = TRUE))
+```
+
+If we don't want to type na.omit() or na.rm = TRUE over and over again, we can potentially use the drop_na() function. What this does is it removes all rows that contain *any* NA values -- not just rows where there are NA values for f0_5, but for *any* variable. If our data contained rows that contained a number in the f0_5 column but an NA in the f0_4 column, we probably wouldn't want to use this drop_na() function because it would remove *too many* rows.
+
+```{r eval = T}
+na_dropped <- mandarin %>%
   drop_na()
-View(na_dropped)
 
-# Now let's just use that as our first step, and add our group and summarise functions after:
-f_means <- mcm %>% 
+nrow(mandarin)
+nrow(na_dropped)
+```
+
+Here you can see that we've eliminated about half the rows, because so many of them have one or more NAs in them! Supposing that was something we wanted to do, we could have drop_na() as our first step, after which we use the group and summarize functions.
+
+```{r eval = T}
+mandarin %>% 
   drop_na() %>%
-  group_by(Fricative) %>% 
-  summarise(meandur = mean(dur_f))
+  group_by(file) %>% 
+  summarise(mean_f0 = mean(f0_5))
 ```
 
 
+### Calculating Standard Error
 
-8. Let's also say we might want to look at any potential effects of gender. Create another column in lex called 'gender'. If the sex of the participant is equal to 1, then the new value in the 'gender' column should be "m" for male, otherwise the new value should be "f".
+We've seen before in Tutorial 2 how to get a dataframe with means, standard deviations, and counts of observations:
 
-# 7. Let' s say we are interested in comparing reaction times of L1 English speakers against L2 English speakers. Create a new column called L2 that indicates whether a speaker' s dominant language is English or not English. 
-# Specifically, if the domLang column is equal to English, the value in the L2 column should be L1 English, otherwise the value in the L2 column should be L2 English.
-lex$L2 <- ifelse(lex$domLang == "English", "L1 English", "L2 English")
+```{r eval = T}
+same_means <- jury %>% 
+  group_by(Level, CorrectAnswer) %>% 
+  summarize(mean_sameness = mean(SameAnswer), 
+            sd_sameness = sd(SameAnswer),
+            count = length(SameAnswer))
+
+f0_means <- mandarin %>% 
+  group_by(file) %>% 
+  summarize(mean_f0 = mean(na.omit(f0_5)), 
+            sd_f0 = sd(na.omit(f0_5)),
+            count = length(na.omit(f0_5)))
+```
+
+We've also seen in our class lecture that the standard error is calculated by taking the standard deviation and dividing by the square root of the number of observations. That means that once we have a dataframe saved with the means, standard deviations, and counts, all we need to do is add a column that does the standard error calculation:
+
+```{r eval = T}
+same_means$se <- same_means$sd_sameness / sqrt(same_means$count)
+
+f0_means$se <- f0_means$sd_f0 / sqrt(f0_means$count)
+```
 
 
+### Saving a table
 
+You might want to save a table of values as a .csv or text file for ease of then copying it into a report/paper. You can use the write.table() function to create a space-delimited .txt file, or write.csv() to create a comma-delimited .csv file. Within each of these functions, you first tell it the name of the dataframe you want to save as a table, then within "" quotes you put the path name to where you want to save it, *ending in the name you want to give the new file and the .csv or .txt extension it should have*. 
+
+When using write.table(), it'll default to writing as a space-delimited .text file -- that is, there will be a space between each of the columns. You can also make it a tab-delimited file by adding the argument *sep = "\\\\t"* which tells R to separate the columns with a tab.
+
+You can also set row.names to FALSE; this is recommended to prevent R from saving the row numbers as an extra column in your file, which can cause issues if you read the data back into R later. You can see in the following two examples that when row.names = FALSE is not included, you end up with an initial column with row numbers that is in most cases extraneous/unnecessary.
+
+```{r eval = F}
+write.table(same_means, "/Users/Thomas/Library/CloudStorage/OneDrive-YorkUniversity/LING 3300/Datasets/sameness_means.txt", sep = "\\t", row.names = FALSE)
+
+write.csv(f0_means, "/Users/Thomas/Library/CloudStorage/OneDrive-YorkUniversity/LING 3300/Datasets/f0_means.csv")
+```
+
+#### Practice with datasets
+1. Load in 'L2_English_Lexical_Decision_Data.csv' and call it 'lex'.
+2. Create another column in lex called 'gender'. If the sex of the participant is equal to 1, then the new value in the 'gender' column should be "m" for male, otherwise the new value should be "f".
+3. Get a count of how many observations we have from male vs. female participants.
+4. Get a count of how many male vs. female participants are in the sample.
+5. Create a new column called 'Germanic'. If the domLang is English, German, Norwegian, Danish, or Afrikaans, the new value in the 'Germanic' column should be "Germanic", otherwise it should be "Other".
+6. Get a count of how many male vs. female participants there are whose dominant language is Germanic vs. other.
+7. Create a dataframe that summarizes the mean, median, standard deviation, count of observations, and standard error of reaction times (the RT column) for the data grouped by gender and Germanic vs. other dominant language. (Hint: you will probably need to first create a table with all the measurements except for standard error, and then calculate standard error in a subsequent line of code.)
+8. Save the dataframe created in step 7 to a tab-delimited .txt table.
 
 
 
