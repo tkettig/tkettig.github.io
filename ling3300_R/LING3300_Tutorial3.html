@@ -713,8 +713,8 @@ write.csv(f0_means, &quot;/Users/Thomas/Library/CloudStorage/OneDrive-YorkUniver
 <div id="practice-with-datasets" class="section level4">
 <h4>Practice with datasets</h4>
 <ol style="list-style-type: decimal">
-<li>Load in ‘L2_English_Lexical_Decision_Data.csv’ and call it
-‘lex’.</li>
+<li>Load in ‘L2_English_Lexical_Decision_Data.csv’ and call it ‘lex’.
+Not again here that participant is in the workerID column.</li>
 <li>Create another column in lex called ‘gender’. If the sex of the
 participant is equal to 1, then the new value in the ‘gender’ column
 should be “m” for male, otherwise the new value should be “f”.</li>
@@ -727,13 +727,18 @@ German, Norwegian, Danish, or Afrikaans, the new value in the ‘Germanic’
 column should be “Germanic”, otherwise it should be “Other”.</li>
 <li>Get a count of how many male vs. female participants there are whose
 dominant language is Germanic vs. other.</li>
-<li>Create a dataframe that summarizes the mean, median, standard
-deviation, count of observations, and standard error of reaction times
-(the RT column) for the data grouped by gender and Germanic vs. other
-dominant language. (Hint: you will probably need to first create a table
-with all the measurements except for standard error, and then calculate
-standard error in a subsequent line of code.)</li>
-<li>Save the dataframe created in step 7 to a tab-delimited .txt
+<li>Create a dataframe that summarizes the within-participant reaction
+time (RT) means, medians, standard deviations, and counts of
+observations. (Hint: in preparation for the next step, it would be wise
+to include not only workerID but also the Germanic and gender columns in
+your group_by() function.)</li>
+<li>Based on the dataframe created in step 7, create another dataframe
+that summarizes the mean of means, standard deviations, and standard
+errors of reaction times for the data, grouped by gender and Germanic
+vs. other dominant language. (Hint: you will probably need to first
+create a dataframe with all the measurements except for standard error,
+and then calculate standard error in a subsequent line of code.)</li>
+<li>Save the dataframe created in step 8 to a tab-delimited .txt
 table.</li>
 </ol>
 <p><font size="1.5"> Disclaimer: Some of these original materials were

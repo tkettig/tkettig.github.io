@@ -242,14 +242,15 @@ write.csv(f0_means, "/Users/Thomas/Library/CloudStorage/OneDrive-YorkUniversity/
 ```
 
 #### Practice with datasets
-1. Load in 'L2_English_Lexical_Decision_Data.csv' and call it 'lex'.
+1. Load in 'L2_English_Lexical_Decision_Data.csv' and call it 'lex'. Not again here that participant is in the workerID column.
 2. Create another column in lex called 'gender'. If the sex of the participant is equal to 1, then the new value in the 'gender' column should be "m" for male, otherwise the new value should be "f".
 3. Get a count of how many observations we have from male vs. female participants.
 4. Get a count of how many male vs. female participants are in the sample.
 5. Create a new column called 'Germanic'. If the domLang is English, German, Norwegian, Danish, or Afrikaans, the new value in the 'Germanic' column should be "Germanic", otherwise it should be "Other".
 6. Get a count of how many male vs. female participants there are whose dominant language is Germanic vs. other.
-7. Create a dataframe that summarizes the mean, median, standard deviation, count of observations, and standard error of reaction times (the RT column) for the data grouped by gender and Germanic vs. other dominant language. (Hint: you will probably need to first create a table with all the measurements except for standard error, and then calculate standard error in a subsequent line of code.)
-8. Save the dataframe created in step 7 to a tab-delimited .txt table.
+7. Create a dataframe that summarizes the within-participant reaction time (RT) means, medians, standard deviations, and counts of observations. (Hint: in preparation for the next step, it would be wise to include not only workerID but also the Germanic and gender columns in your group_by() function.)
+8. Based on the dataframe created in step 7, create another dataframe that summarizes the mean of means, standard deviations, and standard errors of reaction times for the data, grouped by gender and Germanic vs. other dominant language. (Hint: you will probably need to first create a dataframe with all the measurements except for standard error, and then calculate standard error in a subsequent line of code.)
+9. Save the dataframe created in step 8 to a tab-delimited .txt table.
 
 
 
