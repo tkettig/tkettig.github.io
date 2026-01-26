@@ -685,6 +685,13 @@ need to do is add a column that does the standard error calculation:</p>
 <pre class="r"><code>same_means$se &lt;- same_means$sd_sameness / sqrt(same_means$count)
 
 f0_means$se &lt;- f0_means$sd_f0 / sqrt(f0_means$count)</code></pre>
+<p>(Let’s put aside for the moment that standard error should be
+calculated based on a set of means of independent sampling
+distributions, such as within-speaker means, not raw observations. In
+the practice below, you’ll be able to do it the proper way and first
+calculate sample means, from which you then get the means-of-means and
+sd-of-means and count-of-means, and then can calculate the standard
+error.)</p>
 </div>
 <div id="saving-a-table" class="section level3">
 <h3>Saving a table</h3>

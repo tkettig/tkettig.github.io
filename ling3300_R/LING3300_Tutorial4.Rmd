@@ -1,7 +1,7 @@
 ---
-title: "LING 3300 - Week 3"
+title: "LING 3300 - Tutorial 4"
 author: "Thomas Kettig"
-date: "January 8, 2026"
+date: "January 25, 2026"
 output: html_document
 ---
 
@@ -9,219 +9,264 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+### Wide format data and long format data, and tidy data
 
-### Introduction to dplyr
-One of the most useful packages within the tidyverse is **dplyr**. If you've already loaded in the whole tidyverse using library(tidyverse), then dplyr has been loaded and you're ready to go! In the future, though, if you want to save a few seconds of loading time, you can load the individual packages within tidyverse instead of everything at once. In the case of dplyr, you'd run:
+Wide format data refers to a spreadsheet where a single row contains multiple columns for related attributes of a single data point or subject. For example, each column could be the response value for a trial in an experiment. As the name suggests, it is wide in appearance.
 
-```{r eval = FALSE}
-library(dplyr)
+![**Example wide format data: mean VOT values are stored for each subject in a separate row.**](mandarin-wide.png){width=25%}
+
+Long format data refers to a spreadsheet where one column specifies an attribute of a data point and another column specifies the value of that attribute. That is, trial number/type would be listed in one column and the response value for that particular trial would be listed in another column. Subject information is frequently repeated across many rows. As the name suggests, it is long in appearance.
+
+![**Example long format data: mean VOT values are listed in one column with the stop column indicating which stop consonant the mean refers to.**](mandarin-long.png){width=20%}
+
+
+Datasets are frequently a mix of the two types, such as the Jury dataset we’ve been using. It’s long format in the sense that we have multiple rows for each participant, but it’s wide in that several attributes of each pairwise comparison (like the 0-100 responses for typicality, similarity, and sameness) are spread across several columns. Though it’s a mix, this is considered to be a **tidy dataset**. Tidy datasets have one observation per row, one column per variable, and each intersection of a row/column contains a single value.
+
+Tidy datasets are easiest to work with in R, but it’s not always the case that you will start with a tidy dataset. Sometimes you’ll have to spend some time to get it in the proper format. For instance, if you run a study on the popular experiment/survey site Qualtrics, the output will be *very* wide, with just one row per participant and every observation distributed across a large number of columns per variable.
+
+Certain analyses and plots also frequently require the dataset to either be in wide or long format. For example, analyses or plots that require within-subject comparisons such as correlations or paired t-tests on subject means require wide format data: one column for each condition that will then be compared. Long format data is sometimes required for certain ggplots when you want to map an attribute of the data point to some aesthetic.
+
+You don’t want to overthink this too much, but if you find yourself stuck in getting an analysis to work, you might have to pivot (some part of) the dataset to either long or wide format. To do this, we’ll use the pivot_longer() and pivot_wider() functions in the tidyr package of the tidyverse. 
+
+### Wide to long format using tidyr
+
+In addition to running the Jury study using the gamified experiment that you're familiar with, we also ran a boring version of the study on Qualtrics. The difference was that there were no flying cars or robot judge story, no expert witnesses or evidence... each level just had the same boring white background. The first level was a series of eight pairwise voice comparisons to which they supplied their typicality, similarity, and sameness ratings, then a short break, then another series of eight comparisons, then a short break, then the final series of eight comparisons.
+
+On eClass you'll find a (considerably simplified) version of what you might encounter from Qualtrics. Download it and load it into R. Don't forget to load the tidyverse too, since most of the functions in this tutorial are from that set of packages!
+
+```{r eval = T}
+library(tidyverse)
+
+jury_qualtrics <- read.csv("/Users/Thomas/Library/CloudStorage/OneDrive-YorkUniversity/LING 3300/Datasets/Jury/jury_qualtrics_wide.csv", header = TRUE)
 ```
 
-dplyr has a few very useful functions: 
+Take a look at the dataset. Since this portion of the study was run in Qualtrics, the resulting data is in a very wide format, with just a single row per participant and a ton of columns. Each person rated their familiarity with SSBE, Middlebrough, and Newcastle accents just once, so the "Familiarity" columns aren't problematic. The potential problem here is the rest of the columns: A1_typ contains each participant's typicality rating when they encountered the a pair of sound files called A1, A1_sim contains each participant's similarity rating for that pair, and A1_same contains each participant's sameness rating for that pair. (We also have a separate dataset with more information on the exact detail each level and pair -- things like what the files were, what the accents were, whether the correct answer was that they're the same or different speakers, etc. In reality, each participant heard the pairs in a carefully randomized order, too -- but we won't worry about these details at the moment.) So you can see that we have A1 through A8, B1 through B8, and C1 through C8 -- the 24 pairs of sound files that each participant encountered over the course of the experiment, times the three ratings they provided for each pair, for a total of 72 columns that in reality should probably be simplified down to fewer columns in order to be of much use for calculating statistics or making plots.
 
-+ filter()
-+ select()
-+ mutate()
-+ group_by()
-+ summarise()
+So: let's transform this dataframe such that all the pairwise ratings are in a single, new "rating" column; we'll therefore also need to have a new column specifying the attributes of each rating in the column after it -- that is, to which pair and to what response scale was the participant responding when they supplied that particular rating? To do this, we use the function pivot_longer(). 
 
-Note that some of these are effectively equivalent to things we've seen before, but dplyr code is sometimes a little cleaner (and by clean, I don't mean that what we were doing doesn't work; I just mean dplyr syntax is more streamlined, less clunky, etc.). We'll be focusing on the filter(), group_by(), and summarise() functions, but I highly recommend looking up how select() and mutate() work if you like this style of coding. 
-
-
-#### filter()
-Get a subset of the rows in the dataset using the filter() function. This is basically the same as the subset() function.
-```{r eval = FALSE}
-mcm2 <- filter(mcm, dur_f > 100)
-View(mcm2)
+```{r eval = T}
+jury_qualtrics_long <- jury_qualtrics %>% 
+  pivot_longer(cols = A1_typ:C8_same, 
+               names_to = "question", 
+               values_to = "rating")
 ```
 
-#### The pipe %>%
-dplyr, however, lets you use what's called a pipe, which is written like this: %>%
+This function takes three arguments: 
 
-The pipe allows for an assembly line of functions: you start with the original dataset, then apply a function to that dataset. Using %>% allows you to think of your code as a sequence of actions.
+* "cols", where we give it the **range of columns we want to transform**: here, we specify all the columns between A1_typ and C8_same
+* "names_to", where we tell it the name of the new column to which we want to transfer the **names of the old columns**
+* "values_to", where we tell it the name of the new column to which we want to transfer the **values in the cells**.
 
-For instance, the two lines of code below do *the exact same thing*:
-```{r eval = FALSE}
-mcm3 <- filter(mcm, dur_f > 150)
+Note that for "cols" here, we could have specified these columns in various ways, but using the colon to get all columns between A1_typ and C8_same is probably the best. One (very tedious) alternative could have been: c(A1_typ,A1_sim,A1_same,A2_typ,A2_sim,A2_same...) until we'd typed out all 72 of the old columns. Or we could have done one of the following, which are two different ways to ask R to select all columns whose names contain the character strings "typ" or "sim" or "same".
 
-mcm3 <- mcm %>% 
-  filter(dur_f > 150)
+```{r eval = T}
+jury_qualtrics_long <- jury_qualtrics %>% 
+   pivot_longer(cols = contains("typ") | contains("sim") | contains("same"), 
+                names_to = "question", 
+                values_to = "rating")
+
+jury_qualtrics_long <- jury_qualtrics %>% 
+   pivot_longer(cols = contains(c("typ","sim","same")),
+                names_to = "question", 
+                values_to = "rating")
 ```
 
-In the first line, we type out the "verb" -- in this case, filter() -- then within the parentheses we define the dataframe of interest as mcm, followed by an operation on the variable dur_f.
+If you look at our resulting dataframe, you'll see that whereas before we had one row containing each participant code and their associated gender, age, and accent familiarity, we now have *72* of those rows all repeating the identical data for each participant. We now also have a single "question" column with the name of the pair number.
 
-In the second line, we type out the "topic" -- in this case, our dataframe mcm -- and then after the pipe we tell it what "verb" we want to operate on the data -- in this case, filtering based on a particular variable dur_f.
+> __Hot tip: Let's split a column!__
+This dataframe could be even more informative if we split up the "question" column into two parts: the pair name and the question type. Since there's an underscore delimiting these two elements in each cell, it's actually quite easy to split these using the tidyverse separate_wider_delim() function. Let's do this in preparation for the next step.
 
-In both cases, the leftmost part of the code will be the name we want our new dataframe to be, plus the assign <- function.
-
-Avoid using the pipe when: (1) You need to manipulate more than one object at a time. Reserve pipes for a sequence of steps applied to one primary object; (2) There are meaningful intermediate objects that could be given informative names. You may find that you sometimes prefer using R base syntax for some things and prefer to use dplyr's %>% for other things.
-
-Note: %>% should always have a space before it, and should usually be followed by a new line. After the first step, each line should be indented by two spaces. This structure makes it easier to add new steps (or rearrange existing steps) and harder to overlook a step.
-
-
-Typing %>% over and over can be tedious! Thankfully, RStudio provides a keyboard shortcut for inserting the pipe operator into your R code.
-
-On Mac type shift + command + m.
-
-On Windows type shift + control + m
-
-It may not seem totally intuitive at first, but this shortcut is handy once you get used to it.
-
-
-#### Getting descriptive statistics: group_by() %>% summarise()
-
-Allowing multiple pipes brings us to one of the most useful sequences of functions in R / dplyr: **group_by() %>% summarise()**
-
-*SUPER USEFUL!* 
-
-Why do we need this? 
-
-Remember the summary() function? Well, that was useful, but let's say we wanted to get the mean duration of all 8 fricative categories in our dataset. We would have to create 8 separate subsets of the data and run the mean() function (or summary()) function on all 8 subsets. That's effortful. Instead, we can use the group_by() function to create subsets, and then derive the mean using the summarise() function (or summarize(), which also works). 
-
-In this example, we'll store these means in a new dataset that we're calling f_means:
-
-```{r eval = FALSE}
-f_means <- mcm %>% 
-  group_by(Fricative) %>% 
-  summarise(meandur = mean(dur_f))
-View(f_means)
+```{r eval = T}
+jury_qualtrics_long <- jury_qualtrics_long %>% 
+  separate_wider_delim(question, delim = "_", names = c("pair", "question_type"))
 ```
 
-The above line of code takes the mcm dataset, groups by the fricative category, then gets the mean of the dur_f column and fills that value into a column we're calling "meandur" in f_means.
+Below is an example of some plots that are particularly easy to make with the data in this long format. They shows the overall density plots for the ratings obtained for the three question types. If we didn't have a single column for question type, we wouldn't be able to make 
 
-**An important note**
-If you have "NA" values in your vector (column), R will be unable to take the mean or perform other standard mathematical functions on it. You'll know if this happens to you because the returned value (e.g., for the mean) will be "NA". To fix this, you can use the optional argument "na.rm = TRUE", where na.rm means "remove the NA values".
+```{r eval = T}
+ggplot(jury_qualtrics_long) + 
+  geom_density(aes(x = rating, colour = question_type))
 
-```{r eval = FALSE}
-f_means <- mcm %>% 
-  group_by(Fricative) %>% 
-  summarise(meandur = mean(dur_f, na.rm = TRUE))
+ggplot(jury_qualtrics_long) + 
+  geom_density(aes(x = rating)) +
+  facet_wrap(~question_type)
 ```
 
-Another way to do the same thing but not have to type na.rm = TRUE over and over again is to first use the drop_na() function. What this does is it removes all rows that contain *any* NA values -- not just rows where there are NA values for dur_f, but for any other variable. So if our data contained rows that contained a number in the dur_f column but an NA in any other column, we probably wouldn't want to use the drop_na() function because it would remove *too many* rows. But in this particular dataset, it looks like when NA values appaear, they're present in all of the measurement columns and not just one at a time -- so this drop_na() is a good shortcut if you found running the code without it returned NAs.
+### Long to wide format using tidyr
 
-```{r eval = FALSE}
-# Here's what happens when we just run drop_na()
-na_dropped <- mcm %>%
-  drop_na()
-View(na_dropped)
+The long format of this data is great for some uses. But there might also be situations where we want to get the data just a bit wider: We might want, for instance, to have a single column with all the typicality ratings, one with all the similarity ratings, and one with all the sameness ratings. This is very easy to do with -- you guessed it! -- pivot_wider():
 
-# Now let's just use that as our first step, and add our group and summarise functions after:
-f_means <- mcm %>% 
-  drop_na() %>%
-  group_by(Fricative) %>% 
-  summarise(meandur = mean(dur_f))
+```{r eval = T}
+jury_qualtrics_wider <- jury_qualtrics_long %>% 
+  pivot_wider(names_from = question_type,
+              values_from = rating)
 ```
 
-Alright. Back to summarise(). You can have all sorts of functions embedded in the summarise function. *These will be useful on your assignments if you need to find means and standard deviations.*
+In the function, we use the names_from argument to refer to which column in the jury_qualtrics_long dataset contains the names that should become the new column names. The values_from argument refers to which column in the jury_qualtrics_long dataset contains the values that should fill the cells of those new columns.
 
-+ mean()
-+ sd()
-+ median()
-+ max()
-+ min()
-+ length() -- this is one way to get the number of tokens
+Note also the difference in the use of quotations between pivot_longer() above and pivot_wider() here. In the tidyverse style of code, when we are creating a *new* column, we use quotes; when we are referring to an existing column, we leave it unquoted.
 
-```{r eval = FALSE}
-f_means <- mcm %>% 
-  drop_na() %>%
-  group_by(Fricative) %>% 
-  summarise(meandur = mean(dur_f), sddur = sd(dur_f))
+#### Practice
+1. We've seen above how to make a set of rating density plots facetted by question type. Now, see if you can wrangle this Qualtrics data into a format that allows you to create a similarly facetted set of rating density plots for the ratings of familiarity with SSBE, Middlesbrough, and Newcaslte accents. After transforming the data, create the set of facetted plots.
 
-f_means <- mcm %>% 
-  drop_na() %>%
-  group_by(Fricative) %>% 
-  summarise(meandur = mean(dur_f), 
-            sddur = sd(dur_f), 
-            mediandur = median(dur_f))
 
-f_means <- mcm %>% 
-  drop_na() %>%
-  group_by(Fricative) %>% 
-  summarise(meandur = mean(dur_f), 
-            sddur = sd(dur_f), 
-            mediandur = median(dur_f), 
-            maxdur = max(dur_f), 
-            mindur = min(dur_f), 
-            count = length(dur_f))
+### Calculating margin of error + confidence interval
 
-View(f_means)
+I recommend having your slides from Unit 4 open while you read the following.
+
+Let's first read in our L2 lexical decision data and run the code that got us our nice reaction time means-of-means + sd + count + se dataframe.
+
+```{r eval = T}
+lex <- read.csv("/Users/Thomas/Library/CloudStorage/OneDrive-YorkUniversity/LING 3300/Datasets/L2_English_Lexical_Decision_Data.csv")
+
+lex$gender <- ifelse(lex$sex == 1, "m", "f")
+
+lex$Germanic <- ifelse(lex$domLang == "English" |
+                         lex$domLang == "German" |
+                         lex$domLang == "Norwegian" |
+                         lex$domLang == "Danish" |
+                         lex$domLang == "Afrikaans",
+                       "Germanic", "Other")
+
+RTmeans <- lex %>% 
+  group_by(Germanic, gender, workerID) %>%
+  summarize(meanRT = mean(RT),
+            medianRT = median(RT),
+            sdRT = sd(RT),
+            count = length(RT))
+
+RTmeansofmeans <- RTmeans %>% 
+  group_by(Germanic, gender) %>%
+  summarize(meanofmeansRT = mean(meanRT),
+            sdofmeansRT = sd(meanRT),
+            count = length(meanRT))
+
+RTmeansofmeans$se <- RTmeansofmeans$sdofmeansRT / sqrt(RTmeansofmeans$count)
 ```
 
-Note that within the summarise() function, on the *left* side of the = we specify a new name that we make up for each column in our output, and on the *right* side of the = we specify the function to run on a column in the input. There's nothing special about the word "mediandur" -- we could cal this column "median_dur" or "medianduration" or anything we wanted. It's best if we choose a clear, descriptive name that's short enough to easily type.
+Now that we have the standard error of the means, we can calculate the confidence interval around each of the Germanic/non-Germanic and M/F combinations of reaction time means-of-means. Recall that the confidence interval is the mean ± the margin of error. The formula for margin of error is: standard error times the t-value or z-value for a particular confidence level. Using the t-value rather than the z-value is recommended when there's a relatively low number of samples (under 30 or so), or where we don't know the population standard deviation. Here we have plenty of samples, but as with most measurements in linguistics, we can't really claim to know what the population-wide standard deviation is, so let's stick with t-values.
 
-Let's say you wanted to get talker-specific means for each fricative. You can add more groups to the group_by function:
+How do we get a t-value? Well, the R function qt() will give that to us! qt() requires two arguments (see slide 21 from Unit 4 lecture): the point in the t-distribution you want to find the value for and the degrees of freedom in your sample.
 
-```{r eval = FALSE}
-f_means <- mcm %>% 
-  drop_na() %>%
-  group_by(Talker, Fricative) %>% 
-  summarise(meandur = mean(dur_f), 
-            sddur = sd(dur_f), 
-            mediandur = median(dur_f), 
-            maxdur = max(dur_f), 
-            mindur = min(dur_f), 
-            count = length(dur_f))
+Let's say that we want to report a 95% confidence interval, as is most typical in linguistics. Recall that since the difference between 95% and 100% is 5%, that means our alpha is 0.05. Remember how we talked about that 0.05 being split between the upper and lower tails of the normal distribution? That means that some important numbers to keep in mind as we calculate our t-values will be 0.025 and 0.975.
 
-View(f_means)
+In addition to those numbers, we also need to know our degrees of freedom. To get degrees of freedom, we just take our sample size minus one. So first, let's make a new column that takes our sample size counts and subtracts one, to give us degrees of freedom. You can probably already see that this makes a relatively small difference for our data, where we have hundreds of samples; this subtraction of one would make a bigger impact if we had smaller sample sizes
+
+```{r eval = T}
+RTmeansofmeans$df <- RTmeansofmeans$count - 1
 ```
 
-#### Get unique elements
-Use the unique() function to see the individual categories in a column
+Now that we have a *df* column for each of the conditions, we can make another column calculating the lower t-values and the upper t-values.
 
-```{r eval = FALSE}
-unique(mcm$Talker)
-unique(mcm$Fricative)
+```{r eval = T}
+RTmeansofmeans$tval_lower <- qt(0.025, RTmeansofmeans$df)
+RTmeansofmeans$tval_upper <- qt(0.975, RTmeansofmeans$df)
 ```
 
-#### Get the length of unique elements
-You can use length(unique()) to get the number of unique categories in a column. The length() function is simply wrapped around the unique() function.
+Now that we have our degrees of freedom and our t-values in columns, we can calculate the margin of error for each of the rows by multiplying the standard error by the t-values.
 
-```{r eval = FALSE}
-length(unique(mcm$Talker))
+```{r eval = T}
+RTmeansofmeans$margin_of_error_lower <- RTmeansofmeans$se * RTmeansofmeans$tval_lower
+RTmeansofmeans$margin_of_error_upper <- RTmeansofmeans$se * RTmeansofmeans$tval_upper
 ```
 
-You could alternatively write two lines of code to get this:
+Look in the dataframe and see that now you've got the margin of error around the mean that will comprise your confidence interval: plus or minus that particular number. So our last step will be to add or subtract that value from the mean to find the lower and upper bounds of the CI. Since the lower margin of error is already negative, we can *add* that to our mean and it will count as subtraction.
 
-```{r eval = FALSE}
-unique_items <- unique(mcm$Talker)
-length(unique_items)
+```{r eval = T}
+RTmeansofmeans$lower95CI <- RTmeansofmeans$meanofmeansRT + RTmeansofmeans$margin_of_error_lower
+RTmeansofmeans$upper95CI <- RTmeansofmeans$meanofmeansRT + RTmeansofmeans$margin_of_error_upper
 ```
 
-Or even use the pipe %>% :
+### Visualizing confidence intervals
 
-```{r eval = FALSE}
-unique(mcm$Talker) %>%
-  length()
+We have everything we need here to make plots of these confidence intervals. Let's make a plot with the means plotted as points, which we can do with geom_point(). We can add bars for the confidence intervals with geom_errorbar(). We can split the data by Germanic vs. non-Germanic on the x-axis, have the y-axis be reaction time, and separate the genders by colour. For the error bar, we can set ymin (the bar's lowest point) to be the lower 95% CI and the ymax (the bar's highest point) to be the upper 95% CI.
+
+```{r eval = T}
+ggplot(RTmeansofmeans) +
+  geom_point(aes(x = Germanic, y = meanofmeansRT, color = gender)) +
+  geom_errorbar(aes(x = Germanic, y = meanofmeansRT, color = gender, ymin = lower95CI, ymax = upper95CI))
+```
+So far we've been making ggplots by putting the dataframe name inside ggplot() and all the aesthetics inside the individual plotting functions. But do you see how we have the identical aesthetics aes(x = Germanic, y = meanofmeansRT, color = gender) in both of the plotting functions here? When multiple plotting functions take the same dataframe and aesthetics, we can save some space by sticking the parts of aes() that should be applied to all of the functions into the ggplot() function. The following code therefore accomplishes the same thing as above:
+ 
+```{r eval = T}
+ggplot(RTmeansofmeans, aes(x = Germanic, y = meanofmeansRT, color = gender)) +
+  geom_point() +
+  geom_errorbar(aes(ymin = lower95CI, ymax = upper95CI))
+```
+This is a bit hard to read, though, because our mean points and error bars are overlapping. We use the command position = position_dodge(width = 0.5) in both the geom_point() and geom_errorbar() functions in order to spread them apart a bit horizontally. (Unfortunately, it doesn't seem like you can put this position command inside the overall ggplot() function even though it's identical for both plotting functions -- you need to specify it in both plotting functions.)
+
+```{r eval = T}
+ggplot(RTmeansofmeans, aes(x = Germanic, y = meanofmeansRT, color = gender)) +
+  geom_point(position = position_dodge(width = 0.5)) +
+  geom_errorbar(aes(ymin = lower95CI, ymax = upper95CI), position = position_dodge(width = 0.5))
 ```
 
-### Getting help
-You can get help using a question mark preceding the function that you want more information on. You can also get help via Google or the Help tab in the lower righthand corner. I highly recommend Google!
-```{r eval = FALSE}
-?mean
-?max
-?filter
-?subset
+You can also play around with the size of the mean point, the widths of the error bars, and the width of the error bar lines.
+
+```{r eval = T}
+ggplot(RTmeansofmeans, aes(x = Germanic, y = meanofmeansRT, color = gender)) +
+  geom_point(position = position_dodge(width = 0.4), size = 3) +
+  geom_errorbar(aes(ymin = lower95CI, ymax = upper95CI), width = 0.15, position = position_dodge(width = 0.4), linewidth = 0.6)
+```
+Our lines of code are getting awfully long, though! Luckily, we can add line returns after not just + signs, but also commas. Here's the same code, but spaced out a bit more to make things more legible:
+
+```{r eval = T}
+ggplot(RTmeansofmeans, 
+       aes(x = Germanic,
+           y = meanofmeansRT, 
+           color = gender)) +
+  geom_point(position = position_dodge(width = 0.4), 
+             size = 3) +
+  geom_errorbar(aes(ymin = lower95CI, ymax = upper95CI),
+                width = 0.15,
+                position = position_dodge(width = 0.4),
+                linewidth = 0.6)
 ```
 
-### Practice
-Create an R script to save the answers to these questions.
+It's also rather common to see line returns after some opening parentheses and before some ending parentheses. Here's another way to write the code which might help you keep track of all the parentheses going on.
 
-1. Import 'L2_English_Lexical_Decision_Data.csv' into R and call it 'lex'. This data set contains reaction times (RT) in milliseconds to words and nonwords of English from L2 English speaking participants. More info about the data and project [here](https://osf.io/msnpr/).
-2. Create a subset of lex using filter() that contains only the data points where the dominant language (lex$domLang) is **not** English.
-3. Create a variable called 'langs' that contains a list of the unique dominant languages in the newly created subset.
-4. Get the number of unique languages in 'langs' using code. (Don't just look at the environment window.)
-5. Get the number of unique participants in the subset. Participant IDs are in the 'workerID' column.
-6. From the subset of non-English participants, remove data points that have reaction times below 500 ms and above 2000 ms. This will likely require two steps. 
-7. For each participant in this new subset, get the mean reaction time, the standard deviation of the reaction time, and the median reaction time. Store this data in a dataset called 'subj_data'. 
-8. What is the mean, median and range of by-participant means?
-9. What is the mean, median and range of by-participant standard deviations? 
-10. What is the mean, median and range of by-participant medians?
-11. For each dominant language in the new subset, get the mean reaction time. Which language has the lowest mean, which has the highest mean?
-12. For each dominant language in the new subset, get the number of unique participants. Hint: in the summarise() function you will need to use length(unique()). 
+```{r eval = T}
+ggplot(
+  RTmeansofmeans, 
+  aes(
+    x = Germanic, 
+    y = meanofmeansRT, 
+    color = gender
+    )
+  ) +
+  geom_point(
+    position = position_dodge(width = 0.4), 
+    size = 3
+    ) +
+  geom_errorbar(
+    aes(ymin = lower95CI, ymax = upper95CI), 
+    width = 0.15, 
+    position = position_dodge(width = 0.4), 
+    linewidth = 0.6
+    )
+```
 
+The number and placement of your line breaks is really a matter of style and comfort -- as long as the code runs correctly without errors, it's up to you how to code, though I do encourage you to break up particularly long lines of code so that they are more readable.
 
+You can also add labels, or beautify the plot with themes:
 
+```{r eval = T}
+ggplot(RTmeansofmeans, aes(x = Germanic, y = meanofmeansRT, color = gender)) +
+  geom_point(position = position_dodge(width = 0.4), size = 3) +
+  geom_errorbar(
+    aes(ymin = lower95CI, ymax = upper95CI),
+    width = 0.15,
+    position = position_dodge(width = 0.4),
+    linewidth = 0.6
+  ) +
+  labs(
+    x = "Language family",
+    y = "Mean RT",
+    color = "Gender",
+    title = "Mean of means of RT with 95% CI whiskers"
+  ) +
+  theme_minimal()
+```
 
 
 <font size="1.5"> Disclaimer: Some of these original materials were put together by Eleanor Chodroff and Elisa Passoni for the University of York. Thomas Kettig then inherited it and modified as needed, particularly based on notes by Nathan Sanders from the University of Toronto. The R software and the packages are distributed under the terms of the GNU General Public License, either Version 2, June 1991 or Version 3, June 2007 (run the command licence () for more information)</font>

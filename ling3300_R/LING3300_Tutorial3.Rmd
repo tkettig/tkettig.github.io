@@ -16,8 +16,6 @@ library(tidyverse)
 jury <- read.csv("/Users/Thomas/Library/CloudStorage/OneDrive-YorkUniversity/LING 3300/Datasets/Jury/jury_data_basic.csv")
 ```
 
-
-
 ###  & and | 
 
 Something important we haven't covered yet is the AND and OR operators. The AND operator (typed as &, called "ampersand") takes two logical values and returns TRUE only if both values are TRUE themselves. For instance, suppose we have a variable x that is equal to 12, and another variable y equal to 17. We can then check if each of these variables is greater than 5 and less than 15:
@@ -226,6 +224,7 @@ same_means$se <- same_means$sd_sameness / sqrt(same_means$count)
 f0_means$se <- f0_means$sd_f0 / sqrt(f0_means$count)
 ```
 
+(Let's put aside for the moment that standard error should be calculated based on a set of means of independent sampling distributions, such as within-speaker means, not raw observations. In the practice below, you'll be able to do it the proper way and first calculate sample means, from which you then get the means-of-means and sd-of-means and count-of-means, and then can calculate the standard error.)
 
 ### Saving a table
 
