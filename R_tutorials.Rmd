@@ -13,3 +13,4 @@ These tutorials are based on various resources developed at the University of Yo
 
 <h3> [Tutorial 3 - Further data wrangling and standard error](ling3300_R/LING3300_Tutorial3.html) </h3> 
 
+<h3> [Tutorial 4 - Confidence Intervals](ling3300_R/LING3300_Tutorial4.html) </h3> 
