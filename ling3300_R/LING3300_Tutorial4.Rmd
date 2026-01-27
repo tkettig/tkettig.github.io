@@ -113,10 +113,6 @@ In the function, we use the names_from argument to refer to which column in the 
 
 Note also the difference in the use of quotations between pivot_longer() above and pivot_wider() here. In the tidyverse style of code, when we are creating a *new* column, we use quotes; when we are referring to an existing column, we leave it unquoted.
 
-#### Practice
-1. We've seen above how to make a set of rating density plots facetted by question type. Now, see if you can wrangle this Qualtrics data into a format that allows you to create a similarly facetted set of rating density plots for the ratings of familiarity with SSBE, Middlesbrough, and Newcastle accents. After transforming the data, create the set of facetted plots.
-
-
 ### Calculating margin of error + confidence interval
 
 I recommend having your slides from Unit 4 open while you read the following.
@@ -282,6 +278,12 @@ ggplot(RTgrandmeans, aes(x = Germanic, y = meanofmeansRT, color = gender)) +
   ) +
   theme_minimal()
 ```
+
+
+
+#### Practice
+1. We've seen above how to make a set of rating density plots facetted by question type. Now, see if you can wrangle this Qualtrics data into a format that allows you to create a similarly facetted set of rating density plots for the ratings of familiarity with SSBE, Middlesbrough, and Newcastle accents. After transforming the data, create the set of facetted plots.
+2. In this Qualtrics jury dataset, each participant only gave us one estimate for how familiar they'd rate themselves with regard to each accent (Middlesbrough, Newcastle, or SSBE). Even though we've mostly been discussing the standard error when talking about calculating the mean of means, we don't actually need to find multiple means (such as lots of participant-internal means) to calculate standard error and therefore confidence intervals. So let's try it on this Qualtrics dataset: Calculate the mean familiarity rating for each accent, along with the 95% confidence interval around each accent mean. Then make a plot that visualizes these means and CIs. Note that here you won't have to worry about defining colours or dodging the positions -- since we just care about one independent variable here (Accent), this will be a simpler ggplot to make than the above ones where we wanted to show the interaction of two independent variables (Germanic and gender).
 
 
 <font size="1.5"> Disclaimer: Some of these original materials were put together by Eleanor Chodroff and Elisa Passoni for the University of York. Thomas Kettig then inherited it and modified as needed, particularly based on notes by Nathan Sanders from the University of Toronto. The R software and the packages are distributed under the terms of the GNU General Public License, either Version 2, June 1991 or Version 3, June 2007 (run the command licence () for more information)</font>
