@@ -13,12 +13,19 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Wide format data refers to a spreadsheet where a single row contains multiple columns for related attributes of a single data point or subject. For example, each column could be the response value for a trial in an experiment. As the name suggests, it is wide in appearance.
 
+<br>
+
 ![**Example wide format data: mean VOT values are stored for each subject in a separate row.**](mandarin-wide.png){width=25%}
+
+<br>
 
 Long format data refers to a spreadsheet where one column specifies an attribute of a data point and another column specifies the value of that attribute. That is, trial number/type would be listed in one column and the response value for that particular trial would be listed in another column. Subject information is frequently repeated across many rows. As the name suggests, it is long in appearance.
 
+<br>
+
 ![**Example long format data: mean VOT values are listed in one column with the stop column indicating which stop consonant the mean refers to.**](mandarin-long.png){width=20%}
 
+<br>
 
 Datasets are frequently a mix of the two types, such as the Jury dataset we’ve been using. It’s long format in the sense that we have multiple rows for each participant, but it’s wide in that several attributes of each pairwise comparison (like the 0-100 responses for typicality, similarity, and sameness) are spread across several columns. Though it’s a mix, this is considered to be a **tidy dataset**. Tidy datasets have one observation per row, one column per variable, and each intersection of a row/column contains a single value.
 
@@ -107,7 +114,7 @@ In the function, we use the names_from argument to refer to which column in the 
 Note also the difference in the use of quotations between pivot_longer() above and pivot_wider() here. In the tidyverse style of code, when we are creating a *new* column, we use quotes; when we are referring to an existing column, we leave it unquoted.
 
 #### Practice
-1. We've seen above how to make a set of rating density plots facetted by question type. Now, see if you can wrangle this Qualtrics data into a format that allows you to create a similarly facetted set of rating density plots for the ratings of familiarity with SSBE, Middlesbrough, and Newcaslte accents. After transforming the data, create the set of facetted plots.
+1. We've seen above how to make a set of rating density plots facetted by question type. Now, see if you can wrangle this Qualtrics data into a format that allows you to create a similarly facetted set of rating density plots for the ratings of familiarity with SSBE, Middlesbrough, and Newcastle accents. After transforming the data, create the set of facetted plots.
 
 
 ### Calculating margin of error + confidence interval
@@ -117,10 +124,13 @@ I recommend having your slides from Unit 4 open while you read the following.
 Let's first read in our L2 lexical decision data and run the code that got us our nice reaction time means-of-means + sd + count + se dataframe.
 
 ```{r eval = T}
+# Loading in the dataset
 lex <- read.csv("/Users/Thomas/Library/CloudStorage/OneDrive-YorkUniversity/LING 3300/Datasets/L2_English_Lexical_Decision_Data.csv")
 
+# Making a character-based column "gender" out of the previous numerical "sex" column
 lex$gender <- ifelse(lex$sex == 1, "m", "f")
 
+# Making a column for a (fairly arbitrary) subset of Germanic vs. other dominant languages
 lex$Germanic <- ifelse(lex$domLang == "English" |
                          lex$domLang == "German" |
                          lex$domLang == "Norwegian" |
@@ -128,22 +138,24 @@ lex$Germanic <- ifelse(lex$domLang == "English" |
                          lex$domLang == "Afrikaans",
                        "Germanic", "Other")
 
-RTmeans <- lex %>% 
-  group_by(Germanic, gender, workerID) %>%
-  summarize(meanRT = mean(RT),
-            medianRT = median(RT),
-            sdRT = sd(RT),
-            count = length(RT))
+# Making a dataframe called RTmeans that has some descriptive stats
+RTmeans <- lex %>%  # We start with the overall data
+  group_by(Germanic, gender, workerID) %>%  # We group by participant and keep in Germanic and gender
+  summarize(meanRT = mean(RT), # We summarize the mean of the reaction times in a new meanRT column
+            medianRT = median(RT),  # Plus a column for the median RT
+            sdRT = sd(RT),  # And a column for the standard deviation of the RTs
+            count = length(RT))  # And a count of how many observations there were
 
-RTmeansofmeans <- RTmeans %>% 
-  group_by(Germanic, gender) %>%
-  summarize(meanofmeansRT = mean(meanRT),
-            sdofmeansRT = sd(meanRT),
-            count = length(meanRT))
+# Now, from that by-speaker list of descriptive stats, we make a dataframe called RTgrandmeans
+RTgrandmeans <- RTmeans %>% 
+  group_by(Germanic, gender) %>% # We group by Germanic and gender...
+  summarize(meanofmeansRT = mean(meanRT), # ...and get a mean of the by-participant means...
+            sdofmeansRT = sd(meanRT), # ...and the standard deviation of those by-participant means...
+            count = length(meanRT)) # ...and the number of participants in each category
 
-RTmeansofmeans$se <- RTmeansofmeans$sdofmeansRT / sqrt(RTmeansofmeans$count)
+# And also then calculate the standard error of the mean by dividing the std of means by the square root of the counts
+RTgrandmeans$se <- RTgrandmeans$sdofmeansRT / sqrt(RTgrandmeans$count)
 ```
-
 Now that we have the standard error of the means, we can calculate the confidence interval around each of the Germanic/non-Germanic and M/F combinations of reaction time means-of-means. Recall that the confidence interval is the mean ± the margin of error. The formula for margin of error is: standard error times the t-value or z-value for a particular confidence level. Using the t-value rather than the z-value is recommended when there's a relatively low number of samples (under 30 or so), or where we don't know the population standard deviation. Here we have plenty of samples, but as with most measurements in linguistics, we can't really claim to know what the population-wide standard deviation is, so let's stick with t-values.
 
 How do we get a t-value? Well, the R function qt() will give that to us! qt() requires two arguments (see slide 21 from Unit 4 lecture): the point in the t-distribution you want to find the value for and the degrees of freedom in your sample.
@@ -153,28 +165,28 @@ Let's say that we want to report a 95% confidence interval, as is most typical i
 In addition to those numbers, we also need to know our degrees of freedom. To get degrees of freedom, we just take our sample size minus one. So first, let's make a new column that takes our sample size counts and subtracts one, to give us degrees of freedom. You can probably already see that this makes a relatively small difference for our data, where we have hundreds of samples; this subtraction of one would make a bigger impact if we had smaller sample sizes
 
 ```{r eval = T}
-RTmeansofmeans$df <- RTmeansofmeans$count - 1
+RTgrandmeans$df <- RTgrandmeans$count - 1
 ```
 
 Now that we have a *df* column for each of the conditions, we can make another column calculating the lower t-values and the upper t-values.
 
 ```{r eval = T}
-RTmeansofmeans$tval_lower <- qt(0.025, RTmeansofmeans$df)
-RTmeansofmeans$tval_upper <- qt(0.975, RTmeansofmeans$df)
+RTgrandmeans$tval_lower <- qt(0.025, RTgrandmeans$df)
+RTgrandmeans$tval_upper <- qt(0.975, RTgrandmeans$df)
 ```
 
 Now that we have our degrees of freedom and our t-values in columns, we can calculate the margin of error for each of the rows by multiplying the standard error by the t-values.
 
 ```{r eval = T}
-RTmeansofmeans$margin_of_error_lower <- RTmeansofmeans$se * RTmeansofmeans$tval_lower
-RTmeansofmeans$margin_of_error_upper <- RTmeansofmeans$se * RTmeansofmeans$tval_upper
+RTgrandmeans$margin_of_error_lower <- RTgrandmeans$se * RTgrandmeans$tval_lower
+RTgrandmeans$margin_of_error_upper <- RTgrandmeans$se * RTgrandmeans$tval_upper
 ```
 
 Look in the dataframe and see that now you've got the margin of error around the mean that will comprise your confidence interval: plus or minus that particular number. So our last step will be to add or subtract that value from the mean to find the lower and upper bounds of the CI. Since the lower margin of error is already negative, we can *add* that to our mean and it will count as subtraction.
 
 ```{r eval = T}
-RTmeansofmeans$lower95CI <- RTmeansofmeans$meanofmeansRT + RTmeansofmeans$margin_of_error_lower
-RTmeansofmeans$upper95CI <- RTmeansofmeans$meanofmeansRT + RTmeansofmeans$margin_of_error_upper
+RTgrandmeans$lower95CI <- RTgrandmeans$meanofmeansRT + RTgrandmeans$margin_of_error_lower
+RTgrandmeans$upper95CI <- RTgrandmeans$meanofmeansRT + RTgrandmeans$margin_of_error_upper
 ```
 
 ### Visualizing confidence intervals
@@ -182,21 +194,23 @@ RTmeansofmeans$upper95CI <- RTmeansofmeans$meanofmeansRT + RTmeansofmeans$margin
 We have everything we need here to make plots of these confidence intervals. Let's make a plot with the means plotted as points, which we can do with geom_point(). We can add bars for the confidence intervals with geom_errorbar(). We can split the data by Germanic vs. non-Germanic on the x-axis, have the y-axis be reaction time, and separate the genders by colour. For the error bar, we can set ymin (the bar's lowest point) to be the lower 95% CI and the ymax (the bar's highest point) to be the upper 95% CI.
 
 ```{r eval = T}
-ggplot(RTmeansofmeans) +
+ggplot(RTgrandmeans) +
   geom_point(aes(x = Germanic, y = meanofmeansRT, color = gender)) +
   geom_errorbar(aes(x = Germanic, y = meanofmeansRT, color = gender, ymin = lower95CI, ymax = upper95CI))
 ```
-So far we've been making ggplots by putting the dataframe name inside ggplot() and all the aesthetics inside the individual plotting functions. But do you see how we have the identical aesthetics aes(x = Germanic, y = meanofmeansRT, color = gender) in both of the plotting functions here? When multiple plotting functions take the same dataframe and aesthetics, we can save some space by sticking the parts of aes() that should be applied to all of the functions into the ggplot() function. The following code therefore accomplishes the same thing as above:
+
+So far we've been making ggplots by putting the dataframe name inside ggplot() and all the aesthetics inside the individual plotting functions. But do you see how we have the identical aesthetics aes(x = Germanic, y = meanofmeansRT, color = gender) in both of the plotting functions here? When multiple plotting functions take the same dataframe and aesthetics, we can (sometimes) save some space by sticking the parts of aes() that should be applied to all of the functions into the ggplot() function. The following code therefore accomplishes the same thing as above. Like I've been saying, there are usually many different ways to accomplish the same thing in R!
  
 ```{r eval = T}
-ggplot(RTmeansofmeans, aes(x = Germanic, y = meanofmeansRT, color = gender)) +
+ggplot(RTgrandmeans, aes(x = Germanic, y = meanofmeansRT, color = gender)) +
   geom_point() +
   geom_errorbar(aes(ymin = lower95CI, ymax = upper95CI))
 ```
-This is a bit hard to read, though, because our mean points and error bars are overlapping. We use the command position = position_dodge(width = 0.5) in both the geom_point() and geom_errorbar() functions in order to spread them apart a bit horizontally. (Unfortunately, it doesn't seem like you can put this position command inside the overall ggplot() function even though it's identical for both plotting functions -- you need to specify it in both plotting functions.)
+
+Anyway -- this plot isn't that great yet, for one thing because our mean points and error bars are overlapping. We use the command *position = position_dodge(width = 0.5)* in both the geom_point() and geom_errorbar() functions in order to spread them apart a bit horizontally. (Unfortunately, it doesn't seem like you can easily stick this command inside the overall ggplot() function even though it's identical for both plotting functions. Sometimes R is just odd that way.)
 
 ```{r eval = T}
-ggplot(RTmeansofmeans, aes(x = Germanic, y = meanofmeansRT, color = gender)) +
+ggplot(RTgrandmeans, aes(x = Germanic, y = meanofmeansRT, color = gender)) +
   geom_point(position = position_dodge(width = 0.5)) +
   geom_errorbar(aes(ymin = lower95CI, ymax = upper95CI), position = position_dodge(width = 0.5))
 ```
@@ -204,14 +218,15 @@ ggplot(RTmeansofmeans, aes(x = Germanic, y = meanofmeansRT, color = gender)) +
 You can also play around with the size of the mean point, the widths of the error bars, and the width of the error bar lines.
 
 ```{r eval = T}
-ggplot(RTmeansofmeans, aes(x = Germanic, y = meanofmeansRT, color = gender)) +
+ggplot(RTgrandmeans, aes(x = Germanic, y = meanofmeansRT, color = gender)) +
   geom_point(position = position_dodge(width = 0.4), size = 3) +
   geom_errorbar(aes(ymin = lower95CI, ymax = upper95CI), width = 0.15, position = position_dodge(width = 0.4), linewidth = 0.6)
 ```
-Our lines of code are getting awfully long, though! Luckily, we can add line returns after not just + signs, but also commas. Here's the same code, but spaced out a bit more to make things more legible:
+
+Alright. Now our lines of code are getting awfully long! Luckily, we can add some line returns in such a way that the whole thing will run the same way as before! If you have begun a function with an open parenthesis and haven't closed it yet, you can you add as many line breaks as you'd like and R will ignore them and keep reading to figure out what comes next until it gets to the final closing parenthesis. Here's the same code, but spaced out a bit more to make things more legible:
 
 ```{r eval = T}
-ggplot(RTmeansofmeans, 
+ggplot(RTgrandmeans, 
        aes(x = Germanic,
            y = meanofmeansRT, 
            color = gender)) +
@@ -223,11 +238,11 @@ ggplot(RTmeansofmeans,
                 linewidth = 0.6)
 ```
 
-It's also rather common to see line returns after some opening parentheses and before some ending parentheses. Here's another way to write the code which might help you keep track of all the parentheses going on.
+It's also rather common to see line returns after some opening parentheses and before some ending parentheses. Here's another way to write the code which might help you keep track of all the parentheses going on, since as soon as you start having lots of line breaks and embedded functions things can get messy.
 
 ```{r eval = T}
 ggplot(
-  RTmeansofmeans, 
+  RTgrandmeans, 
   aes(
     x = Germanic, 
     y = meanofmeansRT, 
@@ -248,10 +263,10 @@ ggplot(
 
 The number and placement of your line breaks is really a matter of style and comfort -- as long as the code runs correctly without errors, it's up to you how to code, though I do encourage you to break up particularly long lines of code so that they are more readable.
 
-You can also add labels, or beautify the plot with themes:
+We can also add nicer labels and a title, or beautify the plot with themes:
 
 ```{r eval = T}
-ggplot(RTmeansofmeans, aes(x = Germanic, y = meanofmeansRT, color = gender)) +
+ggplot(RTgrandmeans, aes(x = Germanic, y = meanofmeansRT, color = gender)) +
   geom_point(position = position_dodge(width = 0.4), size = 3) +
   geom_errorbar(
     aes(ymin = lower95CI, ymax = upper95CI),
