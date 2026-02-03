@@ -15,5 +15,5 @@ These tutorials are based on various resources developed at the University of Yo
 
 <h3> [Tutorial 4 - Confidence Intervals](ling3300_R/LING3300_Tutorial4.html) </h3> 
 
-<h3> [Tutorial 5 - t-tests](ling3300_R/LING3300_Tutorial45.html) </h3> 
+<h3> [Tutorial 5 - t-tests](ling3300_R/LING3300_Tutorial5.html) </h3> 
 
