@@ -1,7 +1,7 @@
 ---
 title: "LING 3300 - Week 4"
 author: "Thomas Kettig"
-date: "January 8, 2026"
+date: "February 1, 2026"
 output: html_document
 ---
 
@@ -9,83 +9,161 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+First, as always, let's load in the packages and dataset we'll be working with for these examples. To start, let's use the basic jury dataset (not the Qualtrics one from last tutorial).
 
-### Simple if-else statements 
-If-else statements are a staple of almost all programming languages. As their name suggests, these are statements that make a certain change to an element *if* a condition is met, otherwise (or *else*), it makes a different change. For example, we could create a new column in the dataset that tries to guess the gender of a speaker based on their f0. If the f0 is less than, say, 200 Hz, let's call it "male", otherwise (else), we'll call it female. 
-
-There are a few ways to write if-else statements in R. One way is using the ifelse() function. 
-ifelse() takes three arguments: the condition that needs to be met (jury$f0 < 200), what to do if that condition is TRUE (indicate "male"), what to do if the condition is FALSE (indicate "female")
-Here we create a new column where we guess the gender of the speaker based on their F0:
-```{r eval = FALSE}
-jury$guessG <- ifelse(jury$F0 < 200, "male", "female")
-View(jury)
+```{r eval = T}
+library(tidyverse)
+jury <- read.csv("/Users/Thomas/Library/CloudStorage/OneDrive-YorkUniversity/LING 3300/Datasets/Jury/jury_data_basic.csv")
 ```
 
-### Cross tabulation
-For character vectors, we can get the overall number of cells per category using the xtabs() function. xtabs() tabulates, or counts up, the number of cells with each unique label. Here we can look at how many rows were guessed as "male" and how many as "female" in our new guessG column. Note the use of the tilde (~) in this formulation. The use of the tilde is a bit idiosyncratic in R, and frequently means "as a function of", but just go with it for now. Like natural languages, computer languages sometimes also have idiosyncratic features. (Side note from Thomas: There are also other, possibly more intuitive, ways to do the same thing using tidyverse syntax we'll be introducing next week.)
+## t-tests
 
-```{r eval = FALSE}
-xtabs(~guessG, jury)
+t-tests are designed to *test for significant differences between variables*. The dependent variable should be **continuous** (like seconds, hertz, etc.) and the independent variable should be **categorical** and have **two** possible states (e.g., English vs. German, young vs. old, girls vs. boys, this sample vs. known population, etc.). The research hypothesis will involve a statement that there exists a difference between A and B in measurement X. The null hypothesis will involve a statement that no difference exists between A and B in measurement X. 
+
+There are three main types of t-tests:
+
+1. One-sample t-test
+2. Independent samples t-test
+3. Paired sample t-test
+
+### One-sample t-test
+
+The one-sample t-test is for testing whether measures of a given sample are significantly different from a known population mean. It is rare that you have access to a known population mean, but every once in a while it may be available. 
+
+For instance, suppose we bribe the top bureaucrat at the Office for National Statistics and they include a question on the census asking every person in the UK how familiar they are with Southern Standard British English on a 0 to 100 scale. Suppose, in this alternate universe where we have such unbridled power, the mean of their 69 million responses was **75.89**, so we can take that as our known population mean.
+
+We now want to know whether the 1,505 participants we got for our gamified experiment are representative of the UK population as a whole. The null hypothesis is that there should be no difference between the mean of our observed sample of SSBE familiarity responses and the known population mean.
+
+First, let's wrangle our data to be in the proper format. As it stands, the jury dataset has 24 identical observations for SSBEFamiliarity per person, because it's in a fairly long format. For this particular hypothesis, we can focus just on the couple of relevant columns and discard all rows that are repetitions of the same data, so we end up with just one datapoint per participant.
+
+```{r message = T}
+# Get participant ratings of SSBE Familiarity in one dataframe
+jury_familarity <- jury %>% 
+  select(Participant, SSBEFamiliarity) %>% 
+  unique()
 ```
 
-We can get further breakdowns of the counts using the plus sign: 
-The following example breaks down the counts by guessed gender and the talker who produced those values
-```{r eval = FALSE}
-xtabs(~guessG + Talker, jury)
+We now have a dataframe with one row per participant and their self-declared SSBE familiarity rating. This is now in a good format, because our observations (rows) are now independent observations. In other cases, you'll see that these independent observations might be by-participant means (e.g. speaker f0 means, listener response time means). Let's see what the overall mean is:
+
+```{r message = T}
+# What's the mean?
+mean(jury_familarity$SSBEFamiliarity)
+```
+75.04 is pretty close to the known population mean of 75.89! But is the difference significant at a 95% confidence level?
+
+To run a one-sample t-test in R, we can use the t.test() function in R. The first argument will be the list of observations (here, our column of SSBE familiarity ratings), and the second argument will be the known population value (here, since the population mean is known as *µ*, the Greek letter called "mu", we call it "mu" in the argument):
+
+```{r message = T}
+# t.test comparing our sample of SSBE Familiarity ratings to the "known" population mean
+t.test(jury_familarity$SSBEFamiliarity, mu = 75.89)
+```
+So in our sample of 1,505 UK residents, no significant difference was observed between their self-rated familiarity with SSBE (*x̄* = 75.04) and the census-validated population mean (*µ* = 75.89), as assessed in an one sample t-test (*t* = -1.36, *p* = 0.17).
+
+But this was just a made-up example where for some reason we know a population mean. That's almost never going to happen in linguistics. The independent samples t-test and paired sample t-tests are more useful in practice (at least until you learn about regression models, in another couple weeks...)
+
+
+### Paired sample t-test
+
+The paired sample t-test assesses the difference in values between two groups, where the values originate from the *same* source. That is, each value in Group 1 is *paired* with a value in Group 2. In practice, this usually means that you have *one* group of participants who produced values in *two* separate conditions.
+
+In our jury data, participants responded to both same- and different-speaker pairs. One hypothesis we might have is that they probably responded with higher sameness ratings for same-speaker pairs and lower ratings for different-speaker pairs -- or at least we hope they did, if they were paying any attention in the experiment. In this case, we have responses in both conditions for every participant, so it's a good candidate for a paired samples t-test if we want to do this sanity check. Let's get the by-participant, by-condition sameness rating means, first of all. Remember that the "SameAnswer" column contains the sameness ratings, and the "CorrectAnswer" column contains information on whether the pair of files was in fact from the same or different speakers.
+
+```{r message = T}
+# Get the subset of data necessary to answer the research question
+jury_sameness <- jury %>% # Start  with our original dataset, make a new one
+  select(Participant, SameAnswer, CorrectAnswer)
+
+# Since we have multiple observations per participant per condition, let's make sure all our rows are independent by getting the by-participant, by-condition means
+jury_sameness_means <- jury_sameness %>%
+  group_by(Participant, CorrectAnswer) %>%
+  summarize(meanSame = mean(SameAnswer))
+```
+Note that the null hypothesis associated with this research hypothesis is that there is no difference between the two conditions -- that if we subtract participants' different-speaker sameness rating from their same-speaker sameness rating, the result should be zero. Let's see what the data says.
+
+```{r message = T}
+# We need to get the data into a wider format so that we can subtract across columns
+jury_sameness_means_wider <- jury_sameness_means %>%
+  pivot_wider(names_from = CorrectAnswer,
+              values_from = meanSame)
+
+# Get difference between each participant's mean same-speaker pair rating and their mean different-speaker pair rating
+jury_sameness_means_wider$Difference <- jury_sameness_means_wider$same - jury_sameness_means_wider$different
+
+# What are the mean and median of the by-participant differences? What does the distribution look like?
+summary(jury_sameness_means_wider$Difference)
+hist(jury_sameness_means_wider$Difference)
 ```
 
-We can also count how many tokens we have per fricative:
-```{r eval = FALSE}
-xtabs(~Fricative, jury)
+Looks like this is a nice normal-looking distribution around the mean difference of 25. This doesn't at all look like it's centred on 0. So just based on this, we can already expect to reject the null hypothesis based on our statistical test!
+
+With this wider dataset, we now have two paired columns we can compare in the t-test. Our first argument will be the vector of all by-participant mean sameness ratings of same-speaker pairs (the column called "same"), and the second argument will be the vector of all by-participant mean sameness ratings of different-speaker pairs (the column called "different"). We then have *paired = T* because the vector from each column exactly lines up such that they are pairs by row; this is what makes it a paired sample t-test!
+
+```{r message = T}
+t.test(jury_sameness_means_wider$same, jury_sameness_means_wider$different, paired = T)
+```
+We can see that we're given the mean difference of 25.15, just like what our summary gave us as a mean above. We also have 1,504 degrees of freedom because we have 1,505 participants, minus one. We get here a p-value of less than 2.2e-16, which means 2.2 times 10^-16. This is a *very* low number with lots of zero decimal places, so we can sum it up as less than 0.001. The way we'd report this effect is as follows: *In a sample of 1,505 participants, the paired sample t-test reveals a significant difference between sameness ratings for same- and different-speaker voice pairs (t(1504) = 60.405, p < 0.001).*
+
+
+### Independent samples t-test
+
+As the name suggests, the independent samples t-test assesses the difference in some value between two *independent* groups. By independent groups, we mean that the values did not originate from the same source. In practice, this usually means that you have two separate groups of participants and you are comparing their values. 
+
+As an example of the independent samples t-test, we could consider the case of speakers with a high degree of familiarity with the rather obscure Middlesbrough accent, versus those with a low degree of familiarity with it. In this experiment, sometimes we had participants respond to a voice pair where one of the voices was from Middlesbrough and the other was from Newcastle. Most people who aren't from the North East of England can't tell these accents apart, but locals can. Was a group that had higher familiarity with Middlesbrough accents better at giving accent-mismatched pairs low similarity ratings than a group with lower familiarity?
+
+Let's first prep our data so we can test this exciting hypothesis.
+
+```{r message = T}
+# Let's get a summary of the important descriptive stats for Middlesbrough familiarity
+summary(jury$MiddlesbroughFamiliarity)
+
+# Let's divide the data into roughly two parts: The lowest and highest halves of the data
+jury$MidFamBinary <- ifelse(jury$MiddlesbroughFamiliarity < 37.3, "Low", "High")
+
+# Get the subset of data necessary to answer the research question
+jury_middlesbrough <- jury %>% # Start back with our original dataset, make a new one
+  select(Participant, MidFamBinary, SimilarityAnswer, Audio1Accent, Audio2Accent) %>% # These are all the columns we need for now
+  filter(Audio1Accent != Audio2Accent) # We just want the pairs where the two accents are different
+
+# Since we have multiple observations per participant, let's make sure all our rows are independent by getting the by-participant means and medians
+jury_middlesbrough_means <- jury_middlesbrough %>%
+  group_by(Participant, MidFamBinary) %>%
+  summarize(meanSim = mean(SimilarityAnswer))
+```
+Alright -- now we have a dataframe where all the rows are independent observations (that is, we have one row per participant), we have a column telling us whether the participant was high- or low-familiarity, and we have a column for the by-participant means.
+
+To run the independent samples t-test in R, we can create two subset dataframes that we then compare. We enter the two dataframes' mean similarity columns as the first two arguments within t.test(). The argument *paired = F* is there to say that this is an independent-samples t-test: the observations in each group are collected from different participants.
+
+```{r message = T}
+participant.means.low <- subset(jury_middlesbrough_means, MidFamBinary == "Low")
+nrow(participant.means.low) # How many rows do we have for low?
+mean(participant.means.low$meanSim) # What is the mean for low?
+
+participant.means.high <- subset(jury_middlesbrough_means, MidFamBinary == "High")
+nrow(participant.means.high) # How many rows do we have for high?
+mean(participant.means.high$meanSim) # What is the mean for high?
+
+t.test(participant.means.low$meanSim, participant.means.high$meanSim, paired = F)
 ```
 
-And how many tokens we have per fricative and talker:
-```{r eval = FALSE}
-xtabs(~Fricative + Talker, jury)
-```
+It actually appears that the means go in opposite directions from what we might have hypothesized: people in the lower half of Middlesbrough familiarity actually rate the accent-mismatched pairs as *lower* in similarity than the people in the higher half! But is this difference big enough that we need to somehow come up with some explanation for it, or are the numbers close enough that we can write it off as a non-significant difference? Turns out that in our sample of 754 low- and 751 high-familiarity speakers, no significant difference was observed between the similarity ratings of accent-mismatched pairs, as assessed in an independent sample t-test (t=-1.55, p = 0.12).
 
-How many items per fricative and talker and vowel:
-```{r eval = FALSE}
-xtabs(~Talker + Fricative + Vowel, jury)
-```
+### Practice with t-tests
 
-### Subsetting data
-You can take a subset of the dataset using the subset() function. subset() takes two arguments: the name of the dataset, and the condition to subset on. Let's say we just want to look at the data from Talker "M3". We can take the subset in the following way. Note the use of the double equals sign!
+1. Load up your Assignment 1 R script regarding Mandarin VOT. Run all of the steps. With your dataframe of talker- and stop-specific means:
 
-```{r eval = FALSE}
-m3 <- subset(jury, Talker == "M3")
-View(m3)
-```
+2. Calculate the confidence intervals for /p/, /t/, and /k/, assuming a confidence level of 95%.
 
-Let's say we instead want to look at the dataset where the f0 value is below 75 Hz:
+3. Make a plot showing the means of means and their confidence intervals.
 
-```{r eval = FALSE}
-lowf0 <- subset(jury, F0 < 75)
-View(lowf0)
-```
+4. Run 3 t-tests to examine whether the talker means for /p/ are significantly different from those of /t/ (and likewise for /t/–/k/ and /p/–/k/). You must decide which variety of t-test is appropriate! 
 
-You can combine subset conditions using the ampersand (&) which means "AND"
-```{r eval = FALSE}
-lowf0 <- subset(jury, F0 < 200 & Talker == "M3")
-View(lowf0)
+5. Focusing on /t/ only, we are going to determine whether VOT from male speakers differs from that of female speakers. Make a new gender column that marks speakers s005, s011, s012, s016, s018, s020, and s021 as male and the rest as female. Obtain the means-of-means and confidence intervals for male and female speakers' /t/ VOT. 
 
-lowf0 <- subset(jury, F0 < 100 & Talker == "M3")
-View(lowf0)
-```
+6. Make a plot showing the means of means and their confidence intervals for male /t/ and female /t/.
+
+7. Run a t-test to determine whether male speakers differ from female speakers in /t/ VOT. You must decide which variety of t-test is appropriate!
 
 
-
-
-#### Practice with datasets: new columns and xtabs
-1. Let's say your measurement of reaction time (RT) was systematically off by 20 ms. For example, the program recording RT may have started 20 ms after some event, but for the participant, the 20 ms was still technically part of the RT. Create a new column in 'lex' called 'updatedRT' and add 20 to lex\$RT. 
-2. Now delete the old RT column (lex\$RT). If things go horribly wrong here, just reload the dataset back in to start over. :) 
-3. Create another column in lex called 'gender'. If the sex of the participant is equal to 1, then the new value in the 'gender' column should be "m" for male, otherwise the new value should be "f". (See the if-else code). 
-4. Get a count of how many male and female participants there are using cross-tabulation on the gender column.
-
-#### Practice with datasets: subsets
-1. Create a subset of the lex data that includes only data from male participants. Call this new dataset lex_m.
-2. Create another subset of the lex data that includes only reaction times greater than 3000 ms. Call this new dataset sus_long for suspiciously long. How many rows (data points) are there? What is the range of this data? (use the summary() function). 
-3. Create another subset of the lex data that includes only reaction times less than 100 ms. Call this new dataset sus_short for suspiciously short. How many rows (data points) are there? What is the range of this data? (use the summary() function). 
 
 
 
