@@ -1,7 +1,7 @@
 ---
 title: "LING 3300 - Week 5: t-tests"
 author: "Thomas Kettig"
-date: "February 3, 2026"
+date: "February 2, 2026"
 output: html_document
 ---
 
@@ -162,7 +162,6 @@ It actually appears that the means go in opposite directions from what we might 
 6. Make a plot showing the means of means and their confidence intervals for male /t/ and female /t/.
 
 7. Run a t-test to determine whether male speakers differ from female speakers in /t/ VOT. You must decide which variety of t-test is appropriate!
-
 
 
 
