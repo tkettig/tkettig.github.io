@@ -1,0 +1,131 @@
+---
+title: "LING 3300 - Week 7-8: Multiple Linear Regression"
+author: "Thomas Kettig"
+date: "March 3, 2026"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+First step: let's load in the data and required packages. This is the standard McMurray & Jongman dataset of fricative and vowel measures that we've been using this term.
+
+```{r message=T}
+library(tidyverse)
+library(yarrr)
+
+mcm <- read_csv("/Users/Thomas/Library/CloudStorage/OneDrive-YorkUniversity/LING 3300/Datasets/McMurrayJongmanFricativeAcoustics.csv")
+```
+
+## Multiple linear regression
+Last week we predicted F2 from F1. In this example, we'll predict F4 from a combination of phonetic cues: duration of the vowel and onset F3. Not only will we obtain a prediction of F4 using these predictors, we will also be able to assess how well we can predict F4 using the R^2 and whether the effects of vowel duration and onset F3 differ significantly from 0 in their influence on F4.
+
+First, let's get the independent speaker means:
+```{r message = T}
+spkr_means <- mcm %>% 
+  group_by(Talker) %>% 
+  summarise(meanVdur = mean(dur_v, na.rm = T), 
+            meanF3 = mean(F3, na.rm = T), 
+            meanF4 = mean(F4, na.rm = T))
+```
+
+Now, let's center our **predictors** (not the predicted value, which will be F4 in our model). Remember that this is an optional step that makes the intercepts more interpretable.
+```{r message = T}
+spkr_means$meanVdur <- scale(spkr_means$meanVdur, center = T, scale = F)
+spkr_means$meanF3 <- scale(spkr_means$meanF3, center = T, scale = F)
+```
+
+Now, let's look at the relationship between F4 and each predictor:
+
+```{r message = T}
+ggplot(spkr_means, aes(x = meanVdur, y = meanF4)) + 
+  geom_point() + 
+  geom_smooth(method = "lm")
+
+ggplot(spkr_means, aes(x = meanF3, y = meanF4)) + 
+  geom_point() + 
+  geom_smooth(method = "lm")
+```
+
+Now, let's fit the model:
+```{r message = T}
+fit.m <- lm(meanF4 ~ meanVdur + meanF3, spkr_means)
+summary(fit.m)
+```
+Let's have a look at the output, starting with the coefficients. Because we centered our predictor variables, the intercept is the meanF4 in Hz = 3729.46 Hz. *Holding all other variables constant*, we can also see that...
+
++ For every 1 ms increase in mean vowel duration, F4 increases by 0.88 Hz
+
++ For every 1 Hz increase in mean F3, F4 increases by 1.46 Hz
+
+Our equation is as follows:
+
+$meanF4 = 3729 + (0.88 * meanVdur) + (1.46*meanF3) ± e$
+
+Now, looking at the significance of the predictors, we can see that for meanVdur, **we cannot reject the null hypothesis** because the p-value is 0.452, much greater than our 0.05 alpha. For meanF3 **we can reject the null hypothesis** because the p-value is much lower than 0.05.
+
+It's also useful to look at the explained variance, as measured by the Adjusted R-squared: 0.7898. This is good: it means we can account for 79% of the variance in meanF4 from the additive effects of duration of the vowel and onset F3.
+
+### Practice: Multiple linear regression
+
+1. Run a multiple linear regression predicting a talker's mean F4 from their mean F1, F2, and F3. Which formants significantly predict F4? How does the adjusted R-squared of this F1+F2+F3 model compare with the R-squared for the model with vowel duration and F3? What does this indicate about which model is better at predicting F4? 
+
+<br>
+
+## Linear regression with categorical variables
+
+### Two-level categorical variable: treatment coding
+
+In this example, we'll use a subset of the dataset with just /s/ and /sh/ fricative tokens. We're interested in predicting M1 (spectral center of gravity) from the fricative identity (either /s/ or /sh/).
+
+```{r message = T}
+voiceless_sibilants <- subset(mcm, Fricative %in% c("s", "sh"))
+```
+
+First, we need to get independent means of the two sibilant COGs for each speaker. The column with each token's mean COG is **M1**.
+
+```{r message = T}
+vcl_sib <- voiceless_sibilants %>% 
+  group_by(Talker, Fricative) %>% 
+  summarise(meanCOG = mean(M1, na.rm = T))
+```
+
+Next, we'll convert the categorical predictor to a factor and set up the contrast matrix for the linear regression using treatment (dummy) coding. We can then check to see we set it up properly by looking at the contrasts.
+
+The key R code here when dealing with categorical variables is as follows:
+
++ convert the categorical variable to a factor using the **factor()** function
+
+If you want to do treatment coding like we have here, the contr.treatment() line is optional because R will automatically assume this as its default.
+
+```{r message = T}
+vcl_sib$Fricative <- factor(vcl_sib$Fricative, levels = c("s", "sh"))
+# contrasts(vcl_sib$Fricative) <- contr.treatment(2)
+contrasts(vcl_sib$Fricative)
+```
+
+Before we dive into the linear regression, we should visualize our data -- 
+```{r message = T}
+ggplot(vcl_sib) + 
+  geom_boxplot(aes(x = Fricative, y = meanCOG, color = Fricative))
+
+pirateplot(meanCOG ~ Fricative, vcl_sib)
+```
+
+And now we run the regression:
+```{r message = T}
+fit_dummy <- lm(meanCOG ~ Fricative, vcl_sib)
+summary(fit_dummy)
+```
+
+Check out the intercept - it's the mean of means of /s/ COGs.
+```{r message = T}
+mean(subset(vcl_sib, Fricative == "s")$meanCOG)
+```
+
+### Practice: Linear regression with categorical variables 
+
+1. In your Assignment 2, you answered the following research questions using t-tests: *Do sibilants have an overall higher intensity than non-sibilants?* and *Do voiced fricatives have an overall higher intensity than voiceless fricatives?*. Now answer those same questions using linear regressions instead.
+
+<br>
