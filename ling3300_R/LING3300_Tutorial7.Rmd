@@ -143,7 +143,7 @@ contrasts(vcl_sib$Fricative) <- contr.sum(2)
 contrasts(vcl_sib$Fricative)
 ```
 
-In the above code, we order "sh" before "s" because the held-out variable needs to come first (just like how on a number line -1 comes to the left of 1.) Then contr.sum() sum codes the contrasts; we put a 2 in the function to tell it that there are two levels (s vs. sh). Then we can double check that everything looks right by running the contrasts() function.
+In the above code, we order "sh" before "s" because the held-out variable needs to come *last*. Then contr.sum() sum codes the contrasts; we put a 2 in the function to tell it that there are two levels (s vs. sh). Then we can double check that everything looks right by running the contrasts() function.
 
 Since it looks like this is all sum coded correctly, let's now make the model and see what the output looks like.
 
