@@ -75,7 +75,7 @@ It's also useful to look at the explained variance, as measured by the Adjusted 
 
 ## Linear regression with categorical variables
 
-### Two-level categorical variable: treatment coding
+### Two-level categorical variable: treatment/dummy coding
 
 In this example, we'll use a subset of the dataset with just /s/ and /sh/ fricative tokens. We're interested in predicting M1 (spectral center of gravity) from the fricative identity (either /s/ or /sh/).
 
@@ -124,8 +124,39 @@ Check out the intercept - it's the mean of means of /s/ COGs.
 mean(subset(vcl_sib, Fricative == "s")$meanCOG)
 ```
 
+
+### Two-level categorical variable: sum coding
+
+In some research, there's a clear control condition. For instance, in a comparison of L1 and L2 speech, the L1 speakers are generally taken to be the "control", or baseline, while the L2 speakers are hypothesized to have (or not) some difference from L1 speakers. It makes sense to say: L1 speakers have a mean of X along some measure (like reaction time, vowel duration, pitch -- whatever), so we want to know, do L2 speakers differ from that baseline?
+
+In other research, though, there isn't a clear baseline condition. For instance, if we're comparing results for male vs. female participants in a linguistic experiment, which of those should we take as our baseline against which to compare the other? While L1 speakers are usually considered to be the typical, baseline sort of speakers of a language, should men or women be considered the baseline? Perhaps we'd rather consider neither a baseline.
+
+Sum coding is useful when there isn't a clear control condition. It's also very useful when dealing with interactions, as it can make the resulting model more interpretable.
+
+What sum coding does is make the intercept equal to the overall mean of the predicted variable, rather than equal to the mean of the control level. For two-level categorical variables, we do this by setting one of the levels equal to -1 and the other equal to 1. The level set as equal to -1 is called the "held-out condition".
+
+In this case, with /s/ vs. /ʃ/, it doesn't really matter which one we treat as the held-out condition, but just so that everything stays consistent with how we've been visualizing the data, let's set /s/ to -1 and /ʃ/ to 1. 
+
+```{r message = T}
+vcl_sib$Fricative <- factor(vcl_sib$Fricative, levels = c("sh", "s"))
+contrasts(vcl_sib$Fricative) <- contr.sum(2)
+contrasts(vcl_sib$Fricative)
+```
+
+In the above code, we order "sh" before "s" because the held-out variable needs to come first (just like how on a number line -1 comes to the left of 1.) Then contr.sum() sum codes the contrasts; we put a 2 in the function to tell it that there are two levels (s vs. sh). Then we can double check that everything looks right by running the contrasts() function.
+
+Since it looks like this is all sum coded correctly, let's now make the model and see what the output looks like.
+
+```{r message = T}
+fit_sum <- lm(meanCOG ~ Fricative, vcl_sib)
+summary(fit_sum)
+```
+Note that the p-values and t-values all stay the same as before. What changes is the intercept, which is now the overall mean of meanCOG rather than the mean of /s/ meanCOG. Also, the estimate in the Fricative1 line -- the slope of the regression line -- is now -1045.9. This is exactly half of the -2091.8 estimate from the treatment coding. The reason this number changes is because in the treatment coded model, /s/ is 0 and /ʃ/ is 1: For every "1" change in fricative, we get a -2091.8 Hz change in meanCOG. In the sum coded model, /s/ is -1 and /ʃ/ is 1 -- a difference of 2, rather than 1! So now, for every "1" change in fricative (that is, *half* of what they're coded as, from 0 to 1 or from -1 to 0), there's a -1045.9 Hz change in meanCOG.
+
 ### Practice: Linear regression with categorical variables 
 
-1. In your Assignment 2, you answered the following research questions using t-tests: *Do sibilants have an overall higher intensity than non-sibilants?* and *Do voiced fricatives have an overall higher intensity than voiceless fricatives?*. Now answer those same questions using linear regressions instead.
+1. In your Assignment 2, you answered the following research questions using t-tests: *Do sibilants have an overall higher intensity than non-sibilants?* and *Do voiced fricatives have an overall higher intensity than voiceless fricatives?* Now answer those same questions using linear regressions instead.
+
+2. Try out the above linear regressions using treatment coding and using sum coding. What changes, and what stays the same, about the treatment vs. sum coded model outputs? Which type of coding probably makes most sense to use for these research questions?
 
 <br>

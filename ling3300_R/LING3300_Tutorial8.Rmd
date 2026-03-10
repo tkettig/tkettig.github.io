@@ -1,0 +1,101 @@
+---
+title: "LING 3300 - Week 8-9: Regression with Categorical Predictors"
+author: "Thomas Kettig"
+date: "March 3, 2026"
+output: html_document
+---
+
+First step: let's load in the data and required packages. This is the standard McMurray & Jongman dataset of fricative and vowel measures that we've been using this term.
+
+```{r message=T}
+library(tidyverse)
+library(yarrr)
+
+mcm <- read_csv("/Users/Thomas/Library/CloudStorage/OneDrive-YorkUniversity/LING 3300/Datasets/McMurrayJongmanFricativeAcoustics.csv")
+```
+
+## Linear regression with categorical variables
+
+### Two-level categorical variable: treatment coding
+
+In this example, we'll use a subset of the dataset with just /s/ and /sh/ fricative tokens. We're interested in predicting M1 (spectral center of gravity) from the fricative identity (either /s/ or /sh/).
+
+```{r }
+voiceless_sibilants <- subset(mcm, Fricative %in% c("s", "sh"))
+```
+
+First, we need to get independent means of the two sibilant COGs for each speaker. The column with each token's mean COG is **M1**.
+
+```{r message = F}
+vcl_sib <- voiceless_sibilants %>% 
+  group_by(Talker, Fricative) %>% 
+  summarise(meanCOG = mean(M1, na.rm = T))
+```
+
+Next, we'll convert the categorical predictor to a factor and set up the contrast matrix for the linear regression using treatment (dummy) coding. We can then check to see we set it up properly by looking at the contrasts.
+
+The key R code here when dealing with categorical variables is as follows:
+
++ convert the categorical variable to a factor using the **factor()** function
+
+If you want to do treatment coding like we have here, the contr.treatment() line is optional because R will automatically assume this as its default.
+
+```{r }
+vcl_sib$Fricative <- factor(vcl_sib$Fricative, levels = c("s", "sh"))
+# contrasts(vcl_sib$Fricative) <- contr.treatment(2)
+contrasts(vcl_sib$Fricative)
+```
+
+Before we dive into the linear regression, we should visualize our data -- 
+```{r}
+ggplot(vcl_sib) + 
+  geom_boxplot(aes(x = Fricative, y = meanCOG, color = Fricative))
+
+pirateplot(meanCOG ~ Fricative, vcl_sib)
+```
+
+And now we run the regression:
+```{r}
+fit_dummy <- lm(meanCOG ~ Fricative, vcl_sib)
+summary(fit_dummy)
+```
+
+Check out the intercept - it's the mean of means of /s/ COGs.
+```{r }
+mean(subset(vcl_sib, Fricative == "s")$meanCOG)
+```
+
+#### Comparison with one-way ANOVA (technically a repeated measures ANOVA)
+
+A one-way ANOVA is equivalent to a linear regression with one categorical predictor variable with dummy/treatment coding. 
+
+```{r }
+fit_anova <- aov(meanCOG ~ Fricative, vcl_sib)
+summary(fit_anova)
+```
+
+Check out the F-statistic / F-value and note how the p-values for Fricative are the same in both outputs!
+
+### Two-level categorical variable: sum coding
+In the previous example, it was a little odd to use treatment coding on an /s/-/sh/ contrast as it's not really the case that one can be considered a control condition. Using treatment coding was convenient as it allowed us to interpret the effect of fricative identity as the offset of /sh/ from /s/, but at the same time, it's not really the case that /s/ is a true control condition. 
+
+Let's instead set up the same linear regression, but using a sum coding scheme on fricative identity.
+
+Again, the key R code here when dealing with categorical variables is as follows:
+
++ convert the categorical variable to a factor using the **factor()** function
++ set up the contrasts of the variable, but now with **contr.sum()** for sum coding
+
+Note that here we want our "held-back" condition (the one we're assiging to -1) to be at the *end* of the list of levels. In this case, if we want /s/ to be assigned to -1, we need it to be listed last in levels = c("sh", "s"). 
+
+```{r }
+vcl_sib$Fricative <- factor(vcl_sib$Fricative, levels = c("sh", "s"))
+contrasts(vcl_sib$Fricative) <- contr.sum(2)
+contrasts(vcl_sib$Fricative)
+
+fit_sum<- lm(meanCOG ~ Fricative, vcl_sib)
+summary(fit_sum)
+```
+
+### Practice: Linear regression with categorical variables 
+
