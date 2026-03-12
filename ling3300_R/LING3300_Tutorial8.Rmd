@@ -1,5 +1,5 @@
 ---
-title: "LING 3300 - Week 9: Interactions in regression modelling"
+title: "LING 3300 - Week 8: Interactions in regression modelling"
 author: "Thomas Kettig"
 date: "March 12, 2026"
 output: html_document
