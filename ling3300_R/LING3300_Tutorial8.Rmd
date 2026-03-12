@@ -1,7 +1,7 @@
 ---
-title: "LING 3300 - Week 8-9: Regression with Categorical Predictors"
+title: "LING 3300 - Week 9: Interactions in regression modelling"
 author: "Thomas Kettig"
-date: "March 3, 2026"
+date: "March 12, 2026"
 output: html_document
 ---
 
@@ -14,88 +14,183 @@ library(yarrr)
 mcm <- read_csv("/Users/Thomas/Library/CloudStorage/OneDrive-YorkUniversity/LING 3300/Datasets/McMurrayJongmanFricativeAcoustics.csv")
 ```
 
-## Linear regression with categorical variables
 
-### Two-level categorical variable: treatment coding
+Today we're going to talk about **interactions**. Before the break, we compared the COG of the fricatives in this dataset, finding that this differed by place of articulation. For instance, we found that overall, interdental fricatives (marked 'th' and 'dh') have lower COG than alveolar fricatives ('s' and 'z'). But what if we're also interested in whether there's an **interaction** between voicing and place of articulation? That is: Is the effect of place of articulation the same across voicing conditions, and the effect of voicing the same across place of articulation conditions, or is something more complex going on?
 
-In this example, we'll use a subset of the dataset with just /s/ and /sh/ fricative tokens. We're interested in predicting M1 (spectral center of gravity) from the fricative identity (either /s/ or /sh/).
-
-```{r }
-voiceless_sibilants <- subset(mcm, Fricative %in% c("s", "sh"))
-```
-
-First, we need to get independent means of the two sibilant COGs for each speaker. The column with each token's mean COG is **M1**.
 
 ```{r message = F}
-vcl_sib <- voiceless_sibilants %>% 
-  group_by(Talker, Fricative) %>% 
+# Assigning 4 place of articulation levels
+mcm$poa <- ifelse(mcm$Fricative %in% c("f", "v"), "labiodental", ifelse(mcm$Fricative %in% c("th", "dh"), "interdental", ifelse(mcm$Fricative%in% c("s", "z"), "alveolar", "postalveolar")))
+
+# Assigning voiced vs. voiceless in a column
+mcm$voicing <- ifelse(mcm$Fricative == "dh" | mcm$Fricative == "v" | mcm$Fricative == "z" | mcm$Fricative == "zh", "voiced", "voiceless")
+
+# Looking at a boxplot of the overall data by Fricative
+ggplot(mcm) + 
+  geom_boxplot(aes(x = poa, y = M1, color = voicing))
+```
+
+Looking at the data this way, it seems like within alveolar and postalveolar places of articulation, there may be no significant difference in COG between the voiced and voiceless fricatives, while at the interdental and labiodental places, the fricatives exhibit COG differences between voiced and voiceless that may be significant.
+
+For simplicity's sake, let's consider just the alveolar and interdental fricatives. You can run models with interactions involving as many levels and factors as you need, but for now we'll start simple for ease of interpretability.
+
+```{r message = F}
+# Filter so we just have the alveolars and interdentals for now
+mcm2 <- mcm %>%
+  filter(poa == "alveolar" | poa == "interdental")
+
+# Looking at a boxplot of the data again
+ggplot(mcm2) + 
+  geom_boxplot(aes(x = poa, y = M1, color = voicing))
+
+# Can also look at it as a pirate plot
+pirateplot(M1 ~ voicing * poa, mcm2, inf.method = 'ci')
+```
+
+Let's now find the by-Talker, by-place of articulation, by-voicing meanCOGs.
+
+```{r message = F}
+# Getting speaker COG means for each place of articulation and voicing
+COG_means <- mcm2 %>% 
+  group_by(Talker, poa, voicing) %>% 
   summarise(meanCOG = mean(M1, na.rm = T))
+
+# Looking at a boxplot of the speaker mean data by poa + voicing
+ggplot(COG_means) + 
+  geom_boxplot(aes(x = poa, y = meanCOG, color = voicing))
+
+# Looking at a pirate plot of the speaker mean data by poa + voicing
+pirateplot(meanCOG ~ voicing * poa, COG_means, inf.method = 'ci')
 ```
 
-Next, we'll convert the categorical predictor to a factor and set up the contrast matrix for the linear regression using treatment (dummy) coding. We can then check to see we set it up properly by looking at the contrasts.
+Again, note here the **interaction** of voicing and place of articulation. It is not the case that voicing has the same effect on COG for both of these places of articulation: the patterns are clearly different, in that there is no effect of voicing in alveolar fricatives 's' and 'sh', but there is an effect of voicing in interdental fricatives, such that the voiced 'dh' has what looks like a significantly lower COG than the voiceless 'th'. You can also flip around the order you've put voicing and poa if you want to see the interaction from another perspective: When we just look at these four fricatives, there is no apparent effect of place of articulation within the voiceless fricatives, while within the voiced fricatives, 'dh' seems to have a significantly lower COG than 'z'.
 
-The key R code here when dealing with categorical variables is as follows:
-
-+ convert the categorical variable to a factor using the **factor()** function
-
-If you want to do treatment coding like we have here, the contr.treatment() line is optional because R will automatically assume this as its default.
-
-```{r }
-vcl_sib$Fricative <- factor(vcl_sib$Fricative, levels = c("s", "sh"))
-# contrasts(vcl_sib$Fricative) <- contr.treatment(2)
-contrasts(vcl_sib$Fricative)
+```{r message = F}
+# Looking at a pirate plot of the speaker mean data by poa + voicing
+pirateplot(meanCOG ~ poa * voicing, COG_means, inf.method = 'ci')
 ```
 
-Before we dive into the linear regression, we should visualize our data -- 
-```{r}
-ggplot(vcl_sib) + 
-  geom_boxplot(aes(x = Fricative, y = meanCOG, color = Fricative))
+### Interactions in multiple linear regression using treatment coding
 
-pirateplot(meanCOG ~ Fricative, vcl_sib)
+Alright, now let's get to making and interpreting the model. 
+
+Let's first do this with treatment coding. We'll make sure that the levels we want as our baseline/control are listed **first** in the order of levels, and we'll check that they're contrast coded correctly. Let's take 'alveolar' as the baseline for poa, and 'voiceless' as the baseline for voicing. That means that all of our effects will be interpreted as the pairwise difference from **voiceless alveolars** -- that is, 's'.
+
+The only new thing you'll have to do in terms of writing the linear model is to use the * symbol between the factors whose interaction you want to test.
+
+```{r message = F}
+# Putting alveolar as the first poa factor to make it the baseline in treatment coding
+COG_means$poa <- factor(COG_means$poa, levels = c("alveolar", "interdental"))
+
+# Putting voiceless as the first voicing factor to make it the baseline in treatment coding
+COG_means$voicing <- factor(COG_means$voicing, levels = c("voiceless", "voiced"))
+
+# No need to tell R to do treatment coding, it will do it by default. We can double check, though:
+contrasts(COG_means$poa)
+contrasts(COG_means$voicing)
+
+# Making model
+fit.dummy <- lm(meanCOG ~ voicing * poa, COG_means)
+summary(fit.dummy)
+```
+In order to interpret these numbers, let's remind ourselves of the pirateplot we made above. You'll notice that conveniently, the code inside pirateplot() can be *exactly the same* as what we put inside lm()!
+
+```{r message = F}
+# Looking at a pirate plot of the speaker mean data by poa + voicing
+pirateplot(formula = meanCOG ~ voicing * poa, data = COG_means, inf.method = 'ci')
 ```
 
-And now we run the regression:
-```{r}
-fit_dummy <- lm(meanCOG ~ Fricative, vcl_sib)
-summary(fit_dummy)
+Looking at the intercept estimate, we see that the mean of COG means for 's', our voiceless alveolar baseline, is 6861 Hz (check on the pirate plot to confirm!). We can ignore the rest of that row (the error, t-value, and p-value) because we don't really care about whether 6860 is signficantly different from 0.
+
+The next line down says "voicingvoiced". That means that this line will compare 's' to its *voiced* alveolar counterpart, 'z'. We see that the mean of 'z' is 88 Hz lower than 6861 (check on the pirate plot to see the mean of 'z' at 6773), but that this is not a significant difference (p = 0.784).
+
+The next line down says "poainterdental". That means that this line will compare 's' to its voiceless *interdental* counterpart, 'th'. We see that the mean of 'th' is 192 Hz higher than 6861 (check on the pirate plot to see the mean of 'z' at 7053), but that this is not a significant difference (p = 0.553).
+
+The next line down says "poainterdental:poainterdental". That's our interaction term! It means that this line will compare 's' to its *voiced interdental* counterpart, 'dh'. In order to do the math here, we need to add up the intercept PLUS the main effect of voicing PLUS the main effect of poa PLUS the interaction effect. Thus the  mean of 'dh' is 6861 - 88 + 192 - 2071 (check on the pirate plot to see the mean of 'dh' at 4894), and this **is** significantly different from our baseline condition of voiceless alveolar 's' (p < 0.001).
+
+If you wanted to see whether the other pairwise differences are significant (like between 'th' and 'dh', or between 'th' and 'z'), you'd have to re-level the contrasts in one or both of the variables to have a different baseline. There's also a package called "emmeans" which can list out the pairwise differences all at once and simultaneously do p-value correction for multiple comparisons. We might not get to that in this module, though.
+
+### Interactions in multiple linear regression using sum coding
+
+I've mentioned before that when we run interactions, it's often preferable to **sum code**. This will look at the data from a different perspective: rather than doing pairwise comparisons of each of the fricatives ('s' vs. 'z'; 's' vs. 'th', 's' vs. 'dh', etc.), sum coding will allow us to answer the questions: "Does voicing generally have an effect on these fricatives?" + "Does poa generally have an effect on these fricatives?" + "Does the effect of one of these variables change depending on the value of the other variable"?"
+
+Remember that in sum coding, the "held-out" condition is sort of like our baseline -- that's the one we're going to be setting to -1. This held-out condition will be listed **last** in the order of levels. So if we want once again to have a baseline of voiceless and a baseline of alveolar, we'll need to list each of those **last** within our factor() function. We'll then apply contr.sum(2) to each of the variables, because they each have two levels. We'll then fit the same exact model as before, looking for the interaction between voicing and poa.
+
+```{r message = F}
+# Putting alveolar as the last poa factor since that's going to be our held-out condition in sum coding
+COG_means$poa <- factor(COG_means$poa, levels = c("interdental", "alveolar"))
+
+# Putting voiceless as the last voicing factor since that's going to be our held-out condition in sum coding
+COG_means$voicing <- factor(COG_means$voicing, levels = c("voiced", "voiceless"))
+
+# Need to tell R to do sum coding for both of these, with 2 levels in each
+contrasts(COG_means$poa) <- contr.sum(2)
+contrasts(COG_means$voicing) <- contr.sum(2)
+
+# Check the contrasts to make sure
+contrasts(COG_means$poa)
+contrasts(COG_means$voicing)
+
+# Making model
+fit.sum <- lm(meanCOG ~ voicing * poa, COG_means)
+summary(fit.sum)
+```
+Now let's figure out what those numbers mean.
+
+The intercept here is 6395, which is the **mean of the means of the voicing conditions and the poa conditions**. In this case, because our data is nicely balanced and we have the same number of observations in each of our subsets, the mean of the voiced and voiceless means will be the same as the mean of the alveolar and interdental means: both of these are 6395, as illustrated below:
+
+```{r message = F}
+
+# We'll make a dataset that's just the voiceless means and another that's just the voiced means
+just_voiceless <- COG_means %>%
+  filter(voicing == "voiceless")
+just_voiced <- COG_means %>%
+  filter(voicing == "voiced")
+
+# We'll make a dataset that's just the alveolar means and another that's just the interdental means
+just_alveolar <- COG_means %>%
+  filter(poa == "alveolar")
+just_interdental <- COG_means %>%
+  filter(poa == "interdental")
+
+# What are the means of each of these subsets?
+mean(just_voiceless$meanCOG) # 6957
+mean(just_voiced$meanCOG) # 5833
+mean(just_alveolar$meanCOG) # 6817
+mean(just_interdental$meanCOG) # 5973
+
+# What's the mean of the voiceless and voiced means?
+(mean(just_voiceless$meanCOG) + mean(just_voiced$meanCOG)) / 2 # 6395
+
+# What's the mean of the alveolar and voiceless means?
+(mean(just_alveolar$meanCOG) + mean(just_interdental$meanCOG)) / 2 # 6395
+```
+Alright, so that's the intercept. The next line says 'voicing1'. Remember how we've set voiceless to -1 and voiced to 1 in this sum coding? It's using '1' to mean "voiced". So if we take 6395 - 562, we get 5833. Look just above and you'll see that this is the mean of the voiced subset of the data, which includes the alveolar and interdental voiced fricatives. The p-value is telling us that this mean of voiced fricatives is significantly different from the mean of means, meaning that voicing has a significant "main effect" on COG.
+
+The next line says 'poa1'. Remember how we've set alveolar to -1 and interdental to 1 in this sum coding? It's using '1' to mean "interdental". So if we take 6395 - 422, we get 5973. Look just above and you'll see that this is the mean of the interdental subset of the data, which includes the voiceless and voiced interdental fricatives. The p-value is telling us that this mean of interdental fricatives is significantly different from the mean of means, meaning that poa has a significant "main effect" on COG.
+
+Now for something a bit more complicated: The next line says 'voicing1:poa1'. Since '1' in voicing is "voiced" and '1' in poa is "interdental", what this telling us is what the *added effect of being both voiced and interdental is, on top of the main effects of being voiced and being interdental*. Here's what that means:
+
+First, we account for the main effect of voicing: We start with 6395 and add -562 (also known as subtracting 562) to get 5833. 
+
+Then, we need to account for the main effect of poa: We take 5833 and add -422 (also known as subtracting 422), which gives us 5411. 
+
+Last, we'll add in that interaction of -518: 5411 - 518 = 4893. If you look again above, we found that the mean of the voiced interdental was 4894! (The difference of 1 is because I rounded up/down to the nearest Hz in all those calculations, but if you tried the same thing with a larger number of decimals you'd see these results are equal.)
+
+### Emmeans 
+
+In case you're interested in seeing how emmeans does pairwise comparisons all at once, here's a bit of code. We don't have time to get into this, but I encourage you to Google how estimated marginal means work! The numbers sometimes come out a bit different from what the treatment coding model might give you, but because of whatever mysterious math stuff it does. You can find further details online.
+
+```{r message = F}
+library(emmeans) # You might need to install this package if you don't already have it
+emmeans(fit.dummy, specs = pairwise ~ voicing * poa)
+
+# Should give same results for the sum coded and treatment coded models, just in a different order because our factors were ordered differently in the two models
+emmeans(fit.sum, specs = pairwise ~ voicing * poa) 
 ```
 
-Check out the intercept - it's the mean of means of /s/ COGs.
-```{r }
-mean(subset(vcl_sib, Fricative == "s")$meanCOG)
-```
+### Practice with interactions
 
-#### Comparison with one-way ANOVA (technically a repeated measures ANOVA)
+1. We've seen before (in Tutorial 6, practice question 4) that for most fricatives, there's a generally positive correlation between M1 (a.k.a. COG) and MaxPF. The strength of the positive slope differs by fricative; for some fricatives, this fails to reach our p = 0.05 significance level. Create a dataset with the by-speaker, by-fricative means for COG and MaxPF. Now consider just /f/ and /v/. Is the relationship between M1 and MaxPF the same or different for these two fricatives?
 
-A one-way ANOVA is equivalent to a linear regression with one categorical predictor variable with dummy/treatment coding. 
-
-```{r }
-fit_anova <- aov(meanCOG ~ Fricative, vcl_sib)
-summary(fit_anova)
-```
-
-Check out the F-statistic / F-value and note how the p-values for Fricative are the same in both outputs!
-
-### Two-level categorical variable: sum coding
-In the previous example, it was a little odd to use treatment coding on an /s/-/sh/ contrast as it's not really the case that one can be considered a control condition. Using treatment coding was convenient as it allowed us to interpret the effect of fricative identity as the offset of /sh/ from /s/, but at the same time, it's not really the case that /s/ is a true control condition. 
-
-Let's instead set up the same linear regression, but using a sum coding scheme on fricative identity.
-
-Again, the key R code here when dealing with categorical variables is as follows:
-
-+ convert the categorical variable to a factor using the **factor()** function
-+ set up the contrasts of the variable, but now with **contr.sum()** for sum coding
-
-Note that here we want our "held-back" condition (the one we're assiging to -1) to be at the *end* of the list of levels. In this case, if we want /s/ to be assigned to -1, we need it to be listed last in levels = c("sh", "s"). 
-
-```{r }
-vcl_sib$Fricative <- factor(vcl_sib$Fricative, levels = c("sh", "s"))
-contrasts(vcl_sib$Fricative) <- contr.sum(2)
-contrasts(vcl_sib$Fricative)
-
-fit_sum<- lm(meanCOG ~ Fricative, vcl_sib)
-summary(fit_sum)
-```
-
-### Practice: Linear regression with categorical variables 
-
+<br>
