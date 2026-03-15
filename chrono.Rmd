@@ -4,11 +4,25 @@ title: "Papers, posters, and presentations"
 
 <br>
 
+#### 2026
+
+[slides] Thomas Kettig, Noah Henry, and Míša Hejná. Toward modelling indirect effects in longitudinal phonetics research: The case of Queen Elizabeth II’s age, voice quality, and pre-aspiration. _HISPhonCoG 2026_. Seoul, Korea, 22–23 May.
+
+[slides] Thomas Kettig, Vincent Hughes, and Carmen Llamas. Order effects in pairwise voice similarity and sameness evaluations. _MOThQ 2026_. Québec, QC, 27–28 March.
+
+[slides] Carmen Llamas, Vincent Hughes, and Thomas Kettig. What is ‘typicality’? Salience and the vernacular. _22nd Villetaneuse Conference on Spoken English_. Villetaneuse, France, 27–28 March.
+
+[[paper](papers_etc/KettigHejna2026JASA-EL.pdf)] Kettig, Thomas and Míša Hejná. 2026. "Pre-aspiration and longitudinal voice quality trends in Received Pronunciation: The case of Queen Elizabeth II." _JASA-EL_ 6(3): 035204. DOI: https://doi.org/10.1121/10.0042363.
+
+<br>
+
 #### 2025
 
-[[slides](papers_etc/Kettig2025NWAV-AP_slides.pdf)] Kettig, Thomas. 2025. Internal linguistic conditioning of /t~k/ variation in Niʻihau Hawaiian. _NWAV-AP 8_. Singapore, 5 August.
+[paper] Hughes, Vincent, Carmen Llamas and Thomas Kettig. The effects of expert conclusions and other forensic evidence on listener evaluations in a voice comparison task. _International Journal of Speech, Language and the Law_ 32(2).
 
-[[paper](https://eprints.whiterose.ac.uk/id/eprint/226525/)] Hughes, Vincent, Carmen Llamas, and Thomas Kettig. Human and automatic voice comparison with regionally variable speech samples. _Speech Communication_ 172.
+[[paper](https://eprints.whiterose.ac.uk/id/eprint/226525/)] Hughes, Vincent, Carmen Llamas, and Thomas Kettig. Human and automatic voice comparison with regionally variable speech samples. _Speech Communication_ 172. https://doi.org/10.1016/j.specom.2025.103253.
+
+[[slides](papers_etc/Kettig2025NWAV-AP_slides.pdf)] Kettig, Thomas. 2025. Internal linguistic conditioning of /t~k/ variation in Niʻihau Hawaiian. _NWAV-AP 8_. Singapore, 5 August.
 
 [[slides](papers_etc/Kettig2025CLS_slides.pdf)] Kettig, Thomas. Niʻihau Hawaiian /t/>[k] allophony is driven by coronal dissimilation. _CLS61_. Chicago, IL, 9 May. 
 

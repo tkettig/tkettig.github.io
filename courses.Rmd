@@ -10,25 +10,25 @@ title: "Teaching"
 
 * LING 1430: Language, Power, and Persuasion (Fall 2025)
 * LING 2110: Phonetics (Fall 2025)
-* [LING 3300: Statistical Methods for Language Science](ling3300_R.html/) (Winter 2026)
+* [LING 3300: Statistical Methods for Language Science](R_tutorials.html) (Winter 2026)
 * LAL 6600: Graduate Research Seminar in Theoretical Linguistics (Winter 2026)
 
-#### Other courses previously taught at York University
+#### Other courses taught at York University
 
 * LING 2430: Language, Power, and Persuasion
-* [LING 4220: Acoustic Phonetics](acoustic_phonetics.html/)
-* LING 4400/LAL 5400: Research in Sociolinguistic Variation and Change
+* [LING 4220: Acoustic Phonetics](acoustic_phonetics.html)
+* [LING 4400/LAL 5400: Research in Sociolinguistic Variation and Change](elan_manual.html)
 
-#### Courses taught at the University of York
+#### Taught at the University of York
 
 * LAN 009I: Intermediate Phonetics & Phonology
 * LAN 033M: Quantitative Methods
 
-#### Course taught at Queens College - CUNY
+#### Taught at Queens College - CUNY
 
 * LCD 150: Linguistic Phonetics
 
-#### Course taught at the University of Hawaiʻi at Mānoa
+#### Taught at the University of Hawaiʻi at Mānoa
 
 * LING 102: Introduction to the Study of Language
 
