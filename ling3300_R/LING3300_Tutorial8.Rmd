@@ -15,7 +15,7 @@ mcm <- read_csv("/Users/Thomas/Library/CloudStorage/OneDrive-YorkUniversity/LING
 ```
 
 
-Today we're going to talk about **interactions**. Before the break, we compared the COG of the fricatives in this dataset, finding that this differed by place of articulation. For instance, we found that overall, interdental fricatives (marked 'th' and 'dh') have lower COG than alveolar fricatives ('s' and 'z'). But what if we're also interested in whether there's an **interaction** between voicing and place of articulation? That is: Is the effect of place of articulation the same across voicing conditions, and the effect of voicing the same across place of articulation conditions, or is something more complex going on?
+Today we're going to talk about **interactions**. Previously, we compared the COG (that is, M1) of the fricatives in this dataset, finding that this differed by place of articulation. For instance, we found that overall, interdental fricatives (marked 'th' and 'dh') have lower COG than alveolar fricatives ('s' and 'z'). But what if we're also interested in whether there's an **interaction** between voicing and place of articulation? That is: Is the effect of place of articulation the same across voicing conditions, and the effect of voicing the same across place of articulation conditions, or is something more complex going on?
 
 
 ```{r message = F}
