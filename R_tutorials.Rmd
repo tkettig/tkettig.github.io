@@ -22,3 +22,6 @@ These tutorials are based on various resources developed at the University of Yo
 <h3> [Tutorial 7 - Linear Regression, continued](ling3300_R/LING3300_Tutorial7.html) </h3> 
 
 <h3> [Tutorial 8 - Interactions](ling3300_R/LING3300_Tutorial8.html) </h3> 
+
+<h3> [Tutorial 9 - Mixed Models](ling3300_R/LING3300_Tutorial9.html) </h3> 
+
