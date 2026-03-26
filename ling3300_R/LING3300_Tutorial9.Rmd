@@ -92,5 +92,6 @@ The above models are dummy-coded (R's default) but random effects can also be pu
 
 ### Practice with mixed models
 
+1. With the fricatives dataset, consider just /f/ and /v/ (as in the Tutorial 8 practice). Instead of modelling the by-speaker means, try doing your modelling with the raw dataset and integrating a random intercept of Talker. Also try a random slope of Fricative by Talker.
 
 <br>
