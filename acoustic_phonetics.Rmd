@@ -7,6 +7,10 @@ output: html_document
 
 These tutorials for learning how to use Praat are based on the [University of Victoria LING 380 Acoustic Phonetics Lab Manual](https://dspace.library.uvic.ca/items/68b5b175-ebd5-4294-b514-48aa2e58ac98). They are adapted to fit the needs of the York University LING 4220 Acoustic Phonetics class.
 
+The associated sound files can be found [here](acoustic_phonetics_labs/new_labs/soundfiles.html). 
+
+<br>
+
 <h3> [Lab 1 - Exploring Praat](acoustic_phonetics_labs/new_labs/Lab1.html) </h3> 
 
 <br>
