@@ -6,11 +6,11 @@ title: "Papers, posters, and presentations"
 
 #### 2026
 
-[slides] Thomas Kettig, Noah Henry, and Míša Hejná. Toward modelling indirect effects in longitudinal phonetics research: The case of Queen Elizabeth II’s age, voice quality, and pre-aspiration. _HISPhonCoG 2026_. Seoul, Korea, 22–23 May.
+[[slides](KettigHejnaHenry2026HISPhonCog_slides.pdf)] Thomas Kettig, Noah Henry, and Míša Hejná. Toward modelling indirect effects in longitudinal phonetics research: The case of Queen Elizabeth II’s age, voice quality, and pre-aspiration. _HISPhonCoG 2026_. Seoul, Korea, 22–23 May.
 
 [[slides](papers_etc/KettigHughesLlamas_2026MOThQ.pdf)] Thomas Kettig, Vincent Hughes, and Carmen Llamas. Order effects in pairwise voice similarity and sameness evaluations. _MOThQ 2026_. Québec, QC, 27–28 March.
 
-[slides] Carmen Llamas, Vincent Hughes, and Thomas Kettig. What is ‘typicality’? Salience and the vernacular. _22nd Villetaneuse Conference on Spoken English_. Villetaneuse, France, 27–28 March.
+[[slides](papers_etc/LlamasHughesKettig2026ALOES_slides.pdf)] Carmen Llamas, Vincent Hughes, and Thomas Kettig. What is ‘typicality’? Salience and the vernacular. _22nd Villetaneuse Conference on Spoken English_. Villetaneuse, France, 27–28 March.
 
 [[paper](papers_etc/KettigHejna2026JASA-EL.pdf)] Kettig, Thomas and Míša Hejná. 2026. "Pre-aspiration and longitudinal voice quality trends in Received Pronunciation: The case of Queen Elizabeth II." _JASA-EL_ 6(3): 035204. DOI: https://doi.org/10.1121/10.0042363.
 
