@@ -33,6 +33,9 @@ I have recently also been trying to work out how speakers of [Niʻihau](https://
 
 I conducted postdoctoral research at the [University of York](https://www.york.ac.uk/language/) on [Vincent Hughes'](https://scholar.google.com/citations?user=ddZncLsAAAAJ&hl=en&oi=ao) and [Carmen Llamas'](https://scholar.google.com/citations?user=f47LQuAAAAAJ&hl=en) AHRC-funded project [Humans and Machines: Novel Methods for Assessing Speaker Recognition Performance](https://sites.google.com/york.ac.uk/humans-machines/home?authuser=0). We developed a [bespoke computer game](./humans_and_machines.mp4) that elicits judgments of voice similarity in pairs of voices with various UK regional accents. We wanted to explore what factors affect sameness judgments in humans (for instance, jurors in trials involving voice-matching evidence) and we wanted to compare these judgments to the outputs of automatic speech recognition systems. 
 
+* [[paper](https://utppublishing.com/doi/10.3138/ijsll-2025-0022)] Hughes, Vincent, Carmen Llamas, and Thomas Kettig. The effects of expert conclusions and other forensic evidence on listener evaluations in a voice comparison task. _International Journal of Speech, Language and the Law_ 32(2): 297–318.
+
+
 * [[paper](https://eprints.whiterose.ac.uk/id/eprint/226525/)] Hughes, Vincent, Carmen Llamas, and Thomas Kettig. 2025. Human and automatic voice comparison with regionally variable speech samples. _Speech Communication_ 172.
 
 * [[abstract](https://vincent-hughes.com/wp-content/uploads/2022/06/490_paper.pdf)] Hughes, Vincent, Carmen Llamas, and Thomas Kettig. 2022. Eliciting and evaluating likelihood ratios for speaker recognition by human listeners under forensically realistic channel-mismatched conditions. _Proceedings of Interspeech_. Incheon, Korea.  
@@ -62,7 +65,7 @@ While at Cambridge, I became interested in the [BAD-LAD split](https://en.wikipe
 
 In addition, while collecting data on the BAD-LAD split, I noticed that most young speakers of SSBE seem to exhibit pre-aspiration in the relevant /æ/ environments. Since pre-aspiration for the most part had not been previously reported in this dialect, it led me to wonder whether this is a new phenomenon, or whether it's been around for a long time but we're only noticing it now. Turns out that Queen Elizabeth II also pre-aspirated, and did so more when she was younger than when she was older.
 
-* [[paper](papers_etc/KettigHejna2026JASA-EL.pdf)] Kettig, Thomas and Míša Hejná. 2026. "Pre-aspiration and longitudinal voice quality trends in Received Pronunciation: The case of Queen Elizabeth II." _JASA-EL_ 6(3): 035204. DOI: https://doi.org/10.1121/10.0042363.
+* [[paper](papers_etc/KettigHejna2026JASA-EL.pdf)] Kettig, Thomas and Míša Hejná. 2026. Pre-aspiration and longitudinal voice quality trends in Received Pronunciation: The case of Queen Elizabeth II. _JASA-EL_ 6(3): 035204.
 
 <br>
 
