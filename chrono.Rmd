@@ -12,13 +12,13 @@ title: "Papers, posters, and presentations"
 
 [[slides](papers_etc/LlamasHughesKettig2026ALOES_slides.pdf)] Carmen Llamas, Vincent Hughes, and Thomas Kettig. What is ‘typicality’? Salience and the vernacular. _22nd Villetaneuse Conference on Spoken English_. Villetaneuse, France, 27–28 March.
 
-[[paper](papers_etc/KettigHejna2026JASA-EL.pdf)] Kettig, Thomas and Míša Hejná. 2026. "Pre-aspiration and longitudinal voice quality trends in Received Pronunciation: The case of Queen Elizabeth II." _JASA-EL_ 6(3): 035204. DOI: https://doi.org/10.1121/10.0042363.
+[[paper](papers_etc/KettigHejna2026JASA-EL.pdf)] Kettig, Thomas and Míša Hejná. 2026. "Pre-aspiration and longitudinal voice quality trends in Received Pronunciation: The case of Queen Elizabeth II." _JASA-EL_ 6(3): 035204. https://doi.org/10.1121/10.0042363.
 
 <br>
 
 #### 2025
 
-[paper] Hughes, Vincent, Carmen Llamas and Thomas Kettig. The effects of expert conclusions and other forensic evidence on listener evaluations in a voice comparison task. _International Journal of Speech, Language and the Law_ 32(2).
+[[paper](https://utppublishing.com/doi/10.3138/ijsll-2025-0022)] Hughes, Vincent, Carmen Llamas, and Thomas Kettig. The effects of expert conclusions and other forensic evidence on listener evaluations in a voice comparison task. _International Journal of Speech, Language and the Law_ 32(2): 297–318.
 
 [[paper](https://eprints.whiterose.ac.uk/id/eprint/226525/)] Hughes, Vincent, Carmen Llamas, and Thomas Kettig. Human and automatic voice comparison with regionally variable speech samples. _Speech Communication_ 172. https://doi.org/10.1016/j.specom.2025.103253.
 
