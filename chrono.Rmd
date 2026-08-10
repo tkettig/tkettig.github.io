@@ -6,6 +6,10 @@ title: "Papers, posters, and presentations"
 
 #### 2026
 
+[[slides](papers_etc/LlamasHughesKettig2026Methods_slides.pdf)] Carmen Llamas, Vincent Hughes, and Thomas Kettig. What is ‘typicality’? Salience and standardness in UK accents. _Methods in Dialectology_. Vancouver, Canada, 7 August.
+
+[[slides](papers_etc/KettigGilbert2026Methods_slides.pdf)] Thomas Kettig and Gabriel Gilbert. Varieties of Hawaiian: Context and considerations. _Methods in Dialectology_. Vancouver, Canada, 6 August.
+
 [[slides](papers_etc/KettigHejnaHenry2026HISPhonCog_slides.pdf)] Thomas Kettig, Noah Henry, and Míša Hejná. Toward modelling indirect effects in longitudinal phonetics research: The case of Queen Elizabeth II’s age, voice quality, and pre-aspiration. _HISPhonCog 2026_. Seoul, Korea, 22–23 May.
 
 [[slides](papers_etc/KettigHughesLlamas_2026MOThQ.pdf)] Thomas Kettig, Vincent Hughes, and Carmen Llamas. Order effects in pairwise voice similarity and sameness evaluations. _MOThQ 2026_. Québec, QC, 27–28 March.
