@@ -9,11 +9,12 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-
 ### Introduction to R and RStudio
-R is a computer programming language that is particularly well-suited for statistical analysis and data visualisation, but also can handle text processing and phonetic analysis, among other functions. For data science, R is typically considered one of the best programming languages alongside Python; it is one of the most popular programming languages along with C, C++, Python, and JavaScript. 
+R is a computer programming language that is particularly well-suited for statistical analysis and data visualisation, but also can handle text processing and phonetic analysis, among other functions. For data science, R is typically considered one of the best programming languages alongside Python; it is one of the most popular programming languages along with C, C++, Python, and JavaScript.
 
-RStudio is a user-friendly interface for running the R language. If you click on just the R application, it displays what's called a "console" that is a very simple interface that allows you to enter code interactively. You write a line, and it prints out the response, very much like a calculator. RStudio also has a console at the bottom left space of your screen. You'll see that each line begins with a '>' and a blinking cursor; this '>' means you should start entering your code there. 
+You can download R [here](https://mirror.csclub.uwaterloo.ca/CRAN/). Once you download it, though, you don't have to ever actually *open* this application, because the R on its own is not very pleasant. If you click on just the R application, it displays what's called a "console" that is a very simple interface that allows you to enter code interactively. You write a line, and it prints out the response, very much like a calculator.
+
+In this course, we'll be using RStudio, a user-friendly interface for running the R language. Once you've downloaded R, you can then [download RStudio](https://docs.posit.co/ide/user/). Like 'naked' R, RStudio also has a console at the bottom left space of your screen. You'll see that each line begins with a '>' and a blinking cursor; this '>' means you should start entering your code there. 
 
 In addition to having a console down below, RStudio also has a display window that takes up the upper left portion of the screen. Here you view objects like your datasets and scripts (which contain saved code). This is one of the most useful aspects of RStudio.
 
