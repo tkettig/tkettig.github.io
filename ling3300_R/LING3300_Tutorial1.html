@@ -752,38 +752,39 @@ to get into the habit of making them more like
 <p><em>Important note part two</em>: You may need to adjust \ symbols to
 / depending on your computer - sometimes this causes issues, especially
 on Windows machines.</p>
-<p>Let’s now read the jury_data_basic.csv dataset file in to R, and
-assign it the name <em>jury</em>. You can do this by replacing the path
-in the following code with your own path to the data, or by finding it
-through RStudio’s GUI. If you do it through the GUI, make sure you tell
-it that <em>heading</em> is set to <em>Yes</em>; that way it will know
-that the first line of the dataset is the column titles.</p>
-<pre class="r"><code>jury &lt;- read.csv(&quot;/Users/Thomas/Documents/York (Canada)/LING 3300/Datasets/Jury/jury_data_basic.csv&quot;, header = TRUE)</code></pre>
+<p>Let’s now read the mandarin_f0.csv dataset in to R (you can find it
+on eClass). Assign it the name <em>mandarin</em>. You can do this by
+replacing the path in the following code with your own path to the data,
+or by finding it through RStudio’s GUI. If you do it through the GUI,
+make sure you tell it that <em>heading</em> is set to <em>Yes</em>; that
+way it will know that the first line of the dataset is the column
+titles.</p>
+<pre class="r"><code>mandarin &lt;- read.csv(&quot;/Users/Thomas/Library/CloudStorage/OneDrive-YorkUniversity/LING 3300/2025-26 Winter/Datasets/mandarin_f0.csv&quot;, header = TRUE)</code></pre>
 </div>
 <div id="viewing-the-dataset" class="section level4">
 <h4>Viewing the dataset</h4>
 <p>Take a look at the dataset using View(). You can also view the
 dataset by clicking on it in the RStudio Environment window.</p>
-<pre class="r"><code>View(jury)</code></pre>
+<pre class="r"><code>View(mandarin)</code></pre>
 <p>While we won’t use these functions too frequently, you can see the
 top of the dataset in the console using head() and bottom using tail().
 These functions are important if you ever find yourself in a situation
 where you can’t use RStudio and have to use a basic console.</p>
-<pre class="r"><code>head(jury)
-tail(jury)</code></pre>
+<pre class="r"><code>head(mandarin)
+tail(mandarin)</code></pre>
 </div>
 <div id="getting-a-summary-of-the-dataset" class="section level4">
 <h4>Getting a summary of the dataset</h4>
 <p>Get the dimensions of the dataset using nrow() (number of rows) and
 ncol() (number of columns): Notice that you can also find this
 information by glancing at the Environment window.</p>
-<pre class="r"><code>nrow(jury)
-ncol(jury)</code></pre>
+<pre class="r"><code>nrow(mandarin)
+ncol(mandarin)</code></pre>
 <p>Get a summary of all the columns in the dataset using summary(). If
 the vector is numeric, R will tell you the quartiles (a type of quantile
 which divides the number of data points into four parts, or quarters),
 the mean, and the number of NAs, if any.</p>
-<pre class="r"><code>summary(jury)</code></pre>
+<pre class="r"><code>summary(mandarin)</code></pre>
 </div>
 </div>
 <div id="extracting-parts-of-the-dataset" class="section level3">
@@ -797,38 +798,37 @@ two-dimensional space. The dataset has Rows and Columns, so we need to
 provide the coordinates in square brackets, with Rows before Columns
 (<em>R before C because we’re using R</em>). When both the row and the
 column are specified, R will return the individual cell.</p>
-<pre class="r"><code>jury[3,2]
-jury[1000, 10]</code></pre>
+<pre class="r"><code>mandarin[3,2]
+mandarin[1000, 10]</code></pre>
 <p>We can also extract an entire row by leaving the column specification
 blank (the location AFTER the comma):</p>
-<pre class="r"><code>jury[1000,]
-myrow &lt;- jury[1000,]
+<pre class="r"><code>mandarin[1000,]
+myrow &lt;- mandarin[1000,]
 View(myrow)</code></pre>
 <p>We can extract a subset of the dataset by specifying a RANGE of rows
 using the colon:</p>
-<pre class="r"><code>myrow &lt;- jury[1000:1100,]
+<pre class="r"><code>myrow &lt;- mandarin[1000:1100,]
 View(myrow)</code></pre>
 <p>We can also extract an entire column by leaving the row specification
 blank (the location BEFORE the comma):</p>
-<pre class="r"><code>mycol &lt;- jury[,10]
+<pre class="r"><code>mycol &lt;- mandarin[,10]
 View(mycol)</code></pre>
 <p>We can get a set of columns using our vector notation c(). We can get
 columns 1, 5 and 7 by specifying it as follows:</p>
-<pre class="r"><code>mycol &lt;- jury[,c(1,5,7)]</code></pre>
+<pre class="r"><code>mycol &lt;- mandarin[,c(1,5,7)]</code></pre>
 <div id="the-dollar-sign" class="section level4">
 <h4>The dollar sign: $</h4>
 <p>The dollar sign is incredibly useful when it comes to dealing with
 columns in a dataset! The dollar sign allows you to name the column that
 you want to refer to. For example, we can identify and extract the
-column “SimilarityAnswer” from the jury dataset by calling
-jury$SimilarityAnswer:</p>
-<pre class="r"><code>mycol &lt;- jury$SimilarityAnswer
-View(mycol)</code></pre>
+column “maxf0” from the mandarin dataset by calling mandarin$maxf0:</p>
+<pre class="r"><code>mycol &lt;- mandarin$maxf0
+mycol</code></pre>
 <p>We can also create new columns. For instance, if we wanted to create
-a column for AjustedSimilarityAnswer that takes the SimilarityAnswer
-given by the participant and multiplies it by 10, we could do this:</p>
-<pre class="r"><code>jury$AjustedSimilarityAnswer &lt;- jury$SimilarityAnswer*10
-View(jury)</code></pre>
+a column that subtracts the minimum f0 from the maximum f0 of each token
+to get its pitch range, we could make a new “range” column:</p>
+<pre class="r"><code>mandarin$range &lt;- mandarin$maxf0 - mandarin$minf0
+View(mandarin)</code></pre>
 </div>
 </div>
 <div id="deleting-columns" class="section level3">
@@ -838,25 +838,25 @@ functions in R, there are multiple ways to do this. Assigning NULL to it
 is something we can do in “base-R”, or the syntax that R comes along
 with; I prefer to use a different method for deleting columns, using
 syntax from the “tidyverse” package. We’ll introduce that next week.</p>
-<pre class="r"><code>jury$AjustedSimilarityAnswer &lt;- NULL
-View(jury)</code></pre>
+<pre class="r"><code>mandarin$range &lt;- NULL
+View(mandarin)</code></pre>
 </div>
 <div id="pasting-strings-together" class="section level3">
 <h3>Pasting strings together</h3>
 <p>We can paste strings together using the paste() function. In this
-example, we’ll create a single column that contains information on what
-the pair of accents presented to the listener was. To do this, we can
-pasting together the Audio1Accent and Audio2Accent columns with an
+example, we’ll create a single column called “syllable” that pastes
+together the “prec” onset consonant with the “vowel” nucleus. To do
+this, we can paste together the prec and vowel columns with an
 underscore separating the two elements:</p>
-<pre class="r"><code>jury$AccentPair &lt;- paste(jury$Audio1Accent, jury$Audio2Accent, sep=&quot;_&quot;)
-View(jury)</code></pre>
+<pre class="r"><code>mandarin$syllable &lt;- paste(mandarin$prec, mandarin$vowel, sep=&quot;_&quot;)
+View(mandarin)</code></pre>
 <p>The “sep=” argument refers to the character that should separate the
 two elements being pasted together. Since we have quotes wrapped around
 an underscore (“_“), then the underscore will separate the two elements.
 If we wanted nothing separating the two elements, then we could have
 quotes wrapped around nothing:</p>
-<pre class="r"><code>jury$AccentPair &lt;- paste(jury$Audio1Accent, jury$Audio2Accent, sep=&quot;&quot;)
-View(jury)</code></pre>
+<pre class="r"><code>mandarin$syllable &lt;- paste(mandarin$prec, mandarin$vowel, sep=&quot;&quot;)
+View(mandarin)</code></pre>
 </div>
 <div id="practice" class="section level3">
 <h3>Practice</h3>

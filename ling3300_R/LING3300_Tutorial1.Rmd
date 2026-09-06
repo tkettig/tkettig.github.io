@@ -349,40 +349,39 @@ An alternative is to type the code and the *path* directly. The path to the file
 
 *An important note about paths*: The path to a file is the computer address to your file. It is important that you get the address right so the computer can locate the file. A useful life tip is to keep your project files and more generally, your computer very organized so that the paths are easy (or at least intuitive) to type out. It seems that R *can* sometimes spaces in pathnames, but in general be wary of using spaces because they can cause problems - so instead of giving your folders titles like **LING 3300 R files**, try to get into the habit of making them more like **LING3300_R** without spaces.
 
-
 *Important note part two*: You may need to adjust \\ symbols to / depending on your computer - sometimes this causes issues, especially on Windows machines.
 
-Let's now read the jury_data_basic.csv dataset file in to R, and assign it the name *jury*. You can do this by replacing the path in the following code with your own path to the data, or by finding it through RStudio's GUI. If you do it through the GUI, make sure you tell it that *heading* is set to *Yes*; that way it will know that the first line of the dataset is the column titles.
+Let's now read the mandarin_f0.csv dataset in to R (you can find it on eClass). Assign it the name *mandarin*. You can do this by replacing the path in the following code with your own path to the data, or by finding it through RStudio's GUI. If you do it through the GUI, make sure you tell it that *heading* is set to *Yes*; that way it will know that the first line of the dataset is the column titles.
 
 
 ```{r eval = FALSE}
-jury <- read.csv("/Users/Thomas/Documents/York (Canada)/LING 3300/Datasets/Jury/jury_data_basic.csv", header = TRUE)
+mandarin <- read.csv("/Users/Thomas/Library/CloudStorage/OneDrive-YorkUniversity/LING 3300/2025-26 Winter/Datasets/mandarin_f0.csv", header = TRUE)
 ```
 
 #### Viewing the dataset
 Take a look at the dataset using View(). You can also view the dataset by clicking on it in the RStudio Environment window.
 ```{r eval = FALSE}
-View(jury)
+View(mandarin)
 ```
 While we won't use these functions too frequently, you can see the top of the dataset in the console using head() and bottom using tail(). These functions are important if you ever find yourself in a situation where you can't use RStudio and have to use a basic console. 
 
 ```{r eval = FALSE}
-head(jury)
-tail(jury)
+head(mandarin)
+tail(mandarin)
 ```
 
 #### Getting a summary of the dataset
 Get the dimensions of the dataset using nrow() (number of rows) and ncol() (number of columns): Notice that you can also find this information by glancing at the Environment window.
 
 ```{r eval = FALSE}
-nrow(jury)
-ncol(jury)
+nrow(mandarin)
+ncol(mandarin)
 ```
 
 Get a summary of all the columns in the dataset using summary(). If the vector is numeric, R will tell you the quartiles (a type of quantile which divides the number of data points into four parts, or quarters), the mean, and the number of NAs, if any.
 
 ```{r eval = FALSE}
-summary(jury)
+summary(mandarin)
 ```
 
 ### Extracting parts of the dataset 
@@ -394,66 +393,66 @@ x[3]
 
 We can extend this logic to datasets, but now we are in a two-dimensional space. The dataset has Rows and Columns, so we need to provide the coordinates in square brackets, with Rows before Columns (*R before C because we're using R*). When both the row and the column are specified, R will return the individual cell.
 ```{r eval = F}
-jury[3,2]
-jury[1000, 10]
+mandarin[3,2]
+mandarin[1000, 10]
 ```
 
 We can also extract an entire row by leaving the column specification blank (the location AFTER the comma):
 ```{r eval = FALSE}
-jury[1000,]
-myrow <- jury[1000,]
+mandarin[1000,]
+myrow <- mandarin[1000,]
 View(myrow)
 ```
 
 We can extract a subset of the dataset by specifying a RANGE of rows using the colon:
 ```{r eval = FALSE}
-myrow <- jury[1000:1100,]
+myrow <- mandarin[1000:1100,]
 View(myrow)
 ```
 
 We can also extract an entire column by leaving the row specification blank (the location BEFORE the comma):
 ```{r eval = FALSE}
-mycol <- jury[,10]
+mycol <- mandarin[,10]
 View(mycol)
 ```
 
 We can get a set of columns using our vector notation c(). We can get columns 1, 5 and 7 by specifying it as follows:
 ```{r eval = FALSE}
-mycol <- jury[,c(1,5,7)]
+mycol <- mandarin[,c(1,5,7)]
 ```
 
 #### The dollar sign: \$
 
-The dollar sign is incredibly useful when it comes to dealing with columns in a dataset! The dollar sign allows you to name the column that you want to refer to. For example, we can identify and extract the column "SimilarityAnswer" from the jury dataset by calling jury$SimilarityAnswer:
+The dollar sign is incredibly useful when it comes to dealing with columns in a dataset! The dollar sign allows you to name the column that you want to refer to. For example, we can identify and extract the column "maxf0" from the mandarin dataset by calling mandarin$maxf0:
 ```{r eval = FALSE}
-mycol <- jury$SimilarityAnswer
-View(mycol)
+mycol <- mandarin$maxf0
+mycol
 ```
 
-We can also create new columns. For instance, if we wanted to create a column for AjustedSimilarityAnswer that takes the SimilarityAnswer given by the participant and multiplies it by 10, we could do this:
+We can also create new columns. For instance, if we wanted to create a column that subtracts the minimum f0 from the maximum f0 of each token to get its pitch range, we could make a new "range" column:
 ```{r eval = FALSE}
-jury$AjustedSimilarityAnswer <- jury$SimilarityAnswer*10
-View(jury)
+mandarin$range <- mandarin$maxf0 - mandarin$minf0
+View(mandarin)
 ```
 
 ### Deleting columns
 You can delete a column by assigning NULL to it. As with many functions in R, there are multiple ways to do this. Assigning NULL to it is something we can do in "base-R", or the syntax that R comes along with; I prefer to use a different method for deleting columns, using syntax from the "tidyverse" package. We'll introduce that next week.
 ```{r eval = FALSE}
-jury$AjustedSimilarityAnswer <- NULL
-View(jury)
+mandarin$range <- NULL
+View(mandarin)
 ```
 
 ### Pasting strings together
-We can paste strings together using the paste() function. In this example, we'll create a single column that contains information on what the pair of accents presented to the listener was. To do this, we can pasting together the Audio1Accent and Audio2Accent columns with an underscore separating the two elements:
+We can paste strings together using the paste() function. In this example, we'll create a single column called "syllable" that pastes together the "prec" onset consonant with the "vowel" nucleus. To do this, we can paste together the prec and vowel columns with an underscore separating the two elements:
 ```{r eval = FALSE}
-jury$AccentPair <- paste(jury$Audio1Accent, jury$Audio2Accent, sep="_")
-View(jury)
+mandarin$syllable <- paste(mandarin$prec, mandarin$vowel, sep="_")
+View(mandarin)
 ```
 
 The "sep=" argument refers to the character that should separate the two elements being pasted together. Since we have quotes wrapped around an underscore ("_"), then the underscore will separate the two elements. If we wanted nothing separating the two elements, then we could have quotes wrapped around nothing:
 ```{r eval = FALSE}
-jury$AccentPair <- paste(jury$Audio1Accent, jury$Audio2Accent, sep="")
-View(jury)
+mandarin$syllable <- paste(mandarin$prec, mandarin$vowel, sep="")
+View(mandarin)
 ```
 
 
