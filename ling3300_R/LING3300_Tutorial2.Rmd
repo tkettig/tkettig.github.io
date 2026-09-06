@@ -1,7 +1,7 @@
 ---
 title: "LING 3300 - Tutorial 2"
 author: "Thomas Kettig"
-date: "January 15, 2026"
+date: "September 6, 2026"
 output: html_document
 ---
 
@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ### Load in the dataset we'll be working with for these examples
 
 ```{r eval = T}
-jury <- read.csv("/Users/Thomas/Library/CloudStorage/OneDrive-YorkUniversity/LING 3300/Datasets/Jury/jury_data_basic.csv", header = TRUE)
+mandarin <- read.csv("/Users/Thomas/Library/CloudStorage/OneDrive-YorkUniversity/LING 3300/2025-26 Winter/Datasets/mandarin_f0.csv", header = TRUE)
 ```
 
 Remember - here you should change the path that's between the " " so that it points to where on YOUR computer the .csv is. If you don't know how to do this easily, Google "how to find the path name of a file" + your operating system (Mac, Windows 10, etc.). This will be a very valuable skill going forward, so master it now!
@@ -60,33 +60,30 @@ Note that there are also ways to do all of these things in Base R, but dplyr cod
 
 
 #### filter()
-You can select just a subset of the rows in the dataset using the filter() function. This works really similarly to the Base R subset() function; in fact, in this simple case, they look basically identical. Let's create some new dataframes (which will show up in our Environment at upper right) with of just the jury data from Level 1 (beige and boring) and just the data from Level 2 (after being introduced to the robot jury scenario).
+You can select just a subset of the rows in the dataset using the filter() function. This works really similarly to the Base R subset() function; in fact, in this simple case, they look basically identical. Let's create a new dataframe (which will show up in our Environment at upper right) with just the Mandarin F0 observations from the vowel marked "i4" -- that is, the vowel /i/ in Tone 4.
 ```{r eval = FALSE}
-jury_level1 <- filter(jury, Level == "1")
-View(jury_level1)
-
-jury_level2 <- subset(jury, Level == "2")
-View(jury_level2)
+mandarin_i4 <- filter(mandarin, vowel == "i4")
+View(mandarin_i4)
 ```
 
-#### The pipe %>%
-Unlike Base R, dplyr lets you use what's called a **pipe**, which is written like this: %>%
+#### The pipe %>% or |>
+Dplyr lets you use what's called a **pipe**, which is written like this: %>%. Well, actually, |> is also a way of typing the pipe using Base R, so you can feel free to use either of them, and some people prefer |>. Whatever floats your boat.
 
-The pipe allows for an assembly line of functions: you start with the original dataset, then apply a function to that dataset. Using %>% allows you to think of your code as a sequence of actions.
+The pipe allows for an assembly line of functions: you start with the original dataset, then apply a function to that dataset. Using %>% or |> allows you to think of your code as a sequence of actions.
 
 For instance, the two sets of code below do *the exact same thing*:
 ```{r eval = FALSE}
-jury_level1 <- filter(jury, Level == "1")
+mandarin_i4 <- filter(mandarin, vowel == "i4")
 
-jury_level1 <- jury %>% 
-  filter(Level == "1")
+mandarin_i4 <- mandarin %>% 
+  filter(vowel == "i4")
 ```
 
-In the first set of code, we type out the "verb" -- in this case, filter() -- then within the parentheses we define the dataframe of interest as jury, followed by an operation on the variable Level. In the second set, we type out the "topic" -- in this case, our dataframe jury -- and then after the pipe we tell it what "verb" we want to operate on the data -- in this case, filtering based on a particular variable called Level. In both cases, the leftmost part of the code will be the name we want our new dataframe to be called, plus the assign <- function.
+In the first set of code, we type out the "verb" -- in this case, filter() -- then within the parentheses we define the dataframe of interest as mandarin, followed by an operation on the variable Level. In the second set, we type out the "topic" -- in this case, our dataframe mandarin -- and then after the pipe we tell it what "verb" we want to operate on the data -- in this case, filtering based on a particular variable called vowel. In both cases, the leftmost part of the code will be the name we want our new dataframe to be called, plus the assign <- function.
 
-You may find that you sometimes prefer using Base R syntax and functions for some things and prefer to use dplyr's functions and pipes for other things. It's fine to mix and match!
+You may find that you sometimes prefer using Base R syntax and functions for some things and prefer to use dplyr's functions for other things. It's fine to mix and match!
 
-Note: %>% should always have a space before it, and should usually be followed by a new line. After the first step, each line should be indented by two spaces. This structure makes it easier to add new steps (or rearrange existing steps) and harder to overlook a step.
+Note: %>% or |> should always have a space before it, and should usually be followed by a new line. After the first step, each line should be indented by two spaces. This structure makes it easier to add new steps (or rearrange existing steps) and harder to overlook a step.
 
 Typing %>% over and over can be tedious! Thankfully, RStudio provides a keyboard shortcut for inserting the pipe operator into your R code.
 
@@ -97,42 +94,80 @@ On Windows type **shift + control + m**.
 It may not seem totally intuitive at first, but this shortcut can handy once you get used to it.
 
 
+
+### Splitting a column
+
+In this dataset, the column "file" is quite rich in information. It looks like maybe the three numbers refer to a participant number. The "M" looks like it could be a gender marker. The final three letters look like they could be some sort of condition. What if we could have those all as their own columns? With the str_sub() function, they can!
+
+We'll make a new column "participant" that will be all letters from the 5th to the 7th character in the "file" column...
+
+```{r eval = T}
+mandarin$participant <- str_sub(mandarin$file, 5, 7)
+```
+
+...and a new column "condition" that will be all letters from 7th-to-last to the 5th-to-last character in the "file" column...
+
+```{r eval = T}
+mandarin$condition <- str_sub(mandarin$file, -7, -5)
+```
+
+...and a new column "gender" that will be just the 9th character in the "file" column.
+
+```{r eval = T}
+mandarin$gender <- str_sub(mandarin$file, 9, 9)
+```
+
+It also looks like the data in the vowel column is really a vowel plus a tone number. Let's make a tone column from just the last character of the vowel column...
+
+```{r eval = T}
+mandarin$tone <- str_sub(mandarin$vowel, -1,-1)
+```
+
+...and let's overwrite the vowel column with just its first to the second-to-last character -- in other words, we'll delete the final character.
+
+```{r eval = T}
+mandarin$vowel <- str_sub(mandarin$vowel, 1,-2)
+```
+
+Nice, now we have some more rational columns.
+
+
 #### Getting descriptive statistics: group_by() %>% summarise()
 
 Allowing multiple pipes brings us to one of the most useful sequences of functions: **group_by() %>% summarize()**
 
 *SUPER USEFUL!* 
 
-Remember the summary() function from the first tutorial? Well, that was useful, but let's say we wanted to get the mean sameness rating for each of our levels. In Base R, we would have to create four separate subsets of the data, and run the mean() (or summary()) function on all four subsets. That's effortful. Instead, we can use the group_by() function to create subsets, and then derive the mean using the summarize() function (or summarise(), which also works). 
+Remember the summary() function from the first tutorial? Well, that was useful, but let's say we wanted to get the mean duration rating for each of the vowels in the Mandarin F0. In Base R, we would have to create a ton of separate subsets of the data, and run the mean() (or summary()) function on each subset. That's effortful. Instead, we can use the group_by() function to create subsets, and then derive the mean of the dur column using the summarize() function (or summarise(), which also works). 
 
-In this example, we'll store these means in a new dataset called same_means:
+In this example, we'll store these means in a new dataset called duration_means:
 
 ```{r eval = FALSE}
-same_means <- jury %>% 
-  group_by(Level) %>% 
-  summarise(mean_sameness = mean(SameAnswer))
+duration_means <- mandarin %>% 
+  group_by(vowel) %>% 
+  summarise(mean_dur = mean(dur))
 
-View(same_means)
+View(duration_means)
 ```
 
-The above line of code takes the jury dataset, groups by the Level category, then gets the mean of the SameAnswer column and fills that value into a column we're calling "mean_sameness" in same_means dataframe. This is great, but wouldn't it be even better if we could distinguish between the same- and different-speaker pairs, too?
+The above line of code takes the mandarin dataset, groups by the vowel category, then gets the mean of the dur column and fills that value into a column we're calling "mean_dur" in duration_means dataframe. This is great, but wouldn't it be even better if we could also distinguish between the various following sounds, which could conceivably have an effect on the duration too?
 
 ```{r eval = FALSE}
-same_means <- jury %>% 
-  group_by(Level, CorrectAnswer) %>% 
-  summarise(mean_sameness = mean(SameAnswer))
+duration_means <- mandarin %>% 
+  group_by(vowel, foll) %>% 
+  summarise(mean_dur = mean(dur))
 
-View(same_means)
+View(duration_means)
 ```
 
-We could also reverse the order of the grouping; note how the calculations of the means don't change, but we might prefer either seeing the rows clustered by Level or by CorrectAnswer, depending on what our research questions are.
+We could also reverse the order of the grouping; note how the calculations of the means don't change, but we might prefer either seeing the rows clustered by following sound or by vowel, depending on what our research questions are.
 
 ```{r eval = FALSE}
-same_means <- jury %>% 
-  group_by(CorrectAnswer, Level) %>% 
-  summarise(mean_sameness = mean(SameAnswer))
+duration_means <- mandarin %>% 
+  group_by(foll, vowel) %>% 
+  summarise(mean_dur = mean(dur))
 
-View(same_means)
+View(duration_means)
 ```
 
 You can have all sorts of functions embedded in the summarise function. *These will be useful to find means, medians, standard deviations, etc.*
@@ -145,69 +180,72 @@ You can have all sorts of functions embedded in the summarise function. *These w
 + length() -- this is one way to get the number of tokens
 
 ```{r eval = FALSE}
-same_means <- jury %>% 
-  group_by(Level, CorrectAnswer) %>% 
-  summarize(mean_sameness = mean(SameAnswer), 
-            sd_sameness = sd(SameAnswer))
+duration_means <- mandarin %>% 
+  group_by(foll, vowel) %>% 
+  summarise(mean_dur = mean(dur),
+            sd_dur = sd(dur))
 
-same_means <- jury %>% 
-  group_by(Level, CorrectAnswer) %>% 
-  summarize(mean_sameness = mean(SameAnswer), 
-            sd_sameness = sd(SameAnswer),
-            median_sameness = median(SameAnswer))
+duration_means <- mandarin %>% 
+  group_by(foll, vowel) %>% 
+  summarise(mean_dur = mean(dur),
+            sd_dur = sd(dur),
+            median_dur = median(dur))
 
-same_means <- jury %>% 
-  group_by(Level, CorrectAnswer) %>% 
-  summarize(mean_sameness = mean(SameAnswer), 
-            sd_sameness = sd(SameAnswer),
-            median_sameness = median(SameAnswer), 
-            max_sameness = max(SameAnswer), 
-            min_sameness = min(SameAnswer), 
-            count = length(SameAnswer))
+duration_means <- mandarin %>% 
+  group_by(foll, vowel) %>% 
+  summarise(mean_dur = mean(dur),
+            sd_dur = sd(dur),
+            median_dur = median(dur),
+            max_dur = max(dur), 
+            min_dur = min(dur), 
+            count = length(dur))
 
-View(same_means)
+View(duration_means)
 ```
 
-Note that within the summarize() function, on the *left* side of the = we specify a new name that we make up for each column in our output, and on the *right* side of the = we specify the function to run on a column in the input. There's nothing special about the word "mean_sameness" -- we could cal this column "meansame" or "mean_sameness" or "Rumpelstiltskin" or anything we wanted. It's best if we choose a clear, unique, descriptive name that's short enough to easily type.
+Note that within the summarize() function, on the *left* side of the = we specify a new name that we make up for each column in our output, and on the *right* side of the = we specify the function to run on a column in the input. There's nothing special about the word "mean_dur" -- we could cal this column "meandur" or "mean_dur" or "Rumpelstiltskin" or anything we wanted. It's best if we choose a clear, unique, descriptive name that's short enough to easily type.
 
 
 #### Get unique elements
 Use the unique() function to see the individual categories in a column
 
 ```{r eval = FALSE}
-unique(jury$Participant)
-unique(jury$Audio1Accent)
+unique(mandarin$vowel)
+unique(mandarin$participant)
 ```
 
 #### Get the length of unique elements
 You can use length(unique()) to get the number of unique categories in a column. The length() function is simply wrapped around the unique() function.
 
 ```{r eval = FALSE}
-length(unique(jury$Participant))
+length(unique(mandarin$vowel))
 ```
-This will tell us the number of participants who took the experiment. You could alternatively write two lines of code to get this:
+This will tell us the number of vowel categories in the dataset. You could alternatively write two lines of code to get this:
 
 ```{r eval = FALSE}
-unique_items <- unique(jury$Participant)
+unique_items <- unique(mandarin$vowel)
 length(unique_items)
 ```
 
 Or even use the pipe %>% :
 
 ```{r eval = FALSE}
-unique(jury$Participant) %>%
+unique(mandarin$vowel) %>%
   length()
 ```
 
 ### Simple if-else statements 
-If-else statements are a staple of almost all programming languages. As their name suggests, these are statements that make a certain change to an element *if* a condition is met, otherwise (or *else*), it makes a different change. For example, in this experiment, people heard pairs of sound files with voices that might have been same or different; in most cases, the pair of files were voices with the same accent, but sometimes we compared a Middlesbrough voice with a Newcastle voice. We could create a new column in the dataset that tells us whether the first and second audio files in a pair were matched or unmatched for accent.
+If-else statements are a staple of almost all programming languages. As their name suggests, these are statements that make a certain change to an element *if* a condition is met, otherwise (or *else*), it makes a different change. There are a few ways to write if-else statements in R. One way is using the ifelse() function. 
 
-There are a few ways to write if-else statements in R. One way is using the ifelse() function. 
-ifelse() takes three arguments: the condition that needs to be met `(jury$Audio1Accent == jury$Audio2Accent)`, what to do if that condition is TRUE (indicate "matched"), what to do if the condition is FALSE (indicate "unmatched"). Here we create a new column called *accent_match* (on the left side of the line) using an if-else statement:
+For example, in this dataset, f0_1 represents the F0 of the token measured at the first timepoint, f0_2 at the second timepoint, all the way up to f0_10 at the tenth and final timepoint. We might be interested in sorting out tokens where the final point (f0_10) had a higher pitch than the starting point (f0_1), thus giving us a rough measure of "rising" vs. "not rising" tones. We could thus create a new column in the dataset called "rising" that puts "rising" if f0_1 is less than f0_10, and "not rising" otherwise.
+
+ifelse() takes three arguments: the condition that needs to be met `(mandarin$f0_1 < mandarin$f0_10)`, what to do if that condition is TRUE (indicate "rising"), what to do if the condition is FALSE (indicate "not rising"). Here we create a new column called *rising* (on the left side of the line) using an if-else statement:
 ```{r eval = FALSE}
-jury$accent_match <- ifelse(jury$Audio1Accent == jury$Audio2Accent, "matched", "unmatched")
-View(jury)
+mandarin$rising <- ifelse(mandarin$f0_1 < mandarin$f0_10, "rising", "not rising")
+View(mandarin)
 ```
+
+Notice that if either f0_1 or f0_10 are "NA" and have no measurement, we can't evaluate the condition and we need to put "NA" in the resulting cell of the "rising" column.
 
 ### Getting help
 You can get help using a question mark preceding the function that you want more information on. You can also get help via Google or the Help tab in the lower righthand corner.
@@ -218,199 +256,189 @@ You can get help using a question mark preceding the function that you want more
 ?subset
 ```
 
+###  & and | 
 
-## Data visualization in R with ggplot2
+Something important we haven't covered yet is the AND and OR operators. The AND operator (typed as &, called "ampersand") takes two logical values and returns TRUE only if both values are TRUE themselves. For instance, suppose we have a variable x that is equal to 12, and another variable y equal to 17. We can then check if each of these variables is greater than 5 and less than 15:
 
-It's possible to do a lot of decent **data visualisation** just using Base R (that is, just the functions that come pre-loaded with R). [YaRrr! Chapter  11.1-11.5](https://bookdown.org/ndphillips/YaRrr/plotting1.html) demonstrates some of this Base-R plotting. But tidyverse contains a package called [ggplot2](https://ggplot2.tidyverse.org/) (commonly referred to as just "ggplot") which adds flexibility and has been widely adopted by linguists and other scientists. If you have installed tidyverse and loaded it in using the library() or require() functions, then ggplot2 will automatically be loaded too. You can read more about the background to ggplot2 [here](https://qz.com/1007328/all-hail-ggplot2-the-code-powering-all-those-excellent-charts-is-10-years-old/). 
-
-ggplot code is fairly templatic, and works by creating "layers" to a plot. You will always need the following three components in your ggplot code:
-
-+ the ggplot() function that tells R you want to create a graph with some data frame
-+ the geom_X() function where X refers to the specific type of plot you want to make (histogram, scatterplot, etc.). We'll go over some possible geom_X functions below
-+ an aesthetics mapping aes() that tells R how to arrange the variables on the plot
-
-
-### Histograms
-
-When you want to plot the distribution of **one continuous variable**, you can use a histogram. Here, we'll demonstrate with participants' self-rating of familiarity with Standard Southern British English. (Let's set aside debates over whether Likert-style ordinal ratings are truly quantitative, and treat this variable as continuous.)
 ```{r eval = T}
-ggplot(jury) + 
-  geom_histogram(aes(x = SSBEFamiliarity))
+x <- 12
+x > 5 & x < 15
+
+y <- 17
+y > 5 & y < 15
 ```
 
-The stat_bin() warning simply tells you that it's using a default binwidth for grouping the counts together; here it's chosen to chop up all possible values from 0 to 100 so that they're in 30 different 'bins' each of which is about 3.33 units wide. It's usually safe to ignore warnings like this.
-
-As we can see, most people rate themselves as very familiar with SSBE.
-
-### Density plots
-
-Density plots are very similar to histograms, but instead of dealing with bins of observations and their raw counts, these estimate "kernel density". No need to know what this is, but basically this is just a smoothed version of a histogram.
+The OR operator (typed as |, called "pike") takes two logical values and returns TRUE if either one (or both) values are TRUE themselves. If we replace the ANDs in the previous example with ORs, here's what we get:
 
 ```{r eval = T}
-ggplot(jury) + 
-  geom_density(aes(x = SSBEFamiliarity))
+x <- 12
+x > 5 | x < 15
+
+y <- 17
+y > 5 | y < 15
 ```
 
-### Boxplots
-When you want to plot the distribution of one continuous variable, but for separate categories, you can use a boxplot.
+Since y equals 17, and since 17 is greater than 5, the answer is TRUE to the question "Is y greater than 5 or less than 15?".
+
+These operators are very useful when you're filtering/subsetting your data, too. You can combine subset conditions using AND or OR. For instance, here we can subset out a dataframe of just the tokens where preceding the vowel was "d" and following it was "ng".
 
 ```{r eval = T}
-ggplot(jury) + 
-  geom_boxplot(aes(x = CorrectAnswer, y = SameAnswer))
+d_ng <- subset(mandarin, prec == "d" & foll == "ng")
 ```
 
-Here, we can see that listeners' answers on a 0-100 scale for the question "Are these the same or different people?" differ by whether the pair was actually the same or different; when the correct answer is that they're different people, respondents give lower ratings for sameness than when the correct answer is that they're the same person.
-
-### Scatterplots
-When you have **two continuous variables** and you want to show the relationship between them, you'll want a scatterplot. Think carefully about which variable you'll want on the x-axis, and which one on the y-axis:
+...or maybe we want to revise the "rising" column so that it marks as "not rising" any token where f0_10 is greater than f0_1 OR where f0_9 is greater than f0_2, with others marked "not rising".
 
 ```{r eval = T}
-ggplot(jury) + 
-  geom_point(aes(x = SimilarityAnswer, y = SameAnswer))
+mandarin$rising <- ifelse(mandarin$f0_10 > mandarin$f0_1 | mandarin$f0_9 > mandarin$f0_2, "not rising", "rising")
 ```
 
-Here we're plotting people's 0-100 answer to "How similar are these voices" on the x-axis and their 0-100 answer to "Are these the same or different people?" on the y-axis. In RStudio, kyou can click the "Zoom" button in the Plots tab to see a larger version of the plot. One of the things we see here is that if people give low ratings for similarity, they're very unlikely to give high ratings for sameness. There seems to be more instances of people giving high ratings for voice similarity but also saying they're pretty sure that they're not actually the same person.
-
-### Bar graphs
-When you want to display the **count or proportion** of different levels of a categorical variable, you'll want a bar graph:
+### Cross tabulation
+For character vectors, we can get the overall number of cells per category using the xtabs() function. xtabs() tabulates, or counts up, the number of cells with each unique label. Here we can look at the number of observations by vowel. Note the use of the tilde (~) in this formulation. The use of the tilde is a bit idiosyncratic in R, and frequently means "as a function of", but just go with it for now. Like natural languages, computer languages sometimes also have idiosyncratic features.
 
 ```{r eval = T}
-ggplot(jury) + 
-  geom_bar(aes(x = Level))
+xtabs(~vowel, mandarin)
 ```
 
-We see here that when this experiment was run, we collected equal amounts of data for Level 1 (when it's boring and beige) and Level 2 (when we first introduce the jury vs. robot scenario). Because we had two versions of Level 3 which we ran on different participants, we have less data for each of those levels. We have a small amount of data for a version of Level 3 where we gave listeners an extra piece of "evidence" in the "case" (showing them a little picture of a DNA strand, footprint, or fingerprint); we have a larger amount of data for the version of Level 3 where we gave listeners access to an "expert witness" who supplied them with "testimony" in favour of the voices belonging to the same or to different people.
-
-### Layering
-
-#### Facetting
-
-Let's say we want a separate scatterplot looking at the relationship between similarity and sameness rating for each correct answer condition **separately**. We can use facet_wrap(~CorrectAnswer) to split this up:
-
+We can get further breakdowns of the counts using the plus sign. The following example returns a table of the vowel + following sound pairs.
 ```{r eval = T}
-ggplot(jury) + 
-  geom_point(aes(x = SimilarityAnswer, y = SameAnswer)) + 
-  facet_wrap(~CorrectAnswer)
+xtabs(~vowel + foll, mandarin)
+
+# or, if we wanted our table flipped around the other way:
+
+xtabs(~foll + vowel, mandarin)
 ```
 
-You can combine facet_wrap() with any plot. Here's an example with a histogram:
+You can also obtain counts and proportions of vectors with categorical variables with tidyverse code.
 
-```{r eval = T}
-ggplot(jury) + 
-  geom_histogram(aes(x = SameAnswer)) + 
-  facet_wrap(~CorrectAnswer)
-```
+```{r eval = FALSE}
+counts <- mandarin %>% 
+  group_by(vowel) %>% 
+  summarize(count = n())
 
-For every five different-speaker sound pairs in this experiment there were just three same-speaker pairs, so the raw numbers for the different-speaker conditions are higher. That being said, it is also apparent here that the same-speaker pairs were trickier for listeners than the different-speaker pairs. The mode of the different-speaker pair distribution is clearly very low; for the same-speaker pairs, the sameness answers seem to be bimodally distributed, showing about the same number of high sameness ratings as low ratings. We can plot these as density plots instead of histograms to verify that the shape of the same-answer distribution is more strongly bimodal than the different-answer distribution.
+# This should give you an ERROR because length() requires you to type out an argument, unlike n()
+counts <- mandarin %>% 
+  group_by(vowel) %>% 
+  summarize(count = length())
 
-```{r eval = T}
-ggplot(jury) + 
-  geom_density(aes(x = SameAnswer)) + 
-  facet_wrap(~CorrectAnswer)
-```
+# This code should work. Note you can replace the argument inside length() with *any* of the column names (file, vowel, prec, foll, etc.) and it will generate the same by-vowel row count.
+counts <- mandarin %>% 
+  group_by(vowel) %>% 
+  summarize(count = length(vowel))
 
-#### Axis labels
-It's important to put informative labels on your x- and y-axes, and your column names might not provide that. You can use the xlab() and ylab() functions to add an axis label. 
+# If you want to group by two variables, you just put them both in group_by(), separated by a comma:
+counts <- mandarin %>% 
+  group_by(vowel, foll) %>% 
+  summarize(count = n())
 
-For example:
-
-```{r eval = T}
-ggplot(jury) + 
-  geom_density(aes(x = SameAnswer)) + 
-  xlab("Sameness rating") + 
-  ylab("Density") 
 ```
 
 
-#### Axis limits
-Sometimes you want to truncate the displayed data on the axes, or make sure it's very consistent. You can specify an exact range by using the functions xlim(number1, number2) and/or ylim(number1, number2). Compare the plots below. Perhaps we want to just zoom in on the SSBE familiarity responses above 75, in which case we could set the x-axis limits to be between 75 and 101 (or any maximum more than 100 -- setting it to 100 would exclude all the reponses that were exactly 100, which wouldn't be good.) Or we could zoom in on just lower responses and manually select a y-axis range.
+### Selecting columns and getting unique values
+
+If we run the following code, what we see is the number of tokens collected in the experiment for each vowel and tone category -- that is, how many times each vowel was uttered with each tone in the files under investigation.
 
 ```{r eval = T}
-ggplot(jury) + 
-  geom_histogram(aes(x = SSBEFamiliarity))
-
-ggplot(jury) + 
-  geom_histogram(aes(x = SSBEFamiliarity)) +
-  xlim(75, 101)
-
-ggplot(jury) + 
-  geom_histogram(aes(x = SSBEFamiliarity)) +
-  xlim(-1, 80) +
-  ylim(-1, 3000)
+counts <- mandarin %>% 
+  group_by(vowel, tone) %>% 
+  summarize(count = n())
 ```
 
-#### Colors
-There are [so many colors in R!](http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf)
-
-There are confusingly two ggplot arguments that will make use of color:
-
-+ the **color** argument
-+ the **fill** argument
-
-The color argument actually just changes the outline color. The fill argument will refer to the color of a column in e.g., a bar graph or histogram. 
-
-We'll first start with an example where we keep the outline color **constant** across every variable in the figure. When you want everything to be the same color, you put the color variable **outside** of the aes() function, but within the geom_X() function:
+Suppose instead we wanted to find out *how many participants* said each vowel/tone combo instead of *how many observations* we have per vowel/tone combo. (Ideally, every participant should have said every combo at some point, but this kind of thing is always good to double-check!) If we add "participant" to the group_by() argument, that doesn't exactly give us what we want -- it'll just tell us how many tokens were uttered by each participant for each vowel/tone combo:
 
 ```{r eval = T}
-ggplot(jury) + 
-  geom_histogram(aes(x = SSBEFamiliarity), color = "rosybrown2")
+counts <- mandarin %>% 
+  group_by(vowel, tone, participant) %>% 
+  summarize(count = n())
 ```
-
-We can do the exact same thing with **fill**. Note the difference:
-```{r eval = T}
-ggplot(jury) + 
-  geom_histogram(aes(x = SSBEFamiliarity), fill = "rosybrown2")
-```
-
-You can also combine the two; order doesn't matter:
-```{r eval = T}
-ggplot(jury) + 
-  geom_histogram(aes(x = SSBEFamiliarity), color = "black", fill = "rosybrown2")
-```
-
-The second set of examples will be where the color **changes** with the level of a categorical variable. This can be a pretty powerful mapping in your figures. For example, we can have boxplots of the sameness ratings plotted on the x-axis, broken up by level on the y-axis, and further use color to split the boxplots by same- and different-speaker pairs. To do this, we put **color** or **fill** **inside the aes() mapping.** When we do this, the color or fill is **mapped** to some variable. Note that we then lose the immediate ability to specify the color that R uses, but we'll return to that in a moment. Also important to note is that there are several options that can go inside the aes() mapping besides **color** or **fill** including the size of a point, the shape of a point, the line type (dashed or solid), etc. I recommend looking this up online if it interests you. 
+One solution is to instead first collapse the "participant" column such that we only have one row per participant per vowel per tone, which we can then sum up. In this case, it's useful to select just the columns we're interested in: we can ignore all the other columns for now. If we wanted to make a new dataframe with just these columns, we can use the select() function to do so:
 
 ```{r eval = T}
-ggplot(jury) + 
-  geom_boxplot(aes(x = Level, y = SameAnswer, fill = CorrectAnswer))
+participant_voweltone <- mandarin %>%
+  select(participant, vowel, tone)
 ```
 
-Further examples:
-```{r eval = T}
-ggplot(jury) + 
-  geom_boxplot(aes(x = Level, y = SimilarityAnswer, fill = CorrectAnswer))
-ggplot(jury) + 
-  geom_boxplot(aes(x = Level, y = SameAnswer, fill = Audio1Accent))
-```
-
-#### Change the color of the mapping
-You can see how R used some default colors to map gender to the boxplot. You can also overwrite this using the scale_fill_manual() function. Let's take look at how this works:
+If you view this resulting dataframe, you can see that we now have lots of duplicate identical rows. We don't want to stop there! We can then use the unique() function to delete all the duplicate rows, keeping only one version of each unique row:
 
 ```{r eval = T}
-ggplot(jury) + 
-  geom_boxplot(aes(x = Level, y = SameAnswer, fill = CorrectAnswer)) +
-  scale_fill_manual(values = c("rosybrown2", "lightblue"))
+participant_voweltone <- mandarin %>%
+  select(participant, vowel, tone) %>%
+  unique()
 ```
 
-There are also some automatic color scales in R, and ones that work for colorblindness, etc. Some more info can be found by googling "color palettes" in R, and some good examples are on [this page](https://www.datanovia.com/en/blog/top-r-color-palettes-to-know-for-great-data-visualization/). 
-
-#### Background theme
-You can change the "theme" of the R plot, which generally includes the background color, the presence of grid lines, the font size, and a few other things using some theme_X() functions. The default theme with the gray background is theme_gray(); many people like the theme_bw() or theme_classic() backgrounds. There are several more theme_X() options in the ggthemes package if you'd like to install that and experiment. Here you can see what it looks like with the theme_classic() function. You can put the font size in the parentheses if you want, or leave a number out and have it choose a default size. Note also the specification of the binwidth in this histogram, if you wanted to specify that bins should be 10 units wide:
+We can now add our group_by() and summarize() functions to group by vowel and tone and then get the count for how many individual participants uttered each vowel/tone combo:
 
 ```{r eval = T}
-ggplot(jury) + 
-  geom_histogram(aes(x = SameAnswer), fill = "rosybrown2", color = "black", binwidth = 10) + 
-  xlab("Sameness Response") + 
-  theme_classic(20)
+participant_voweltone <- mandarin %>%
+  select(participant, vowel, tone) %>%
+  unique() %>%
+  group_by(vowel, tone) %>%
+  summarize(count = n())
 ```
 
-### Saving images
-You can save an image using various file formats. The simplest way to save an image is to click on the Export... button in the Plots panel. You should have the option save either as a PNG or as a PDF file there. You may need to play around with the sizes and settings to get one that's a decent resolution for PNGs. The Export option for Save as PDF is a little easier to work with, but note that PDF images often **do not** transfer well between Mac and Windows computers.
+Looks like we mostly have evidence from all 13 speakers, but there are a handful of vowel/tone combos for which we're missing some evidence! It is always good to know when we have some unbalanced or missing data.
 
-An alternative to clicking around at the bottom right is to use the ggsave() function. You specify the name and location of the new file you want to create, and then the height and width in inches and the resolution you'd like it to be (usually 300 is fine).
+
+### NA values
+
+Suppose we want to find the mean of all the f0 measurements at timepoint 5 (that is, f0_5), grouped by file, so that we get a sense of the average f0 within each file at about the midpoint of each vowel.
+
+```{r eval = T}
+mandarin %>% 
+  group_by(file) %>% 
+  summarise(mean_f0 = mean(f0_5))
+```
+
+If you look at the resulting table, everything is NA! That's not good. The reason is that if you have "NA" values in your vector (column), R will be unable to take the mean or perform other standard mathematical functions on it. You'll know if this happens to you because the returned value (e.g., for the mean) will be "NA". One way to omit NA values is to wrap the object within the function na.omit():
+
+```{r eval = T}
+mandarin %>% 
+  group_by(file) %>% 
+  summarise(mean_f0 = mean(na.omit(f0_5)))
+```
+
+Another strategy that does the same thing is using the optional argument "na.rm = TRUE", where na.rm means "remove the NA values".
+
+```{r eval = T}
+mandarin %>% 
+  group_by(file) %>% 
+  summarise(mean_f0 = mean(f0_5, na.rm = TRUE))
+```
+
+If we don't want to type na.omit() or na.rm = TRUE over and over again, we can potentially use the drop_na() function. What this does is it removes all rows that contain *any* NA values -- not just rows where there are NA values for f0_5, but for *any* variable. If our data contained rows that contained a number in the f0_5 column but an NA in the f0_4 column, we probably wouldn't want to use this drop_na() function because it would remove *too many* rows.
+
+```{r eval = T}
+na_dropped <- mandarin %>%
+  drop_na()
+
+nrow(mandarin)
+nrow(na_dropped)
+```
+
+Here you can see that we've eliminated about half the rows, because so many of them have one or more NAs in them! Supposing that was something we wanted to do, we could have drop_na() as our first step, after which we use the group and summarize functions.
+
+```{r eval = T}
+mandarin %>% 
+  drop_na() %>%
+  group_by(file) %>% 
+  summarise(mean_f0 = mean(f0_5))
+```
+
+### Saving a table
+
+You might want to save a table of values as a .csv or text file for ease of then copying it into a report/paper. You can use the write.table() function to create a space-delimited .txt file, or write.csv() to create a comma-delimited .csv file. Within each of these functions, you first tell it the name of the dataframe you want to save as a table, then within "" quotes you put the path name to where you want to save it, *ending in the name you want to give the new file and the .csv or .txt extension it should have*. 
+
+When using write.table(), it'll default to writing as a space-delimited .text file -- that is, there will be a space between each of the columns. You can also make it a tab-delimited file by adding the argument *sep = "\\\\t"* which tells R to separate the columns with a tab.
+
+You can also set row.names to FALSE; this is recommended to prevent R from saving the row numbers as an extra column in your file, which can cause issues if you read the data back into R later. You can see in the following two examples that when row.names = FALSE is not included, you end up with an initial column with row numbers that is in most cases extraneous/unnecessary.
+
 ```{r eval = F}
-ggsave("/Users/Thomas/Library/CloudStorage/OneDrive-YorkUniversity/LING 3300/Datasets/Jury/plot1.png", width = 7, height = 7, dpi = 300)
+write.table(participant_voweltone, "/Users/Thomas/Library/CloudStorage/OneDrive-YorkUniversity/LING 3300/Datasets/participant_voweltone.txt", sep = "\\t", row.names = FALSE)
+
+write.csv(participant_voweltone, "/Users/Thomas/Library/CloudStorage/OneDrive-YorkUniversity/LING 3300/Datasets/participant_voweltone.txt")
 ```
+
+
+#### Practice with datasets
 
 ### Practice
 
@@ -430,26 +458,12 @@ Create an R script to save the answers to these questions.
 10. What is the mean, median and range of by-participant medians?
 11. For each dominant language in the new subset, get the mean reaction time. Which language has the lowest mean, which has the highest mean?
 12. For each dominant language in the new subset, get the number of unique participants. Hint: in the summarise() function you will need to use length(unique()). 
+13. Create another column in lex called 'gender'. If the sex of the participant is equal to 1, then the new value in the 'gender' column should be "m" for male, otherwise the new value should be "f".
+14. Get a count of how many observations we have from male vs. female participants.
+15. Get a count of how many male vs. female participants are in the sample.
+16. Create a new column called 'Germanic'. If the domLang is English, German, Norwegian, Danish, or Afrikaans, the new value in the 'Germanic' column should be "Germanic", otherwise it should be "Other".
+17. Get a count of how many male vs. female participants there are whose dominant language is Germanic vs. other.
+18. Create a dataframe that summarizes the within-participant reaction time (RT) means, medians, standard deviations, and counts of observations. (Hint: in preparation for the next step, it would be wise to include not only workerID but also the Germanic and gender columns in your group_by() function.)
+19. (Bonus, if you dare!) Based on the dataframe created in step 18, create another dataframe that summarizes the mean of means, standard deviations, and standard errors of reaction times for the data, grouped by gender and Germanic vs. other dominant language. (Hint: you will probably need to first create a dataframe with all the measurements except for standard error, and then calculate standard error in a subsequent line of code.)
+20. Save the dataframe created in step 18 (or step 19) to a tab-delimited .txt table.
 
-
-#### Data visualization practice
-
-1. Load in 'L2_English_Lexical_Decision_Data.csv' again R and call it 'lex', so we're starting over from the original dataset.
-2. Create a histogram of the reaction times (RT column). It will probably look weird because of the extreme range of RTs.
-3. Get a summary of the RT values, and take a look at the maximum value. Something can't be right there.
-4. Create another histogram of the reaction times where the x-axis only includes values from 0 to 5000 ms.
-5. Based on the histogram, it looks like values above 2500 seem pretty improbable. Create a subset of lex which only retains reaction times below 2500 ms. Call this lex again.
-6. Create another histogram of reaction times using the new dataset and change the background theme, along with the outline color and fill of the bars. 
-7. Let's say we're interested in comparing reaction times of L1 English speakers against L2 English speakers. Create a new column called 'L2' that indicates whether a speaker's dominant language is English or not.
-8. Create a boxplot with L2 status on the x-axis and the reaction time on the y-axis.
-9. Let's also say we might want to look at any potential effects of gender. Create another column in lex called 'gender'. If the sex of the participant is equal to 1, then the new value in the 'gender' column should be "m" for male, otherwise the new value should be "f".
-10. Recreate the same boxplot in 8, but use the aesthetic mapping to map color to the gender column. 
-11. Now recreate the same boxplot, but also provide more descriptive axis labels. 
-12. Create a new column called 'accuracy'. If the column 'acc' is equal to 1, then the value in 'accuracy' should be equal to "right", otherwise the value should be equal to "wrong".
-13. Create a bar graph with accuracy on the x-axis and the fill of the bar mapped to the L2 status. This should create what's called a "stacked" bar graph, where the number of "right" answers for L1 English speakers is stacked on top of the number of "right" answers for L2 English speakers.
-14. To create a "dodged" bar graph where the bars are **next to each other**, you'll need to use the following argument:
-
-```{r eval = F}
-geom_bar(aes(x = accuracy, fill = L2), position = "dodge")
-```
-15. Now take the same graph from 14 and change the colors and background theme.

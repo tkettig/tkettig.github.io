@@ -760,6 +760,14 @@ make sure you tell it that <em>heading</em> is set to <em>Yes</em>; that
 way it will know that the first line of the dataset is the column
 titles.</p>
 <pre class="r"><code>mandarin &lt;- read.csv(&quot;/Users/Thomas/Library/CloudStorage/OneDrive-YorkUniversity/LING 3300/2025-26 Winter/Datasets/mandarin_f0.csv&quot;, header = TRUE)</code></pre>
+<p>This is a dataset containing f0 (pitch) measurements. Each sound file
+(named in the “file” column) contained several words; each vowel was
+located (named in the “vowel” column, along with the preceding “prec”
+and following “foll” sounds) and its start and end points were marked;
+from these start and end points the duration could be calculated
+(“dur”), and f0 could be measured at 10 time points through the vowel
+(so “f0_1” is the f0 at the beginning of the vowel, “f0_2” is the f0 at
+the next time point, all the way to “f0_10” at the end).</p>
 </div>
 <div id="viewing-the-dataset" class="section level4">
 <h4>Viewing the dataset</h4>
@@ -873,7 +881,7 @@ comments, use the # symbol.</p>
 answer in code below it, like the following:</p>
 <pre class="r"><code># LING 3300 Week 1 Practice 
 # Thomas Kettig
-# August 23, 2026
+# September 12, 2026
 
 # Practice with unit variables
 
@@ -948,9 +956,9 @@ numbers, and/or logicals.</li>
 <div id="practice-with-datasets-basics" class="section level4">
 <h4>Practice with datasets: basics</h4>
 <ol style="list-style-type: decimal">
-<li>Find the Lexical Decision Dataset on eClass and download it. Import
-‘L2_English_Lexical_Decision_Data.csv’ into R and call it ‘lex’ for
-lexical decision. This data set contains reaction times (RT) in
+<li>Find the L2 Lexical Decision dataset on eClass and download it.
+Import ‘L2_English_Lexical_Decision_Data.csv’ into R and call it ‘lex’
+for lexical decision. This data set contains reaction times (RT) in
 milliseconds to words and nonwords of English from L2 English speaking
 participants. More info about the data and project <a href="https://osf.io/msnpr/">here</a>.</li>
 <li>Get the number of rows in the dataset using the console (don’t just

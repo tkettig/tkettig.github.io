@@ -113,6 +113,7 @@ In the function, we use the names_from argument to refer to which column in the 
 
 Note also the difference in the use of quotations between pivot_longer() above and pivot_wider() here. In the tidyverse style of code, when we are creating a *new* column, we use quotes; when we are referring to an existing column, we leave it unquoted.
 
+
 ### Calculating margin of error + confidence interval
 
 I recommend having your slides from Unit 4 open while you read the following.
