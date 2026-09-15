@@ -9,11 +9,11 @@ These tutorials are based on various resources developed at the University of Yo
 
 <h3> [Tutorial 1 - Basics of R](ling3300_R/LING3300_Tutorial1.html) </h3> 
 
-<h3> [Tutorial 2 - dplyr and ggplot2](ling3300_R/LING3300_Tutorial2.html) </h3> 
+<h3> [Tutorial 2 - dplyr](ling3300_R/LING3300_Tutorial2.html) </h3> 
 
-<h3> [Tutorial 3 - Further data wrangling and standard error](ling3300_R/LING3300_Tutorial3.html) </h3> 
+<h3> [Tutorial 3 - Plotting with ggplot2](ling3300_R/LING3300_Tutorial3.html) </h3> 
 
-<h3> [Tutorial 4 - Confidence Intervals](ling3300_R/LING3300_Tutorial4.html) </h3> 
+<h3> [Tutorial 4 - Further data wrangling, standard error, and confidence Intervals](ling3300_R/LING3300_Tutorial4.html) </h3> 
 
 <h3> [Tutorial 5 - t-tests](ling3300_R/LING3300_Tutorial5.html) </h3> 
 

@@ -392,24 +392,22 @@ language (which we call “Base R”).</p>
 <p>If you’re connected to the internet, you can install/update a package
 with the following code:</p>
 <pre class="r"><code>install.packages(&quot;tidyverse&quot;)</code></pre>
-<p>You’re not done yet! You now “own” the package but you still need to
-pull the package “off the shelf” to use the code. You can import the
-package with the library() function. Yes, you do have to write this line
-of code every time you restart R and want to access the code again! That
-means that most of your scripts will begin with two bits of code:
-reading in the data you want to work with and reading in the packages
-you need.</p>
-<pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-## ✔ dplyr     1.2.0     ✔ readr     2.1.6
-## ✔ forcats   1.0.1     ✔ stringr   1.6.0
-## ✔ ggplot2   4.0.1     ✔ tibble    3.3.0
-## ✔ lubridate 1.9.4     ✔ tidyr     1.3.2
-## ✔ purrr     1.2.0     
-## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()
-## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+<p>You only have to run this code once on your computer, and then the
+package is installed. It’s just like when you install an app on your
+computer – you don’t have to re-download it every time you use it! So I
+don’t advise keeping this line of code in your scripts or re-running it
+every time you open R.</p>
+<p>However you’re not done yet! You now “own” the package but you still
+need to pull the package “off the shelf” to use the code. You can import
+the package with the library() function. The function require() does the
+same thing.</p>
+<pre class="r"><code>library(tidyverse)
+# or
+require(tidyverse)</code></pre>
+<p>Yes, you do have to open each package every time you restart R and
+want to run your code again! That means that most of your scripts will
+begin with two bits of code: reading in the data you want to work with
+and reading in the packages you need using library().</p>
 <p>Alternatively, you can click the “Packages” tab in the lower
 righthand corner of RStudio, and check the box for the packages you want
 to use.</p>
@@ -701,267 +699,14 @@ frequently means “as a function of”, but just go with it for now. Like
 natural languages, computer languages sometimes also have idiosyncratic
 features.</p>
 <pre class="r"><code>xtabs(~vowel, mandarin)</code></pre>
-<pre><code>## vowel
-##    a   ai   ao    e   ei    i   ia  iao   ie   ii   io  iou   iu    o   ou    u 
-## 2902 1302  779 4422  847 4686 1997 1176  335 1370   50  787  398  857  385 1583 
-##   ua  uai   ue  uei   uo 
-##  867  116  193  660 1640</code></pre>
 <p>We can get further breakdowns of the counts using the plus sign. The
 following example returns a table of the vowel + following sound
 pairs.</p>
-<pre class="r"><code>xtabs(~vowel + foll, mandarin)</code></pre>
-<pre><code>##      foll
-## vowel   a3  ai4  ao4    b    c   ch    d   e2   e4   e5    f    g    h   i1
-##   a      0    0    0   36   38   63  252    0    0    0   13   38   64   39
-##   ai     0    0    0   65   25   52  126    0    0    0   25   13   50   50
-##   ao     0    0    0    0   25   37   78    0    0    0   13   13    0   26
-##   e      0    0    0   49   13   26  156   12    0    0   39   87   91   13
-##   ei     0    0    0   39    0   78   26    1    0    0   57  252   12    0
-##   i     13    0    0  248   52   63  308   26   13    0   78  254  278   51
-##   ia     0    0    0   39    0    0   78    0    0    0   13   13   52    0
-##   iao    0    0    0   24   13   13   62    0    0    0    0   39  115  110
-##   ie     0    0    0   26   13   13   37    0    0    0   26    0   13    0
-##   ii     0    0    0   13   25   25  127    0    0    0   38   61  116   38
-##   io     0    0    0    0    0    0    0    0    0    0    0    0    0    0
-##   iou    0    0   13   26    0    0   39    0    0    0   26   25   91   62
-##   iu     0    0    0   60    0    0   39    0    0    0    0   13   13   13
-##   o      0   13    0    0    0    0   26    0    0    0    0    0   26   13
-##   ou     0    0    0    0    0    0   90    0    0    0    0    0   13   51
-##   u      0    0    0   13   26   50  238    0    0    0   13   51   39   26
-##   ua     0    0    0    0    0    0   24    0    0    0    0    0    0   24
-##   uai    0    0    0   13    0    0   25    0    0    0    0    0   13    0
-##   ue     0    0    0    0    0    0    0    0    0    0    0    0    0    0
-##   uei    0    0    0   11   13   13   61    0    0   11    0   39   77   13
-##   uo     0    0    0   25    0   39  115    0    0    0   50   91   75   36
-##      foll
-## vowel   i2   i3   i4  ia1  ia2  ia3  ia4 iao4  ie3  ie4  io4 iou1 iou2 iou3
-##   a      0   13    0    0    0    0    0   13   13    0    0   13    0    0
-##   ai     0    0    0    0   33    0    0    0   13    0    0    0    0   12
-##   ao     0    0    0    0    0    0    0    0    0    0    0    0    0   26
-##   e      0   12    0    0    0    0    0    0    0    0    0    0    0   49
-##   ei     0    0    0    0    0    0   25    0    0    0   12    0    0   64
-##   i     13   13    0    0    0    6    0   26    0    0   12    0    0   13
-##   ia     0   26    0    0    0    0    0   13    0    0    0    0    0    0
-##   iao    0    0    0    0    0   13    0   13    0    0    0    0    0   13
-##   ie     0    0    0    0    0    0    0   13    0    0    0    0    0    0
-##   ii     0   13    0   13   12    0    0    0    0   26    0    0   65   13
-##   io     0    0    0    0    0    0    0    0    0    0    0    0    0    0
-##   iou    0    0    0    0    0    0    0    0    0    0   13   13    0    0
-##   iu     0    0    0    0   13    0    0    0    0    0    0    0    0    0
-##   o      0    0    0    0    0    0    0    0    0    0    0    0    0    0
-##   ou     0    0    0    0    0    0    0    0    0    0    0    0    0    0
-##   u      0    0   26    0   13    0    0   39    0    0    0    0    0   26
-##   ua     0    0    0    0    0    0    0    0    0    0    0    0    0    0
-##   uai    0    0    0    0    0    0    0    0    0    0    0    0    0    0
-##   ue     0    0    0    0    0    0    0    0    0    0    0    0    0    0
-##   uei   13    0   13   13    0    0    0    0    0    0    0    0    0    0
-##   uo     0   24    0    0    0    0    0    0    0   13    0    0    0   40
-##      foll
-## vowel iou4    j    k    l    m    n   ng    p    q    r    s   sh   sp  spn
-##   a      0   78    0  113  254  662  623   26   26   38   13  162   46    0
-##   ai     0   89   39  101   26   86    0   38   13   26   23   61   90    0
-##   ao     0   49   26   72   26   13    0    0    0    0    0   65  180    0
-##   e      0   91   26  114   48 2092  576   64   52  264    0   85   79    0
-##   ei     0   25   13   23   13    0    0   13   26    0   13    0    0    0
-##   i     13  165   63   89   78  434  931    0  232   90   52  150  315    0
-##   ia     0   26    0   22    0 1261  273    0    0   13   12   13   39    0
-##   iao    0  101   26   26   39   51    0   39   75    0    0   36  115    0
-##   ie     0   38    0    0   26    0    0    0    0    0    0   52   39    0
-##   ii     0  126   13   51   13   13    0    0   26    0   13   50  106    0
-##   io     0    0    0    0    0    0   50    0    0    0    0    0    0    0
-##   iou    0   13   13   13   13   13    0   13  156   13   13   39   47    3
-##   iu     0   13   12    0    0   25    0    0   13    0   35   48   26    0
-##   o      0    0    0   11    0    0  680    0   13    0    0   50   13    0
-##   ou     0   26    0   13   13    0    0    0    0   26    0   13   39    0
-##   u      0   90   26  136   39   26    0    0   60   39    0  140  134    0
-##   ua     0    0    0   13    0  562  179   13    0    0    0   13   26    0
-##   uai    0   13    0    0   26    0    0    0    0    0    0    0   13    0
-##   ue     0    0    0    0    0  193    0    0    0    0    0    0    0    0
-##   uei    0   13   11   26   13   24    0   25   13   13    0   52   90    0
-##   uo     0  129   25   58  143   39    0    0   26   78   34  100   83    0
-##      foll
-## vowel    t   u2   u3   u4  ua2  ua3  ua4 uai4  ue2 uei2 uei4  uo3   v2   v3
-##   a     73    0    0    0    0    0    0    0    0    0   13    0    0    0
-##   ai    12    0    0    0    0    0   13   13    0    0    0    0    0   13
-##   ao    26    0    0    0    0    0    0    0    0    0    0    0    0   12
-##   e     39   13    0    0   25    0    0    0    0   13   13    0    0    0
-##   ei    78    0    0    0   13    0    0    0    0    0    0   13    0    0
-##   i    140    0    0   13    0    0    0    0    0    0   26   13    0   12
-##   ia    26    0   26    0    0    0    0    0    0    0    0    0    0    0
-##   iao   39    0    0    0   49    0    0    0   13    0   13   12    0    0
-##   ie     0    0    0    0    0    0    0    0    0    0    0    0   13    0
-##   ii   104    0    0   13   13    0    0    0    0    0   26   25   13   12
-##   io     0    0    0    0    0    0    0    0    0    0    0    0    0    0
-##   iou   13    0    0    0    0    0    0    0    0    0   13    0    0    0
-##   iu     0    0    0    0    0    0    0    0    0    0    0    0    0    0
-##   o     12    0    0    0    0    0    0    0    0    0    0    0    0    0
-##   ou    13    0    0    0    0    0    0    0    0    0    0    0    0    0
-##   u     88    0    0    0    0    0    0    0    0    0    0    0   13    0
-##   ua     0    0    0    0    0    0    0    0    0    0    0    0    0    0
-##   uai    0    0    0   13    0    0    0    0    0    0    0    0    0    0
-##   ue     0    0    0    0    0    0    0    0    0    0    0    0    0    0
-##   uei   26    0    0    0    0    0    0    0    0   13    0   13    0    0
-##   uo    51    0    0    0   13   13    0   13   13    0    0   13    0    0
-##      foll
-## vowel   v4  va2  va3  va4  ve1  ve4    x    z   zh
-##   a      0    0    0    0    0    0   39   75   61
-##   ai    13   13    0    0    0    0   26   26  117
-##   ao    13    0    0    0    0    0   39   26   13
-##   e      0    0    0    0    0   24  141   64   52
-##   ei     0    0    0    0    0    0   38    0   13
-##   i      0    0    0   26    0   11   89  123  154
-##   ia     0    0    0    0    0    0   26    0   26
-##   iao   13    0    0    0    0    0   49   39   24
-##   ie     0    0    0    0    0    0   26    0    0
-##   ii     0    0    0    0    0    0   78   25   65
-##   io     0    0    0    0    0    0    0    0    0
-##   iou   13    0    0    0   13    0   52    0   25
-##   iu     0    0    0    0    0    0   26   24   25
-##   o      0    0    0    0    0    0    0    0    0
-##   ou     0    0    0    0    0    0   13   24   51
-##   u      0    0   13    0    0    0  143   39   36
-##   ua     0    0    0    0    0    0   13    0    0
-##   uai    0    0    0    0    0    0    0    0    0
-##   ue     0    0    0    0    0    0    0    0    0
-##   uei    0    0    0    0    0    0   12   26   13
-##   uo     0    0    0    0    0    0   62  179   60</code></pre>
-<pre class="r"><code># or, if we wanted our table flipped around the other way:
+<pre class="r"><code>xtabs(~vowel + foll, mandarin)
+
+# or, if we wanted our table flipped around the other way:
 
 xtabs(~foll + vowel, mandarin)</code></pre>
-<pre><code>##       vowel
-## foll      a   ai   ao    e   ei    i   ia  iao   ie   ii   io  iou   iu    o
-##   a3      0    0    0    0    0   13    0    0    0    0    0    0    0    0
-##   ai4     0    0    0    0    0    0    0    0    0    0    0    0    0   13
-##   ao4     0    0    0    0    0    0    0    0    0    0    0   13    0    0
-##   b      36   65    0   49   39  248   39   24   26   13    0   26   60    0
-##   c      38   25   25   13    0   52    0   13   13   25    0    0    0    0
-##   ch     63   52   37   26   78   63    0   13   13   25    0    0    0    0
-##   d     252  126   78  156   26  308   78   62   37  127    0   39   39   26
-##   e2      0    0    0   12    1   26    0    0    0    0    0    0    0    0
-##   e4      0    0    0    0    0   13    0    0    0    0    0    0    0    0
-##   e5      0    0    0    0    0    0    0    0    0    0    0    0    0    0
-##   f      13   25   13   39   57   78   13    0   26   38    0   26    0    0
-##   g      38   13   13   87  252  254   13   39    0   61    0   25   13    0
-##   h      64   50    0   91   12  278   52  115   13  116    0   91   13   26
-##   i1     39   50   26   13    0   51    0  110    0   38    0   62   13   13
-##   i2      0    0    0    0    0   13    0    0    0    0    0    0    0    0
-##   i3     13    0    0   12    0   13   26    0    0   13    0    0    0    0
-##   i4      0    0    0    0    0    0    0    0    0    0    0    0    0    0
-##   ia1     0    0    0    0    0    0    0    0    0   13    0    0    0    0
-##   ia2     0   33    0    0    0    0    0    0    0   12    0    0   13    0
-##   ia3     0    0    0    0    0    6    0   13    0    0    0    0    0    0
-##   ia4     0    0    0    0   25    0    0    0    0    0    0    0    0    0
-##   iao4   13    0    0    0    0   26   13   13   13    0    0    0    0    0
-##   ie3    13   13    0    0    0    0    0    0    0    0    0    0    0    0
-##   ie4     0    0    0    0    0    0    0    0    0   26    0    0    0    0
-##   io4     0    0    0    0   12   12    0    0    0    0    0   13    0    0
-##   iou1   13    0    0    0    0    0    0    0    0    0    0   13    0    0
-##   iou2    0    0    0    0    0    0    0    0    0   65    0    0    0    0
-##   iou3    0   12   26   49   64   13    0   13    0   13    0    0    0    0
-##   iou4    0    0    0    0    0   13    0    0    0    0    0    0    0    0
-##   j      78   89   49   91   25  165   26  101   38  126    0   13   13    0
-##   k       0   39   26   26   13   63    0   26    0   13    0   13   12    0
-##   l     113  101   72  114   23   89   22   26    0   51    0   13    0   11
-##   m     254   26   26   48   13   78    0   39   26   13    0   13    0    0
-##   n     662   86   13 2092    0  434 1261   51    0   13    0   13   25    0
-##   ng    623    0    0  576    0  931  273    0    0    0   50    0    0  680
-##   p      26   38    0   64   13    0    0   39    0    0    0   13    0    0
-##   q      26   13    0   52   26  232    0   75    0   26    0  156   13   13
-##   r      38   26    0  264    0   90   13    0    0    0    0   13    0    0
-##   s      13   23    0    0   13   52   12    0    0   13    0   13   35    0
-##   sh    162   61   65   85    0  150   13   36   52   50    0   39   48   50
-##   sp     46   90  180   79    0  315   39  115   39  106    0   47   26   13
-##   spn     0    0    0    0    0    0    0    0    0    0    0    3    0    0
-##   t      73   12   26   39   78  140   26   39    0  104    0   13    0   12
-##   u2      0    0    0   13    0    0    0    0    0    0    0    0    0    0
-##   u3      0    0    0    0    0    0   26    0    0    0    0    0    0    0
-##   u4      0    0    0    0    0   13    0    0    0   13    0    0    0    0
-##   ua2     0    0    0   25   13    0    0   49    0   13    0    0    0    0
-##   ua3     0    0    0    0    0    0    0    0    0    0    0    0    0    0
-##   ua4     0   13    0    0    0    0    0    0    0    0    0    0    0    0
-##   uai4    0   13    0    0    0    0    0    0    0    0    0    0    0    0
-##   ue2     0    0    0    0    0    0    0   13    0    0    0    0    0    0
-##   uei2    0    0    0   13    0    0    0    0    0    0    0    0    0    0
-##   uei4   13    0    0   13    0   26    0   13    0   26    0   13    0    0
-##   uo3     0    0    0    0   13   13    0   12    0   25    0    0    0    0
-##   v2      0    0    0    0    0    0    0    0   13   13    0    0    0    0
-##   v3      0   13   12    0    0   12    0    0    0   12    0    0    0    0
-##   v4      0   13   13    0    0    0    0   13    0    0    0   13    0    0
-##   va2     0   13    0    0    0    0    0    0    0    0    0    0    0    0
-##   va3     0    0    0    0    0    0    0    0    0    0    0    0    0    0
-##   va4     0    0    0    0    0   26    0    0    0    0    0    0    0    0
-##   ve1     0    0    0    0    0    0    0    0    0    0    0   13    0    0
-##   ve4     0    0    0   24    0   11    0    0    0    0    0    0    0    0
-##   x      39   26   39  141   38   89   26   49   26   78    0   52   26    0
-##   z      75   26   26   64    0  123    0   39    0   25    0    0   24    0
-##   zh     61  117   13   52   13  154   26   24    0   65    0   25   25    0
-##       vowel
-## foll     ou    u   ua  uai   ue  uei   uo
-##   a3      0    0    0    0    0    0    0
-##   ai4     0    0    0    0    0    0    0
-##   ao4     0    0    0    0    0    0    0
-##   b       0   13    0   13    0   11   25
-##   c       0   26    0    0    0   13    0
-##   ch      0   50    0    0    0   13   39
-##   d      90  238   24   25    0   61  115
-##   e2      0    0    0    0    0    0    0
-##   e4      0    0    0    0    0    0    0
-##   e5      0    0    0    0    0   11    0
-##   f       0   13    0    0    0    0   50
-##   g       0   51    0    0    0   39   91
-##   h      13   39    0   13    0   77   75
-##   i1     51   26   24    0    0   13   36
-##   i2      0    0    0    0    0   13    0
-##   i3      0    0    0    0    0    0   24
-##   i4      0   26    0    0    0   13    0
-##   ia1     0    0    0    0    0   13    0
-##   ia2     0   13    0    0    0    0    0
-##   ia3     0    0    0    0    0    0    0
-##   ia4     0    0    0    0    0    0    0
-##   iao4    0   39    0    0    0    0    0
-##   ie3     0    0    0    0    0    0    0
-##   ie4     0    0    0    0    0    0   13
-##   io4     0    0    0    0    0    0    0
-##   iou1    0    0    0    0    0    0    0
-##   iou2    0    0    0    0    0    0    0
-##   iou3    0   26    0    0    0    0   40
-##   iou4    0    0    0    0    0    0    0
-##   j      26   90    0   13    0   13  129
-##   k       0   26    0    0    0   11   25
-##   l      13  136   13    0    0   26   58
-##   m      13   39    0   26    0   13  143
-##   n       0   26  562    0  193   24   39
-##   ng      0    0  179    0    0    0    0
-##   p       0    0   13    0    0   25    0
-##   q       0   60    0    0    0   13   26
-##   r      26   39    0    0    0   13   78
-##   s       0    0    0    0    0    0   34
-##   sh     13  140   13    0    0   52  100
-##   sp     39  134   26   13    0   90   83
-##   spn     0    0    0    0    0    0    0
-##   t      13   88    0    0    0   26   51
-##   u2      0    0    0    0    0    0    0
-##   u3      0    0    0    0    0    0    0
-##   u4      0    0    0   13    0    0    0
-##   ua2     0    0    0    0    0    0   13
-##   ua3     0    0    0    0    0    0   13
-##   ua4     0    0    0    0    0    0    0
-##   uai4    0    0    0    0    0    0   13
-##   ue2     0    0    0    0    0    0   13
-##   uei2    0    0    0    0    0   13    0
-##   uei4    0    0    0    0    0    0    0
-##   uo3     0    0    0    0    0   13   13
-##   v2      0   13    0    0    0    0    0
-##   v3      0    0    0    0    0    0    0
-##   v4      0    0    0    0    0    0    0
-##   va2     0    0    0    0    0    0    0
-##   va3     0   13    0    0    0    0    0
-##   va4     0    0    0    0    0    0    0
-##   ve1     0    0    0    0    0    0    0
-##   ve4     0    0    0    0    0    0    0
-##   x      13  143   13    0    0   12   62
-##   z      24   39    0    0    0   26  179
-##   zh     51   36    0    0    0   13   60</code></pre>
 <p>You can also obtain counts and proportions of vectors with
 categorical variables with tidyverse code.</p>
 <pre class="r"><code>counts &lt;- mandarin %&gt;% 
@@ -992,12 +737,6 @@ investigation.</p>
 <pre class="r"><code>counts &lt;- mandarin %&gt;% 
   group_by(vowel, tone) %&gt;% 
   summarize(count = n())</code></pre>
-<pre><code>## `summarise()` has regrouped the output.
-## ℹ Summaries were computed grouped by vowel and tone.
-## ℹ Output is grouped by vowel.
-## ℹ Use `summarise(.groups = &quot;drop_last&quot;)` to silence this message.
-## ℹ Use `summarise(.by = c(vowel, tone))` for per-operation grouping
-##   (`?dplyr::dplyr_by`) instead.</code></pre>
 <p>Suppose instead we wanted to find out <em>how many participants</em>
 said each vowel/tone combo instead of <em>how many observations</em> we
 have per vowel/tone combo. (Ideally, every participant should have said
@@ -1008,12 +747,6 @@ tokens were uttered by each participant for each vowel/tone combo:</p>
 <pre class="r"><code>counts &lt;- mandarin %&gt;% 
   group_by(vowel, tone, participant) %&gt;% 
   summarize(count = n())</code></pre>
-<pre><code>## `summarise()` has regrouped the output.
-## ℹ Summaries were computed grouped by vowel, tone, and participant.
-## ℹ Output is grouped by vowel and tone.
-## ℹ Use `summarise(.groups = &quot;drop_last&quot;)` to silence this message.
-## ℹ Use `summarise(.by = c(vowel, tone, participant))` for per-operation grouping
-##   (`?dplyr::dplyr_by`) instead.</code></pre>
 <p>One solution is to instead first collapse the “participant” column
 such that we only have one row per participant per vowel per tone, which
 we can then sum up. In this case, it’s useful to select just the columns
@@ -1037,12 +770,6 @@ participants uttered each vowel/tone combo:</p>
   unique() %&gt;%
   group_by(vowel, tone) %&gt;%
   summarize(count = n())</code></pre>
-<pre><code>## `summarise()` has regrouped the output.
-## ℹ Summaries were computed grouped by vowel and tone.
-## ℹ Output is grouped by vowel.
-## ℹ Use `summarise(.groups = &quot;drop_last&quot;)` to silence this message.
-## ℹ Use `summarise(.by = c(vowel, tone))` for per-operation grouping
-##   (`?dplyr::dplyr_by`) instead.</code></pre>
 <p>Looks like we mostly have evidence from all 13 speakers, but there
 are a handful of vowel/tone combos for which we’re missing some
 evidence! It is always good to know when we have some unbalanced or
@@ -1056,20 +783,6 @@ the average f0 within each file at about the midpoint of each vowel.</p>
 <pre class="r"><code>mandarin %&gt;% 
   group_by(file) %&gt;% 
   summarise(mean_f0 = mean(f0_5))</code></pre>
-<pre><code>## # A tibble: 63 × 2
-##    file                      mean_f0
-##    &lt;chr&gt;                       &lt;dbl&gt;
-##  1 ALL_005_M_CMN_CMN_DHR.wav      NA
-##  2 ALL_005_M_CMN_CMN_HT1.wav      NA
-##  3 ALL_005_M_CMN_CMN_HT2.wav      NA
-##  4 ALL_005_M_CMN_CMN_LPP.wav      NA
-##  5 ALL_005_M_CMN_CMN_NWS.wav      NA
-##  6 ALL_012_M_CMN_CMN_DHR.wav      NA
-##  7 ALL_012_M_CMN_CMN_HT1.wav      NA
-##  8 ALL_012_M_CMN_CMN_HT2.wav      NA
-##  9 ALL_012_M_CMN_CMN_LPP.wav      NA
-## 10 ALL_012_M_CMN_CMN_NWS.wav      NA
-## # ℹ 53 more rows</code></pre>
 <p>If you look at the resulting table, everything is NA! That’s not
 good. The reason is that if you have “NA” values in your vector
 (column), R will be unable to take the mean or perform other standard
@@ -1079,39 +792,11 @@ values is to wrap the object within the function na.omit():</p>
 <pre class="r"><code>mandarin %&gt;% 
   group_by(file) %&gt;% 
   summarise(mean_f0 = mean(na.omit(f0_5)))</code></pre>
-<pre><code>## # A tibble: 63 × 2
-##    file                      mean_f0
-##    &lt;chr&gt;                       &lt;dbl&gt;
-##  1 ALL_005_M_CMN_CMN_DHR.wav    152.
-##  2 ALL_005_M_CMN_CMN_HT1.wav    164.
-##  3 ALL_005_M_CMN_CMN_HT2.wav    164.
-##  4 ALL_005_M_CMN_CMN_LPP.wav    152.
-##  5 ALL_005_M_CMN_CMN_NWS.wav    139.
-##  6 ALL_012_M_CMN_CMN_DHR.wav    117.
-##  7 ALL_012_M_CMN_CMN_HT1.wav    120.
-##  8 ALL_012_M_CMN_CMN_HT2.wav    126.
-##  9 ALL_012_M_CMN_CMN_LPP.wav    120.
-## 10 ALL_012_M_CMN_CMN_NWS.wav    112.
-## # ℹ 53 more rows</code></pre>
 <p>Another strategy that does the same thing is using the optional
 argument “na.rm = TRUE”, where na.rm means “remove the NA values”.</p>
 <pre class="r"><code>mandarin %&gt;% 
   group_by(file) %&gt;% 
   summarise(mean_f0 = mean(f0_5, na.rm = TRUE))</code></pre>
-<pre><code>## # A tibble: 63 × 2
-##    file                      mean_f0
-##    &lt;chr&gt;                       &lt;dbl&gt;
-##  1 ALL_005_M_CMN_CMN_DHR.wav    152.
-##  2 ALL_005_M_CMN_CMN_HT1.wav    164.
-##  3 ALL_005_M_CMN_CMN_HT2.wav    164.
-##  4 ALL_005_M_CMN_CMN_LPP.wav    152.
-##  5 ALL_005_M_CMN_CMN_NWS.wav    139.
-##  6 ALL_012_M_CMN_CMN_DHR.wav    117.
-##  7 ALL_012_M_CMN_CMN_HT1.wav    120.
-##  8 ALL_012_M_CMN_CMN_HT2.wav    126.
-##  9 ALL_012_M_CMN_CMN_LPP.wav    120.
-## 10 ALL_012_M_CMN_CMN_NWS.wav    112.
-## # ℹ 53 more rows</code></pre>
 <p>If we don’t want to type na.omit() or na.rm = TRUE over and over
 again, we can potentially use the drop_na() function. What this does is
 it removes all rows that contain <em>any</em> NA values – not just rows
@@ -1122,10 +807,8 @@ drop_na() function because it would remove <em>too many</em> rows.</p>
 <pre class="r"><code>na_dropped &lt;- mandarin %&gt;%
   drop_na()
 
-nrow(mandarin)</code></pre>
-<pre><code>## [1] 27352</code></pre>
-<pre class="r"><code>nrow(na_dropped)</code></pre>
-<pre><code>## [1] 11463</code></pre>
+nrow(mandarin)
+nrow(na_dropped)</code></pre>
 <p>Here you can see that we’ve eliminated about half the rows, because
 so many of them have one or more NAs in them! Supposing that was
 something we wanted to do, we could have drop_na() as our first step,
@@ -1134,20 +817,6 @@ after which we use the group and summarize functions.</p>
   drop_na() %&gt;%
   group_by(file) %&gt;% 
   summarise(mean_f0 = mean(f0_5))</code></pre>
-<pre><code>## # A tibble: 63 × 2
-##    file                      mean_f0
-##    &lt;chr&gt;                       &lt;dbl&gt;
-##  1 ALL_005_M_CMN_CMN_DHR.wav    160.
-##  2 ALL_005_M_CMN_CMN_HT1.wav    164.
-##  3 ALL_005_M_CMN_CMN_HT2.wav    169.
-##  4 ALL_005_M_CMN_CMN_LPP.wav    159.
-##  5 ALL_005_M_CMN_CMN_NWS.wav    147.
-##  6 ALL_012_M_CMN_CMN_DHR.wav    119.
-##  7 ALL_012_M_CMN_CMN_HT1.wav    119.
-##  8 ALL_012_M_CMN_CMN_HT2.wav    126.
-##  9 ALL_012_M_CMN_CMN_LPP.wav    122.
-## 10 ALL_012_M_CMN_CMN_NWS.wav    115.
-## # ℹ 53 more rows</code></pre>
 </div>
 <div id="saving-a-table" class="section level3">
 <h3>Saving a table</h3>

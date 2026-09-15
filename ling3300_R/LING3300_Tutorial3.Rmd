@@ -18,7 +18,6 @@ jury <- read.csv("/Users/Thomas/Library/CloudStorage/OneDrive-YorkUniversity/LIN
 
 
 
-
 ### Calculating Standard Error
 
 We've seen before in Tutorial 2 how to get a dataframe with means, standard deviations, and counts of observations:

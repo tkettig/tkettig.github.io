@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ### Load in the dataset we'll be working with for these examples
 
-```{r eval = T}
+```{r eval = F}
 mandarin <- read.csv("/Users/Thomas/Library/CloudStorage/OneDrive-YorkUniversity/LING 3300/2025-26 Winter/Datasets/mandarin_f0.csv", header = TRUE)
 ```
 
@@ -30,11 +30,17 @@ If you're connected to the internet, you can install/update a package with the f
 install.packages("tidyverse")
 ```
 
-You're not done yet! You now "own" the package but you still need to pull the package "off the shelf" to use the code. You can import the package with the library() function. Yes, you do have to write this line of code every time you restart R and want to access the code again! That means that most of your scripts will begin with two bits of code: reading in the data you want to work with and reading in the packages you need.
+You only have to run this code once on your computer, and then the package is installed. It's just like when you install an app on your computer -- you don't have to re-download it every time you use it! So I don't advise keeping this line of code in your scripts or re-running it every time you open R.
 
-```{r eval = T}
+However you're not done yet! You now "own" the package but you still need to pull the package "off the shelf" to use the code. You can import the package with the library() function. The function require() does the same thing.
+
+```{r eval = F}
 library(tidyverse)
+# or
+require(tidyverse)
 ```
+
+Yes, you do have to open each package every time you restart R and want to run your code again! That means that most of your scripts will begin with two bits of code: reading in the data you want to work with and reading in the packages you need using library().
 
 Alternatively, you can click the "Packages" tab in the lower righthand corner of RStudio, and check the box for the packages you want to use.
 
@@ -101,31 +107,31 @@ In this dataset, the column "file" is quite rich in information. It looks like m
 
 We'll make a new column "participant" that will be all letters from the 5th to the 7th character in the "file" column...
 
-```{r eval = T}
+```{r eval = F}
 mandarin$participant <- str_sub(mandarin$file, 5, 7)
 ```
 
 ...and a new column "condition" that will be all letters from 7th-to-last to the 5th-to-last character in the "file" column...
 
-```{r eval = T}
+```{r eval = F}
 mandarin$condition <- str_sub(mandarin$file, -7, -5)
 ```
 
 ...and a new column "gender" that will be just the 9th character in the "file" column.
 
-```{r eval = T}
+```{r eval = F}
 mandarin$gender <- str_sub(mandarin$file, 9, 9)
 ```
 
 It also looks like the data in the vowel column is really a vowel plus a tone number. Let's make a tone column from just the last character of the vowel column...
 
-```{r eval = T}
+```{r eval = F}
 mandarin$tone <- str_sub(mandarin$vowel, -1,-1)
 ```
 
 ...and let's overwrite the vowel column with just its first to the second-to-last character -- in other words, we'll delete the final character.
 
-```{r eval = T}
+```{r eval = F}
 mandarin$vowel <- str_sub(mandarin$vowel, 1,-2)
 ```
 
@@ -282,25 +288,25 @@ Since y equals 17, and since 17 is greater than 5, the answer is TRUE to the que
 
 These operators are very useful when you're filtering/subsetting your data, too. You can combine subset conditions using AND or OR. For instance, here we can subset out a dataframe of just the tokens where preceding the vowel was "d" and following it was "ng".
 
-```{r eval = T}
+```{r eval = F}
 d_ng <- subset(mandarin, prec == "d" & foll == "ng")
 ```
 
 ...or maybe we want to revise the "rising" column so that it marks as "not rising" any token where f0_10 is greater than f0_1 OR where f0_9 is greater than f0_2, with others marked "not rising".
 
-```{r eval = T}
+```{r eval = F}
 mandarin$rising <- ifelse(mandarin$f0_10 > mandarin$f0_1 | mandarin$f0_9 > mandarin$f0_2, "not rising", "rising")
 ```
 
 ### Cross tabulation
 For character vectors, we can get the overall number of cells per category using the xtabs() function. xtabs() tabulates, or counts up, the number of cells with each unique label. Here we can look at the number of observations by vowel. Note the use of the tilde (~) in this formulation. The use of the tilde is a bit idiosyncratic in R, and frequently means "as a function of", but just go with it for now. Like natural languages, computer languages sometimes also have idiosyncratic features.
 
-```{r eval = T}
+```{r eval = F}
 xtabs(~vowel, mandarin)
 ```
 
 We can get further breakdowns of the counts using the plus sign. The following example returns a table of the vowel + following sound pairs.
-```{r eval = T}
+```{r eval = F}
 xtabs(~vowel + foll, mandarin)
 
 # or, if we wanted our table flipped around the other way:
@@ -337,7 +343,7 @@ counts <- mandarin %>%
 
 If we run the following code, what we see is the number of tokens collected in the experiment for each vowel and tone category -- that is, how many times each vowel was uttered with each tone in the files under investigation.
 
-```{r eval = T}
+```{r eval = F}
 counts <- mandarin %>% 
   group_by(vowel, tone) %>% 
   summarize(count = n())
@@ -345,21 +351,21 @@ counts <- mandarin %>%
 
 Suppose instead we wanted to find out *how many participants* said each vowel/tone combo instead of *how many observations* we have per vowel/tone combo. (Ideally, every participant should have said every combo at some point, but this kind of thing is always good to double-check!) If we add "participant" to the group_by() argument, that doesn't exactly give us what we want -- it'll just tell us how many tokens were uttered by each participant for each vowel/tone combo:
 
-```{r eval = T}
+```{r eval = F}
 counts <- mandarin %>% 
   group_by(vowel, tone, participant) %>% 
   summarize(count = n())
 ```
 One solution is to instead first collapse the "participant" column such that we only have one row per participant per vowel per tone, which we can then sum up. In this case, it's useful to select just the columns we're interested in: we can ignore all the other columns for now. If we wanted to make a new dataframe with just these columns, we can use the select() function to do so:
 
-```{r eval = T}
+```{r eval = F}
 participant_voweltone <- mandarin %>%
   select(participant, vowel, tone)
 ```
 
 If you view this resulting dataframe, you can see that we now have lots of duplicate identical rows. We don't want to stop there! We can then use the unique() function to delete all the duplicate rows, keeping only one version of each unique row:
 
-```{r eval = T}
+```{r eval = F}
 participant_voweltone <- mandarin %>%
   select(participant, vowel, tone) %>%
   unique()
@@ -367,7 +373,7 @@ participant_voweltone <- mandarin %>%
 
 We can now add our group_by() and summarize() functions to group by vowel and tone and then get the count for how many individual participants uttered each vowel/tone combo:
 
-```{r eval = T}
+```{r eval = F}
 participant_voweltone <- mandarin %>%
   select(participant, vowel, tone) %>%
   unique() %>%
@@ -382,7 +388,7 @@ Looks like we mostly have evidence from all 13 speakers, but there are a handful
 
 Suppose we want to find the mean of all the f0 measurements at timepoint 5 (that is, f0_5), grouped by file, so that we get a sense of the average f0 within each file at about the midpoint of each vowel.
 
-```{r eval = T}
+```{r eval = F}
 mandarin %>% 
   group_by(file) %>% 
   summarise(mean_f0 = mean(f0_5))
@@ -390,7 +396,7 @@ mandarin %>%
 
 If you look at the resulting table, everything is NA! That's not good. The reason is that if you have "NA" values in your vector (column), R will be unable to take the mean or perform other standard mathematical functions on it. You'll know if this happens to you because the returned value (e.g., for the mean) will be "NA". One way to omit NA values is to wrap the object within the function na.omit():
 
-```{r eval = T}
+```{r eval = F}
 mandarin %>% 
   group_by(file) %>% 
   summarise(mean_f0 = mean(na.omit(f0_5)))
@@ -398,7 +404,7 @@ mandarin %>%
 
 Another strategy that does the same thing is using the optional argument "na.rm = TRUE", where na.rm means "remove the NA values".
 
-```{r eval = T}
+```{r eval = F}
 mandarin %>% 
   group_by(file) %>% 
   summarise(mean_f0 = mean(f0_5, na.rm = TRUE))
@@ -406,7 +412,7 @@ mandarin %>%
 
 If we don't want to type na.omit() or na.rm = TRUE over and over again, we can potentially use the drop_na() function. What this does is it removes all rows that contain *any* NA values -- not just rows where there are NA values for f0_5, but for *any* variable. If our data contained rows that contained a number in the f0_5 column but an NA in the f0_4 column, we probably wouldn't want to use this drop_na() function because it would remove *too many* rows.
 
-```{r eval = T}
+```{r eval = F}
 na_dropped <- mandarin %>%
   drop_na()
 
@@ -416,7 +422,7 @@ nrow(na_dropped)
 
 Here you can see that we've eliminated about half the rows, because so many of them have one or more NAs in them! Supposing that was something we wanted to do, we could have drop_na() as our first step, after which we use the group and summarize functions.
 
-```{r eval = T}
+```{r eval = F}
 mandarin %>% 
   drop_na() %>%
   group_by(file) %>% 
