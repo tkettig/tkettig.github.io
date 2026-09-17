@@ -444,13 +444,9 @@ write.csv(participant_voweltone, "/Users/Thomas/Library/CloudStorage/OneDrive-Yo
 ```
 
 
-#### Practice with datasets
-
 ### Practice
 
 Create an R script to save the answers to these questions.
-
-#### Data wrangling practice
 
 1. Import 'L2_English_Lexical_Decision_Data.csv' into R and call it 'lex'. This data set contains reaction times (RT) in milliseconds to words and nonwords of English from L2 English speaking participants. More info about the data and project [here](https://osf.io/msnpr/).
 2. Create a subset of lex using filter() that contains only the data points where the dominant language (lex$domLang) is **not** English.
