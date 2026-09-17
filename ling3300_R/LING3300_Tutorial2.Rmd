@@ -465,7 +465,7 @@ Create an R script to save the answers to these questions.
 15. Get a count of how many male vs. female participants are in the sample.
 16. Create a new column called 'Germanic'. If the domLang is English, German, Norwegian, Danish, or Afrikaans, the new value in the 'Germanic' column should be "Germanic", otherwise it should be "Other".
 17. Get a count of how many male vs. female participants there are whose dominant language is Germanic vs. other.
-18. Create a dataframe that summarizes the within-participant reaction time (RT) means, medians, standard deviations, and counts of observations. (Hint: in preparation for the next step, it would be wise to include not only workerID but also the Germanic and gender columns in your group_by() function.)
-19. (Bonus, if you dare!) Based on the dataframe created in step 18, create another dataframe that summarizes the mean of means, standard deviations, and standard errors of reaction times for the data, grouped by gender and Germanic vs. other dominant language. (Hint: you will probably need to first create a dataframe with all the measurements except for standard error, and then calculate standard error in a subsequent line of code.)
-20. Save the dataframe created in step 18 (or step 19) to a tab-delimited .txt table.
+<!-- 18. Create a dataframe that summarizes the within-participant reaction time (RT) means, medians, standard deviations, and counts of observations. (Hint: in preparation for the next step, it would be wise to include not only workerID but also the Germanic and gender columns in your group_by() function.) -->
+<!-- 19. (Bonus, if you dare!) Based on the dataframe created in step 18, create another dataframe that summarizes the mean of means, standard deviations, and standard errors of reaction times for the data, grouped by gender and Germanic vs. other dominant language. (Hint: you will probably need to first create a dataframe with all the measurements except for standard error, and then calculate standard error in a subsequent line of code.) -->
+<!-- 20. Save the dataframe created in step 18 (or step 19) to a tab-delimited .txt table. -->
 
