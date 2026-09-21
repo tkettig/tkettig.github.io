@@ -9,6 +9,41 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+
+
+
+### Calculating Standard Error
+
+We've seen before in Tutorial 2 how to get a dataframe with means, standard deviations, and counts of observations:
+
+```{r eval = T}
+same_means <- jury %>% 
+  group_by(Level, CorrectAnswer) %>% 
+  summarize(mean_sameness = mean(SameAnswer), 
+            sd_sameness = sd(SameAnswer),
+            count = length(SameAnswer))
+
+f0_means <- mandarin %>% 
+  group_by(file) %>% 
+  summarize(mean_f0 = mean(na.omit(f0_5)), 
+            sd_f0 = sd(na.omit(f0_5)),
+            count = length(na.omit(f0_5)))
+```
+
+We've also seen in our class lecture that the standard error is calculated by taking the standard deviation and dividing by the square root of the number of observations. That means that once we have a dataframe saved with the means, standard deviations, and counts, all we need to do is add a column that does the standard error calculation:
+
+```{r eval = T}
+same_means$se <- same_means$sd_sameness / sqrt(same_means$count)
+
+f0_means$se <- f0_means$sd_f0 / sqrt(f0_means$count)
+```
+
+(Let's put aside for the moment that standard error should be calculated based on a set of means of independent sampling distributions, such as within-speaker means, not raw observations. In the practice below, you'll be able to do it the proper way and first calculate sample means, from which you then get the means-of-means and sd-of-means and count-of-means, and then can calculate the standard error.)
+
+
+
+
+
 ### Wide format data and long format data, and tidy data
 
 Wide format data refers to a spreadsheet where a single row contains multiple columns for related attributes of a single data point or subject. For example, each column could be the response value for a trial in an experiment. As the name suggests, it is wide in appearance.
