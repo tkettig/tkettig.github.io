@@ -16,154 +16,208 @@ library(tidyverse)
 jury <- read.csv("/Users/Thomas/Library/CloudStorage/OneDrive-YorkUniversity/LING 3300/Datasets/Jury/jury_data_basic.csv")
 ```
 
-## t-tests
 
-t-tests are designed to *test for significant differences between variables*. The dependent variable should be **continuous** (like seconds, hertz, etc.) and the independent variable should be **categorical** and have **two** possible states (e.g., English vs. German, young vs. old, girls vs. boys, this sample vs. known population, etc.). The research hypothesis will involve a statement that there exists a difference between A and B in measurement X. The null hypothesis will involve a statement that no difference exists between A and B in measurement X. 
 
-There are three main types of t-tests:
+### Calculating Standard Error
 
-1. One-sample t-test
-2. Independent samples t-test
-3. Paired sample t-test
+We've seen before in Tutorial 2 how to get a dataframe with means, standard deviations, and counts of observations:
 
-### One-sample t-test
+```{r eval = T}
+same_means <- jury %>% 
+  group_by(Level, CorrectAnswer) %>% 
+  summarize(mean_sameness = mean(SameAnswer), 
+            sd_sameness = sd(SameAnswer),
+            count = length(SameAnswer))
 
-The one-sample t-test is for testing whether measures of a given sample are significantly different from a known population mean. It is rare that you have access to a known population mean, but every once in a while it may be available. 
-
-For instance, suppose we bribe the top bureaucrat at the Office for National Statistics and they include a question on the census asking every person in the UK how familiar they are with Southern Standard British English on a 0 to 100 scale. Suppose, in this alternate universe where we have such unbridled power, the mean of their 69 million responses was **75.89**, so we can take that as our known population mean.
-
-We now want to know whether the 1,505 participants we got for our gamified experiment are representative of the UK population as a whole. The null hypothesis is that there should be no difference between the mean of our observed sample of SSBE familiarity responses and the known population mean.
-
-First, let's wrangle our data to be in the proper format. As it stands, the jury dataset has 24 identical observations for SSBEFamiliarity per person, because it's in a fairly long format. For this particular hypothesis, we can focus just on the couple of relevant columns and discard all rows that are repetitions of the same data, so we end up with just one datapoint per participant.
-
-```{r message = T}
-# Get participant ratings of SSBE Familiarity in one dataframe
-jury_familarity <- jury %>% 
-  select(Participant, SSBEFamiliarity) %>% 
-  unique()
+f0_means <- mandarin %>% 
+  group_by(file) %>% 
+  summarize(mean_f0 = mean(na.omit(f0_5)), 
+            sd_f0 = sd(na.omit(f0_5)),
+            count = length(na.omit(f0_5)))
 ```
 
-We now have a dataframe with one row per participant and their self-declared SSBE familiarity rating. This is now in a good format, because our observations (rows) are now independent observations. In other cases, you'll see that these independent observations might be by-participant means (e.g. speaker f0 means, listener response time means). Let's see what the overall mean is:
+We've also seen in our class lecture that the standard error is calculated by taking the standard deviation and dividing by the square root of the number of observations. That means that once we have a dataframe saved with the means, standard deviations, and counts, all we need to do is add a column that does the standard error calculation:
 
-```{r message = T}
-# What's the mean?
-mean(jury_familarity$SSBEFamiliarity)
-```
-75.04 is pretty close to the known population mean of 75.89! But is the difference significant at a 95% confidence level?
+```{r eval = T}
+same_means$se <- same_means$sd_sameness / sqrt(same_means$count)
 
-To run a one-sample t-test in R, we can use the t.test() function in R. The first argument will be the list of observations (here, our column of SSBE familiarity ratings), and the second argument will be the known population value (here, since the population mean is known as *µ*, the Greek letter called "mu", we call it "mu" in the argument):
-
-```{r message = T}
-# t.test comparing our sample of SSBE Familiarity ratings to the "known" population mean
-t.test(jury_familarity$SSBEFamiliarity, mu = 75.89)
-```
-So in our sample of 1,505 UK residents, no significant difference was observed between their self-rated familiarity with SSBE (*x̄* = 75.04) and the census-validated population mean (*µ* = 75.89), as assessed in an one sample t-test (*t* = -1.36, *p* = 0.17).
-
-But this was just a made-up example where for some reason we know a population mean. That's almost never going to happen in linguistics. The independent samples t-test and paired sample t-tests are more useful in practice (at least until you learn about regression models, in another couple weeks...)
-
-
-### Paired sample t-test
-
-The paired sample t-test assesses the difference in values between two groups, where the values originate from the *same* source. That is, each value in Group 1 is *paired* with a value in Group 2. In practice, this usually means that you have *one* group of participants who produced values in *two* separate conditions.
-
-In our jury data, participants responded to both same- and different-speaker pairs. One hypothesis we might have is that they probably responded with higher sameness ratings for same-speaker pairs and lower ratings for different-speaker pairs -- or at least we hope they did, if they were paying any attention in the experiment. In this case, we have responses in both conditions for every participant, so it's a good candidate for a paired samples t-test if we want to do this sanity check. Let's get the by-participant, by-condition sameness rating means, first of all. Remember that the "SameAnswer" column contains the sameness ratings, and the "CorrectAnswer" column contains information on whether the pair of files was in fact from the same or different speakers.
-
-```{r message = T}
-# Get the subset of data necessary to answer the research question
-jury_sameness <- jury %>% # Start  with our original dataset, make a new one
-  select(Participant, SameAnswer, CorrectAnswer)
-
-# Since we have multiple observations per participant per condition, let's make sure all our rows are independent by getting the by-participant, by-condition means
-jury_sameness_means <- jury_sameness %>%
-  group_by(Participant, CorrectAnswer) %>%
-  summarize(meanSame = mean(SameAnswer))
-```
-Note that the null hypothesis associated with this research hypothesis is that there is no difference between the two conditions -- that if we subtract participants' different-speaker sameness rating from their same-speaker sameness rating, the result should be zero. Let's see what the data says.
-
-```{r message = T}
-# We need to get the data into a wider format so that we can subtract across columns
-jury_sameness_means_wider <- jury_sameness_means %>%
-  pivot_wider(names_from = CorrectAnswer,
-              values_from = meanSame)
-
-# Get difference between each participant's mean same-speaker pair rating and their mean different-speaker pair rating
-jury_sameness_means_wider$Difference <- jury_sameness_means_wider$same - jury_sameness_means_wider$different
-
-# What are the mean and median of the by-participant differences? What does the distribution look like?
-summary(jury_sameness_means_wider$Difference)
-hist(jury_sameness_means_wider$Difference)
+f0_means$se <- f0_means$sd_f0 / sqrt(f0_means$count)
 ```
 
-Looks like this is a nice normal-looking distribution around the mean difference of 25. This doesn't at all look like it's centred on 0. So just based on this, we can already expect to reject the null hypothesis based on our statistical test!
-
-With this wider dataset, we now have two paired columns we can compare in the t-test. Our first argument will be the vector of all by-participant mean sameness ratings of same-speaker pairs (the column called "same"), and the second argument will be the vector of all by-participant mean sameness ratings of different-speaker pairs (the column called "different"). We then have *paired = T* because the vector from each column exactly lines up such that they are pairs by row; this is what makes it a paired sample t-test!
-
-```{r message = T}
-t.test(jury_sameness_means_wider$same, jury_sameness_means_wider$different, paired = T)
-```
-We can see that we're given the mean difference of 25.15, just like what our summary gave us as a mean above. We also have 1,504 degrees of freedom because we have 1,505 participants, minus one. We get here a p-value of less than 2.2e-16, which means 2.2 times 10^-16. This is a *very* low number with lots of zero decimal places, so we can sum it up as less than 0.001. The way we'd report this effect is as follows: *In a sample of 1,505 participants, the paired sample t-test reveals a significant difference between sameness ratings for same- and different-speaker voice pairs (t(1504) = 60.405, p < 0.001).*
+(Let's put aside for the moment that standard error should be calculated based on a set of means of independent sampling distributions, such as within-speaker means, not raw observations. In the practice below, you'll be able to do it the proper way and first calculate sample means, from which you then get the means-of-means and sd-of-means and count-of-means, and then can calculate the standard error.)
 
 
-### Independent samples t-test
 
-As the name suggests, the independent samples t-test assesses the difference in some value between two *independent* groups. By independent groups, we mean that the values did not originate from the same source. In practice, this usually means that you have two separate groups of participants and you are comparing their values. 
+### Calculating margin of error + confidence interval
 
-As an example of the independent samples t-test, we could consider the case of speakers with a high degree of familiarity with the rather obscure Middlesbrough accent, versus those with a low degree of familiarity with it. In this experiment, sometimes we had participants respond to a voice pair where one of the voices was from Middlesbrough and the other was from Newcastle. Most people who aren't from the North East of England can't tell these accents apart, but locals can. Was a group that had higher familiarity with Middlesbrough accents better at giving accent-mismatched pairs low similarity ratings than a group with lower familiarity?
+I recommend having your slides from Week 4 open while you read the following.
 
-Let's first prep our data so we can test this exciting hypothesis.
+Let's first read in our L2 lexical decision data and run the code that got us our nice reaction time means-of-means + sd + count + se dataframe.
 
-```{r message = T}
-# Let's get a summary of the important descriptive stats for Middlesbrough familiarity
-summary(jury$MiddlesbroughFamiliarity)
+```{r eval = T}
+# Loading in the dataset
+lex <- read.csv("/Users/Thomas/Library/CloudStorage/OneDrive-YorkUniversity/LING 3300/Datasets/L2_English_Lexical_Decision_Data.csv")
 
-# Let's divide the data into roughly two parts: The lowest and highest halves of the data
-jury$MidFamBinary <- ifelse(jury$MiddlesbroughFamiliarity < 37.3, "Low", "High")
+# Making a character-based column "gender" out of the previous numerical "sex" column
+lex$gender <- ifelse(lex$sex == 1, "m", "f")
 
-# Get the subset of data necessary to answer the research question
-jury_middlesbrough <- jury %>% # Start back with our original dataset, make a new one
-  select(Participant, MidFamBinary, SimilarityAnswer, Audio1Accent, Audio2Accent) %>% # These are all the columns we need for now
-  filter(Audio1Accent != Audio2Accent) # We just want the pairs where the two accents are different
+# Making a column for a (fairly arbitrary) subset of Germanic vs. other dominant languages
+lex$Germanic <- ifelse(lex$domLang == "English" |
+                         lex$domLang == "German" |
+                         lex$domLang == "Norwegian" |
+                         lex$domLang == "Danish" |
+                         lex$domLang == "Afrikaans",
+                       "Germanic", "Other")
 
-# Since we have multiple observations per participant, let's make sure all our rows are independent by getting the by-participant means and medians
-jury_middlesbrough_means <- jury_middlesbrough %>%
-  group_by(Participant, MidFamBinary) %>%
-  summarize(meanSim = mean(SimilarityAnswer))
-```
-Alright -- now we have a dataframe where all the rows are independent observations (that is, we have one row per participant), we have a column telling us whether the participant was high- or low-familiarity, and we have a column for the by-participant means.
+# Making a dataframe called RTmeans that has some descriptive stats
+RTmeans <- lex %>%  # We start with the overall data
+  group_by(Germanic, gender, workerID) %>%  # We group by participant and keep in Germanic and gender
+  summarize(meanRT = mean(RT), # We summarize the mean of the reaction times in a new meanRT column
+            medianRT = median(RT),  # Plus a column for the median RT
+            sdRT = sd(RT),  # And a column for the standard deviation of the RTs
+            count = length(RT))  # And a count of how many observations there were
 
-To run the independent samples t-test in R, we can create two subset dataframes that we then compare. We enter the two dataframes' mean similarity columns as the first two arguments within t.test(). The argument *paired = F* is there to say that this is an independent-samples t-test: the observations in each group are collected from different participants.
+# Now, from that by-speaker list of descriptive stats, we make a dataframe called RTgrandmeans
+RTgrandmeans <- RTmeans %>% 
+  group_by(Germanic, gender) %>% # We group by Germanic and gender...
+  summarize(meanofmeansRT = mean(meanRT), # ...and get a mean of the by-participant means...
+            sdofmeansRT = sd(meanRT), # ...and the standard deviation of those by-participant means...
+            count = length(meanRT)) # ...and the number of participants in each category
 
-```{r message = T}
-participant.means.low <- subset(jury_middlesbrough_means, MidFamBinary == "Low")
-nrow(participant.means.low) # How many rows do we have for low?
-mean(participant.means.low$meanSim) # What is the mean for low?
-
-participant.means.high <- subset(jury_middlesbrough_means, MidFamBinary == "High")
-nrow(participant.means.high) # How many rows do we have for high?
-mean(participant.means.high$meanSim) # What is the mean for high?
-
-t.test(participant.means.low$meanSim, participant.means.high$meanSim, paired = F)
+# And also then calculate the standard error of the mean by dividing the std of means by the square root of the counts
+RTgrandmeans$se <- RTgrandmeans$sdofmeansRT / sqrt(RTgrandmeans$count)
 ```
 
-It actually appears that the means go in opposite directions from what we might have hypothesized: people in the lower half of Middlesbrough familiarity actually rate the accent-mismatched pairs as *lower* in similarity than the people in the higher half! But is this difference big enough that we need to somehow come up with some explanation for it, or are the numbers close enough that we can write it off as a non-significant difference? Turns out that in our sample of 754 low- and 751 high-familiarity speakers, no significant difference was observed between the similarity ratings of accent-mismatched pairs, as assessed in an independent sample t-test (t=-1.55, p = 0.12).
+Now that we have the standard error of the means, we can calculate the confidence interval around each of the Germanic/non-Germanic and M/F combinations of reaction time means-of-means. Recall that the confidence interval is the mean ± the margin of error. The formula for margin of error is: standard error times the t-value or z-value for a particular confidence level. Using the t-value rather than the z-value is recommended when there's a relatively low number of samples (under 30 or so), or where we don't know the population standard deviation. Here we have plenty of samples, but as with most measurements in linguistics, we can't really claim to know what the population-wide standard deviation is, so let's stick with t-values.
 
-### Practice with t-tests
+How do we get a t-value? Well, the R function qt() will give that to us! qt() requires two arguments (see slide 21 from Unit 4 lecture): the point in the t-distribution you want to find the value for and the degrees of freedom in your sample.
 
-1. Load up your Assignment 1 R script regarding Mandarin VOT. Run all of the steps. With your dataframe of talker- and stop-specific means:
+Let's say that we want to report a 95% confidence interval, as is most typical in linguistics. Recall that since the difference between 95% and 100% is 5%, that means our alpha is 0.05. Remember how we talked about that 0.05 being split between the upper and lower tails of the normal distribution? That means that some important numbers to keep in mind as we calculate our t-values will be 0.025 and 0.975.
 
-2. Calculate the confidence intervals for /p/, /t/, and /k/, assuming a confidence level of 95%.
+In addition to those numbers, we also need to know our degrees of freedom. To get degrees of freedom, we just take our sample size minus one. So first, let's make a new column that takes our sample size counts and subtracts one, to give us degrees of freedom. You can probably already see that this makes a relatively small difference for our data, where we have hundreds of samples; this subtraction of one would make a bigger impact if we had smaller sample sizes
 
-3. Make a plot showing the means of means and their confidence intervals.
+```{r eval = T}
+RTgrandmeans$df <- RTgrandmeans$count - 1
+```
 
-4. Run 3 t-tests to examine whether the talker means for /p/ are significantly different from those of /t/ (and likewise for /t/–/k/ and /p/–/k/). You must decide which variety of t-test is appropriate! 
+Now that we have a *df* column for each of the conditions, we can make another column calculating the lower t-values and the upper t-values.
 
-5. Focusing on /t/ only, we are going to determine whether VOT from male speakers differs from that of female speakers. Make a new gender column that marks speakers s005, s011, s012, s016, s018, s020, and s021 as male and the rest as female. Obtain the means-of-means and confidence intervals for male and female speakers' /t/ VOT. 
+```{r eval = T}
+RTgrandmeans$tval_lower <- qt(0.025, RTgrandmeans$df)
+RTgrandmeans$tval_upper <- qt(0.975, RTgrandmeans$df)
+```
 
-6. Make a plot showing the means of means and their confidence intervals for male /t/ and female /t/.
+Now that we have our degrees of freedom and our t-values in columns, we can calculate the margin of error for each of the rows by multiplying the standard error by the t-values.
 
-7. Run a t-test to determine whether male speakers differ from female speakers in /t/ VOT. You must decide which variety of t-test is appropriate!
+```{r eval = T}
+RTgrandmeans$margin_of_error_lower <- RTgrandmeans$se * RTgrandmeans$tval_lower
+RTgrandmeans$margin_of_error_upper <- RTgrandmeans$se * RTgrandmeans$tval_upper
+```
 
+Look in the dataframe and see that now you've got the margin of error around the mean that will comprise your confidence interval: plus or minus that particular number. So our last step will be to add or subtract that value from the mean to find the lower and upper bounds of the CI. Since the lower margin of error is already negative, we can *add* that to our mean and it will count as subtraction.
 
+```{r eval = T}
+RTgrandmeans$lower95CI <- RTgrandmeans$meanofmeansRT + RTgrandmeans$margin_of_error_lower
+RTgrandmeans$upper95CI <- RTgrandmeans$meanofmeansRT + RTgrandmeans$margin_of_error_upper
+```
+
+### Visualizing confidence intervals
+
+We have everything we need here to make plots of these confidence intervals. Let's make a plot with the means plotted as points, which we can do with geom_point(). We can add bars for the confidence intervals with geom_errorbar(). We can split the data by Germanic vs. non-Germanic on the x-axis, have the y-axis be reaction time, and separate the genders by colour. For the error bar, we can set ymin (the bar's lowest point) to be the lower 95% CI and the ymax (the bar's highest point) to be the upper 95% CI.
+
+```{r eval = T}
+ggplot(RTgrandmeans) +
+  geom_point(aes(x = Germanic, y = meanofmeansRT, color = gender)) +
+  geom_errorbar(aes(x = Germanic, y = meanofmeansRT, color = gender, ymin = lower95CI, ymax = upper95CI))
+```
+
+So far we've been making ggplots by putting the dataframe name inside ggplot() and all the aesthetics inside the individual plotting functions. But do you see how we have the identical aesthetics aes(x = Germanic, y = meanofmeansRT, color = gender) in both of the plotting functions here? When multiple plotting functions take the same dataframe and aesthetics, we can (sometimes) save some space by sticking the parts of aes() that should be applied to all of the functions into the ggplot() function. The following code therefore accomplishes the same thing as above. Like I've been saying, there are usually many different ways to accomplish the same thing in R!
+ 
+```{r eval = T}
+ggplot(RTgrandmeans, aes(x = Germanic, y = meanofmeansRT, color = gender)) +
+  geom_point() +
+  geom_errorbar(aes(ymin = lower95CI, ymax = upper95CI))
+```
+
+Anyway -- this plot isn't that great yet, for one thing because our mean points and error bars are overlapping. We use the command *position = position_dodge(width = 0.5)* in both the geom_point() and geom_errorbar() functions in order to spread them apart a bit horizontally. (Unfortunately, it doesn't seem like you can easily stick this command inside the overall ggplot() function even though it's identical for both plotting functions. Sometimes R is just odd that way.)
+
+```{r eval = T}
+ggplot(RTgrandmeans, aes(x = Germanic, y = meanofmeansRT, color = gender)) +
+  geom_point(position = position_dodge(width = 0.5)) +
+  geom_errorbar(aes(ymin = lower95CI, ymax = upper95CI), position = position_dodge(width = 0.5))
+```
+
+You can also play around with the size of the mean point, the widths of the error bars, and the width of the error bar lines.
+
+```{r eval = T}
+ggplot(RTgrandmeans, aes(x = Germanic, y = meanofmeansRT, color = gender)) +
+  geom_point(position = position_dodge(width = 0.4), size = 3) +
+  geom_errorbar(aes(ymin = lower95CI, ymax = upper95CI), width = 0.15, position = position_dodge(width = 0.4), linewidth = 0.6)
+```
+
+Alright. Now our lines of code are getting awfully long! Luckily, we can add some line returns in such a way that the whole thing will run the same way as before! If you have begun a function with an open parenthesis and haven't closed it yet, you can you add as many line breaks as you'd like and R will ignore them and keep reading to figure out what comes next until it gets to the final closing parenthesis. Here's the same code, but spaced out a bit more to make things more legible:
+
+```{r eval = T}
+ggplot(RTgrandmeans, 
+       aes(x = Germanic,
+           y = meanofmeansRT, 
+           color = gender)) +
+  geom_point(position = position_dodge(width = 0.4), 
+             size = 3) +
+  geom_errorbar(aes(ymin = lower95CI, ymax = upper95CI),
+                width = 0.15,
+                position = position_dodge(width = 0.4),
+                linewidth = 0.6)
+```
+
+It's also rather common to see line returns after some opening parentheses and before some ending parentheses. Here's another way to write the code which might help you keep track of all the parentheses going on, since as soon as you start having lots of line breaks and embedded functions things can get messy.
+
+```{r eval = T}
+ggplot(
+  RTgrandmeans, 
+  aes(
+    x = Germanic, 
+    y = meanofmeansRT, 
+    color = gender
+    )
+  ) +
+  geom_point(
+    position = position_dodge(width = 0.4), 
+    size = 3
+    ) +
+  geom_errorbar(
+    aes(ymin = lower95CI, ymax = upper95CI), 
+    width = 0.15, 
+    position = position_dodge(width = 0.4), 
+    linewidth = 0.6
+    )
+```
+
+The number and placement of your line breaks is really a matter of style and comfort -- as long as the code runs correctly without errors, it's up to you how to code, though I do encourage you to break up particularly long lines of code so that they are more readable.
+
+We can also add nicer labels and a title, or beautify the plot with themes:
+
+```{r eval = T}
+ggplot(RTgrandmeans, aes(x = Germanic, y = meanofmeansRT, color = gender)) +
+  geom_point(position = position_dodge(width = 0.4), size = 3) +
+  geom_errorbar(
+    aes(ymin = lower95CI, ymax = upper95CI),
+    width = 0.15,
+    position = position_dodge(width = 0.4),
+    linewidth = 0.6
+  ) +
+  labs(
+    x = "Language family",
+    y = "Mean RT",
+    color = "Gender",
+    title = "Mean of means of RT with 95% CI whiskers"
+  ) +
+  theme_minimal()
+```
+
+#### Practice
+
+1. In the Qualtrics jury dataset, each participant only gave us one estimate for how familiar they'd rate themselves with regard to each accent (Middlesbrough, Newcastle, or SSBE). Even though we've mostly been discussing the standard error when talking about calculating the mean of means, we don't actually need to find multiple means (such as lots of participant-internal means) to calculate standard error and therefore confidence intervals. So let's try it on this Qualtrics dataset: Calculate the mean familiarity rating for each accent, along with the 95% confidence interval around each accent mean. Then make a plot that visualizes these means and CIs. Note that here you won't have to worry about defining colours or dodging the positions -- since we just care about one independent variable here (Accent), this will be a simpler ggplot to make than the above ones where we wanted to show the interaction of two independent variables (Germanic and gender).
 
 
 <font size="1.5"> Disclaimer: Some of these original materials were put together by Eleanor Chodroff and Elisa Passoni for the University of York. Thomas Kettig then inherited it and modified as needed, particularly based on notes by Nathan Sanders from the University of Toronto. The R software and the packages are distributed under the terms of the GNU General Public License, either Version 2, June 1991 or Version 3, June 2007 (run the command licence () for more information)</font>
