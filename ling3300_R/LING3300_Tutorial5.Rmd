@@ -1,7 +1,7 @@
 ---
-title: "LING 3300 - Week 5: t-tests"
+title: "LING 3300 - Tutorial 5"
 author: "Thomas Kettig"
-date: "February 2, 2026"
+date: "October 1, 2026"
 output: html_document
 ---
 
@@ -16,8 +16,6 @@ library(tidyverse)
 jury <- read.csv("/Users/Thomas/Library/CloudStorage/OneDrive-YorkUniversity/LING 3300/Datasets/Jury/jury_data_basic.csv")
 ```
 
-
-
 ### Calculating Standard Error
 
 We've seen before in Tutorial 2 how to get a dataframe with means, standard deviations, and counts of observations:
@@ -28,24 +26,15 @@ same_means <- jury %>%
   summarize(mean_sameness = mean(SameAnswer), 
             sd_sameness = sd(SameAnswer),
             count = length(SameAnswer))
-
-f0_means <- mandarin %>% 
-  group_by(file) %>% 
-  summarize(mean_f0 = mean(na.omit(f0_5)), 
-            sd_f0 = sd(na.omit(f0_5)),
-            count = length(na.omit(f0_5)))
 ```
 
 We've also seen in our class lecture that the standard error is calculated by taking the standard deviation and dividing by the square root of the number of observations. That means that once we have a dataframe saved with the means, standard deviations, and counts, all we need to do is add a column that does the standard error calculation:
 
 ```{r eval = T}
 same_means$se <- same_means$sd_sameness / sqrt(same_means$count)
-
-f0_means$se <- f0_means$sd_f0 / sqrt(f0_means$count)
 ```
 
 (Let's put aside for the moment that standard error should be calculated based on a set of means of independent sampling distributions, such as within-speaker means, not raw observations. In the practice below, you'll be able to do it the proper way and first calculate sample means, from which you then get the means-of-means and sd-of-means and count-of-means, and then can calculate the standard error.)
-
 
 
 ### Calculating margin of error + confidence interval
@@ -217,7 +206,8 @@ ggplot(RTgrandmeans, aes(x = Germanic, y = meanofmeansRT, color = gender)) +
 
 #### Practice
 
-1. In the Qualtrics jury dataset, each participant only gave us one estimate for how familiar they'd rate themselves with regard to each accent (Middlesbrough, Newcastle, or SSBE). Even though we've mostly been discussing the standard error when talking about calculating the mean of means, we don't actually need to find multiple means (such as lots of participant-internal means) to calculate standard error and therefore confidence intervals. So let's try it on this Qualtrics dataset: Calculate the mean familiarity rating for each accent, along with the 95% confidence interval around each accent mean. Then make a plot that visualizes these means and CIs. Note that here you won't have to worry about defining colours or dodging the positions -- since we just care about one independent variable here (Accent), this will be a simpler ggplot to make than the above ones where we wanted to show the interaction of two independent variables (Germanic and gender).
+In the Qualtrics jury dataset, each participant only gave us one estimate for how familiar they'd rate themselves with regard to each accent (Middlesbrough, Newcastle, or SSBE). Even though we've mostly been discussing the standard error when talking about calculating the mean of means, we don't actually need to find multiple means (such as lots of participant-internal means) to calculate standard error and therefore confidence intervals. 
+So let's try it on this Qualtrics dataset: Start your code the same way you did for the exercise in Tutorial 4, wrangling the data into a format that gives you a column for Accent and a column for Familiarity rating. Now, calculate the mean familiarity rating for each accent, along with the 95% confidence interval around each accent mean. Then make a plot that visualizes these means and CIs. Note that here you won't have to worry about defining colours or dodging the positions -- since we just care about one independent variable here (Accent), this will be a simpler ggplot to make than the above ones where we wanted to show the interaction of two independent variables (Germanic and gender).
 
 
 <font size="1.5"> Disclaimer: Some of these original materials were put together by Eleanor Chodroff and Elisa Passoni for the University of York. Thomas Kettig then inherited it and modified as needed, particularly based on notes by Nathan Sanders from the University of Toronto. The R software and the packages are distributed under the terms of the GNU General Public License, either Version 2, June 1991 or Version 3, June 2007 (run the command licence () for more information)</font>
