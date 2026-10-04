@@ -79,7 +79,7 @@ RTgrandmeans$se <- RTgrandmeans$sdofmeansRT / sqrt(RTgrandmeans$count)
 
 Now that we have the standard error of the means, we can calculate the confidence interval around each of the Germanic/non-Germanic and M/F combinations of reaction time means-of-means. Recall that the confidence interval is the mean ± the margin of error. The formula for margin of error is: standard error times the t-value or z-value for a particular confidence level. Using the t-value rather than the z-value is recommended when there's a relatively low number of samples (under 30 or so), or where we don't know the population standard deviation. Here we have plenty of samples, but as with most measurements in linguistics, we can't really claim to know what the population-wide standard deviation is, so let's stick with t-values.
 
-How do we get a t-value? Well, the R function qt() will give that to us! qt() requires two arguments (see slide 21 from Unit 4 lecture): the point in the t-distribution you want to find the value for and the degrees of freedom in your sample.
+How do we get a t-value? Well, the R function qt() will give that to us! qt() requires two arguments (see slide 66 from Week 4 lecture): the point in the t-distribution you want to find the value for and the degrees of freedom in your sample.
 
 Let's say that we want to report a 95% confidence interval, as is most typical in linguistics. Recall that since the difference between 95% and 100% is 5%, that means our alpha is 0.05. Remember how we talked about that 0.05 being split between the upper and lower tails of the normal distribution? That means that some important numbers to keep in mind as we calculate our t-values will be 0.025 and 0.975.
 
