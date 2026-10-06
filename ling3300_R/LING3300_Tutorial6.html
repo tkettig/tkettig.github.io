@@ -426,9 +426,12 @@ the data where <em>monthsLive</em> is NA. That’s to be expected. But the
 weird thing now is that we have these big vertical lines of dots rather
 than single points. This is because we’re plotting all of the raw
 observations, and each participant responded to a lot of different
-words. It would probably make more sense for us to find the mean for
-each participant’s reaction time (the “by-participant means”) and then
-plot the relationship again.</p>
+words. It would make more sense for us to find the mean for each
+participant’s reaction time (the “by-participant means”) and then plot
+the relationship again. This is particularly important because a major
+assumption of correlation testing is that your data points are
+<strong>independent</strong> – that is, you only have one data point per
+participant.</p>
 <pre class="r"><code>german_means &lt;- german %&gt;%
   group_by(workerID, monthsLive) %&gt;% 
   summarize(mean_RT = mean(RT)) %&gt;%

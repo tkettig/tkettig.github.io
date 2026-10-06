@@ -59,7 +59,7 @@ ggplot(german) +
   geom_point(aes(x = monthsLive, y = RT))
 ```
 
-Note that we get a warning just because it's telling us it can't plot the data where *monthsLive* is NA. That's to be expected. But the weird thing now is that we have these big vertical lines of dots rather than single points. This is because we're plotting all of the raw observations, and each participant responded to a lot of different words. It would probably make more sense for us to find the mean for each participant's reaction time (the "by-participant means") and then plot the relationship again.
+Note that we get a warning just because it's telling us it can't plot the data where *monthsLive* is NA. That's to be expected. But the weird thing now is that we have these big vertical lines of dots rather than single points. This is because we're plotting all of the raw observations, and each participant responded to a lot of different words. It would make more sense for us to find the mean for each participant's reaction time (the "by-participant means") and then plot the relationship again. This is particularly important because a major assumption of correlation testing is that your data points are **independent** -- that is, you only have one data point per participant.
 
 ```{r eval = T}
 german_means <- german %>%
