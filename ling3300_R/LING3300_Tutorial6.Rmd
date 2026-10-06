@@ -118,11 +118,17 @@ Look back at the Multiple R-squared shown in your linear regression model output
 
 What we did above was get the overall mean of each German speaker's RTs, and then we found the correlation with monthsLive. But perhaps it's important to look separately at the conditions where the words were fake versus real -- like maybe people were overall faster at responding to real words, or maybe living in an English speaking country for a long time only helps at speeding up RTs for real words and not fake ones. 
 
-1. Taking the set of German-dominant speakers, recode the *condition* column (or make a new column) such that if it has '1', it's marked as "real", and if it has '2', it's marked as "fake". This will make it more transparent which condition is which. You may want to use an ifelse() function here, though there are other ways to do this too.
-2. Make a dataframe that finds the by-participant, by-condition RT means. As above, you'll want to also include monthsLive in your group_by() step so that we also have that information in the new dataframe. It would also be a good idea to drop the NA values, as above.
-3. Use ggplot to show the relationship between monthsLive (on the x-axis) and by-participant mean RT (on the y-axis). Facet over condition such that we end up with two side-by-side scatterplots, with each including the best-fit line.
-4. Consider the relationship between monthsLive and by-participant mean reaction times to fake words. Find the correlation as well as the y-intercept and slope of the best-fit line as shown in your plot.
-5. Consider the relationship between monthsLive and by-participant mean reaction times to real words. Find the correlation as well as the y-intercept and slope of the best-fit line as shown in your plot.
+1. Read in the lexical decision dataset. Get a dataframe with just the data from the German-dominant speakers, and filter out all of the RTs that are above 2000ms.
+
+2. Now recode the *condition* column (or make a new column) such that if condition is '1', it's now marked as "real", and if it has '2', it's marked as "fake". This will make it more transparent which condition is which. You may want to use an ifelse() function here, though there are other ways to do this too.
+
+3. Make a dataframe that finds the by-participant, by-condition RT means. As above, you'll want to also include monthsLive in your group_by() step so that we also have that information in the new dataframe. It would also be a good idea to drop the NA values, as above.
+
+4. Use ggplot to show the relationship between monthsLive (on the x-axis) and by-participant mean RT (on the y-axis). Facet over condition such that we end up with two side-by-side scatterplots, with each including the best-fit line.
+
+5. Consider the relationship between monthsLive and by-participant mean reaction times to fake words. Find the correlation as well as the y-intercept and slope of the best-fit line as shown in your plot.
+
+6. Consider the relationship between monthsLive and by-participant mean reaction times to real words. Find the correlation as well as the y-intercept and slope of the best-fit line as shown in your plot.
 
 <br>
 

@@ -553,27 +553,31 @@ versus real – like maybe people were overall faster at responding to
 real words, or maybe living in an English speaking country for a long
 time only helps at speeding up RTs for real words and not fake ones.</p>
 <ol style="list-style-type: decimal">
-<li>Taking the set of German-dominant speakers, recode the
-<em>condition</em> column (or make a new column) such that if it has
-‘1’, it’s marked as “real”, and if it has ‘2’, it’s marked as “fake”.
-This will make it more transparent which condition is which. You may
-want to use an ifelse() function here, though there are other ways to do
-this too.</li>
-<li>Make a dataframe that finds the by-participant, by-condition RT
+<li><p>Read in the lexical decision dataset. Get a dataframe with just
+the data from the German-dominant speakers, and filter out all of the
+RTs that are above 2000ms.</p></li>
+<li><p>Now recode the <em>condition</em> column (or make a new column)
+such that if condition is ‘1’, it’s now marked as “real”, and if it has
+‘2’, it’s marked as “fake”. This will make it more transparent which
+condition is which. You may want to use an ifelse() function here,
+though there are other ways to do this too.</p></li>
+<li><p>Make a dataframe that finds the by-participant, by-condition RT
 means. As above, you’ll want to also include monthsLive in your
 group_by() step so that we also have that information in the new
 dataframe. It would also be a good idea to drop the NA values, as
-above.</li>
-<li>Use ggplot to show the relationship between monthsLive (on the
+above.</p></li>
+<li><p>Use ggplot to show the relationship between monthsLive (on the
 x-axis) and by-participant mean RT (on the y-axis). Facet over condition
 such that we end up with two side-by-side scatterplots, with each
-including the best-fit line.</li>
-<li>Consider the relationship between monthsLive and by-participant mean
-reaction times to fake words. Find the correlation as well as the
-y-intercept and slope of the best-fit line as shown in your plot.</li>
-<li>Consider the relationship between monthsLive and by-participant mean
-reaction times to real words. Find the correlation as well as the
-y-intercept and slope of the best-fit line as shown in your plot.</li>
+including the best-fit line.</p></li>
+<li><p>Consider the relationship between monthsLive and by-participant
+mean reaction times to fake words. Find the correlation as well as the
+y-intercept and slope of the best-fit line as shown in your
+plot.</p></li>
+<li><p>Consider the relationship between monthsLive and by-participant
+mean reaction times to real words. Find the correlation as well as the
+y-intercept and slope of the best-fit line as shown in your
+plot.</p></li>
 </ol>
 <p><br></p>
 </div>
