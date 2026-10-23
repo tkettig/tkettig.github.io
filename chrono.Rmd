@@ -6,6 +6,8 @@ title: "Papers, posters, and presentations"
 
 #### 2026
 
+[[slides](papers_etc/KettigHejnaHenry2026NWAV_slides.pdf)] Thomas Kettig, Míša Hejná, and Noah Henry. Testing indirect effects in lifespan change: A Structural Equation Modelling approach to Queen Elizabeth II’s pre-aspiration. _NWAV 54_. Montréal, Canada, 22 October.
+
 [[slides](papers_etc/LlamasHughesKettig2026Methods_slides.pdf)] Carmen Llamas, Vincent Hughes, and Thomas Kettig. What is ‘typicality’? Salience and standardness in UK accents. _Methods in Dialectology_. Vancouver, Canada, 7 August.
 
 [[slides](papers_etc/KettigGilbert2026Methods_slides.pdf)] Thomas Kettig and Gabriel Gilbert. Varieties of Hawaiian: Context and considerations. _Methods in Dialectology_. Vancouver, Canada, 6 August.
