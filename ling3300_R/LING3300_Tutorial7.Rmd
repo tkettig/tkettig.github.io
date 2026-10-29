@@ -157,7 +157,8 @@ summary(fit_dummy)
 First, let's check out the intercept - it's the mean of means of /s/ COGs. Because *s* comes before *sh* alphabetically, R has by default set *s* as the control condition -- that is, /s/ is considered to be the x = 0 condition, so its mean will by definition be the y-intercept.
 
 ```{r message = T}
-mean(subset(vcl_sib, Fricative == "s")$meanCOG)
+just_s <- subset(vcl_sib, Fricative == "s")
+mean(just_s$meanCOG)
 ```
 
 We also see that the slope of -2091.8 is significantly different from zero. We know this because the p value is really low. 2.71e-10, or 0.000000000271, is far less than 0.05. To save space we'd usually describe this as *p < 0.001*. This means that we've found a *significant effect* of /s/ vs. /ʃ/ fricative identity on the by-speaker mean COG.
