@@ -1,7 +1,7 @@
 ---
-title: "LING 3300: Linear Regression"
+title: "LING 3300: Linear Regression, continued"
 author: "Thomas Kettig"
-date: "March 3, 2026"
+date: "October 29, 2026"
 output: html_document
 ---
 
@@ -9,26 +9,23 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Linear Regression
-
 Our goal in fitting a regression model will be to obtain three major pieces of information:
 
-+ the best-fit line (y = mx + b)
-+ how much variation in vowel F2 can be accounted for by vowel F1 (R^2)
-+ whether the effects of m (slope) and b (intercept) are significantly different from 0
++ the best-fit line (y = mx + b) -- we've done this before.
++ how much variation in vowel F2 can be accounted for by vowel F1 (R^2) -- we've also talked about this.
++ whether the effects of m (slope) and b (intercept) are *significantly different from 0* -- we haven't done this yet.
 
 First step: let's load in the data and required packages. This is the McMurray & Jongman dataset of fricative and vowel measures that we used for the midterm.
 
 ```{r message=T}
 library(tidyverse)
-library(yarrr)
 
 mcm <- read_csv("/Users/Thomas/Library/CloudStorage/OneDrive-YorkUniversity/LING 3300/Datasets/McMurrayJongmanFricativeAcoustics.csv")
 ```
 
 ### Linear regression with one continuous predictor
 
-In this example, we'll predict a speaker's mean F2 value from their mean F1. Rather than throwing all the raw data together, we have to use the speaker means because of the independence of observations assumption.
+In this example, we'll predict a speaker's mean F2 value from their mean F1. Because each person's physiology is different, their F1 and F2 values won't be comparable to each other. So rather than throwing all the raw data together, we have to use the speaker means due to the independence of observations assumption.
 
 ```{r message = T}
 spkr_means <- mcm %>% 
@@ -48,11 +45,9 @@ ggplot(spkr_means, aes(x = mean_f1, y = mean_f2)) +
   ylab("speaker mean F2 (Hz)")
 ```
 
-In a scatterplot that shows this relationship along the best-fit line, we'll put F2 on the y-axis because that is the variable we are predicting from F1.
+In a scatterplot that shows this relationship along the best-fit line, we'll put F2 on the y-axis because that is the variable we are predicting from F1. We can see from the line that we should expect a positive effect of F1 on F2 (positive slope). 
 
-We can see from the line that we should expect a positive effect of F1 on F2 (positive slope). 
-
-We can also see that if we were to extend the the intercept all the way to the left to the y-axis (where x = 0), the y-intercept would be well above 0.
+We can also see that if we were to extend the the intercept all the way to the left until it reaches the y-axis (where x = 0), the y-intercept would be well above 0.
 
 ```{r message = T}
 ggplot(spkr_means, aes(x = mean_f1, y = mean_f2)) + 
@@ -64,9 +59,9 @@ ggplot(spkr_means, aes(x = mean_f1, y = mean_f2)) +
   ylab("speaker mean F2 (Hz)")
 ```
 
-However, this isn't all that meaningful because F1 and F2 values are *always* well above 0 anyway. 
+However, this isn't all that meaningful because F1 and F2 values are *always* well above 0 anyway, and we're never interested in knowing what happens when F1 equals 0, since that's physically impossible. 
 
-Some people will center each variable on 0, and then the intercept is a little more interpretable. We can use the scale() function, which takes three arguments: the vector to operate on, whether centering should be applied, and whether scaling should be applied. If scaling is set to TRUE, then it gives a z-score; otherwise, if it's set to false, it just subtracts the mean from each point. We'll set scale to FALSE and just center our x variable, F1:
+To make the y-intercept a little more interpretable, people will often center a continuous predictor variable on 0. We can use the scale() function to do this. scale() takes three arguments: the vector to operate on, whether centering should be applied, and whether scaling should be applied. If scaling is set to TRUE, then it gives a z-score; otherwise, if it's set to false, it just subtracts the mean from each point. For now, we'll set scale to FALSE and just center our x variable, F1:
 
 ```{r message = T}
 spkr_means$centered_f1 <- scale(spkr_means$mean_f1, center = TRUE, scale = FALSE)
@@ -79,13 +74,15 @@ ggplot(spkr_means, aes(x = centered_f1, y = mean_f2)) +
   ylab("speaker mean F2 (Hz)")
 ```
 
-Notice what's happening: instead of the y-intercept being all the way off the chart and sort of meaningless, now the very center of our plot *is* the y-intercept! From this visualization, we can now see that when the predictor (F1 here) is 0, we get the mean of the F2 dimension (around 1778 Hz).
+From this visualization, we can now see that when the predictor (F1 here) is 0, we get the mean of the F2 dimension (around 1778 Hz). But otherwise, the points and the line look identical to what we plotted at first. 
+
+Notice what's happening: instead of the y-intercept being all the way off the chart and sort of meaningless, now the very center of our plot *is* the y-intercept! So the intercept is just the mean of the dependent (predicted) variable when the predictor is set to 0. 
+
 
 ```{r message = T}
 # Don't believe me?
 mean(spkr_means$mean_f2)
 ```
-So the intercept is just the mean of the dependent (predicted) variable when the predictor is set to 0. 
 
 Now let's actually get the information from the linear regression model:
 
@@ -96,21 +93,23 @@ summary(fit_centered)
 
 From this output, the key info is in the Coefficients table. You might also be interested in the Adjusted R-squared value. The adjusted R-squared value ranges from 0 to 1. In this case, it's 0.03, which is ridiculously low: it means that F1 accounts for approximately 3% of the variation in F2. (My hunch is that vowel quality does a much better job predicting F2 than F1... the phoneticians should have the intuition that F1 varies independently of F2). 
 
-This leads us to the next critical component of the model: is F1 a significant predictor of F2? Are they significantly related? Note that the Coefficients table has two lines: intercept and centered_f1, in other words, the b and the m in our equation y = mx + b. The value of "m" or "b" is in the Estimate column, so here it would by y = 1.24x + 1778.08. In other words, to get a speaker's F2 from their F1, the best linear prediction is to scale the F1 value by 1.24 Hz and add 1778.08 Hz to it. This is cool; unfortunately, the model fit as shown in the adjusted R-squared value is awful, so we won't be all that accurate. 
+This leads us to the next critical component of the model: is F1 a significant predictor of F2? That is, are they significantly related? Note that the Coefficients table has two lines: intercept and centered_f1, in other words, the b and the m in our equation y = mx + b. The value of "m" or "b" is in the Estimate column, so here it would by y = 1.24x + 1778.08. In other words, to get a speaker's F2 from their F1, the best linear prediction is to multiply the F1 value by 1.24 and add 1778.08 Hz to it. This is cool; unfortunately, the model fit as shown in the adjusted R-squared value is awful, so we won't be all that accurate.
 
-Next to the Estimate column in the table, we get our standard error, our t-value, and our p-value. The p-value for our predictor (F1) is p = 0.21. If our alpha is at 0.05 as is standard, then p = 0.21 is not less than 0.05, so F1 is not significantly related to F2. In other words, the F1 estimate of 1.24 is not significantly different from 0. 
+Next to the Estimate column in the table, we get our standard error, our t-value, and our p-value. The p-value for our predictor (F1) is p = 0.21. If our alpha is set at 0.05 as is standard, then p = 0.21 is not less than 0.05, so F1 is *not* significantly related to F2. In other words, the F1 estimate of 1.24 is *not* significantly different from 0, and we can't trust that this is a meaningful relationship. 
 
 The intercept is significantly different from 0, with p < 0.05, but this is not that interesting. F2 will *always* be considerably higher than 0. Most studies will usually omit discussion of the intercept for this reason. That said, it's cool to see that when you scale your predictors, the intercept is interpretable as the mean of your dependent variable.
 
 ### Linear regression with one categorical predictor: Treatment/dummy coding
 
-In this example, we'll use a subset of the dataset with just /s/ and /sh/ fricative tokens. We're interested in predicting M1 (spectral center of gravity) from the fricative identity (either /s/ or /sh/).
+In this example, we'll use a subset of the dataset with just /s/ and /ʃ/ fricative tokens. We're interested in predicting M1 (spectral center of gravity, or COG) from the fricative identity (either /s/ or /ʃ/).
+
+Let's start out with our original raw dataset, and make a new subset with just the voiceless sibilants /s/ and /ʃ/.
 
 ```{r message = T}
 voiceless_sibilants <- subset(mcm, Fricative %in% c("s", "sh"))
 ```
 
-First, we need to get independent means of the two sibilant COGs for each speaker. The column with each token's mean COG is **M1**.
+Now we need to get independent means of the two sibilant COGs for each speaker -- again, because each speaker has a different physiology and their raw values can't be directly compared to each other. The column in the raw dataset that contains each token's mean COG is **M1**.
 
 ```{r message = T}
 vcl_sib <- voiceless_sibilants %>% 
@@ -120,11 +119,7 @@ vcl_sib <- voiceless_sibilants %>%
 
 Next, we'll convert the categorical predictor to a factor and set up the contrast matrix for the linear regression using treatment (dummy) coding. We can then check to see we set it up properly by looking at the contrasts.
 
-The key R code here when dealing with categorical variables is as follows:
-
-+ convert the categorical variable to a factor using the **factor()** function
-
-If you want to do treatment coding like we have here, the contr.treatment() line is optional because R will automatically assume this as its default.
+The key R code here when dealing with categorical variables is to convert the categorical variable to a factor using the **factor()** function.
 
 ```{r message = T}
 vcl_sib$Fricative <- factor(vcl_sib$Fricative, levels = c("s", "sh"))
@@ -132,25 +127,44 @@ vcl_sib$Fricative <- factor(vcl_sib$Fricative, levels = c("s", "sh"))
 contrasts(vcl_sib$Fricative)
 ```
 
-Before we dive into the linear regression, we should visualize our data -- 
+If you want to use treatment coding like we do here, the contr.treatment() line that I've commented out above is optional because R will automatically assume treatment coding as its default.
+
+Before we dive into the linear regression, we should visualize our data, though.
+
 ```{r message = T}
 ggplot(vcl_sib) + 
-  geom_boxplot(aes(x = Fricative, y = meanCOG, color = Fricative))
-
-pirateplot(meanCOG ~ Fricative, vcl_sib)
+  geom_boxplot(aes(x = Fricative, y = meanCOG, color = Fricative)) +
+  theme(legend.position = "none")
 ```
 
-And now we run the regression:
+It looks like there's definitely a major effect of fricative identity: /ʃ/ has a way lower COG than /s/. So already we expect this effect to come out as significant in our regression model.
+
+We can also use pirateplot() to see this with a really simple line of code. Remember also that we can easily get it to show us the mean and 95% confidence interval by setting inf.method to 'ci'. Eyeballing the CI will be even more useful than seeing the distribution of the data in a boxplot!
+
+```{r message = T}
+library(yarrr)
+pirateplot(meanCOG ~ Fricative, vcl_sib,
+           inf.method = 'ci')
+```
+
+Indeed, we see that the mean of /s/ is well outside the CI of /ʃ/ and vice-versa. So when we run our regression, we will almost certainly find that this difference is significant.
+
 ```{r message = T}
 fit_dummy <- lm(meanCOG ~ Fricative, vcl_sib)
 summary(fit_dummy)
 ```
 
-Check out the intercept - it's the mean of means of /s/ COGs.
+First, let's check out the intercept - it's the mean of means of /s/ COGs. Because *s* comes before *sh* alphabetically, R has by default set *s* as the control condition -- that is, /s/ is considered to be the x = 0 condition, so its mean will by definition be the y-intercept.
+
 ```{r message = T}
 mean(subset(vcl_sib, Fricative == "s")$meanCOG)
 ```
 
+We also see that the slope of -2091.8 is significantly different from zero. We know this because the p value is really low. 2.71e-10, or 0.000000000271, is far less than 0.05. To save space we'd usually describe this as *p < 0.001*. This means that we've found a *significant effect* of /s/ vs. /ʃ/ fricative identity on the by-speaker mean COG.
+
+In addition, we can look at the Adjusted R-squared to figure out just how much knowing /s/ vs. /ʃ/ identity helps us in predicting the fricative COG. It turns out that 64.5% of the variation in COG between /s/ and /ʃ/ can be explained simply from knowing which of them we're talking about. That's quite a bit!
+
+<br>
 
 ### Practice: Linear regression with categorical variables 
 
