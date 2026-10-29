@@ -15,6 +15,149 @@ mcm <- read_csv("/Users/Thomas/Library/CloudStorage/OneDrive-YorkUniversity/LING
 ```
 
 
+## Multiple linear regression
+
+In the previous example, we predicted F2 from F1. In this example, we'll predict F4 from a combination of phonetic cues: duration of the vowel and onset F3. Not only will we obtain a prediction of F4 using these predictors, we will also be able to assess how well we can predict F4 using the R^2 and whether the effects of vowel duration and onset F3 differ significantly from 0 in their influence on F4.
+
+First, let's get the independent speaker means:
+```{r message = T}
+spkr_means <- mcm %>% 
+  group_by(Talker) %>% 
+  summarise(meanVdur = mean(dur_v, na.rm = T), 
+            meanF3 = mean(F3, na.rm = T), 
+            meanF4 = mean(F4, na.rm = T))
+```
+
+Now, let's center our **predictors** (not the predicted value, which will be F4 in our model). Remember that this is an optional step that makes the intercepts more interpretable.
+```{r message = T}
+spkr_means$meanVdur <- scale(spkr_means$meanVdur, center = T, scale = F)
+spkr_means$meanF3 <- scale(spkr_means$meanF3, center = T, scale = F)
+```
+
+Now, let's look at the relationship between F4 and each predictor:
+
+```{r message = T}
+ggplot(spkr_means, aes(x = meanVdur, y = meanF4)) + 
+  geom_point() + 
+  geom_smooth(method = "lm")
+
+ggplot(spkr_means, aes(x = meanF3, y = meanF4)) + 
+  geom_point() + 
+  geom_smooth(method = "lm")
+```
+
+Now, let's fit the model:
+```{r message = T}
+fit.m <- lm(meanF4 ~ meanVdur + meanF3, spkr_means)
+summary(fit.m)
+```
+Let's have a look at the output, starting with the coefficients. Because we centered our predictor variables, the intercept is the meanF4 in Hz = 3729.46 Hz. *Holding all other variables constant*, we can also see that...
+
++ For every 1 ms increase in mean vowel duration, F4 increases by 0.88 Hz
+
++ For every 1 Hz increase in mean F3, F4 increases by 1.46 Hz
+
+Our equation is as follows:
+
+$meanF4 = 3729 + (0.88 * meanVdur) + (1.46*meanF3) ± e$
+
+Now, looking at the significance of the predictors, we can see that for meanVdur, **we cannot reject the null hypothesis** because the p-value is 0.452, much greater than our 0.05 alpha. For meanF3 **we can reject the null hypothesis** because the p-value is much lower than 0.05.
+
+It's also useful to look at the explained variance, as measured by the Adjusted R-squared: 0.7898. This is good: it means we can account for 79% of the variance in meanF4 from the additive effects of duration of the vowel and onset F3.
+
+
+### Practice: Multiple linear regression
+
+1. Run a multiple linear regression predicting a talker's mean F4 from their mean F1, F2, and F3. Which formants significantly predict F4? How does the adjusted R-squared of this F1+F2+F3 model compare with the R-squared for the model with vowel duration and F3? What does this indicate about which model is better at predicting F4? 
+
+<br>
+
+
+
+## Linear regression with categorical variables
+
+### Two-level categorical variable: treatment/dummy coding
+
+In this example, we'll use a subset of the dataset with just /s/ and /sh/ fricative tokens. We're interested in predicting M1 (spectral center of gravity) from the fricative identity (either /s/ or /sh/).
+
+```{r message = T}
+voiceless_sibilants <- subset(mcm, Fricative %in% c("s", "sh"))
+```
+
+First, we need to get independent means of the two sibilant COGs for each speaker. The column with each token's mean COG is **M1**.
+
+```{r message = T}
+vcl_sib <- voiceless_sibilants %>% 
+  group_by(Talker, Fricative) %>% 
+  summarise(meanCOG = mean(M1, na.rm = T))
+```
+
+Next, we'll convert the categorical predictor to a factor and set up the contrast matrix for the linear regression using treatment (dummy) coding. We can then check to see we set it up properly by looking at the contrasts.
+
+The key R code here when dealing with categorical variables is as follows:
+
++ convert the categorical variable to a factor using the **factor()** function
+
+If you want to do treatment coding like we have here, the contr.treatment() line is optional because R will automatically assume this as its default.
+
+```{r message = T}
+vcl_sib$Fricative <- factor(vcl_sib$Fricative, levels = c("s", "sh"))
+# contrasts(vcl_sib$Fricative) <- contr.treatment(2)
+contrasts(vcl_sib$Fricative)
+```
+
+Before we dive into the linear regression, we should visualize our data -- 
+```{r message = T}
+ggplot(vcl_sib) + 
+  geom_boxplot(aes(x = Fricative, y = meanCOG, color = Fricative))
+
+pirateplot(meanCOG ~ Fricative, vcl_sib)
+```
+
+And now we run the regression:
+```{r message = T}
+fit_dummy <- lm(meanCOG ~ Fricative, vcl_sib)
+summary(fit_dummy)
+```
+
+Check out the intercept - it's the mean of means of /s/ COGs.
+```{r message = T}
+mean(subset(vcl_sib, Fricative == "s")$meanCOG)
+```
+
+
+### Two-level categorical variable: sum coding
+
+In some research, there's a clear control condition. For instance, in a comparison of L1 and L2 speech, the L1 speakers are generally taken to be the "control", or baseline, while the L2 speakers are hypothesized to have (or not) some difference from L1 speakers. It makes sense to say: L1 speakers have a mean of X along some measure (like reaction time, vowel duration, pitch -- whatever), so we want to know, do L2 speakers differ from that baseline?
+
+In other research, though, there isn't a clear baseline condition. For instance, if we're comparing results for male vs. female participants in a linguistic experiment, which of those should we take as our baseline against which to compare the other? While L1 speakers are usually considered to be the typical, baseline sort of speakers of a language, should men or women be considered the baseline? Perhaps we'd rather consider neither a baseline.
+
+Sum coding is useful when there isn't a clear control condition. It's also very useful when dealing with interactions, as it can make the resulting model more interpretable.
+
+What sum coding does is make the intercept equal to the overall mean of the predicted variable, rather than equal to the mean of the control level. For two-level categorical variables, we do this by setting one of the levels equal to -1 and the other equal to 1. The level set as equal to -1 is called the "held-out condition".
+
+In this case, with /s/ vs. /ʃ/, it doesn't really matter which one we treat as the held-out condition, but just so that everything stays consistent with how we've been visualizing the data, let's set /s/ to -1 and /ʃ/ to 1. 
+
+```{r message = T}
+vcl_sib$Fricative <- factor(vcl_sib$Fricative, levels = c("sh", "s"))
+contrasts(vcl_sib$Fricative) <- contr.sum(2)
+contrasts(vcl_sib$Fricative)
+```
+
+In the above code, we order "sh" before "s" because the held-out variable needs to come *last*. Then contr.sum() sum codes the contrasts; we put a 2 in the function to tell it that there are two levels (s vs. sh). Then we can double check that everything looks right by running the contrasts() function.
+
+Since it looks like this is all sum coded correctly, let's now make the model and see what the output looks like.
+
+```{r message = T}
+fit_sum <- lm(meanCOG ~ Fricative, vcl_sib)
+summary(fit_sum)
+```
+Note that the p-values and t-values all stay the same as before. What changes is the intercept, which is now the overall mean of meanCOG rather than the mean of /s/ meanCOG. Also, the estimate in the Fricative1 line -- the slope of the regression line -- is now -1045.9. This is exactly half of the -2091.8 estimate from the treatment coding. The reason this number changes is because in the treatment coded model, /s/ is 0 and /ʃ/ is 1: For every "1" change in fricative, we get a -2091.8 Hz change in meanCOG. In the sum coded model, /s/ is -1 and /ʃ/ is 1 -- a difference of 2, rather than 1! So now, for every "1" change in fricative (that is, *half* of what they're coded as, from 0 to 1 or from -1 to 0), there's a -1045.9 Hz change in meanCOG.
+
+
+
+## Interactions
+
 Today we're going to talk about **interactions**. Previously, we compared the COG (that is, M1) of the fricatives in this dataset, finding that this differed by place of articulation. For instance, we found that overall, interdental fricatives (marked 'th' and 'dh') have lower COG than alveolar fricatives ('s' and 'z'). But what if we're also interested in whether there's an **interaction** between voicing and place of articulation? That is: Is the effect of place of articulation the same across voicing conditions, and the effect of voicing the same across place of articulation conditions, or is something more complex going on?
 
 

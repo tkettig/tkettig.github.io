@@ -1,5 +1,5 @@
 ---
-title: "LING 3300 - Week 7-8: Multiple Linear Regression"
+title: "LING 3300: Linear Regression"
 author: "Thomas Kettig"
 date: "March 3, 2026"
 output: html_document
@@ -9,7 +9,15 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-First step: let's load in the data and required packages. This is the standard McMurray & Jongman dataset of fricative and vowel measures that we've been using this term.
+## Linear Regression
+
+Our goal in fitting a regression model will be to obtain three major pieces of information:
+
++ the best-fit line (y = mx + b)
++ how much variation in vowel F2 can be accounted for by vowel F1 (R^2)
++ whether the effects of m (slope) and b (intercept) are significantly different from 0
+
+First step: let's load in the data and required packages. This is the McMurray & Jongman dataset of fricative and vowel measures that we used for the midterm.
 
 ```{r message=T}
 library(tidyverse)
@@ -18,27 +26,20 @@ library(yarrr)
 mcm <- read_csv("/Users/Thomas/Library/CloudStorage/OneDrive-YorkUniversity/LING 3300/Datasets/McMurrayJongmanFricativeAcoustics.csv")
 ```
 
+### Linear regression with one continuous predictor
 
-# Linear Regression
+In this example, we'll predict a speaker's mean F2 value from their mean F1. Rather than throwing all the raw data together, we have to use the speaker means because of the independence of observations assumption.
 
-The research hypothesis involves a statement that there exists a relationship between the two variables (r ≠ 0); the null hypothesis involves a statement that no relationship exists between the two variables (r = 0). 
-
-## Simple linear regression
-
-In this example, we'll predict a speaker's mean F2 value from their mean F1, ignoring vowel information. We have to use the speaker means still because of the independence of observations assumption. From this model, we can obtain three major components:
-
-+ the best-fit line (y = mx + b)
-+ whether the effects of m (slope) and b (intercept) are significantly different from 0
-+ how much variation in vowel F2 can be accounted for by vowel F1 (R^2)
-
-First, we'll get the speaker means and make a plot to see how linear the relationship is between these two variables. We'll put F2 on the y-axis because that is the variable we are predicting, and we'll include the best-fit regression line to visualize the regression model in 2D:
-
-```{r message = F}
+```{r message = T}
 spkr_means <- mcm %>% 
   group_by(Talker) %>% 
   summarise(mean_f1 = mean(F1, na.rm = TRUE), 
             mean_f2 = mean(F2, na.rm = TRUE))
+```
 
+Note that if we wanted to get the by-talker and by-vowel mean F1 and F2 (which is for sure more interesting than just knowing the mean F1/F2 from all the vowels uttered by a particular speaker in a sample) we would add 'Vowel' in the group_by() function. But for now let's just lump all the vowels together and see whether, overall, there's a relationship between the by-speaker mean F1 and F2.
+
+```{r message = T}
 ggplot(spkr_means, aes(x = mean_f1, y = mean_f2)) + 
   geom_point() + 
   geom_smooth(method = "lm") + 
@@ -47,9 +48,27 @@ ggplot(spkr_means, aes(x = mean_f1, y = mean_f2)) +
   ylab("speaker mean F2 (Hz)")
 ```
 
-We can see from the line that we should expect a positive effect of F1 on F2 (positive slope). We can also see that the intercept is well above 0; however, this isn't all that meaningful because F1 and F2 values are always well above 0 anyway. Some people will center each variable on 0, and then the intercept is a little more interpretable. We can use the scale() function, which takes three arguments: the vector to operate on, whether centering should be applied, and whether scaling should be applied. If scaling is set to TRUE, then it gives a z-score; otherwise, if it's set to false, it just subtracts the mean from each point. We'll set scale to FALSE and just center the data:
+In a scatterplot that shows this relationship along the best-fit line, we'll put F2 on the y-axis because that is the variable we are predicting from F1.
 
-```{r message = F}
+We can see from the line that we should expect a positive effect of F1 on F2 (positive slope). 
+
+We can also see that if we were to extend the the intercept all the way to the left to the y-axis (where x = 0), the y-intercept would be well above 0.
+
+```{r message = T}
+ggplot(spkr_means, aes(x = mean_f1, y = mean_f2)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", fullrange = TRUE) + 
+  scale_x_continuous(limits = c(0, NA), expand = c(0, 0)) +
+  theme_classic() +
+  xlab("speaker mean F1 (Hz)") + 
+  ylab("speaker mean F2 (Hz)")
+```
+
+However, this isn't all that meaningful because F1 and F2 values are *always* well above 0 anyway. 
+
+Some people will center each variable on 0, and then the intercept is a little more interpretable. We can use the scale() function, which takes three arguments: the vector to operate on, whether centering should be applied, and whether scaling should be applied. If scaling is set to TRUE, then it gives a z-score; otherwise, if it's set to false, it just subtracts the mean from each point. We'll set scale to FALSE and just center our x variable, F1:
+
+```{r message = T}
 spkr_means$centered_f1 <- scale(spkr_means$mean_f1, center = TRUE, scale = FALSE)
 
 ggplot(spkr_means, aes(x = centered_f1, y = mean_f2)) + 
@@ -60,7 +79,13 @@ ggplot(spkr_means, aes(x = centered_f1, y = mean_f2)) +
   ylab("speaker mean F2 (Hz)")
 ```
 
-From this visualization, we can now interpret that when the predictors (just F1 here) are 0, we get the mean of the F2 dimension (around 1778 Hz). So the intercept is just the mean of the dependent (predicted) variable, when the predictors are 0. 
+Notice what's happening: instead of the y-intercept being all the way off the chart and sort of meaningless, now the very center of our plot *is* the y-intercept! From this visualization, we can now see that when the predictor (F1 here) is 0, we get the mean of the F2 dimension (around 1778 Hz).
+
+```{r message = T}
+# Don't believe me?
+mean(spkr_means$mean_f2)
+```
+So the intercept is just the mean of the dependent (predicted) variable when the predictor is set to 0. 
 
 Now let's actually get the information from the linear regression model:
 
@@ -73,71 +98,11 @@ From this output, the key info is in the Coefficients table. You might also be i
 
 This leads us to the next critical component of the model: is F1 a significant predictor of F2? Are they significantly related? Note that the Coefficients table has two lines: intercept and centered_f1, in other words, the b and the m in our equation y = mx + b. The value of "m" or "b" is in the Estimate column, so here it would by y = 1.24x + 1778.08. In other words, to get a speaker's F2 from their F1, the best linear prediction is to scale the F1 value by 1.24 Hz and add 1778.08 Hz to it. This is cool; unfortunately, the model fit as shown in the adjusted R-squared value is awful, so we won't be all that accurate. 
 
-Next to the Estimate column in the table, we get our standard error, our t-value, etc. These components are familiar from our confidence intervals and t-tests. This is basically a t-test, but multiple t-tests are being run at once. The p-value for our critical predictor of F1 is p = 0.21. If our alpha is at 0.05 as is standard, then p = 0.21 is not less than 0.05, so F1 is not significantly related to F2. In other words, the F1 estimate of 1.24 is not significantly different from 0. 
+Next to the Estimate column in the table, we get our standard error, our t-value, and our p-value. The p-value for our predictor (F1) is p = 0.21. If our alpha is at 0.05 as is standard, then p = 0.21 is not less than 0.05, so F1 is not significantly related to F2. In other words, the F1 estimate of 1.24 is not significantly different from 0. 
 
-(Note that most people **don't** bother to adjust for multiple comparisons within a single regression model, even if there are multiple predictors. For more complex models, the functions we'll be learning in future tutorials usually do all the p-value adjustments for you automatically. As mentioned in class, you'll also find various opinions in the statistics literature about when to correct your p-value.)
+The intercept is significantly different from 0, with p < 0.05, but this is not that interesting. F2 will *always* be considerably higher than 0. Most studies will usually omit discussion of the intercept for this reason. That said, it's cool to see that when you scale your predictors, the intercept is interpretable as the mean of your dependent variable.
 
-The intercept is significantly different from 0, with p < 0.05, but this is not that interesting. Anyone who knows anything about F2 knows that it will always be considerably higher than 0. Most studies will usually omit discussion of the intercept for this reason. That said, it's cool to see that when you scale your predictors, the intercept is interpretable as the mean of your dependent variable.
-
-
-## Multiple linear regression
-Last week we predicted F2 from F1. In this example, we'll predict F4 from a combination of phonetic cues: duration of the vowel and onset F3. Not only will we obtain a prediction of F4 using these predictors, we will also be able to assess how well we can predict F4 using the R^2 and whether the effects of vowel duration and onset F3 differ significantly from 0 in their influence on F4.
-
-First, let's get the independent speaker means:
-```{r message = T}
-spkr_means <- mcm %>% 
-  group_by(Talker) %>% 
-  summarise(meanVdur = mean(dur_v, na.rm = T), 
-            meanF3 = mean(F3, na.rm = T), 
-            meanF4 = mean(F4, na.rm = T))
-```
-
-Now, let's center our **predictors** (not the predicted value, which will be F4 in our model). Remember that this is an optional step that makes the intercepts more interpretable.
-```{r message = T}
-spkr_means$meanVdur <- scale(spkr_means$meanVdur, center = T, scale = F)
-spkr_means$meanF3 <- scale(spkr_means$meanF3, center = T, scale = F)
-```
-
-Now, let's look at the relationship between F4 and each predictor:
-
-```{r message = T}
-ggplot(spkr_means, aes(x = meanVdur, y = meanF4)) + 
-  geom_point() + 
-  geom_smooth(method = "lm")
-
-ggplot(spkr_means, aes(x = meanF3, y = meanF4)) + 
-  geom_point() + 
-  geom_smooth(method = "lm")
-```
-
-Now, let's fit the model:
-```{r message = T}
-fit.m <- lm(meanF4 ~ meanVdur + meanF3, spkr_means)
-summary(fit.m)
-```
-Let's have a look at the output, starting with the coefficients. Because we centered our predictor variables, the intercept is the meanF4 in Hz = 3729.46 Hz. *Holding all other variables constant*, we can also see that...
-
-+ For every 1 ms increase in mean vowel duration, F4 increases by 0.88 Hz
-
-+ For every 1 Hz increase in mean F3, F4 increases by 1.46 Hz
-
-Our equation is as follows:
-
-$meanF4 = 3729 + (0.88 * meanVdur) + (1.46*meanF3) ± e$
-
-Now, looking at the significance of the predictors, we can see that for meanVdur, **we cannot reject the null hypothesis** because the p-value is 0.452, much greater than our 0.05 alpha. For meanF3 **we can reject the null hypothesis** because the p-value is much lower than 0.05.
-
-It's also useful to look at the explained variance, as measured by the Adjusted R-squared: 0.7898. This is good: it means we can account for 79% of the variance in meanF4 from the additive effects of duration of the vowel and onset F3.
-
-### Practice: Multiple linear regression
-
-1. Run a multiple linear regression predicting a talker's mean F4 from their mean F1, F2, and F3. Which formants significantly predict F4? How does the adjusted R-squared of this F1+F2+F3 model compare with the R-squared for the model with vowel duration and F3? What does this indicate about which model is better at predicting F4? 
-
-<br>
-
-## Linear regression with categorical variables
-
-### Two-level categorical variable: treatment/dummy coding
+### Linear regression with one categorical predictor: Treatment/dummy coding
 
 In this example, we'll use a subset of the dataset with just /s/ and /sh/ fricative tokens. We're interested in predicting M1 (spectral center of gravity) from the fricative identity (either /s/ or /sh/).
 
@@ -187,65 +152,22 @@ mean(subset(vcl_sib, Fricative == "s")$meanCOG)
 ```
 
 
-### Two-level categorical variable: sum coding
-
-In some research, there's a clear control condition. For instance, in a comparison of L1 and L2 speech, the L1 speakers are generally taken to be the "control", or baseline, while the L2 speakers are hypothesized to have (or not) some difference from L1 speakers. It makes sense to say: L1 speakers have a mean of X along some measure (like reaction time, vowel duration, pitch -- whatever), so we want to know, do L2 speakers differ from that baseline?
-
-In other research, though, there isn't a clear baseline condition. For instance, if we're comparing results for male vs. female participants in a linguistic experiment, which of those should we take as our baseline against which to compare the other? While L1 speakers are usually considered to be the typical, baseline sort of speakers of a language, should men or women be considered the baseline? Perhaps we'd rather consider neither a baseline.
-
-Sum coding is useful when there isn't a clear control condition. It's also very useful when dealing with interactions, as it can make the resulting model more interpretable.
-
-What sum coding does is make the intercept equal to the overall mean of the predicted variable, rather than equal to the mean of the control level. For two-level categorical variables, we do this by setting one of the levels equal to -1 and the other equal to 1. The level set as equal to -1 is called the "held-out condition".
-
-In this case, with /s/ vs. /ʃ/, it doesn't really matter which one we treat as the held-out condition, but just so that everything stays consistent with how we've been visualizing the data, let's set /s/ to -1 and /ʃ/ to 1. 
-
-```{r message = T}
-vcl_sib$Fricative <- factor(vcl_sib$Fricative, levels = c("sh", "s"))
-contrasts(vcl_sib$Fricative) <- contr.sum(2)
-contrasts(vcl_sib$Fricative)
-```
-
-In the above code, we order "sh" before "s" because the held-out variable needs to come *last*. Then contr.sum() sum codes the contrasts; we put a 2 in the function to tell it that there are two levels (s vs. sh). Then we can double check that everything looks right by running the contrasts() function.
-
-Since it looks like this is all sum coded correctly, let's now make the model and see what the output looks like.
-
-```{r message = T}
-fit_sum <- lm(meanCOG ~ Fricative, vcl_sib)
-summary(fit_sum)
-```
-Note that the p-values and t-values all stay the same as before. What changes is the intercept, which is now the overall mean of meanCOG rather than the mean of /s/ meanCOG. Also, the estimate in the Fricative1 line -- the slope of the regression line -- is now -1045.9. This is exactly half of the -2091.8 estimate from the treatment coding. The reason this number changes is because in the treatment coded model, /s/ is 0 and /ʃ/ is 1: For every "1" change in fricative, we get a -2091.8 Hz change in meanCOG. In the sum coded model, /s/ is -1 and /ʃ/ is 1 -- a difference of 2, rather than 1! So now, for every "1" change in fricative (that is, *half* of what they're coded as, from 0 to 1 or from -1 to 0), there's a -1045.9 Hz change in meanCOG.
-
-
-## Practice with correlations and regressions
-
-1. Calculate the by-speaker means of M1 and MaxPF. Using these means, plot the relationship between these two measures of fricative frequency (both in Hz). Are they significantly correlated? How strongly?
-
-2. Run a simple linear regression predicting a talker's MaxPF from their M1. Is MaxPF significantly predicted by M1?
-
-3. What is the multiple R-squared (unadjusted) from the linear regression model in Q2? Take its square root. Compare it to the Pearson's R found for Q1. Feels good, huh?
-
-4. Now calculate the by-speaker, by-fricative means of M1 and MaxPF. Using these means, plot the relationship between these two measures of fricative frequency, with the colour of the best-fit regression line differing by fricative. Do some of the fricatives appear to have a stronger correlation between the two measure than others? 
-
-5. Run a simple linear regression predicting a talker's MaxPF from their M1, but separately for each fricative. For which fricative does a 1 Hz increase in M1 result in the largest predicted increase in MaxPF (that is, which slope is the most highly positive)? For which fricative does M1 best predict MaxPF?
-
-
-
 ### Practice: Linear regression with categorical variables 
 
-1. In your Assignment 2, you answered the following research questions using t-tests: *Do sibilants have an overall higher intensity than non-sibilants?* and *Do voiced fricatives have an overall higher intensity than voiceless fricatives?* Now answer those same questions using linear regressions instead.
-
-2. Try out the above linear regressions using treatment coding and using sum coding. What changes, and what stays the same, about the treatment vs. sum coded model outputs? Which type of coding probably makes most sense to use for these research questions?
-
 1. Calculate the by-speaker means of M1 and MaxPF. Using these means, plot the relationship between these two measures of fricative frequency (both in Hz). Are they significantly correlated? How strongly?
 
-2. Run a simple linear regression predicting a talker's MaxPF from their M1. Is MaxPF significantly predicted by M1?
+2. Run a simple linear regression predicting a talker's MaxPF from their M1. Is MaxPF significantly predicted by M1? (Note that we did something very similar for the midterm -- can you identify the slight difference with the way we're conceiving of the relationship here?)
 
 3. What is the multiple R-squared (unadjusted) from the linear regression model in Q2? Take its square root. Compare it to the Pearson's R found for Q1. Feels good, huh?
 
-4. Now calculate the by-speaker, by-fricative means of M1 and MaxPF. Using these means, plot the relationship between these two measures of fricative frequency, with the colour of the best-fit regression line differing by fricative. Do some of the fricatives appear to have a stronger correlation between the two measure than others? 
+4. Now calculate the by-speaker, by-fricative means of M1 and MaxPF. Using these means, plot the relationship between these two measures of fricative frequency, with the colour of the best-fit regression line differing by fricative. Do some of the fricatives appear to have a stronger correlation between the two measures than others? 
 
 5. Run a simple linear regression predicting a talker's MaxPF from their M1, but separately for each fricative. For which fricative does a 1 Hz increase in M1 result in the largest predicted increase in MaxPF (that is, which slope is the most highly positive)? For which fricative does M1 best predict MaxPF?
 
+
+### Practice: Linear regression with a categorical predictor 
+
+1. Try to answer the questions: *Do sibilants have an overall higher intensity than non-sibilants?* and *Do voiced fricatives have an overall higher intensity than voiceless fricatives?* using linear regressions, with the predictors treatment coded. You'll need to construct two models, one regarding sibilants vs. non-sibilants and one for the voiced vs. voiceless question.
 
 
 <br>
