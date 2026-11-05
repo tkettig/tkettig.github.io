@@ -1,0 +1,98 @@
+---
+  title: "LING 3300 - Week 10: Linear mixed effects modelling"
+author: "Thomas Kettig"
+date: "March 26, 2026"
+output: html_document
+---
+  
+  
+First step: let's load in the data and required packages. This is the standard McMurray & Jongman dataset of fricative and vowel measures that we've been using this term.
+
+```{r message=T}
+library(tidyverse)
+library(yarrr)
+
+mcm <- read_csv("/Users/Thomas/Library/CloudStorage/OneDrive-YorkUniversity/LING 3300/Datasets/McMurrayJongmanFricativeAcoustics.csv")
+```
+
+Let's also mark all the fricatives for place of articulation and voicing:
+
+```{r message = T}
+# Assigning 4 place of articulation levels
+mcm$poa <- ifelse(mcm$Fricative %in% c("f", "v"), "labiodental", ifelse(mcm$Fricative %in% c("th", "dh"), "interdental", ifelse(mcm$Fricative%in% c("s", "z"), "alveolar", "postalveolar")))
+
+# Assigning voiced vs. voiceless in a column
+mcm$voicing <- ifelse(mcm$Fricative == "dh" | mcm$Fricative == "v" | mcm$Fricative == "z" | mcm$Fricative == "zh", "voiced", "voiceless")
+```
+
+Up to now, we've been taking our raw datasets and wrangling them into independent observations that fulfill the assumptions of linear regressions. In the fricatives experiment, participants uttered each fricative many times; we therefore have been finding the by-talker, by-fricative means before running our models, like so:
+  
+  ```{r message = T}
+talker_means <- mcm %>% 
+  group_by(Talker, Fricative) %>% 
+  summarise(mean_maxpf = mean(na.omit(maxpf)),
+            mean_M1 = mean(na.omit(M1)))
+```
+
+While this gets our data into a format where all the data points are independent, a drawback of this is that we lose statistical power because we now have far fewer datapoints than were present in the raw dataset. Mixed effects modelling introduces random effects which allow us to use the raw dataset (which is much more powerful because of its greater degrees of freedom) but also account for the inter-dependence of data points by talker.
+
+Let's just look at alveolar and interdental fricatives, just as in Tutorial 8.
+
+```{r message = T}
+# Filter so we just have the alveolars and interdentals for now
+mcm2 <- mcm %>%
+  filter(poa == "alveolar" | poa == "interdental")
+
+# Let's look at it as a pirate plot
+pirateplot(M1 ~ voicing * poa, mcm2, inf.method = 'ci')
+```
+
+Now, instead of using our dataframe of by-speaker means, let's use the raw dataset to make our model. The difference from our previous models is that we'll be using the lmer() function from the lmerTest package. If you don't already have it, install the package; then load it.
+
+```{r message = T}
+# Install lmerTest
+# install.packages("lmerTest")
+
+# Load lmerTest
+library(lmerTest)
+```
+
+According to [Schertz Chapter 11](http://individual.utoronto.ca/jschertz/teaching/LIN318_23F/_book/ch11.html), you should include a *random intercept* if you have multiple observations per participant, but each participant is present in only one level of predictor. That would look like this:
+
+```{r message = T}
+# Making model with random intercept
+model <- lmer(M1 ~ voicing * poa + (1|Talker), mcm2)
+summary(model)
+```
+
+According to Schertz, you should include a *random slope* if you have multiple observations per participant, and each participant is in both levels of the predictor. That's the case here -- each participant produced both voiced and voiceless fricatives, and both interdental and alveolar fricatives. Ideally, your model might look something like this:
+  
+  ```{r message = T}
+# Making model with random slope
+model <- lmer(M1 ~ voicing * poa + (1 + voicing|Talker) + (1 + poa|Talker), mcm2)
+summary(model)
+```
+
+However, you'll note the warning here that this model *fails to converge*. Oops! This is because we've stuffed too much into the model, given the amount of data that we have. It would also be bad if we got a "boundary (singular) fit" message when we run the model. In this case, we need to make a decision about what might be most useful to keep in. Since we can see from the visualization that we still want the interaction of the main effects, it makes sense here for us to just choose one of the random slopes and delete the other one. Hard to say which is *better*, but you can see that the p-values slightly change depending on which one you run:
+  
+  ```{r message = T}
+# Making model with one random slope
+model1 <- lmer(M1 ~ voicing * poa + (1 + poa|Talker), mcm2)
+summary(model1)
+
+# Making model with one random slope
+model2 <- lmer(M1 ~ voicing * poa + (1 + voicing|Talker), mcm2)
+summary(model2)
+```
+
+In most cases, we proceed with interpreting our model outputs the same way as with our lm() regressions. No need to interpret the outputs regarding the random effects, but see Winter (2020) for more details if you wish.
+
+The above models are dummy-coded (R's default) but random effects can also be put into models with any other type of coding.
+
+<br>
+
+### Practice with mixed models
+
+1. With the fricatives dataset, consider just /f/ and /v/ (as in the Tutorial 8 practice). Instead of modelling the by-speaker means, try doing your modelling with the raw dataset and integrating a random intercept of Talker. Also try a random slope of Fricative by Talker.
+
+<br>
