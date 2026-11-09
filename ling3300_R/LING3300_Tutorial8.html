@@ -365,7 +365,7 @@ that we’ve been using this term.</p>
 <pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 ## ✔ dplyr     1.2.0     ✔ readr     2.1.6
 ## ✔ forcats   1.0.1     ✔ stringr   1.6.0
-## ✔ ggplot2   4.0.1     ✔ tibble    3.3.0
+## ✔ ggplot2   4.0.3     ✔ tibble    3.3.0
 ## ✔ lubridate 1.9.4     ✔ tidyr     1.3.2
 ## ✔ purrr     1.2.0     
 ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
@@ -398,8 +398,8 @@ significantly from 0 in their influence on F4.</p>
 <p>Now, let’s center our <strong>predictors</strong> (not the predicted
 value, which will be F4 in our model). Remember that this is an optional
 step that makes the intercepts more interpretable.</p>
-<pre class="r"><code>spkr_means$meanVdur &lt;- scale(spkr_means$meanVdur, center = T, scale = F)
-spkr_means$meanF3 &lt;- scale(spkr_means$meanF3, center = T, scale = F)</code></pre>
+<pre class="r"><code>spkr_means$meanVdur &lt;- spkr_means$meanVdur - mean(spkr_means$meanVdur, na.rm = TRUE)
+spkr_means$meanF3 &lt;- spkr_means$meanF3 - mean(spkr_means$meanF3, na.rm = TRUE)</code></pre>
 <p>Now, let’s look at the relationship between F4 and each
 predictor:</p>
 <pre class="r"><code>ggplot(spkr_means, aes(x = meanVdur, y = meanF4)) + 

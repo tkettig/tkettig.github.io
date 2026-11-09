@@ -28,9 +28,10 @@ spkr_means <- mcm %>%
 ```
 
 Now, let's center our **predictors** (not the predicted value, which will be F4 in our model). Remember that this is an optional step that makes the intercepts more interpretable.
+
 ```{r message = T}
-spkr_means$meanVdur <- scale(spkr_means$meanVdur, center = T, scale = F)
-spkr_means$meanF3 <- scale(spkr_means$meanF3, center = T, scale = F)
+spkr_means$meanVdur <- spkr_means$meanVdur - mean(spkr_means$meanVdur, na.rm = TRUE)
+spkr_means$meanF3 <- spkr_means$meanF3 - mean(spkr_means$meanF3, na.rm = TRUE)
 ```
 
 Now, let's look at the relationship between F4 and each predictor:
