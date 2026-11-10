@@ -1,7 +1,7 @@
 ---
-  title: "LING 3300 - Week 10: Linear mixed effects modelling"
+title: "LING 3300: Linear mixed effects modelling"
 author: "Thomas Kettig"
-date: "March 26, 2026"
+date: "November 9, 2026"
 output: html_document
 ---
   
