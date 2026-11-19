@@ -1,11 +1,20 @@
 ---
-title: "LING 3300 - Week 9: Interactions"
+title: "LING 3300 - Interactions"
 author: "Thomas Kettig"
-date: "November 9, 2026"
+date: "November 19, 2026"
 output: html_document
 ---
 
-## Interactions
+First step: let's load in the data and required packages. This is the standard McMurray & Jongman dataset of fricative and vowel measures that we've been using this term.
+
+```{r message=FALSE}
+library(tidyverse)
+library(yarrr)
+
+mcm <- read_csv("/Users/Thomas/Library/CloudStorage/OneDrive-YorkUniversity/LING 3300/Datasets/McMurrayJongmanFricativeAcoustics.csv")
+```
+
+### Interactions: Two categorical variables
 
 Today we're going to talk about **interactions**. Previously, we compared the COG (that is, M1) of the fricatives in this dataset, finding that this differed by place of articulation. For instance, we found that overall, interdental fricatives (marked 'th' and 'dh') have lower COG than alveolar fricatives ('s' and 'z'). But what if we're also interested in whether there's an **interaction** between voicing and place of articulation? That is: Is the effect of place of articulation the same across voicing conditions, and the effect of voicing the same across place of articulation conditions, or is something more complex going on?
 
@@ -62,7 +71,7 @@ Again, note here the **interaction** of voicing and place of articulation. It is
 pirateplot(meanCOG ~ poa * voicing, COG_means, inf.method = 'ci')
 ```
 
-### Interactions in multiple linear regression using treatment coding
+#### Interactions between two categorical variables using treatment coding
 
 Alright, now let's get to making and interpreting the model. 
 
@@ -102,7 +111,7 @@ The next line down says "poainterdental:poainterdental". That's our interaction 
 
 If you wanted to see whether the other pairwise differences are significant (like between 'th' and 'dh', or between 'th' and 'z'), you'd have to re-level the contrasts in one or both of the variables to have a different baseline. There's also a package called "emmeans" which can list out the pairwise differences all at once and simultaneously do p-value correction for multiple comparisons. We might not get to that in this module, though.
 
-### Interactions in multiple linear regression using sum coding
+#### Interactions between two categorical variables using sum coding
 
 I've mentioned before that when we run interactions, it's often preferable to **sum code**. This will look at the data from a different perspective: rather than doing pairwise comparisons of each of the fricatives ('s' vs. 'z'; 's' vs. 'th', 's' vs. 'dh', etc.), sum coding will allow us to answer the questions: "Does voicing generally have an effect on these fricatives?" + "Does poa generally have an effect on these fricatives?" + "Does the effect of one of these variables change depending on the value of the other variable"?"
 
@@ -132,7 +141,6 @@ Now let's figure out what those numbers mean.
 The intercept here is 6395, which is the **mean of the means of the voicing conditions and the poa conditions**. In this case, because our data is nicely balanced and we have the same number of observations in each of our subsets, the mean of the voiced and voiceless means will be the same as the mean of the alveolar and interdental means: both of these are 6395, as illustrated below:
 
 ```{r message = F}
-
 # We'll make a dataset that's just the voiceless means and another that's just the voiced means
 just_voiceless <- COG_means %>%
   filter(voicing == "voiceless")
@@ -169,7 +177,7 @@ Then, we need to account for the main effect of poa: We take 5833 and add -422 (
 
 Last, we'll add in that interaction of -518: 5411 - 518 = 4893. If you look again above, we found that the mean of the voiced interdental was 4894! (The difference of 1 is because I rounded up/down to the nearest Hz in all those calculations, but if you tried the same thing with a larger number of decimals you'd see these results are equal.)
 
-### Emmeans 
+#### Emmeans 
 
 In case you're interested in seeing how emmeans does pairwise comparisons all at once, here's a bit of code. We don't have time to get into this, but I encourage you to Google how estimated marginal means work! The numbers sometimes come out a bit different from what the treatment coding model might give you, but because of whatever mysterious math stuff it does. You can find further details online.
 
@@ -177,12 +185,117 @@ In case you're interested in seeing how emmeans does pairwise comparisons all at
 library(emmeans) # You might need to install this package if you don't already have it
 emmeans(fit.dummy, specs = pairwise ~ voicing * poa)
 
-# Should give same results for the sum coded and treatment coded models, just in a different order because our factors were ordered differently in the two models
+# Should give same results for the sum coded and treatment coded models, just in a different order and the opposite positive/negative valence because our factors were ordered differently in the two models
 emmeans(fit.sum, specs = pairwise ~ voicing * poa) 
 ```
 
+### Interactions between one categorical variable and one continuous variable
+
+Sometimes we're interested in an interaction between a categorical predictor and a continuous predictor. For instance, Imagine that we're interested in some of the vowel measurements in this dataset, like the vowel intensity and the vowel F0. We suspect there might be some relationship between gender and these measures - maybe men have an overall lower F0 than women, and/or maybe there's some relationship between gender and loudness.
+
+```{r message = F}
+# Get a Gender column
+mcm$Gender <- str_sub(mcm$Talker, 1, 1)
+
+# Get by-talker, by-vowel means for vowel intensity and mean F0 along with the label of the gender for each talker
+spkr_means <- mcm %>% 
+  group_by(Talker, Gender, Vowel) %>% 
+  summarise(mean_RMS = mean(rms_v, na.rm = TRUE),
+            mean_F0 = mean(F0, na.rm = TRUE))
+
+# Pirateplots of gender vs. RMS and gender vs. F0
+pirateplot(mean_F0 ~ Gender, spkr_means, inf.method = 'ci')
+
+pirateplot(mean_RMS ~ Gender, spkr_means, inf.method = 'ci')
+```
+
+All well and good - there seems to be a gender difference in F0 with men having lower pitch, and there might also be a gender difference here where women have slightly louder vowels than men. 
+
+What about the relationship of RMS to F0? Do men and women behave the same?
+
+```{r message = F}
+# Scatterplot of the by-talker means of vowel RMS predicting vowel F0
+ggplot(spkr_means, aes(x = mean_RMS, y = mean_F0, colour = Gender)) + 
+  geom_point() + 
+  geom_smooth(method = "lm") +
+  theme_bw()
+```
+
+Looks like the genders are different in this regard! For women, the louder their voice, the lower their pitch; for men, the louder their voice, the higher their pitch. Let's now run the stats to check whether the interaction effect we can see on the plot is statistically significant.
+
+We'll first do this with Gender being treatment coded, and then with Gender sum coded. But in both cases we'll want to centre our continuous predictor of mean_RMS so that the intercept is interpretable.
+
+```{r message = F}
+# Centre the continuous predictor so that the intercept is more interpretable
+spkr_means$mean_RMS_centered <- spkr_means$mean_RMS - mean(spkr_means$mean_RMS, na.rm = TRUE)
+```
+
+#### Interactions between one categorical variable and one continuous variable using treatment coding
+
+The default in R is treatment coding, so if we just run a linear regression it will automatically set the alphabetically earlier level (F) as 0, and the other (M) as 1.
+
+```{r message = F}
+# Let's look again at the scatterplot, this time with the centered predictor
+ggplot(spkr_means, aes(x = mean_RMS_centered, y = mean_F0, colour = Gender)) + 
+  geom_point() + 
+  geom_smooth(method = "lm") +
+  theme_bw()
+
+model_treatment <- lm(mean_F0 ~ mean_RMS_centered * Gender, spkr_means)
+summary(model_treatment)
+```
+
+Here, we can see that the intercept of 197 is where the F line crosses 0. The F line has a slope of -3.0, which is significantly different from 0.The M line crosses 0 at 197-79 = 118; that -79 difference is significantly different from 0, meaning that the M mean is significantly different from the F mean. The M line has a slope of -3.0 + 6.9 = 3.9, which is significantly different from the F slope.
+
+With this treatment coding, we can't directly answer whether the M slope is significantly different from 0, just whether it's significantly different from our reference level of F. If we wanted to know whether the M slope is significantly different from 0, we'd want to relevel so it's our reference level of 0.
+
+We could write up this result as: "For women, mean RMS was negatively associated with mean F0 (β = -3.04, p = .002). The interaction between mean RMS and gender was significant (β = 6.88, p < .001), indicating that the relationship differed by gender. The estimated slope for men was positive (β = 3.84), whereas the slope for women was negative (β = -3.04)."
+
+#### Interactions between one categorical variable and one continuous variable using sum coding
+
+Now let's see what happens when we sum code Gender.
+
+```{r message = F}
+# Sum coding Gender, with F as the held-out level
+spkr_means$Gender <- factor(spkr_means$Gender, levels = c("M", "F"))
+contrasts(spkr_means$Gender) <- contr.sum(2)
+contrasts(spkr_means$Gender)
+
+# Run the regression again, sum coded
+model_sum <- lm(mean_F0 ~ mean_RMS_centered * Gender, spkr_means)
+summary(model_sum)
+```
+
+Now let's interpret this output. Look back at our treatment coded model outputs. The y-intercept is the mean between the y-intercepts of M and F.
+
+```{r message = F}
+(197.2248 + (197.2248 -79.1871)) / 2
+```
+
+We get about 0.4 for the slope of mean_RMS_centered. Why? Look back at our treatment coded model outputs. Here we see that the slope for F is -3.04, and the slope for M is -3.04 + 6.88 = 3.84. What is the average of -3.04 and 3.84?
+
+```{r message = F}
+(-3.0400 + (-3.0400 + 6.8793)) / 2
+```
+
+That's right, it's our beta of about 0.4! So: taking gender and the interaction of gender and RMS into account, there is no significant overall effect of mean RMS on mean F0.
+
+On the next line of the sum coded output, we see -39.6. Remember that 157 is the midpoint between the two Genders' means of F0. We can thus see that to get from that 157 mean of means to the mean of M, we need to go down -39.6, and to get from 157 to the mean of F we have to go up 39.6. This difference in F0 of 39.6 between overall mean and the mean of M, our held-out level, is significant.
+
+Now to interpret the interaction: What does the 3.44 mean? Again, let's look back at our treatment coded results. See how there's a difference of 6.88 in the slopes of F (-3.04) and M (3.84)? Just like how the beta for Gender gave us half the difference between the two means, this interaction beta is giving us half the difference between the two slopes.
+
+```{r message = F}
+6.88 / 2 
+```
+
+Overall, we could summarize this result as: “There was no overall effect of mean RMS on mean F0 (β = 0.40, p = .571). However, the interaction between mean RMS and gender was significant (β = 3.44, p < .001), indicating that the relationship between RMS and F0 differed by gender. Specifically, mean F0 decreased with increasing RMS for females (β = -3.04) but increased with increasing RMS for males (β = 3.84).”
+
+Conceptually, once you know the relationship reverses direction across genders, the question "Is there an overall RMS effect on F0?" becomes less interesting. The interaction is telling you that the effect of RMS depends on gender, so the main effect of RMS is an average of two qualitatively different relationships. That's why the average of the two slopes (our mean_RMS_centered beta in the sum coded model) ends up near zero.
+
+<br> 
+
 ### Practice with interactions
 
-1. We've seen before (in Tutorial 6, practice question 4) that for most fricatives, there's a generally positive correlation between M1 (a.k.a. COG) and MaxPF. The strength of the positive slope differs by fricative; for some fricatives, this fails to reach our p = 0.05 significance level. Create a dataset with the by-speaker, by-fricative means for COG and MaxPF. Now consider just /f/ and /v/. Is the relationship between M1 and MaxPF the same or different for these two fricatives?
+1. We've seen before that for most fricatives, there's a generally positive correlation between M1 (a.k.a. COG) and MaxPF. The strength of the positive slope differs by fricative; for some fricatives, this fails to reach our p = 0.05 significance level. Create a dataset with the by-speaker, by-fricative means for COG and MaxPF. Now consider just /f/ and /v/. Is the relationship between M1 and MaxPF the same or different for these two fricatives?
 
 <br>

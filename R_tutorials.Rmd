@@ -23,5 +23,7 @@ These tutorials are based on various resources developed at the University of Yo
 
 <h3> [Tutorial 8 - Multiple regression and sum coding](ling3300_R/LING3300_Tutorial8.html) </h3> 
 
-<h3> [Tutorial 9 - Interactions](ling3300_R/LING3300_Tutorial9.html) </h3> 
+<h3> [Tutorial 9 - Categorical variables with more than two levels](ling3300_R/LING3300_Tutorial9.html) </h3> 
+
+<h3> [Tutorial 10 - Interactions](ling3300_R/LING3300_Tutorial10.html) </h3> 
 
