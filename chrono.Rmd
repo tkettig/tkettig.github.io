@@ -6,6 +6,8 @@ title: "Papers, posters, and presentations"
 
 #### 2026
 
+[[slides](papers_etc/CahillKettig2026APLA_slides.pdf)] Griffin Cahill and Thomas Kettig. Wallahi fam, mans talk bare strange: An ultrasound study of rhotics in Multicultural Toronto English. _APLA 2026_. Moncton, Canada, 7 November.
+
 [[slides](papers_etc/KettigHejnaHenry2026NWAV_slides.pdf)] Thomas Kettig, Míša Hejná, and Noah Henry. Testing indirect effects in lifespan change: A Structural Equation Modelling approach to Queen Elizabeth II’s pre-aspiration. _NWAV 54_. Montréal, Canada, 22 October.
 
 [[slides](papers_etc/LlamasHughesKettig2026Methods_slides.pdf)] Carmen Llamas, Vincent Hughes, and Thomas Kettig. What is ‘typicality’? Salience and standardness in UK accents. _Methods in Dialectology_. Vancouver, Canada, 7 August.
