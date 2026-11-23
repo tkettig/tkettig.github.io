@@ -35,7 +35,7 @@ talker_means <- mcm %>%
 
 While this gets our data into a format where all the data points are independent, a drawback of this is that we lose statistical power because we now have far fewer datapoints than were present in the raw dataset. Mixed effects modelling introduces random effects which allow us to use the raw dataset (which is much more powerful because of its greater degrees of freedom) but also account for the inter-dependence of data points by talker.
 
-Let's just look at alveolar and interdental fricatives, just as in Tutorial 8.
+Let's just look at alveolar and interdental fricatives.
 
 ```{r message = T}
 # Filter so we just have the alveolars and interdentals for now
@@ -69,7 +69,6 @@ According to Schertz, you should include a *random slope* if you have multiple o
 ```{r message = T}
 # Making model with random slope
 model <- lmer(M1 ~ voicing * poa + (1 + voicing|Talker) + (1 + poa|Talker), mcm2)
-summary(model)
 ```
 
 However, you'll note the warning here that this model *fails to converge*. Oops! This is because we've stuffed too much into the model, given the amount of data that we have. It would also be bad if we got a "boundary (singular) fit" message when we run the model. In this case, we need to make a decision about what might be most useful to keep in. Since we can see from the visualization that we still want the interaction of the main effects, it makes sense here for us to just choose one of the random slopes and delete the other one. Hard to say which is *better*, but you can see that the p-values slightly change depending on which one you run:
@@ -84,14 +83,14 @@ model2 <- lmer(M1 ~ voicing * poa + (1 + voicing|Talker), mcm2)
 summary(model2)
 ```
 
-In most cases, we proceed with interpreting our model outputs the same way as with our lm() regressions. No need to interpret the outputs regarding the random effects, but see Winter (2020) for more details if you wish.
+The above models are treatment coded (R's default) but random effects can also be put into models with any other type of coding.
 
-The above models are dummy-coded (R's default) but random effects can also be put into models with any other type of coding.
+In most cases, we proceed with interpreting our model outputs the same way as with our lm() regressions. For this class, there is need to interpret the outputs regarding the random effects, but see Winter (2020) for more details if you wish. Sometimes it's useful to interpret random intercepts or slopes, such as in [this example](https://www.cambridge.org/core/journals/language-variation-and-change/article/abs/exploiting-random-intercepts-two-case-studies-in-sociophonetics/6B661A6226E015A613AB22616C9C2300) from sociophonetics.
 
 <br>
 
 ### Practice with mixed models
 
-1. With the fricatives dataset, consider just /f/ and /v/ (as in the Tutorial 8 practice). Instead of modelling the by-speaker means, try doing your modelling with the raw dataset and integrating a random intercept of Talker. Also try a random slope of Fricative by Talker.
+1. With the fricatives dataset, consider just /f/ and /v/ (as in the Tutorial 9 practice problem). Instead of modelling the by-speaker means, try doing your modelling with the raw dataset and integrating a random intercept of Talker. Also try a random slope of Fricative by Talker. Which is preferable based on Schertz's guidelines?
 
 <br>
