@@ -91,6 +91,6 @@ In most cases, we proceed with interpreting our model outputs the same way as wi
 
 ### Practice with mixed models
 
-1. With the fricatives dataset, consider just /f/ and /v/ (as in the Tutorial 9 practice problem). Instead of modelling the by-speaker means, try doing your modelling with the raw dataset and integrating a random intercept of Talker. Also try a random slope of Fricative by Talker. Which is preferable based on Schertz's guidelines?
+1. With the fricatives dataset, consider just /f/ and /v/ (as in the Tutorial 10 practice problem). Instead of modelling the by-speaker means, try doing your modelling with the raw dataset and integrating a random intercept of Talker. Also try a random slope of Fricative by Talker. Which is preferable based on Schertz's guidelines?
 
 <br>
