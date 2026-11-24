@@ -1,7 +1,7 @@
 ---
 title: "LING 3300: Linear mixed effects modelling"
 author: "Thomas Kettig"
-date: "November 9, 2026"
+date: "November 24, 2026"
 output: html_document
 ---
 
@@ -26,7 +26,7 @@ mcm$voicing <- ifelse(mcm$Fricative == "dh" | mcm$Fricative == "v" | mcm$Fricati
 
 Up to now, we've been taking our raw datasets and wrangling them into independent observations that fulfill the assumptions of linear regressions. In the fricatives experiment, participants uttered each fricative many times; we therefore have been finding the by-talker, by-fricative means before running our models, like so:
   
-```{r message = T}
+```{r message = F}
 talker_means <- mcm %>% 
   group_by(Talker, Fricative) %>% 
   summarise(mean_maxpf = mean(na.omit(maxpf)),
@@ -67,20 +67,44 @@ summary(model)
 According to Schertz, you should include a *random slope* if you have multiple observations per participant, and each participant is in both levels of the predictor. That's the case here -- each participant produced both voiced and voiceless fricatives, and both interdental and alveolar fricatives. Ideally, your model might look something like this:
   
 ```{r message = T}
-# Making model with random slope
+# Making model with all possible by-speaker random slopes
 model <- lmer(M1 ~ voicing * poa + (1 + voicing|Talker) + (1 + poa|Talker), mcm2)
 ```
 
-However, you'll note the warning here that this model *fails to converge*. Oops! This is because we've stuffed too much into the model, given the amount of data that we have. It would also be bad if we got a "boundary (singular) fit" message when we run the model. In this case, we need to make a decision about what might be most useful to keep in. Since we can see from the visualization that we still want the interaction of the main effects, it makes sense here for us to just choose one of the random slopes and delete the other one. Hard to say which is *better*, but you can see that the p-values slightly change depending on which one you run:
+However, you'll note the warning here that this model *fails to converge*. Oops! This is because we've stuffed too much into the model, given the amount of data that we have. It would also be bad if we got a "boundary (singular) fit" message when we run the model. In this case, we need to make a decision about what might be most useful to keep in. Since we can see from the visualization that we still want the interaction of the main effects, it makes sense here for us to just choose one of the random slopes and delete the other one. Let's see what the by-speaker slopes for voicing and poa look like to see if it makes more sense to model one or the other with varying slopes.
+
+```{r message = T}
+voice_plot <- mcm2 %>%
+  group_by(Talker, voicing) %>%
+  summarize(M1 = mean(M1, na.rm = TRUE), .groups = "drop")
+
+ggplot(voice_plot,
+       aes(x = voicing, y = M1,
+           group = Talker, colour = Talker)) +
+  geom_line(alpha = .5) +
+  geom_point() +
+  theme_classic() +
+  guides(colour = "none")
+
+poa_plot <- mcm2 %>%
+  group_by(Talker, poa) %>%
+  summarize(M1 = mean(M1, na.rm = TRUE), .groups = "drop")
+
+ggplot(poa_plot,
+       aes(x = poa, y = M1,
+           group = Talker, colour = Talker)) +
+  geom_line(alpha = .5) +
+  geom_point() +
+  theme_classic() +
+  guides(colour = "none")
+```
+
+Here we can see that the voicing effect has different slopes across talkers for sure - but all of them have more or less positive slopes. For poa, the variation is far greater: some speakers have strongly positive slopes and others have strongly negative slopes. This means that if we need to pick between modelling varying slopes for poa or voicing, it makes more sense to model the variation in poa slopes.
   
 ```{r message = T}
 # Making model with one random slope
 model1 <- lmer(M1 ~ voicing * poa + (1 + poa|Talker), mcm2)
 summary(model1)
-
-# Making model with one random slope
-model2 <- lmer(M1 ~ voicing * poa + (1 + voicing|Talker), mcm2)
-summary(model2)
 ```
 
 The above models are treatment coded (R's default) but random effects can also be put into models with any other type of coding.
