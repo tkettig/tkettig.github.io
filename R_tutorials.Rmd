@@ -29,4 +29,5 @@ These tutorials are based on various resources developed at the University of Yo
 
 <h3> [Tutorial 11 - Linear mixed effects regression (Random effects)](ling3300_R/LING3300_Tutorial11.html) </h3> 
 
+<h3> [Tutorial 12 - Logistic regression](ling3300_R/LING3300_Tutorial12.html) </h3> 
 

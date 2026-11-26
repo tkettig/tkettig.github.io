@@ -1,0 +1,151 @@
+---
+title: "LING 3300: Logistic regression"
+author: "Thomas Kettig"
+date: "November 24, 2026"
+output: html_document
+---
+
+First step: let's load in the data and required packages. This is the standard McMurray & Jongman dataset of fricative and vowel measures that we've been using this term.
+
+```{r message=T}
+library(tidyverse)
+library(yarrr)
+
+mcm <- read_csv("/Users/Thomas/Library/CloudStorage/OneDrive-YorkUniversity/LING 3300/Datasets/McMurrayJongmanFricativeAcoustics.csv")
+```
+
+Get a column for gender and column for sibilant status.
+
+```{r message=T}
+# Get a column marking gender
+mcm$Gender <- str_sub(mcm$Talker, 1, 1)
+
+# Get a column marking whether sibilant or not
+mcm$Sibilant <- ifelse(mcm$Fricative == "s" | mcm$Fricative == "sh" | mcm$Fricative == "z" | mcm$Fricative == "zh", "sibilant", "non-sibilant")
+```
+
+Let's set aside for now what we know about random effects, and get our by-talker, by-fricative means. It's totally possible to add random effects to a logistic regression, though!
+
+```{r message = T}
+spkr_means <- mcm %>% 
+  group_by(Talker, Gender, Fricative, Sibilant) %>% 
+  summarise(mean_maxpf = mean(maxpf, na.rm = TRUE), 
+            mean_M1 = mean(M1, na.rm = TRUE),
+            mean_RMS = mean(rms_f, na.rm = TRUE))
+```
+
+We shouldn't be surprised to find that sibilant has an effect on loudness.
+
+```{r message = T}
+pirateplot(mean_RMS ~ Sibilant, spkr_means,
+           inf.method = "ci")
+```
+
+This helps us answer an RQ like: *Do we predict different loudness based on what we know about the sibilant vs. non-sibilant status of a fricative?*. But imagine we flip the RQ around: *If we know a fricative’s loudness, can we predict whether it is a sibilant or non-sibilant?*
+
+Pirateplots can't have their x and y axes flipped, but here's a ggplot that shows what we mean now:
+
+```{r message = T}
+ggplot(spkr_means, aes(x = Sibilant, y = mean_RMS)) +
+  geom_violin(fill = "lightblue", alpha = 0.5) +
+  stat_summary(
+    fun.data = mean_sdl,
+    fun.args = list(mult = 1),
+    geom = "pointrange",
+    color = "blue"
+  ) +
+  geom_jitter(width = 0.1, alpha = 0.5) +
+  coord_flip() +
+  theme_classic()
+```
+
+Another way to visualize this through proportions of how much of the data is "sibilant" in a particular bin of mean_RMS:
+
+```{r message = T}
+# Make a new column with 0 (non-sibilant) and 1 (sibilant)
+spkr_means$sib_num <- ifelse(spkr_means$Sibilant == "non-sibilant", 0, 1)
+
+# Get the proportions of how many of the fricatives are sibilants in each 1 dB bin of mean_RMS
+prop_data <- spkr_means %>%
+  mutate(mean_RMS_bin = cut_width(mean_RMS, width = 1)) %>%
+  group_by(mean_RMS_bin) %>%
+  summarize(
+    meanRMS = mean(mean_RMS),
+    prop_sib = mean(sib_num),
+    .groups = "drop"
+  )
+
+# Make a ggplot of the proportions
+ggplot(prop_data, aes(meanRMS, prop_sib)) +
+  geom_point(size = 2) +
+  ylim(0, 1) +
+  theme_classic() +
+  geom_hline(yintercept = c(0, 1)) +
+  ylab("Proportion sibilant")
+
+# Make a ggplot of the proportions, adding a best-fit logistic regression
+ggplot(prop_data, aes(meanRMS, prop_sib)) +
+  geom_point(size = 2) +
+  ylim(0, 1) +
+  theme_classic() +
+  geom_hline(yintercept = c(0, 1)) +
+  ylab("Proportion sibilant")+
+  geom_smooth(method = "glm", 
+              method.args = list(family = binomial),
+              se = F)
+```
+
+Notice that we always use the "x" variable to predict the "y" variable. How would we model this, then? We have to use logistic regression. We utilize the glm() function, with y ~ x as our formula. In addition to telling R that dataframe we want to model (here, spkr_means), we need to tell it *family = binomial* so it realizes that we have a binary outcome which has been coded as 0 and 1. Note that the predicted variable needs to be 0/1, so here we need to use sib_num rather than Sibilant.
+
+```{r message = T}
+sib_model <- glm(sib_num ~ mean_RMS, spkr_means, family = binomial)
+summary(sib_model)
+```
+
+This is a logistic regression, so the coefficients are in log-odds, not in the original probability scale. The positive coefficient of 0.42588 means that as RMS increases, speakers are more likely to be coded as sib_num = 1 (which in this case, means *sibilant*). That is, a 1-unit increase in RMS increases the log-odds of sib_num = 1 by 0.426. Log-odds are sort of weird, so in order to convert them into the odds ratio, we have to convert them:
+
+```{r message = T}
+exp(0.42588)
+```
+
+So for every 1-unit increase in RMS, the odds of sib_num = 1 are multiplied by about 1.53 (a 53% increase). Don't worry if you don't understand this, though - what's most important is that the number is *positive* rather than negative, which makes sense given what we know about sibilants being louder than non-sibilants.
+
+We can pretty safely ignore the intercept of -27.07... basically this is the predicted log-odds when RMS is 0 (which shouldn't happen because then it would mean that someone just hasn't opened their mouth and isn't speaking).
+
+A more useful quantity would be the crossover point where the model predicts 50% probability of each category. We can think about our y = b + mx formula. Let's set y to 0, and fill in the other numbers from our outputs: 0 = -27.07 + 0.426 * RMS. We can then add 27.07 to both sides of the equation, which will give us 27.07 = 0.426 * RMS. We can then solve for RMS:
+
+```{r message = T}
+27.07 / 0.426
+```
+
+We then see that at around 63.5 dB, we have a 50% chance of a sibilant and a 50% chance of a non-sibilant. 
+
+```{r message = T}
+coef(sib_model)
+x_cross <- -coef(sib_model)[1] / coef(sib_model)[2]
+
+ggplot(prop_data, aes(meanRMS, prop_sib)) +
+  geom_point(size = 2) +
+  ylim(0, 1) +
+  theme_classic() +
+  geom_hline(yintercept = c(0, 0.5, 1),
+             linetype = c("solid", "dashed", "solid")) +
+  geom_vline(xintercept = x_cross,
+             linetype = "dashed",
+             colour = "red") +
+  ylab("Proportion sibilant") +
+  geom_smooth(
+    method = "glm",
+    method.args = list(family = binomial),
+    se = FALSE
+  )
+```
+
+
+
+### Practice with logistic regression
+
+1. Do the same logistic regression as above, but using the raw data rather than the means. Instead of glm(), use the glmer() function from the lmer4 package. Add a random intercept of talker.
+
+2. 
+
