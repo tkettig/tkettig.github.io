@@ -14,12 +14,9 @@ library(yarrr)
 mcm <- read_csv("/Users/Thomas/Library/CloudStorage/OneDrive-YorkUniversity/LING 3300/Datasets/McMurrayJongmanFricativeAcoustics.csv")
 ```
 
-Get a column for gender and column for sibilant status.
+Get a column for sibilant status.
 
 ```{r message=T}
-# Get a column marking gender
-mcm$Gender <- str_sub(mcm$Talker, 1, 1)
-
 # Get a column marking whether sibilant or not
 mcm$Sibilant <- ifelse(mcm$Fricative == "s" | mcm$Fricative == "sh" | mcm$Fricative == "z" | mcm$Fricative == "zh", "sibilant", "non-sibilant")
 ```
@@ -28,7 +25,7 @@ Let's set aside for now what we know about random effects, and get our by-talker
 
 ```{r message = T}
 spkr_means <- mcm %>% 
-  group_by(Talker, Gender, Fricative, Sibilant) %>% 
+  group_by(Talker, Fricative, Sibilant) %>% 
   summarise(mean_maxpf = mean(maxpf, na.rm = TRUE), 
             mean_M1 = mean(M1, na.rm = TRUE),
             mean_RMS = mean(rms_f, na.rm = TRUE))
@@ -141,11 +138,10 @@ ggplot(prop_data, aes(meanRMS, prop_sib)) +
   )
 ```
 
-
+<br>
 
 ### Practice with logistic regression
 
-1. Do the same logistic regression as above, but using the raw data rather than the means. Instead of glm(), use the glmer() function from the lmer4 package. Add a random intercept of talker.
+1. Do the same logistic regression as above, but using the raw data rather than the means. Instead of glm(), use the glmer() function from the lmer4 package. Add a random intercept for talker.
 
-2. 
-
+2. Using this same raw dataset, prepare and run a logistic regression modelling how F1 predicts whether a vowel is /u/ or /a/. Use the glmer() function from the lmer4 package and include a random intercept of talker.
